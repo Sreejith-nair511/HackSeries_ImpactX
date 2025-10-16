@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: algorand-node
+  namespace: impactx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: algorand-node
+  template:
+    metadata:
+      labels:
+        app: algorand-node
+    spec:
+      containers:
+        - name: algorand-node
+          image: algorand/algod:latest
+          ports:
+            - containerPort: 4001
+            - containerPort: 4002
+          env:
+            - name: ALGOD_PORT
+              value: "4001"
+            - name: KMD_PORT
+              value: "4002"
+            - name: NETWORK
+              value: "testnet"
+          volumeMounts:
+            - name: algorand-storage
+              mountPath: /algod/data
+      volumes:
+        - name: algorand-storage
+          persistentVolumeClaim:
+            claimName: algorand-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: algorand-node
+  namespace: impactx
+spec:
+  selector:
+    app: algorand-node
+  ports:
+    - name: algod
+      protocol: TCP
+      port: 4001
+      targetPort: 4001
+    - name: kmd
+      protocol: TCP
+      port: 4002
+      targetPort: 4002
+  type: ClusterIP

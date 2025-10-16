@@ -1,0 +1,154 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  backend-test:
+    runs-on: ubuntu-latest
+    
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: impactx
+          POSTGRES_PASSWORD: impactx123
+          POSTGRES_DB: impactx_test
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Use Node.js 18
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+        cache: 'npm'
+        cache-dependency-path: backend/package-lock.json
+    
+    - name: Install backend dependencies
+      run: |
+        cd backend
+        npm ci
+    
+    - name: Run backend lint
+      run: |
+        cd backend
+        npm run lint
+    
+    - name: Run backend tests
+      run: |
+        cd backend
+        npm test
+      env:
+        DATABASE_URL: postgresql://impactx:impactx123@localhost:5432/impactx_test
+        ALGOD_SERVER: http://localhost:4001
+        ALGOD_PORT: 4001
+        ALGOD_TOKEN: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+        IPFS_PROVIDER: pinata
+        PINATA_API_KEY: ${{ secrets.PINATA_API_KEY }}
+        PINATA_SECRET_API_KEY: ${{ secrets.PINATA_SECRET_API_KEY }}
+        JWT_SECRET: your-super-secret-jwt-key-change-this-in-production
+    
+    - name: Run backend integration tests
+      run: |
+        cd backend
+        npm run test:integration
+      env:
+        DATABASE_URL: postgresql://impactx:impactx123@localhost:5432/impactx_test
+        ALGOD_SERVER: http://localhost:4001
+        ALGOD_PORT: 4001
+        ALGOD_TOKEN: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+        IPFS_PROVIDER: pinata
+        PINATA_API_KEY: ${{ secrets.PINATA_API_KEY }}
+        PINATA_SECRET_API_KEY: ${{ secrets.PINATA_SECRET_API_KEY }}
+        JWT_SECRET: your-super-secret-jwt-key-change-this-in-production
+
+  frontend-test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Use Node.js 18
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+        cache: 'npm'
+        cache-dependency-path: frontend/package-lock.json
+    
+    - name: Install frontend dependencies
+      run: |
+        cd frontend
+        npm ci
+    
+    - name: Run frontend lint
+      run: |
+        cd frontend
+        npm run lint
+    
+    - name: Run frontend tests
+      run: |
+        cd frontend
+        npm test
+
+  docker-build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+    
+    - name: Build backend Docker image
+      run: |
+        docker build -f backend/Dockerfile.dev -t impactx-backend .
+    
+    - name: Build frontend Docker image
+      run: |
+        docker build -f frontend/Dockerfile.dev -t impactx-frontend .
+    
+    - name: Test docker-compose
+      run: |
+        docker-compose up -d
+        sleep 30
+        docker-compose ps
+        docker-compose down
+
+  deploy-teal:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Use Node.js 18
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+        cache: 'npm'
+        cache-dependency-path: backend/package-lock.json
+    
+    - name: Install backend dependencies
+      run: |
+        cd backend
+        npm ci
+    
+    - name: Test TEAL deployment script
+      run: |
+        cd backend
+        node scripts/deploy_teal.js --network testnet
+      env:
+        ALGOD_SERVER: ${{ secrets.ALGOD_SERVER }}
+        ALGOD_PORT: ${{ secrets.ALGOD_PORT }}
+        ALGOD_TOKEN: ${{ secrets.ALGOD_TOKEN }}
+        ALGOD_NETWORK: testnet

@@ -1,0 +1,106 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: impactx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: backend
+          image: impactx-backend:latest
+          ports:
+            - containerPort: 5000
+          env:
+            - name: DATABASE_URL
+              value: "postgresql://impactx:$(POSTGRES_PASSWORD)@postgres:5432/impactx_prod"
+            - name: ALGOD_SERVER
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secret
+                  key: algod-server
+            - name: ALGOD_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secret
+                  key: algod-port
+            - name: ALGOD_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secret
+                  key: algod-token
+            - name: ALGOD_NETWORK
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secret
+                  key: algod-network
+            - name: IPFS_PROVIDER
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secret
+                  key: ipfs-provider
+            - name: PINATA_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secret
+                  key: pinata-api-key
+            - name: PINATA_SECRET_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secret
+                  key: pinata-secret-api-key
+            - name: INFURA_PROJECT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secret
+                  key: infura-project-id
+            - name: INFURA_PROJECT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secret
+                  key: infura-project-secret
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secret
+                  key: jwt-secret
+          readinessProbe:
+            httpGet:
+              path: /api/v1/healthz
+              port: 5000
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /api/v1/healthz
+              port: 5000
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          volumeMounts:
+            - name: uploads
+              mountPath: /app/uploads
+      volumes:
+        - name: uploads
+          persistentVolumeClaim:
+            claimName: backend-uploads-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+  namespace: impactx
+spec:
+  selector:
+    app: backend
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
+  type: ClusterIP

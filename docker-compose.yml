@@ -1,0 +1,85 @@
+version: '3.8'
+
+services:
+  # PostgreSQL database
+  db:
+    image: postgres:15
+    container_name: impactx-db
+    environment:
+      POSTGRES_USER: impactx
+      POSTGRES_PASSWORD: impactx123
+      POSTGRES_DB: impactx_dev
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - impactx-network
+
+  # Backend service
+  backend:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    container_name: impactx-backend
+    ports:
+      - "5000:5000"
+    environment:
+      - DATABASE_URL=postgresql://impactx:impactx123@db:5432/impactx_dev
+      - ALGOD_SERVER=http://algorand-node:4001
+      - ALGOD_PORT=4001
+      - ALGOD_TOKEN=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+      - IPFS_PROVIDER=pinata
+      - PINATA_API_KEY=your-pinata-api-key
+      - PINATA_SECRET_API_KEY=your-pinata-secret-key
+      - JWT_SECRET=your-super-secret-jwt-key-change-this-in-production
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    depends_on:
+      - db
+      - algorand-node
+    networks:
+      - impactx-network
+
+  # Frontend service
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    container_name: impactx-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - VITE_API_URL=http://localhost:5000
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+    networks:
+      - impactx-network
+
+  # Algorand sandbox node
+  algorand-node:
+    image: algorand/algod:latest
+    container_name: impactx-algorand-node
+    ports:
+      - "4001:4001"
+      - "4002:4002"
+    environment:
+      - ALGOD_PORT=4001
+      - KMD_PORT=4002
+      - NETWORK=devnet
+    volumes:
+      - algorand_data:/algod/data
+    networks:
+      - impactx-network
+
+volumes:
+  postgres_data:
+  algorand_data:
+
+networks:
+  impactx-network:
+    driver: bridge

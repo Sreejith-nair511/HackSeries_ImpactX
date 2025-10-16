@@ -1,0 +1,18 @@
+# Ignore all commit txt files
+commit_*.txt
+
+# Ignore commit history directories
+commit-history/
+more-commits/
+
+# Node.js dependencies
+node_modules/
+
+# Environment files
+.env
+
+# Log files
+*.log
+
+# Optional: Ignore upload directories
+uploads/

@@ -1,0 +1,103 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String     @id @default(uuid())
+  email     String     @unique
+  password  String
+  role      String     @default("DONOR")
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  donations Donation[]
+  campaigns Campaign[]
+  proofs    Proof[]
+}
+
+model Campaign {
+  id          String     @id @default(uuid())
+  title       String
+  description String
+  goal        Float
+  ngoAddress  String
+  creatorId   String
+  status      String     @default("active")
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  donations   Donation[]
+  proofs      Proof[]
+  escrow      Escrow?
+  creator     User       @relation(fields: [creatorId], references: [id])
+}
+
+model Donation {
+  id          String   @id @default(uuid())
+  amount      Float
+  donorId     String
+  campaignId  String
+  transaction String
+  status      String   @default("pending")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  donor       User     @relation(fields: [donorId], references: [id])
+  campaign    Campaign @relation(fields: [campaignId], references: [id])
+}
+
+model Proof {
+  id          String     @id @default(uuid())
+  description String
+  ipfsHash    String?
+  campaignId  String
+  uploaderId  String
+  status      String     @default("pending")
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  campaign    Campaign   @relation(fields: [campaignId], references: [id])
+  uploader    User       @relation(fields: [uploaderId], references: [id])
+  oracleVotes OracleVote[]
+}
+
+model Oracle {
+  id        String     @id @default(uuid())
+  name      String
+  publicKey String     @unique
+  weight    Int        @default(1)
+  active    Boolean    @default(true)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  votes     OracleVote[]
+}
+
+model OracleVote {
+  id         String   @id @default(uuid())
+  proofId    String
+  oracleId   String
+  vote       Boolean
+  signature  String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  proof      Proof    @relation(fields: [proofId], references: [id])
+  oracle     Oracle   @relation(fields: [oracleId], references: [id])
+
+  @@unique([proofId, oracleId])
+}
+
+model Escrow {
+  id            String   @id @default(uuid())
+  campaignId    String   @unique
+  appId         BigInt?
+  escrowAddress String?
+  balance       Float    @default(0)
+  status        String   @default("active")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  campaign      Campaign @relation(fields: [campaignId], references: [id])
+}
