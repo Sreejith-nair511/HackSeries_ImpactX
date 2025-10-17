@@ -1,53 +1,99 @@
-# Disaster Relief Escrow on Algorand
-Note the commit message is high due to the api testing 
-A minimal web application where donors can contribute funds to a disaster relief project and funds are stored in an Algorand smart contract escrow. The funds are released only when an NGO uploads proof of aid delivery.
+# Transparent & Verifiable Disaster Relief Funding on Algorand
 
-## Features
+An open-source blockchain-powered disaster relief and impact funding platform built on Algorand. The solution ensures that every donation is transparent, tamper-proof, and outcome-verified. Funds are locked in smart contract escrows and released only when verified by multi-source oracles, including NGO reports, IoT/drones, and satellite data. This approach restores donor trust, eliminates corruption, and establishes a global standard for accountable disaster aid.
 
-1. **Algorand Smart Contract (Escrow)**
-   - Accepts donations from multiple users
-   - Releases funds when an NGO "approves" delivery (manual verification)
+## Problem Statement
 
-2. **Frontend (React.js)**
-   - Donor view: Connect wallet, enter amount, donate
-   - NGO view: Upload proof (text + optional image upload)
-   - Status view: Show escrow balance + release status
+Every year, trillions of dollars are allocated to global aid, disaster relief, poverty alleviation, and climate action. However, reports from the World Bank estimate that up to 30% of this funding is lost due to corruption, mismanagement, or fraud. This leads to significant inefficiency: funds raised for schools, hospitals, or disaster survivors often never reach those in need. Opaque reporting, middlemen layers, and lack of verification worsen the issue, leading to loss of trust, wasted resources, and delayed climate or humanitarian action.
 
-3. **Backend (Node.js/Express)**
-   - Simple API to interact with Algorand smart contract
-   - Store NGO proof uploads (in local storage or mock DB)
+## Why Current Systems Fail
 
-## Tech Stack
+- **Middlemen Layers**: Funds pass through multiple intermediaries (NGOs, agencies, government bodies), each capable of misreporting or diverting resources.
 
-- **Blockchain**: Algorand (TEAL smart contract)
-- **Frontend**: React.js + Tailwind CSS
-- **Backend**: Node.js/Express
-- **Storage**: Local/Mock (IPFS later)
+- **Opaque Reporting**: Donors rarely see real-time updates; reports are delayed, manipulated, or fabricated.
+
+- **Lack of Verification**: No reliable system exists to confirm whether claimed outcomes (e.g., 10,000 trees planted) actually occurred.
+
+- **Centralized Control**: A few organizations hold and distribute funds, creating monopolies vulnerable to misuse.
+
+## Our Solution
+
+We propose a blockchain-based open-source platform to ensure transparency and accountability in disaster relief and social impact funding. Using Algorand smart contracts, funds are locked in escrow and released only when independent oracles verify that relief activities have been completed. The system integrates IoT, drones, and satellite imagery to cross-verify outcomes, creating an end-to-end transparent audit trail.
+
+## Core Features
+
+- **Real-time Transparent Tracking**: All donations and fund flows are immutably recorded on Algorand.
+- **Verified Impact Outcomes**: Multi-source verification from NGOs, IoT sensors, drones, and satellites.
+- **Smart Contract Escrow**: Funds released only when outcome verifications pass.
+- **Donor Dashboard**: Real-time updates and APIs for open access.
+- **Secure Data Handling**: Sensitive beneficiary data protected with privacy measures.
+- **Multi-Source Oracles**: Verification from NGO field data, IoT/drones, and satellite imagery.
+
+## Technology Stack
+
+- **Blockchain**: Algorand (public ledger) with TEAL smart contracts
+- **Frontend**: React.js + Vite + Tailwind CSS
+- **Backend**: Node.js/Express with REST API
+- **Storage**: IPFS for proof documents with on-chain hashes
+- **Oracles**: Multi-source verification (NGO reports, IoT/drones, satellite imagery)
+- **Privacy**: Secure handling of sensitive data
+- **Deployment**: Docker/Kubernetes for backend, Vercel for frontend
+
+## System Architecture
+
+- **Tamper-proof Ledger**: All donations and fund flows are immutably recorded on Algorand.
+- **Smart Contract Escrow**: Funds released only when outcome verifications pass.
+- **Outcome Verification Oracles**: Multi-source inputs from NGOs, IoT sensors, drones, and satellites.
+- **Dual-Chain Architecture**: Algorand (public transparency) with privacy measures for sensitive data.
+- **Off-chain Storage**: Proofs such as documents, reports, and images stored on IPFS with on-chain hashes.
 
 ## Project Structure
 
 ```
-disaster-relief-escrow/
-├── frontend/          # React.js frontend
+impactx/
+├── frontend/          # React.js + Vite frontend
 │   ├── src/
-│   │   ├── DonorView.jsx
-│   │   ├── NGOView.jsx
-│   │   └── StatusView.jsx
+│   │   ├── components/
+│   │   ├── hooks/
+│   │   ├── pages/
+│   │   ├── services/
+│   │   └── utils/
 │   └── ...
 ├── backend/           # Node.js/Express backend
 │   ├── contracts/
 │   │   └── escrow.teal
-│   ├── server.js
+│   ├── src/
+│   │   ├── controllers/
+│   │   ├── middleware/
+│   │   ├── models/
+│   │   ├── routes/
+│   │   ├── services/
+│   │   └── utils/
+│   ├── prisma/
 │   └── ...
+├── k8s/               # Kubernetes deployment manifests
+├── docs/              # Documentation
 └── README.md
 ```
+
+## Implementation Roadmap
+
+**Phase 1 (MVP)**: Build Algorand smart contract escrow + donor dashboard.
+
+**Phase 2 (Pilot)**: Integrate NGOs with field-level verification (IoT/drones).
+
+**Phase 3 (Scaling)**: Add cross-border aid flows, satellite data verification, and AI-driven fraud detection.
+
+**Phase 4 (Open Source)**: Release SDKs and APIs for NGOs, civic-tech startups, and governments.
 
 ## Setup Instructions
 
 ### Prerequisites
 
-- Node.js (v14 or higher)
-- npm (v6 or higher)
+- Node.js (v18 or higher)
+- npm (v8 or higher)
+- Docker (for containerized deployment)
+- Kubernetes (for production deployment)
 
 ### Backend Setup
 
@@ -116,20 +162,38 @@ The application can also be deployed to a Kubernetes cluster. See the [k8s/READM
 - **Database**: PostgreSQL (Docker container or managed service)
 - **Blockchain**: Algorand TestNet
 
-## Future Enhancements
+## Open Source Vision
 
-- Integrate with real Algorand blockchain
-- Implement IoT oracles for automatic verification
-- Store proofs on IPFS for decentralized storage
+By releasing the codebase under an open-source license, we aim to create a global standard for transparent and verifiable disaster relief. NGOs, civic-tech innovators, and governments can fork, extend, and customize the system to suit regional needs. This encourages collaboration, innovation, and trust in humanitarian ecosystems.
 
+## Impact
 
-- Integrate satellite APIs for location verification
-- Add Hyperledger for enhanced privacy features
+- Restores trust in aid and charity ecosystems.
+- Prevents corruption and mismanagement.
+- Ensures faster, verified relief delivery.
+- Provides a model for sustainable, climate-related project funding.
+- Sets a global precedent for tamper-proof, outcome-driven funding systems.
 
-- <img width="785" height="849" alt="Screenshot 2025-09-30 114731" src="https://github.com/user-attachments/assets/9c43f850-b91b-471e-b473-c7a8c2695e33" />
-<img width="881" height="927" alt="Screenshot 2025-09-30 114745" src="https://github.com/user-attachments/assets/7b4a51a0-5035-4df3-a676-255fc3748e20" />
-<img width="922" height="898" alt="Screenshot 2025-09-30 114756" src="https://github.com/user-attachments/assets/1350dd88-90d5-4e94-a695-e0482702cec5" />
-- <img width="659" height="312" alt="Screenshot 2025-09-30 115207" src="https://github.com/user-attachments/assets/4349ff28-fd88-4f2b-82a2-88ec2ca79677" />
+## Future Scope
+
+- **Tokenized Impact Credits**: Donors receive proof-of-impact tokens.
+- **AI-driven fraud detection**: Pattern analysis for anomaly detection in aid distribution.
+- **Cross-border interoperability**: Integration with CBDCs and international remittance systems.
+- **Community governance**: DAO-based voting for fund allocation decisions.
+
+## Conclusion
+
+Our project harnesses Algorand's secure, scalable blockchain to revolutionize disaster relief funding. By combining transparency, outcome verification, and open-source collaboration, we aim to create a future where every donation counts, every promise is proven, and global aid truly reaches those who need it most.
+
+## Additional Documentation
+
+For more detailed information about the implementation and deployment of this system, please refer to the following documents:
+
+- [Vision Implementation Guide](VISION-IMPLEMENTATION.md) - Detailed explanation of how the system implements the vision
+- [Deployment Guide](DEPLOYMENT-GUIDE.md) - Comprehensive deployment instructions for various environments
+- [Project Structure](PROJECT-STRUCTURE.md) - Detailed overview of the project architecture
+- [Developer Documentation](README-dev.md) - Technical documentation for developers
+- [Architecture Diagram](architecture.md) - Visual representation of the system architecture
 
 
 ## License
