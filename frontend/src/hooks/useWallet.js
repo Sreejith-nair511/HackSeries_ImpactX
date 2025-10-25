@@ -6,6 +6,7 @@ const useWallet = () => {
   const [connected, setConnected] = useState(false);
   const [loading, setLoading] = useState(false);
   const [accounts, setAccounts] = useState([]);
+  const [simulationMode, setSimulationMode] = useState(false); // Track if we're in simulation mode
 
   // Check if wallet is already connected
   useEffect(() => {
@@ -15,6 +16,10 @@ const useWallet = () => {
       setWallet(parsedWallet);
       setConnected(true);
       setAccounts(parsedWallet.accounts || []);
+      // Check if it was a simulated connection
+      if (parsedWallet.simulated) {
+        setSimulationMode(true);
+      }
     }
   }, []);
 
@@ -27,15 +32,17 @@ const useWallet = () => {
       if (result.success) {
         const walletData = {
           provider: 'myalgo',
-          accounts: result.accounts
+          accounts: result.accounts,
+          simulated: result.simulated || false // Store simulation status
         };
         
         setWallet(walletData);
         setConnected(true);
         setAccounts(result.accounts);
+        setSimulationMode(result.simulated || false);
         localStorage.setItem('connectedWallet', JSON.stringify(walletData));
         
-        return { success: true, wallet: walletData };
+        return { success: true, wallet: walletData, message: result.message };
       } else {
         return { success: false, error: result.error };
       }
@@ -56,6 +63,21 @@ const useWallet = () => {
       if (result.success) {
         // For WalletConnect, we don't immediately have accounts
         // The connection will be established when the user scans the QR code
+        // If it's simulated, we do have accounts
+        if (result.accounts) {
+          const walletData = {
+            provider: 'walletconnect',
+            accounts: result.accounts,
+            simulated: result.simulated || false
+          };
+          
+          setWallet(walletData);
+          setConnected(true);
+          setAccounts(result.accounts);
+          setSimulationMode(result.simulated || false);
+          localStorage.setItem('connectedWallet', JSON.stringify(walletData));
+        }
+        
         return { success: true, message: result.message };
       } else {
         return { success: false, error: result.error };
@@ -74,6 +96,7 @@ const useWallet = () => {
       setWallet(null);
       setConnected(false);
       setAccounts([]);
+      setSimulationMode(false);
       localStorage.removeItem('connectedWallet');
       return { success: true };
     } catch (error) {
@@ -87,6 +110,7 @@ const useWallet = () => {
     connected,
     loading,
     accounts,
+    simulationMode, // Expose simulation mode status
     connectMyAlgo,
     connectWalletConnect,
     disconnectWallet

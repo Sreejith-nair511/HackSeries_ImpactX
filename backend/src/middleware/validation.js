@@ -75,9 +75,6 @@ const validateDonation = [
   body('amount')
     .isFloat({ min: 0.000001 })
     .withMessage('Amount must be a positive number'),
-  body('campaignId')
-    .notEmpty()
-    .withMessage('Campaign ID is required'),
   (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {

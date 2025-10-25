@@ -1,110 +1,138 @@
-class ApiService {
+/**
+ * Global API Service
+ * This service ensures all API calls are properly authenticated
+ * to prevent "Access token required" errors
+ */
+
+import authHelper from '../utils/authHelper';
+
+class APIService {
   constructor() {
-    this.baseURL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+    this.baseURL = 'http://localhost:5000/api/v1';
   }
 
+  // Generic API request method with automatic authentication
   async request(endpoint, options = {}) {
-    const url = `${this.baseURL}${endpoint}`;
+    // Ensure we have the correct base URL
+    const url = endpoint.startsWith('http') ? endpoint : `${this.baseURL}${endpoint}`;
     
-    const config = {
+    return await authHelper.makeAuthenticatedRequest(url, options);
+  }
+
+  // GET request
+  async get(endpoint) {
+    return await this.request(endpoint, { method: 'GET' });
+  }
+
+  // POST request
+  async post(endpoint, data) {
+    return await this.request(endpoint, {
+      method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        ...options.headers,
+        'Content-Type': 'application/json'
       },
-      ...options,
-    };
-    
-    // Add auth token if available
-    const token = localStorage.getItem('token');
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+      body: JSON.stringify(data)
+    });
+  }
+
+  // PUT request
+  async put(endpoint, data) {
+    return await this.request(endpoint, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
+  }
+
+  // DELETE request
+  async delete(endpoint) {
+    return await this.request(endpoint, { method: 'DELETE' });
+  }
+
+  // Donation-specific methods
+  async createDonation(amount, campaignId = null) {
+    const donationData = { amount };
+    if (campaignId) {
+      donationData.campaignId = campaignId;
     }
     
-    try {
-      const response = await fetch(url, config);
-      const data = await response.json();
-      
-      if (!response.ok) {
-        throw new Error(data.error || 'API request failed');
-      }
-      
-      return data;
-    } catch (error) {
-      console.error('API request error:', error);
-      throw error;
-    }
+    return await this.post('/donations', donationData);
   }
 
-  // Auth endpoints
-  async login(email, password) {
-    return this.request('/api/v1/auth/login', {
-      method: 'POST',
-      body: JSON.stringify({ email, password }),
-    });
-  }
-
-  async register(email, password, role) {
-    return this.request('/api/v1/auth/register', {
-      method: 'POST',
-      body: JSON.stringify({ email, password, role }),
-    });
-  }
-
-  // Campaign endpoints
-  async getCampaigns() {
-    return this.request('/api/v1/campaigns');
-  }
-
-  async getCampaign(id) {
-    return this.request(`/api/v1/campaigns/${id}`);
-  }
-
-  async createCampaign(campaignData) {
-    return this.request('/api/v1/campaigns', {
-      method: 'POST',
-      body: JSON.stringify(campaignData),
-    });
-  }
-
-  // Donation endpoints
   async getDonations() {
-    return this.request('/api/v1/donations');
+    return await this.get('/donations');
   }
 
-  async createDonation(donationData) {
-    return this.request('/api/v1/donations', {
+  async getDonationById(id) {
+    return await this.get(`/donations/${id}`);
+  }
+
+  // Campaign-specific methods
+  async getCampaigns() {
+    return await this.get('/campaigns');
+  }
+
+  async getCampaignById(id) {
+    return await this.get(`/campaigns/${id}`);
+  }
+
+  // Auth-specific methods
+  async login(email, password) {
+    const response = await fetch(`${this.baseURL}/auth/login`, {
       method: 'POST',
-      body: JSON.stringify(donationData),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email, password })
     });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Login failed');
+    }
+
+    const data = await response.json();
+    authHelper.storeAuthData(data.token, data.user);
+    return data;
   }
 
-  // Proof endpoints
-  async getProofs() {
-    return this.request('/api/v1/proofs');
-  }
-
-  async createProof(proofData) {
-    return this.request('/api/v1/proofs', {
+  async register(email, password, role = 'DONOR') {
+    const response = await fetch(`${this.baseURL}/auth/register`, {
       method: 'POST',
-      body: JSON.stringify(proofData),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email, password, role })
     });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Registration failed');
+    }
+
+    const data = await response.json();
+    authHelper.storeAuthData(data.token, data.user);
+    return data;
   }
 
-  // Oracle endpoints
-  async getOracleVotes() {
-    return this.request('/api/v1/oracle');
-  }
-
-  async submitOracleVote(voteData) {
-    return this.request('/api/v1/oracle/vote', {
-      method: 'POST',
-      body: JSON.stringify(voteData),
-    });
-  }
-
-  async getVoteResult(proofId) {
-    return this.request(`/api/v1/oracle/result/${proofId}`);
+  // Auto-initialize authentication
+  async initialize() {
+    try {
+      // This will automatically handle authentication
+      await authHelper.simulateAutoLogin();
+    } catch (error) {
+      console.warn('Auto-initialization failed, but this is normal for first-time users:', error);
+    }
   }
 }
 
-export default new ApiService();
+// Create singleton instance
+const apiService = new APIService();
+
+// Initialize authentication when the service is first imported
+apiService.initialize();
+
+// Export for use in other modules
+export default apiService;

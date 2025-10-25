@@ -8,22 +8,55 @@ const createDonation = [
   async (req, res) => {
     try {
       const { amount, campaignId } = req.body;
-      const { userId } = req.user;
+      const { user } = req;
 
-      // Check if campaign exists
-      const campaign = await prisma.campaign.findUnique({
-        where: { id: campaignId }
-      });
+      console.log('Creating donation with user:', user);
 
-      if (!campaign) {
-        return res.status(404).json({ error: 'Campaign not found' });
+      // Check if user is authenticated
+      if (!user) {
+        return res.status(401).json({ error: 'Authentication required' });
       }
 
+      // Check if campaign exists (if provided)
+      if (campaignId) {
+        const campaign = await prisma.campaign.findUnique({
+          where: { id: campaignId }
+        });
+
+        if (!campaign) {
+          return res.status(404).json({ error: 'Campaign not found' });
+        }
+      }
+
+      // Create the donation record
+      const donationData = {
+        amount: parseFloat(amount),
+        donorId: user.id,
+        status: 'completed' // Default to completed for demo purposes
+      };
+
+      // Add campaignId if provided
+      if (campaignId) {
+        donationData.campaignId = campaignId;
+      }
+
+      console.log('Donation data to create:', donationData);
+
       const donation = await prisma.donation.create({
-        data: {
-          amount: parseFloat(amount),
-          donorId: userId,
-          campaignId
+        data: donationData,
+        include: {
+          donor: {
+            select: {
+              id: true,
+              email: true
+            }
+          },
+          campaign: {
+            select: {
+              id: true,
+              title: true
+            }
+          }
         }
       });
 
@@ -41,13 +74,18 @@ const createDonation = [
 const getDonations = async (req, res) => {
   try {
     const { campaignId } = req.query;
-    const { userId, role } = req.user;
+    const { user } = req;
+
+    // Check if user is authenticated
+    if (!user) {
+      return res.status(401).json({ error: 'Authentication required' });
+    }
 
     let whereClause = {};
 
     // If user is not admin, only show their own donations
-    if (role !== 'ADMIN') {
-      whereClause.donorId = userId;
+    if (user.role !== 'ADMIN') {
+      whereClause.donorId = user.id;
     }
 
     // If campaignId is provided, filter by campaign
@@ -86,7 +124,12 @@ const getDonations = async (req, res) => {
 const getDonationById = async (req, res) => {
   try {
     const { id } = req.params;
-    const { userId, role } = req.user;
+    const { user } = req;
+
+    // Check if user is authenticated
+    if (!user) {
+      return res.status(401).json({ error: 'Authentication required' });
+    }
 
     const donation = await prisma.donation.findUnique({
       where: { id },
@@ -111,7 +154,7 @@ const getDonationById = async (req, res) => {
     }
 
     // Check if user is authorized to view this donation
-    if (role !== 'ADMIN' && donation.donorId !== userId) {
+    if (user.role !== 'ADMIN' && donation.donorId !== user.id) {
       return res.status(403).json({ error: 'Not authorized to view this donation' });
     }
 

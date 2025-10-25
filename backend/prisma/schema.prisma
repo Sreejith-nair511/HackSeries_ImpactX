@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider = "sqlite"
-  url      = env("DATABASE_URL")
+  url      = "file:./dev.db"
 }
 
 model User {
@@ -39,16 +39,17 @@ model Campaign {
 }
 
 model Donation {
-  id          String   @id @default(uuid())
-  amount      Float
-  donorId     String
-  campaignId  String
-  transaction String
-  status      String   @default("pending")
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  donor       User     @relation(fields: [donorId], references: [id])
-  campaign    Campaign @relation(fields: [campaignId], references: [id])
+  id             String   @id @default(uuid())
+  amount         Float
+  donorId        String
+  campaignId     String?
+  transactionId  String?
+  transactionUrl String?
+  status         String   @default("completed")
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  donor          User     @relation(fields: [donorId], references: [id])
+  campaign       Campaign? @relation(fields: [campaignId], references: [id])
 }
 
 model Proof {

@@ -5,6 +5,9 @@ const { validateRegistration, validateLogin } = require('../middleware/validatio
 
 const prisma = new PrismaClient();
 
+// Fallback JWT secret for demo purposes
+const JWT_SECRET = process.env.JWT_SECRET || 'super_secret_key_for_demo_purposes_only_change_in_production';
+
 const register = [
   validateRegistration,
   async (req, res) => {
@@ -35,7 +38,7 @@ const register = [
       // Generate JWT token
       const token = jwt.sign(
         { userId: user.id, email: user.email, role: user.role },
-        process.env.JWT_SECRET,
+        JWT_SECRET,
         { expiresIn: '24h' }
       );
 
@@ -79,7 +82,7 @@ const login = [
       // Generate JWT token
       const token = jwt.sign(
         { userId: user.id, email: user.email, role: user.role },
-        process.env.JWT_SECRET,
+        JWT_SECRET,
         { expiresIn: '24h' }
       );
 
