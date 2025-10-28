@@ -135,6 +135,15 @@
     "increase_font_size": "फॉन्ट आकार वाढवा",
     "decrease_font_size": "फॉन्ट आकार कमी करा",
     "high_contrast": "उच्च विरोधाभास मोड",
+    "reading_assistance": "वाचन सहाय्य",
+    "reading_mode": "वाचन मोड",
+    "reading_mode_desc": "चांगल्या वाचनीयतेसाठी मजकूर लेआउट ऑप्टिमाइझ करा",
+    "text_to_speech": "मजकूर-ते-भाषण",
+    "text_to_speech_desc": "निवडलेला मजकूर जोरात वाचा",
+    "speech_rate": "भाषण दर",
+    "stop_speaking": "बोलणे थांबवा",
+    "how_to_use": "कसे वापरायचे",
+    "tts_instructions": "ते जोरात ऐकण्यासाठी पृष्ठावरील कोणताही मजकूर निवडा. तुमच्या पसंतीनुसार भाषण दर समायोजित करा.",
     "accessibility_options": "ॲक्सेसिबिलिटी पर्याय"
   }
 }

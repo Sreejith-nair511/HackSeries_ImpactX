@@ -135,6 +135,15 @@
     "increase_font_size": "ફોન્ટ કદ વધારો",
     "decrease_font_size": "ફોન્ટ કદ ઘટાડો",
     "high_contrast": "ઉચ્ચ વિરોધાભાસ મોડ",
+    "reading_assistance": "વાંચન સહાય",
+    "reading_mode": "વાંચન મોડ",
+    "reading_mode_desc": "સુધરેલી વાંચનીયતા માટે લખાણ લેઆઉટને શ્રેષ્ઠ બનાવો",
+    "text_to_speech": "લખાણ-થી-સ્પીચ",
+    "text_to_speech_desc": "પસંદ કરેલા લખાણને અવાજે વાંચો",
+    "speech_rate": "સ્પીચનો દર",
+    "stop_speaking": "બોલવાનું બંધ કરો",
+    "how_to_use": "કેવી રીતે ઉપયોગ કરવો",
+    "tts_instructions": "તેને અવાજે સાંભળવા માટે પૃષ્ઠ પર કોઈપણ લખાણ પસંદ કરો. તમારી પસંદગી મુજબ સ્પીચનો દર સમાયોજિત કરો.",
     "accessibility_options": "ઉપલબ્ધતા વિકલ્પો"
   }
 }

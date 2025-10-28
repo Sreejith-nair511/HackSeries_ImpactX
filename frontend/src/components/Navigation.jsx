@@ -2,6 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import IndianFlag from './IndianFlag';
+import ReadingAssistance from './ReadingAssistance';
 
 const Navigation = ({ 
   darkMode, 
@@ -17,6 +18,7 @@ const Navigation = ({
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAccessibilityOpen, setIsAccessibilityOpen] = useState(false);
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
+  const [isReadingAssistanceOpen, setIsReadingAssistanceOpen] = useState(false);
   
   // Handle keyboard navigation
   useEffect(() => {
@@ -25,6 +27,7 @@ const Navigation = ({
         setIsMenuOpen(false);
         setIsAccessibilityOpen(false);
         setIsLanguageOpen(false);
+        setIsReadingAssistanceOpen(false);
       }
     };
     
@@ -131,7 +134,7 @@ const Navigation = ({
                   setIsLanguageOpen(false);
                 }}
                 className="p-2 rounded-full ml-2"
-                aria-label="Accessibility options"
+                aria-label={t('accessibility.accessibility_options')}
                 aria-expanded={isAccessibilityOpen}
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -164,6 +167,16 @@ const Navigation = ({
                     role="menuitem"
                   >
                     {t('accessibility.high_contrast')}
+                  </button>
+                  <button
+                    onClick={() => {
+                      setIsReadingAssistanceOpen(true);
+                      setIsAccessibilityOpen(false);
+                    }}
+                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    role="menuitem"
+                  >
+                    {t('accessibility.reading_assistance')}
                   </button>
                 </div>
               )}
@@ -241,7 +254,7 @@ const Navigation = ({
                 setIsLanguageOpen(false);
               }}
               className="p-2 rounded-full mr-2"
-              aria-label="Accessibility options"
+              aria-label={t('accessibility.accessibility_options')}
               aria-expanded={isAccessibilityOpen}
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -341,9 +354,25 @@ const Navigation = ({
             >
               {t('accessibility.high_contrast')}
             </button>
+            <button
+              onClick={() => {
+                setIsReadingAssistanceOpen(true);
+                setIsAccessibilityOpen(false);
+              }}
+              className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+              role="menuitem"
+            >
+              {t('accessibility.reading_assistance')}
+            </button>
           </div>
         )}
       </div>
+      
+      {/* Reading Assistance Modal */}
+      <ReadingAssistance 
+        isOpen={isReadingAssistanceOpen} 
+        onClose={() => setIsReadingAssistanceOpen(false)} 
+      />
     </nav>
   );
 };

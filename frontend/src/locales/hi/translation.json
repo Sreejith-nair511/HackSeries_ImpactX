@@ -135,6 +135,15 @@
     "increase_font_size": "फ़ॉन्ट आकार बढ़ाएं",
     "decrease_font_size": "फ़ॉन्ट आकार घटाएं",
     "high_contrast": "उच्च विपरीत मोड",
+    "reading_assistance": "पठन सहायता",
+    "reading_mode": "पठन मोड",
+    "reading_mode_desc": "बेहतर पठनीयता के लिए पाठ लेआउट को अनुकूलित करें",
+    "text_to_speech": "पाठ-से-भाषण",
+    "text_to_speech_desc": "चयनित पाठ को जोर से पढ़ें",
+    "speech_rate": "भाषण दर",
+    "stop_speaking": "बोलना बंद करो",
+    "how_to_use": "उपयोग कैसे करें",
+    "tts_instructions": "इसे जोर से पढ़ने के लिए पृष्ठ पर कोई भी पाठ चुनें। अपनी पसंद के अनुसार भाषण दर को समायोजित करें।",
     "accessibility_options": "सुलभता विकल्प"
   }
 }
