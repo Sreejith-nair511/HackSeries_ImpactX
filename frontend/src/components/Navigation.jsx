@@ -45,7 +45,8 @@ const Navigation = ({
   const languages = [
     { code: 'en', name: t('common.english') },
     { code: 'hi', name: t('common.hindi') },
-    { code: 'ta', name: t('common.tamil') }
+    { code: 'ta', name: t('common.tamil') },
+    { code: 'te', name: t('common.telugu') }
   ];
 
   const currentLanguage = i18n.language;
