@@ -119,4 +119,37 @@ main {
   .card {
     padding: 1rem;
   }
+  
+  /* Improved mobile navigation */
+  nav {
+    padding: 0.5rem;
+  }
+  
+  /* Better mobile footer layout */
+  footer .grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  /* Mobile-friendly buttons */
+  button, .btn {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Improved mobile spacing */
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  /* Mobile-friendly forms */
+  form {
+    width: 100%;
+  }
+  
+  input, textarea, select {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
 }

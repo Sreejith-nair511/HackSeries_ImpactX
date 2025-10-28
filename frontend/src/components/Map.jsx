@@ -108,8 +108,8 @@ const Map = ({ darkMode }) => {
         key={mapKey} // Force re-render when dark mode changes
         center={center} 
         zoom={5} 
-        style={{ height: '500px', width: '100%' }}
-        className={darkMode ? 'dark-map' : ''}
+        style={{ height: '300px', width: '100%' }}
+        className={`${darkMode ? 'dark-map' : ''} rounded-2xl`}
       >
         <TileLayer
           url={darkMode 

@@ -99,7 +99,7 @@ const Home = () => {
   return (
     <div className="max-w-6xl mx-auto">
       {/* Hero Section with Carousel */}
-      <div className="relative rounded-2xl overflow-hidden shadow-2xl mb-12 h-96 md:h-[500px]">
+      <div className="relative rounded-2xl overflow-hidden shadow-2xl mb-12 h-64 md:h-96 lg:h-[500px]">
         {heroSlides.map((slide, index) => (
           <div 
             key={index}
@@ -113,32 +113,32 @@ const Home = () => {
             >
               <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/30"></div>
               <div className="absolute inset-0 flex items-center">
-                <div className="container mx-auto px-6 md:px-12">
+                <div className="container mx-auto px-4 md:px-6 lg:px-12">
                   <div className="max-w-2xl text-white">
-                    <h1 className="text-4xl md:text-5xl font-bold mb-4">{slide.title}</h1>
-                    <p className="text-xl mb-6">{slide.description}</p>
+                    <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-2 md:mb-4">{slide.title}</h1>
+                    <p className="text-base md:text-xl mb-4 md:mb-6">{slide.description}</p>
                     <div className="mb-4">
                       <div className="flex justify-between text-sm mb-1">
                         <span>{t('home.funds_raised')}</span>
                         <span>{slide.progress}%</span>
                       </div>
-                      <div className="h-3 bg-gray-300 rounded-full overflow-hidden">
+                      <div className="h-2 md:h-3 bg-gray-300 rounded-full overflow-hidden">
                         <div 
                           className="h-full bg-green-500 rounded-full" 
                           style={{ width: `${slide.progress}%` }}
                         ></div>
                       </div>
                     </div>
-                    <div className="flex flex-col sm:flex-row gap-4">
+                    <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
                       <Link 
                         to="/donate" 
-                        className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-bold py-3 px-8 rounded-full transition duration-300 shadow-lg transform hover:scale-105"
+                        className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-bold py-2 md:py-3 px-4 md:px-8 rounded-full transition duration-300 shadow-lg transform hover:scale-105 touch-target"
                       >
                         {t('common.donate')}
                       </Link>
                       <Link 
                         to="/campaigns" 
-                        className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white font-bold py-3 px-8 rounded-full transition duration-300 border border-white/30"
+                        className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white font-bold py-2 md:py-3 px-4 md:px-8 rounded-full transition duration-300 border border-white/30 touch-target"
                       >
                         {t('common.campaigns')}
                       </Link>
@@ -151,12 +151,12 @@ const Home = () => {
         ))}
         
         {/* Carousel Indicators */}
-        <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-2">
+        <div className="absolute bottom-4 md:bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-2">
           {heroSlides.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentSlide(index)}
-              className={`w-3 h-3 rounded-full transition-colors ${
+              className={`w-2 h-2 md:w-3 md:h-3 rounded-full transition-colors ${
                 index === currentSlide ? 'bg-white' : 'bg-white/50'
               }`}
               aria-label={`${t('home.go_to_slide')} ${index + 1}`}
@@ -166,28 +166,28 @@ const Home = () => {
       </div>
 
       {/* Stats Section */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-12 md:mb-16">
         {stats.map((stat, index) => (
-          <div key={index} className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg text-center border border-gray-100 dark:border-gray-700 hover:shadow-xl transition-shadow">
-            <div className="text-3xl md:text-4xl font-bold text-blue-700 dark:text-blue-400 mb-2">{stat.value}</div>
-            <div className="text-gray-600 dark:text-gray-300">{stat.label}</div>
+          <div key={index} className="bg-white dark:bg-gray-800 p-4 md:p-6 rounded-2xl shadow-lg text-center border border-gray-100 dark:border-gray-700 hover:shadow-xl transition-shadow touch-target">
+            <div className="text-2xl md:text-3xl lg:text-4xl font-bold text-blue-700 dark:text-blue-400 mb-1 md:mb-2">{stat.value}</div>
+            <div className="text-sm md:text-base text-gray-600 dark:text-gray-300">{stat.label}</div>
           </div>
         ))}
       </div>
 
       {/* Features Section */}
-      <div className="mb-16">
-        <h2 className="text-3xl font-bold text-center text-gray-800 dark:text-white mb-4">{t('home.why_impactx')}</h2>
-        <p className="text-gray-600 dark:text-gray-300 text-center mb-12 max-w-3xl mx-auto">
+      <div className="mb-12 md:mb-16">
+        <h2 className="text-2xl md:text-3xl font-bold text-center text-gray-800 dark:text-white mb-2 md:mb-4">{t('home.why_impactx')}</h2>
+        <p className="text-gray-600 dark:text-gray-300 text-center mb-8 md:mb-12 max-w-3xl mx-auto px-4">
           {t('home.why_impactx_desc')}
         </p>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {features.map((feature, index) => (
-            <div key={index} className="bg-gradient-to-br from-white to-blue-50 dark:from-gray-800 dark:to-gray-900 p-6 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
-              <div className="text-4xl mb-4">{feature.icon}</div>
-              <h3 className="text-xl font-semibold mb-2 text-gray-800 dark:text-white">{feature.title}</h3>
-              <p className="text-gray-600 dark:text-gray-300">{feature.description}</p>
+            <div key={index} className="bg-gradient-to-br from-white to-blue-50 dark:from-gray-800 dark:to-gray-900 p-5 md:p-6 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 touch-target">
+              <div className="text-3xl md:text-4xl mb-3 md:mb-4">{feature.icon}</div>
+              <h3 className="text-lg md:text-xl font-semibold mb-2 text-gray-800 dark:text-white">{feature.title}</h3>
+              <p className="text-gray-600 dark:text-gray-300 text-sm md:text-base">{feature.description}</p>
             </div>
           ))}
         </div>
@@ -200,70 +200,70 @@ const Home = () => {
       <RegionalStats />
 
       {/* India Map Section */}
-      <div className="mb-16">
-        <h2 className="text-3xl font-bold text-center text-gray-800 dark:text-white mb-4">{t('home.disaster_relief')}</h2>
-        <p className="text-gray-600 dark:text-gray-300 text-center mb-12 max-w-3xl mx-auto">
+      <div className="mb-12 md:mb-16">
+        <h2 className="text-2xl md:text-3xl font-bold text-center text-gray-800 dark:text-white mb-2 md:mb-4">{t('home.disaster_relief')}</h2>
+        <p className="text-gray-600 dark:text-gray-300 text-center mb-8 md:mb-12 max-w-3xl mx-auto px-4">
           {t('home.disaster_relief_desc')}
         </p>
         
         <Map darkMode={darkMode} />
         
-        <div className="mt-6 flex flex-wrap justify-center gap-4">
+        <div className="mt-4 md:mt-6 flex flex-wrap justify-center gap-3 md:gap-4">
           <div className="flex items-center">
-            <div className="w-4 h-4 bg-blue-500 rounded-full mr-2"></div>
-            <span className="text-gray-700 dark:text-gray-300">{t('home.active_campaigns')}</span>
+            <div className="w-3 h-3 md:w-4 md:h-4 bg-blue-500 rounded-full mr-2"></div>
+            <span className="text-gray-700 dark:text-gray-300 text-sm md:text-base">{t('home.active_campaigns')}</span>
           </div>
           <div className="flex items-center">
-            <div className="w-4 h-4 bg-green-500 rounded-full mr-2"></div>
-            <span className="text-gray-700 dark:text-gray-300">{t('home.completed_campaigns')}</span>
+            <div className="w-3 h-3 md:w-4 md:h-4 bg-green-500 rounded-full mr-2"></div>
+            <span className="text-gray-700 dark:text-gray-300 text-sm md:text-base">{t('home.completed_campaigns')}</span>
           </div>
         </div>
       </div>
 
       {/* Government Partners */}
-      <div className="mb-16">
-        <h2 className="text-3xl font-bold text-center text-gray-800 dark:text-white mb-4">{t('home.partners')}</h2>
-        <p className="text-gray-600 dark:text-gray-300 text-center mb-12 max-w-3xl mx-auto">
+      <div className="mb-12 md:mb-16">
+        <h2 className="text-2xl md:text-3xl font-bold text-center text-gray-800 dark:text-white mb-2 md:mb-4">{t('home.partners')}</h2>
+        <p className="text-gray-600 dark:text-gray-300 text-center mb-8 md:mb-12 max-w-3xl mx-auto px-4">
           {t('home.partners_desc')}
         </p>
         
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
           {partners.map((partner, index) => (
-            <div key={index} className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700 text-center hover:shadow-xl transition-shadow">
-              <div className="bg-gray-200 dark:bg-gray-700 border-2 border-dashed rounded-xl w-16 h-16 mx-auto mb-4 flex items-center justify-center text-xl font-bold">
+            <div key={index} className="bg-white dark:bg-gray-800 p-4 md:p-6 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700 text-center hover:shadow-xl transition-shadow touch-target">
+              <div className="bg-gray-200 dark:bg-gray-700 border-2 border-dashed rounded-xl w-12 h-12 md:w-16 md:h-16 mx-auto mb-3 md:mb-4 flex items-center justify-center text-lg md:text-xl font-bold">
                 {partner.logo}
               </div>
-              <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">{partner.name}</h3>
-              <p className="text-gray-600 dark:text-gray-400 text-sm">{partner.description}</p>
+              <h3 className="text-base md:text-lg font-semibold text-gray-800 dark:text-white mb-1 md:mb-2">{partner.name}</h3>
+              <p className="text-gray-600 dark:text-gray-400 text-xs md:text-sm">{partner.description}</p>
             </div>
           ))}
         </div>
       </div>
 
       {/* How It Works */}
-      <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-900 p-8 rounded-2xl mb-16">
-        <h2 className="text-3xl font-bold text-center text-gray-800 dark:text-white mb-4">{t('home.how_it_works')}</h2>
-        <p className="text-gray-600 dark:text-gray-300 text-center mb-12 max-w-3xl mx-auto">
+      <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-900 p-6 md:p-8 rounded-2xl mb-12 md:mb-16">
+        <h2 className="text-2xl md:text-3xl font-bold text-center text-gray-800 dark:text-white mb-2 md:mb-4">{t('home.how_it_works')}</h2>
+        <p className="text-gray-600 dark:text-gray-300 text-center mb-8 md:mb-12 max-w-3xl mx-auto px-4">
           {t('home.how_it_works_desc')}
         </p>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
           {[
             { step: 1, title: t('home.step_create'), description: t('home.step_create_desc') },
             { step: 2, title: t('home.step_donate'), description: t('home.step_donate_desc') },
             { step: 3, title: t('home.step_verify'), description: t('home.step_verify_desc') },
             { step: 4, title: t('home.step_release'), description: t('home.step_release_desc') }
           ].map((item, index) => (
-            <div key={index} className="text-center relative">
-              <div className="bg-blue-600 text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 text-2xl font-bold shadow-lg">
+            <div key={index} className="text-center relative touch-target">
+              <div className="bg-blue-600 text-white rounded-full w-12 h-12 md:w-16 md:h-16 flex items-center justify-center mx-auto mb-3 md:mb-4 text-xl md:text-2xl font-bold shadow-lg">
                 {item.step}
               </div>
-              <h3 className="text-xl font-semibold mb-2 text-gray-800 dark:text-white">{item.title}</h3>
-              <p className="text-gray-600 dark:text-gray-300">{item.description}</p>
+              <h3 className="text-lg md:text-xl font-semibold mb-2 text-gray-800 dark:text-white">{item.title}</h3>
+              <p className="text-gray-600 dark:text-gray-300 text-sm md:text-base">{item.description}</p>
               
               {index < 3 && (
-                <div className="hidden lg:block absolute top-8 -right-4 text-blue-400 dark:text-blue-300">
-                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="hidden lg:block absolute top-6 md:top-8 -right-3 md:-right-4 text-blue-400 dark:text-blue-300">
+                  <svg className="w-6 h-6 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
                   </svg>
                 </div>
@@ -274,21 +274,21 @@ const Home = () => {
       </div>
 
       {/* Call to Action */}
-      <div className="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-2xl p-12 text-center text-white mb-16">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">{t('home.cta_title')}</h2>
-        <p className="text-xl mb-8 max-w-2xl mx-auto">
+      <div className="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-2xl p-8 md:p-12 text-center text-white mb-12 md:mb-16">
+        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 md:mb-4">{t('home.cta_title')}</h2>
+        <p className="text-base md:text-xl mb-6 md:mb-8 max-w-2xl mx-auto px-4">
           {t('home.cta_desc')}
         </p>
-        <div className="flex flex-col sm:flex-row justify-center gap-4">
+        <div className="flex flex-col sm:flex-row justify-center gap-3 md:gap-4 max-w-md mx-auto">
           <Link 
             to="/donate" 
-            className="bg-white text-blue-700 hover:bg-gray-100 font-bold py-4 px-8 rounded-full transition duration-300 shadow-lg transform hover:scale-105"
+            className="bg-white text-blue-700 hover:bg-gray-100 font-bold py-3 md:py-4 px-6 md:px-8 rounded-full transition duration-300 shadow-lg transform hover:scale-105 touch-target"
           >
             {t('home.cta_button_donate')}
           </Link>
           <Link 
             to="/campaigns" 
-            className="bg-transparent border-2 border-white hover:bg-white/10 text-white font-bold py-4 px-8 rounded-full transition duration-300"
+            className="bg-transparent border-2 border-white hover:bg-white/10 text-white font-bold py-3 md:py-4 px-6 md:px-8 rounded-full transition duration-300 touch-target"
           >
             {t('home.cta_button_explore')}
           </Link>
