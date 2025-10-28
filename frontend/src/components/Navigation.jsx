@@ -47,7 +47,8 @@ const Navigation = ({
     { code: 'hi', name: t('common.hindi') },
     { code: 'ta', name: t('common.tamil') },
     { code: 'te', name: t('common.telugu') },
-    { code: 'mr', name: t('common.marathi') }
+    { code: 'mr', name: t('common.marathi') },
+    { code: 'bn', name: t('common.bengali') }
   ];
 
   const currentLanguage = i18n.language;
