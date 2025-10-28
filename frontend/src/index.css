@@ -34,9 +34,58 @@ body {
   background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
 }
 
+/* High contrast mode styles */
+.high-contrast {
+  color: #000000;
+  background-color: #ffffff;
+}
+
+.high-contrast .dark {
+  color: #ffffff;
+  background-color: #000000;
+}
+
+.high-contrast a {
+  color: #0000ff;
+  text-decoration: underline;
+}
+
+.high-contrast a:hover {
+  color: #ff0000;
+}
+
+.high-contrast button {
+  border: 2px solid #000000;
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.high-contrast button:hover {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.high-contrast .bg-gradient-to-r {
+  background: #000000 !important;
+  color: #ffffff !important;
+}
+
 /* Custom styles for India-focused design */
 .india-flag-gradient {
   background: linear-gradient(135deg, #ff9933 0%, #ffffff 50%, #138808 100%);
+}
+
+/* Flag animation */
+@keyframes flag-wave {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(2deg); }
+  50% { transform: rotate(0deg); }
+  75% { transform: rotate(-2deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.animate-flag-wave {
+  animation: flag-wave 2s ease-in-out infinite;
 }
 
 /* Enhanced card styles */
@@ -154,6 +203,29 @@ body {
 /* Focus styles */
 .focus-ring {
   @apply focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2;
+}
+
+/* Screen reader only class */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.sr-only:not(:focus):not(:active) {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
 }
 
 /* Leaflet map dark mode */

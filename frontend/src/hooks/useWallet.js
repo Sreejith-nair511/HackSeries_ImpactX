@@ -44,7 +44,7 @@ const useWallet = () => {
         
         return { success: true, wallet: walletData, message: result.message };
       } else {
-        return { success: false, error: result.error };
+        return { success: false, error: result.error || 'Failed to connect to MyAlgo wallet' };
       }
     } catch (error) {
       console.error('MyAlgo connection error:', error);
@@ -80,7 +80,7 @@ const useWallet = () => {
         
         return { success: true, message: result.message };
       } else {
-        return { success: false, error: result.error };
+        return { success: false, error: result.error || 'Failed to connect to WalletConnect' };
       }
     } catch (error) {
       console.error('WalletConnect connection error:', error);
@@ -101,7 +101,13 @@ const useWallet = () => {
       return { success: true };
     } catch (error) {
       console.error('Disconnect error:', error);
-      return { success: false, error: error.message };
+      // Even if disconnect fails, clear local state
+      setWallet(null);
+      setConnected(false);
+      setAccounts([]);
+      setSimulationMode(false);
+      localStorage.removeItem('connectedWallet');
+      return { success: true }; // Still return success to avoid confusing the user
     }
   };
 

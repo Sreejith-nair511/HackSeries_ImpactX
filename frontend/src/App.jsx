@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import Navigation from './components/Navigation';
 import Home from './pages/Home';
 import Campaigns from './pages/Campaigns';
@@ -10,7 +11,10 @@ import DonationDemo from './components/DonationDemo';
 import AuthTest from './pages/AuthTest';
 
 function App() {
+  const { t, i18n } = useTranslation();
   const [darkMode, setDarkMode] = useState(false);
+  const [fontSize, setFontSize] = useState(16); // Base font size in pixels
+  const [highContrast, setHighContrast] = useState(false);
 
   // Check for saved dark mode preference
   useEffect(() => {
@@ -20,6 +24,26 @@ function App() {
     // Apply dark mode class to body
     if (savedDarkMode) {
       document.documentElement.classList.add('dark');
+    }
+  }, []);
+
+  // Check for saved font size preference
+  useEffect(() => {
+    const savedFontSize = localStorage.getItem('fontSize');
+    if (savedFontSize) {
+      setFontSize(parseInt(savedFontSize));
+      document.documentElement.style.fontSize = `${savedFontSize}px`;
+    }
+  }, []);
+
+  // Check for saved high contrast preference
+  useEffect(() => {
+    const savedHighContrast = localStorage.getItem('highContrast') === 'true';
+    setHighContrast(savedHighContrast);
+    
+    // Apply high contrast class to body
+    if (savedHighContrast) {
+      document.documentElement.classList.add('high-contrast');
     }
   }, []);
 
@@ -37,12 +61,63 @@ function App() {
     }
   };
 
+  // Increase font size
+  const increaseFontSize = () => {
+    const newSize = Math.min(fontSize + 2, 24); // Max 24px
+    setFontSize(newSize);
+    localStorage.setItem('fontSize', newSize.toString());
+    document.documentElement.style.fontSize = `${newSize}px`;
+  };
+
+  // Decrease font size
+  const decreaseFontSize = () => {
+    const newSize = Math.max(fontSize - 2, 12); // Min 12px
+    setFontSize(newSize);
+    localStorage.setItem('fontSize', newSize.toString());
+    document.documentElement.style.fontSize = `${newSize}px`;
+  };
+
+  // Toggle high contrast mode
+  const toggleHighContrast = () => {
+    const newHighContrast = !highContrast;
+    setHighContrast(newHighContrast);
+    localStorage.setItem('highContrast', newHighContrast.toString());
+    
+    // Apply high contrast class to body
+    if (newHighContrast) {
+      document.documentElement.classList.add('high-contrast');
+    } else {
+      document.documentElement.classList.remove('high-contrast');
+    }
+  };
+
+  // Change language
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+  };
+
   return (
     <Router>
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
-        <Navigation darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+        {/* Skip to main content link for accessibility */}
+        <a 
+          href="#main-content" 
+          className="sr-only focus:not-sr-only focus:absolute focus:p-4 focus:bg-blue-600 focus:text-white focus:z-50"
+        >
+          {t('accessibility.skip_to_main_content')}
+        </a>
         
-        <main className="container mx-auto px-4 py-8">
+        <Navigation 
+          darkMode={darkMode} 
+          toggleDarkMode={toggleDarkMode}
+          increaseFontSize={increaseFontSize}
+          decreaseFontSize={decreaseFontSize}
+          highContrast={highContrast}
+          toggleHighContrast={toggleHighContrast}
+          changeLanguage={changeLanguage}
+        />
+        
+        <main id="main-content" className="container mx-auto px-4 py-8">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/campaigns" element={<Campaigns />} />
@@ -63,17 +138,17 @@ function App() {
                   ImpactX
                 </h3>
                 <p className="text-gray-400">
-                  Transparent & Verifiable Disaster Relief Funding on Algorand.
+                  {t('home.title')}
                 </p>
               </div>
               
               <div>
                 <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
                 <ul className="space-y-2">
-                  <li><a href="/" className="text-gray-400 hover:text-white transition-colors">Home</a></li>
-                  <li><a href="/campaigns" className="text-gray-400 hover:text-white transition-colors">Campaigns</a></li>
-                  <li><a href="/donate" className="text-gray-400 hover:text-white transition-colors">Donate</a></li>
-                  <li><a href="/ngo" className="text-gray-400 hover:text-white transition-colors">NGO Dashboard</a></li>
+                  <li><a href="/" className="text-gray-400 hover:text-white transition-colors">{t('common.home')}</a></li>
+                  <li><a href="/campaigns" className="text-gray-400 hover:text-white transition-colors">{t('common.campaigns')}</a></li>
+                  <li><a href="/donate" className="text-gray-400 hover:text-white transition-colors">{t('common.donate')}</a></li>
+                  <li><a href="/ngo" className="text-gray-400 hover:text-white transition-colors">{t('common.ngo_dashboard')}</a></li>
                 </ul>
               </div>
               
@@ -107,7 +182,7 @@ function App() {
             </div>
             
             <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
-              <p>&copy; 2025 ImpactX. Transparent & Verifiable Disaster Relief Funding on Algorand. Made with ❤️ for India.</p>
+              <p>&copy; 2025 ImpactX. {t('home.title')}. Made with ❤️ for India.</p>
             </div>
           </div>
         </footer>

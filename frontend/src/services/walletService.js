@@ -34,27 +34,10 @@ class WalletService {
 
   async connectMyAlgo() {
     try {
-      if (!this.myAlgoWallet) {
-        const initSuccess = await this.initMyAlgo();
-        if (!initSuccess) {
-          // If initialization fails, simulate the connection
-          this.simulationMode = true;
-          const simulatedAccount = {
-            address: this.generateSimulatedAddress(),
-            name: 'Simulated MyAlgo Account',
-            provider: 'myalgo'
-          };
-          
-          this.accounts = [simulatedAccount];
-          this.connected = true;
-          
-          return { 
-            success: true, 
-            accounts: this.accounts,
-            simulated: true,
-            message: 'Connected to simulated MyAlgo wallet for demo purposes' 
-          };
-        }
+      // Always try to initialize first
+      const initSuccess = await this.initMyAlgo();
+      if (!initSuccess) {
+        throw new Error('Failed to initialize MyAlgo');
       }
 
       const accounts = await this.myAlgoWallet.connect({
@@ -155,27 +138,10 @@ class WalletService {
 
   async connectWalletConnect() {
     try {
-      if (!this.walletConnector) {
-        const initSuccess = await this.initWalletConnect();
-        if (!initSuccess) {
-          // If initialization fails, simulate the connection
-          this.simulationMode = true;
-          const simulatedAccount = {
-            address: this.generateSimulatedAddress(),
-            name: 'Simulated WalletConnect Account',
-            provider: 'walletconnect'
-          };
-          
-          this.accounts = [simulatedAccount];
-          this.connected = true;
-          
-          return { 
-            success: true, 
-            accounts: this.accounts,
-            simulated: true,
-            message: 'Connected to simulated WalletConnect wallet for demo purposes' 
-          };
-        }
+      // Always try to initialize first
+      const initSuccess = await this.initWalletConnect();
+      if (!initSuccess) {
+        throw new Error('Failed to initialize WalletConnect');
       }
 
       if (!this.walletConnector.connected) {

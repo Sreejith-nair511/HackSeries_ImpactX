@@ -1,8 +1,12 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import Map from '../components/Map';
+import DisasterInfo from '../components/DisasterInfo';
+import RegionalStats from '../components/RegionalStats';
 
 const Home = () => {
+  const { t } = useTranslation();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [darkMode, setDarkMode] = useState(false);
   
@@ -36,20 +40,20 @@ const Home = () => {
 
   const heroSlides = [
     {
-      title: "Flood Relief in Kerala",
-      description: "Help families affected by monsoon floods rebuild their lives",
+      title: t('home.hero_title_1'),
+      description: t('home.hero_description_1'),
       image: "https://images.unsplash.com/photo-1593062091233-5450f1b5c3c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
       progress: 75
     },
     {
-      title: "Education for Tribal Children",
-      description: "Support education initiatives in remote tribal areas of India",
+      title: t('home.hero_title_2'),
+      description: t('home.hero_description_2'),
       image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
       progress: 45
     },
     {
-      title: "Drought Relief in Rajasthan",
-      description: "Provide water and food security for drought-affected communities",
+      title: t('home.hero_title_3'),
+      description: t('home.hero_description_3'),
       image: "https://images.unsplash.com/photo-1591228391010-0a6a3c7b4c1c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
       progress: 30
     }
@@ -58,31 +62,31 @@ const Home = () => {
   const features = [
     {
       icon: "🔒",
-      title: "Blockchain Transparency",
-      description: "All donations and fund releases are recorded on the Algorand blockchain for complete transparency."
+      title: t('home.feature_transparency'),
+      description: t('home.feature_transparency_desc')
     },
     {
       icon: "✅",
-      title: "Multi-Oracle Verification",
-      description: "Proof of aid delivery verified by multiple oracles (drones, satellites, IoT) with weighted voting."
+      title: t('home.feature_verification'),
+      description: t('home.feature_verification_desc')
     },
     {
       icon: "📁",
-      title: "IPFS Storage",
-      description: "Proof documents stored securely on IPFS with hashes anchored to the blockchain."
+      title: t('home.feature_storage'),
+      description: t('home.feature_storage_desc')
     },
     {
       icon: "🇮🇳",
-      title: "India-Focused",
-      description: "Specifically designed for Indian disaster relief scenarios with local language support."
+      title: t('home.feature_india'),
+      description: t('home.feature_india_desc')
     }
   ];
 
   const stats = [
-    { value: "₹2.5Cr", label: "Funds Distributed" },
-    { value: "15K+", label: "Beneficiaries" },
-    { value: "42", label: "Active Campaigns" },
-    { value: "98%", label: "Transparency Rating" }
+    { value: t('home.stats_funds'), label: t('home.stats_funds_label') },
+    { value: t('home.stats_beneficiaries'), label: t('home.stats_beneficiaries_label') },
+    { value: t('home.stats_campaigns'), label: t('home.stats_campaigns_label') },
+    { value: t('home.stats_transparency'), label: t('home.stats_transparency_label') }
   ];
 
   const partners = [
@@ -94,29 +98,6 @@ const Home = () => {
 
   return (
     <div className="max-w-6xl mx-auto">
-      {/* Dark mode toggle */}
-      <div className="flex justify-end mb-4">
-        <button
-          onClick={toggleDarkMode}
-          className={`p-2 rounded-full ${
-            darkMode 
-              ? 'bg-gray-700 text-yellow-300' 
-              : 'bg-gray-200 text-gray-700'
-          }`}
-          aria-label="Toggle dark mode"
-        >
-          {darkMode ? (
-            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clipRule="evenodd" />
-            </svg>
-          ) : (
-            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
-            </svg>
-          )}
-        </button>
-      </div>
-
       {/* Hero Section with Carousel */}
       <div className="relative rounded-2xl overflow-hidden shadow-2xl mb-12 h-96 md:h-[500px]">
         {heroSlides.map((slide, index) => (
@@ -138,7 +119,7 @@ const Home = () => {
                     <p className="text-xl mb-6">{slide.description}</p>
                     <div className="mb-4">
                       <div className="flex justify-between text-sm mb-1">
-                        <span>Funds Raised</span>
+                        <span>{t('home.funds_raised')}</span>
                         <span>{slide.progress}%</span>
                       </div>
                       <div className="h-3 bg-gray-300 rounded-full overflow-hidden">
@@ -153,13 +134,13 @@ const Home = () => {
                         to="/donate" 
                         className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-bold py-3 px-8 rounded-full transition duration-300 shadow-lg transform hover:scale-105"
                       >
-                        Donate Now
+                        {t('common.donate')}
                       </Link>
                       <Link 
                         to="/campaigns" 
                         className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white font-bold py-3 px-8 rounded-full transition duration-300 border border-white/30"
                       >
-                        View Campaigns
+                        {t('common.campaigns')}
                       </Link>
                     </div>
                   </div>
@@ -178,7 +159,7 @@ const Home = () => {
               className={`w-3 h-3 rounded-full transition-colors ${
                 index === currentSlide ? 'bg-white' : 'bg-white/50'
               }`}
-              aria-label={`Go to slide ${index + 1}`}
+              aria-label={`${t('home.go_to_slide')} ${index + 1}`}
             />
           ))}
         </div>
@@ -196,9 +177,9 @@ const Home = () => {
 
       {/* Features Section */}
       <div className="mb-16">
-        <h2 className="text-3xl font-bold text-center text-gray-800 dark:text-white mb-4">Why ImpactX?</h2>
+        <h2 className="text-3xl font-bold text-center text-gray-800 dark:text-white mb-4">{t('home.why_impactx')}</h2>
         <p className="text-gray-600 dark:text-gray-300 text-center mb-12 max-w-3xl mx-auto">
-          Our platform ensures every rupee reaches those who need it most through transparent, verifiable processes
+          {t('home.why_impactx_desc')}
         </p>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -212,11 +193,17 @@ const Home = () => {
         </div>
       </div>
 
+      {/* Disaster Information Section - India Specific */}
+      <DisasterInfo />
+      
+      {/* Regional Statistics Section - India Specific */}
+      <RegionalStats />
+
       {/* India Map Section */}
       <div className="mb-16">
-        <h2 className="text-3xl font-bold text-center text-gray-800 dark:text-white mb-4">Disaster Relief Across India</h2>
+        <h2 className="text-3xl font-bold text-center text-gray-800 dark:text-white mb-4">{t('home.disaster_relief')}</h2>
         <p className="text-gray-600 dark:text-gray-300 text-center mb-12 max-w-3xl mx-auto">
-          View active campaigns and relief efforts across different regions of India
+          {t('home.disaster_relief_desc')}
         </p>
         
         <Map darkMode={darkMode} />
@@ -224,20 +211,20 @@ const Home = () => {
         <div className="mt-6 flex flex-wrap justify-center gap-4">
           <div className="flex items-center">
             <div className="w-4 h-4 bg-blue-500 rounded-full mr-2"></div>
-            <span className="text-gray-700 dark:text-gray-300">Active Campaigns</span>
+            <span className="text-gray-700 dark:text-gray-300">{t('home.active_campaigns')}</span>
           </div>
           <div className="flex items-center">
             <div className="w-4 h-4 bg-green-500 rounded-full mr-2"></div>
-            <span className="text-gray-700 dark:text-gray-300">Completed Campaigns</span>
+            <span className="text-gray-700 dark:text-gray-300">{t('home.completed_campaigns')}</span>
           </div>
         </div>
       </div>
 
       {/* Government Partners */}
       <div className="mb-16">
-        <h2 className="text-3xl font-bold text-center text-gray-800 dark:text-white mb-4">Government & NGO Partners</h2>
+        <h2 className="text-3xl font-bold text-center text-gray-800 dark:text-white mb-4">{t('home.partners')}</h2>
         <p className="text-gray-600 dark:text-gray-300 text-center mb-12 max-w-3xl mx-auto">
-          Collaborating with national organizations for effective disaster response
+          {t('home.partners_desc')}
         </p>
         
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
@@ -255,17 +242,17 @@ const Home = () => {
 
       {/* How It Works */}
       <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-900 p-8 rounded-2xl mb-16">
-        <h2 className="text-3xl font-bold text-center text-gray-800 dark:text-white mb-4">How It Works</h2>
+        <h2 className="text-3xl font-bold text-center text-gray-800 dark:text-white mb-4">{t('home.how_it_works')}</h2>
         <p className="text-gray-600 dark:text-gray-300 text-center mb-12 max-w-3xl mx-auto">
-          Our 4-step process ensures transparency and accountability in every donation
+          {t('home.how_it_works_desc')}
         </p>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {[
-            { step: 1, title: "Create Campaign", description: "NGOs create disaster relief campaigns with detailed information" },
-            { step: 2, title: "Donate", description: "Donors contribute funds to secure blockchain escrow" },
-            { step: 3, title: "Verify", description: "Oracles verify proof of aid delivery using multiple sources" },
-            { step: 4, title: "Release", description: "Funds released to NGO upon successful verification" }
+            { step: 1, title: t('home.step_create'), description: t('home.step_create_desc') },
+            { step: 2, title: t('home.step_donate'), description: t('home.step_donate_desc') },
+            { step: 3, title: t('home.step_verify'), description: t('home.step_verify_desc') },
+            { step: 4, title: t('home.step_release'), description: t('home.step_release_desc') }
           ].map((item, index) => (
             <div key={index} className="text-center relative">
               <div className="bg-blue-600 text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 text-2xl font-bold shadow-lg">
@@ -288,22 +275,22 @@ const Home = () => {
 
       {/* Call to Action */}
       <div className="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-2xl p-12 text-center text-white mb-16">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Make a Difference?</h2>
+        <h2 className="text-3xl md:text-4xl font-bold mb-4">{t('home.cta_title')}</h2>
         <p className="text-xl mb-8 max-w-2xl mx-auto">
-          Join thousands of donors who trust ImpactX to ensure their contributions reach those in need
+          {t('home.cta_desc')}
         </p>
         <div className="flex flex-col sm:flex-row justify-center gap-4">
           <Link 
             to="/donate" 
             className="bg-white text-blue-700 hover:bg-gray-100 font-bold py-4 px-8 rounded-full transition duration-300 shadow-lg transform hover:scale-105"
           >
-            Start Donating
+            {t('home.cta_button_donate')}
           </Link>
           <Link 
             to="/campaigns" 
             className="bg-transparent border-2 border-white hover:bg-white/10 text-white font-bold py-4 px-8 rounded-full transition duration-300"
           >
-            Explore Campaigns
+            {t('home.cta_button_explore')}
           </Link>
         </div>
       </div>
