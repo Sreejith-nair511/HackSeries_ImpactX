@@ -57,4 +57,5 @@ const IndianFlag = () => {
   );
 };
 
+// Export the component
 export default IndianFlag;
