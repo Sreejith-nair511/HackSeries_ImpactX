@@ -102,7 +102,8 @@ function App() {
         {/* Skip to main content link for accessibility */}
         <a 
           href="#main-content" 
-          className="sr-only focus:not-sr-only focus:absolute focus:p-4 focus:bg-blue-600 focus:text-white focus:z-50"
+          className="sr-only focus:not-sr-only focus:absolute focus:p-4 focus:bg-blue-600 focus:text-white focus:z-50 focus:ring-2 focus:ring-white"
+          aria-label={t('accessibility.skip_to_main_content')}
         >
           {t('accessibility.skip_to_main_content')}
         </a>
@@ -117,7 +118,7 @@ function App() {
           changeLanguage={changeLanguage}
         />
         
-        <main id="main-content" className="container mx-auto px-4 py-8">
+        <main id="main-content" className="container mx-auto px-4 py-8" role="main">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/campaigns" element={<Campaigns />} />
@@ -129,7 +130,7 @@ function App() {
           </Routes>
         </main>
         
-        <footer className="bg-gradient-to-r from-gray-800 to-gray-900 text-white py-12">
+        <footer className="bg-gradient-to-r from-gray-800 to-gray-900 text-white py-12" role="contentinfo">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
               <div>
@@ -145,10 +146,10 @@ function App() {
               <div>
                 <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
                 <ul className="space-y-2">
-                  <li><a href="/" className="text-gray-400 hover:text-white transition-colors">{t('common.home')}</a></li>
-                  <li><a href="/campaigns" className="text-gray-400 hover:text-white transition-colors">{t('common.campaigns')}</a></li>
-                  <li><a href="/donate" className="text-gray-400 hover:text-white transition-colors">{t('common.donate')}</a></li>
-                  <li><a href="/ngo" className="text-gray-400 hover:text-white transition-colors">{t('common.ngo_dashboard')}</a></li>
+                  <li><a href="/" className="text-gray-400 hover:text-white transition-colors">Home</a></li>
+                  <li><a href="/campaigns" className="text-gray-400 hover:text-white transition-colors">Campaigns</a></li>
+                  <li><a href="/donate" className="text-gray-400 hover:text-white transition-colors">Donate</a></li>
+                  <li><a href="/ngo" className="text-gray-400 hover:text-white transition-colors">NGO Dashboard</a></li>
                 </ul>
               </div>
               
@@ -183,6 +184,8 @@ function App() {
             
             <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
               <p>&copy; 2025 ImpactX. {t('home.title')}. Made with ❤️ for India.</p>
+              {/* Team attribution */}
+              <p className="mt-2 text-sm">Developed by Goodwell Sreejith S, Vasudha, and Nikhil</p>
             </div>
           </div>
         </footer>
