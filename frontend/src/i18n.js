@@ -8,6 +8,7 @@ import taTranslation from './locales/ta/translation.json';
 import teTranslation from './locales/te/translation.json';
 import mrTranslation from './locales/mr/translation.json';
 import bnTranslation from './locales/bn/translation.json';
+import guTranslation from './locales/gu/translation.json';
 
 const resources = {
   en: {
@@ -27,6 +28,9 @@ const resources = {
   },
   bn: {
     translation: bnTranslation
+  },
+  gu: {
+    translation: guTranslation
   }
 };
 
