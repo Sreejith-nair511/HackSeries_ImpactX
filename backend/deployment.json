@@ -1,7 +1,0 @@
-{
-  "appId": 12345678,
-  "escrowAddress": "PLACEHOLDER_ESCROW_ADDRESS",
-  "creatorAddress": "PLACEHOLDER_CREATOR_ADDRESS",
-  "network": "sandbox",
-  "timestamp": "2025-10-16T00:00:00.000Z"
-}
