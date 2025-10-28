@@ -103,4 +103,5 @@ const DisasterInfo = () => {
   );
 };
 
+// Export the component
 export default DisasterInfo;
