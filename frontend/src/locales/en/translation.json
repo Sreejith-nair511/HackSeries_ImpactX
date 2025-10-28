@@ -123,7 +123,13 @@
     "common_disasters": "Common Disasters",
     "people_affected": "People Affected",
     "funds_allocated": "Funds Allocated",
-    "view_detailed_statistics": "View Detailed Statistics"
+    "view_detailed_statistics": "View Detailed Statistics",
+    "disaster_statistics": "Disaster Statistics",
+    "disaster_statistics_insight": "Key Insights",
+    "disaster_statistics_desc": "Floods and droughts are the most frequent natural disasters in India, affecting millions of people annually. Earthquakes and cyclones, while less frequent, have severe impacts. Fire incidents show high frequency but relatively lower impact on population.",
+    "bar_chart": "Bar Chart",
+    "line_chart": "Line Chart",
+    "pie_chart": "Pie Chart"
   },
   "navigation": {
     "menu": "Menu",

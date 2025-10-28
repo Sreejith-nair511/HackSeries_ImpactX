@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import Map from '../components/Map';
 import DisasterInfo from '../components/DisasterInfo';
 import RegionalStats from '../components/RegionalStats';
+import DisasterStatsChart from '../components/DisasterStatsChart';
 
 const Home = () => {
   const { t } = useTranslation();
@@ -198,6 +199,9 @@ const Home = () => {
       
       {/* Regional Statistics Section - India Specific */}
       <RegionalStats />
+      
+      {/* Disaster Statistics Chart */}
+      <DisasterStatsChart />
 
       {/* India Map Section */}
       <div className="mb-12 md:mb-16">
