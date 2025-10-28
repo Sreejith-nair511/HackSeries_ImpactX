@@ -10,7 +10,12 @@ const DisasterInfo = () => {
       description: t('home.disaster_flood_desc'),
       regions: ["Kerala", "Assam", "Bihar", "Uttar Pradesh"],
       frequency: t('home.disaster_high'),
-      impact: t('home.disaster_severe')
+      impact: t('home.disaster_severe'),
+      preparedness: [
+        t('home.disaster_flood_prep1'),
+        t('home.disaster_flood_prep2'),
+        t('home.disaster_flood_prep3')
+      ]
     },
     {
       type: t('home.disaster_earthquake'),
@@ -18,7 +23,12 @@ const DisasterInfo = () => {
       description: t('home.disaster_earthquake_desc'),
       regions: ["Himalayan Region", "North-East", "Gujarat", "Bihar"],
       frequency: t('home.disaster_medium'),
-      impact: t('home.disaster_severe')
+      impact: t('home.disaster_severe'),
+      preparedness: [
+        t('home.disaster_earthquake_prep1'),
+        t('home.disaster_earthquake_prep2'),
+        t('home.disaster_earthquake_prep3')
+      ]
     },
     {
       type: t('home.disaster_cyclone'),
@@ -26,7 +36,12 @@ const DisasterInfo = () => {
       description: t('home.disaster_cyclone_desc'),
       regions: ["Odisha", "West Bengal", "Andhra Pradesh", "Tamil Nadu"],
       frequency: t('home.disaster_high'),
-      impact: t('home.disaster_severe')
+      impact: t('home.disaster_severe'),
+      preparedness: [
+        t('home.disaster_cyclone_prep1'),
+        t('home.disaster_cyclone_prep2'),
+        t('home.disaster_cyclone_prep3')
+      ]
     },
     {
       type: t('home.disaster_drought'),
@@ -34,7 +49,12 @@ const DisasterInfo = () => {
       description: t('home.disaster_drought_desc'),
       regions: ["Rajasthan", "Maharashtra", "Karnataka", "Andhra Pradesh"],
       frequency: t('home.disaster_medium'),
-      impact: t('home.disaster_moderate')
+      impact: t('home.disaster_moderate'),
+      preparedness: [
+        t('home.disaster_drought_prep1'),
+        t('home.disaster_drought_prep2'),
+        t('home.disaster_drought_prep3')
+      ]
     },
     {
       type: t('home.disaster_landslide'),
@@ -42,7 +62,12 @@ const DisasterInfo = () => {
       description: t('home.disaster_landslide_desc'),
       regions: ["Himalayan Region", "Western Ghats", "North-East"],
       frequency: t('home.disaster_low'),
-      impact: t('home.disaster_moderate')
+      impact: t('home.disaster_moderate'),
+      preparedness: [
+        t('home.disaster_landslide_prep1'),
+        t('home.disaster_landslide_prep2'),
+        t('home.disaster_landslide_prep3')
+      ]
     },
     {
       type: t('home.disaster_fire'),
@@ -50,7 +75,12 @@ const DisasterInfo = () => {
       description: t('home.disaster_fire_desc'),
       regions: ["Himachal Pradesh", "Uttarakhand", "Madhya Pradesh", "Odisha"],
       frequency: t('home.disaster_medium'),
-      impact: t('home.disaster_moderate')
+      impact: t('home.disaster_moderate'),
+      preparedness: [
+        t('home.disaster_fire_prep1'),
+        t('home.disaster_fire_prep2'),
+        t('home.disaster_fire_prep3')
+      ]
     }
   ];
 
@@ -79,7 +109,7 @@ const DisasterInfo = () => {
               </div>
             </div>
             
-            <div className="flex justify-between text-sm">
+            <div className="flex justify-between text-sm mb-3">
               <div>
                 <span className="text-gray-500 dark:text-gray-400">{t('home.disaster_frequency')}:</span>
                 <span className="ml-1 font-medium text-gray-800 dark:text-white">{disaster.frequency}</span>
@@ -88,6 +118,15 @@ const DisasterInfo = () => {
                 <span className="text-gray-500 dark:text-gray-400">{t('home.disaster_impact')}:</span>
                 <span className="ml-1 font-medium text-gray-800 dark:text-white">{disaster.impact}</span>
               </div>
+            </div>
+            
+            <div className="mt-3">
+              <h4 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase mb-1">{t('home.disaster_preparedness')}</h4>
+              <ul className="text-gray-600 dark:text-gray-300 text-xs list-disc pl-4 space-y-1">
+                {disaster.preparedness.map((prep, idx) => (
+                  <li key={idx}>{prep}</li>
+                ))}
+              </ul>
             </div>
           </div>
         ))}
