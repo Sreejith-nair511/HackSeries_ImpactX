@@ -129,7 +129,23 @@
     "disaster_statistics_desc": "भारत में बाढ़ और सूखा सबसे आम प्राकृतिक आपदाएं हैं, जो प्रतिवर्ष करोड़ों लोगों को प्रभावित करती हैं। भूकंप और चक्रवात, जबकि कम आवृत्ति वाले हैं, लेकिन गहरे प्रभाव डालते हैं। आग की घटनाएं उच्च आवृत्ति दिखाती हैं लेकिन आबादी पर तुलनात्मक रूप से कम प्रभाव डालती हैं।",
     "bar_chart": "बार चार्ट",
     "line_chart": "लाइन चार्ट",
-    "pie_chart": "पाई चार्ट"
+    "pie_chart": "पाई चार्ट",
+    "lakh": "लाख",
+    "crore": "करोड़",
+    "thousand": "हजार",
+    "localization_demo": "स्थानीयकरण डेमो",
+    "currency_formatting": "मुद्रा स्वरूपण",
+    "number_formatting": "संख्या स्वरूपण",
+    "date_formatting": "दिनांक स्वरूपण",
+    "percentage_formatting": "प्रतिशत स्वरूपण",
+    "large_number_formatting": "बड़ी संख्या स्वरूपण",
+    "current_locale": "वर्तमान स्थान",
+    "formatting": {
+      "date_format": "dd/MM/yyyy",
+      "currency_symbol": "₹",
+      "decimal_separator": ".",
+      "thousands_separator": ","
+    }
   },
   "navigation": {
     "menu": "मेनू",

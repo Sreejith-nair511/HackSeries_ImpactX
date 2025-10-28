@@ -5,6 +5,7 @@ import Map from '../components/Map';
 import DisasterInfo from '../components/DisasterInfo';
 import RegionalStats from '../components/RegionalStats';
 import DisasterStatsChart from '../components/DisasterStatsChart';
+import LocalizationDemo from '../components/LocalizationDemo';
 
 const Home = () => {
   const { t } = useTranslation();
@@ -202,6 +203,9 @@ const Home = () => {
       
       {/* Disaster Statistics Chart */}
       <DisasterStatsChart />
+      
+      {/* Localization Demo */}
+      <LocalizationDemo />
 
       {/* India Map Section */}
       <div className="mb-12 md:mb-16">

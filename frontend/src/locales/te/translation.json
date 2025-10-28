@@ -129,7 +129,23 @@
     "disaster_statistics_desc": "భారతదేశంలో వరదలు మరియు ఎండ అత్యంత తరచుగా సంభవించే సహజ డిసాస్టర్లు, సంవత్సరానికి దశలక్షల మంది ప్రజలను బాధిస్తాయి. భూకంపాలు మరియు సునాములు, తక్కువ పౌనఃపున్యం కలిగి ఉన్నప్పటికీ, తీవ్రమైన ప్రభావాలను కలిగి ఉంటాయి. అడవి నిప్పు సంఘటనలు అధిక పౌనఃపున్యాన్ని చూపుతాయి కానీ జనాభాపై పోలిస్తే తక్కువ ప్రభావం ఉంటుంది.",
     "bar_chart": "బార్ ఛార్ట్",
     "line_chart": "లైన్ ఛార్ట్",
-    "pie_chart": "పై ఛార్ట్"
+    "pie_chart": "పై ఛార్ట్",
+    "lakh": "లక్ష",
+    "crore": "కోటి",
+    "thousand": "వేల",
+    "localization_demo": "స్థానికీకరణ డెమో",
+    "currency_formatting": "కరెన్సీ ఫార్మాటింగ్",
+    "number_formatting": "సంఖ్య ఫార్మాటింగ్",
+    "date_formatting": "తేదీ ఫార్మాటింగ్",
+    "percentage_formatting": "శాతం ఫార్మాటింగ్",
+    "large_number_formatting": "పెద్ద సంఖ్య ఫార్మాటింగ్",
+    "current_locale": "ప్రస్తుత స్థానం",
+    "formatting": {
+      "date_format": "dd/MM/yyyy",
+      "currency_symbol": "₹",
+      "decimal_separator": ".",
+      "thousands_separator": ","
+    }
   },
   "navigation": {
     "menu": "మెను",

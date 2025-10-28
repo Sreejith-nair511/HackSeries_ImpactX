@@ -129,7 +129,23 @@
     "disaster_statistics_desc": "ભારતમાં સોજા અને ખોરાક સૌથી સામાન્ય પ્રાકૃતિક આપત્તિઓ છે, જે વાર્ષિક દસ લાખો લોકોને અસર કરે છે. ભૂકંપ અને ચક્રીવાળા તુફાનો, જોકે ઓછી આવર્તન સાથે, ગંભીર અસરો છે. આગની ઘટનાઓ ઉચ્ચ આવર્તન બતાવે છે પરંતુ વસ્તી પર સાપેક્ષ રીતે ઓછી અસર છે.",
     "bar_chart": "બાર ચાર્ટ",
     "line_chart": "લાઇન ચાર્ટ",
-    "pie_chart": "પાઇ ચાર્ટ"
+    "pie_chart": "પાઇ ચાર્ટ",
+    "lakh": "લાખ",
+    "crore": "કરોડ",
+    "thousand": "હજાર",
+    "localization_demo": "સ્થાનિકરણ ડેમો",
+    "currency_formatting": "ચલણ ગોઠવણી",
+    "number_formatting": "સંખ્યા ગોઠવણી",
+    "date_formatting": "તારીખ ગોઠવણી",
+    "percentage_formatting": "ટકા ગોઠવણી",
+    "large_number_formatting": "મોટી સંખ્યા ગોઠવણી",
+    "current_locale": "વર્તમાન સ્થાન",
+    "formatting": {
+      "date_format": "dd/MM/yyyy",
+      "currency_symbol": "₹",
+      "decimal_separator": ".",
+      "thousands_separator": ","
+    }
   },
   "navigation": {
     "menu": "મેનુ",

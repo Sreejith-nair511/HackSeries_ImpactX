@@ -129,7 +129,23 @@
     "disaster_statistics_desc": "ভারতে বন্যা এবং খরা সবচেয়ে ঘটনাক্রমিক প্রাকৃতিক দুর্যোগ, যা বার্ষিক কোটি মানুষকে প্রভাবিত করে। ভূমিকম্প এবং ঘূর্ণিঝড়, যদিও কম ঘটনার হলেও, তীব্র প্রভাব ফেলে। আগুনের ঘটনা উচ্চ ঘটনার দেখায় কিন্তু জনসংখ্যার উপর তুলনামূলকভাবে কম প্রভাব ফেলে।",
     "bar_chart": "বার চার্ট",
     "line_chart": "লাইন চার্ট",
-    "pie_chart": "পাই চার্ট"
+    "pie_chart": "পাই চার্ট",
+    "lakh": "লক্ষ",
+    "crore": "কোটি",
+    "thousand": "হাজার",
+    "localization_demo": "স্থানীয়করণ ডেমো",
+    "currency_formatting": "মুদ্রা বিন্যাস",
+    "number_formatting": "সংখ্যা বিন্যাস",
+    "date_formatting": "তারিখ বিন্যাস",
+    "percentage_formatting": "শতাংশ বিন্যাস",
+    "large_number_formatting": "বড় সংখ্যা বিন্যাস",
+    "current_locale": "বর্তমান স্থান",
+    "formatting": {
+      "date_format": "dd/MM/yyyy",
+      "currency_symbol": "₹",
+      "decimal_separator": ".",
+      "thousands_separator": ","
+    }
   },
   "navigation": {
     "menu": "মেনু",

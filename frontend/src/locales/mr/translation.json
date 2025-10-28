@@ -129,7 +129,23 @@
     "disaster_statistics_desc": "भारतात बाढी आणि ड्राऊट हे सर्वाधिक सामान्य नैसर्गिक आपत्ती आहेत, ज्यामुळे दरवर्षी दशलक्षो लोक प्रभावित होतात. भूकंप आणि चक्रीवादळे, जरी कमी वारंवारतेची असली तरी, तीव्र प्रभाव टाकतात. आगीच्या घटना उच्च वारंवारता दर्शवितात पण लोकसंख्येवर तुलनात्मक रित्या कमी प्रभाव टाकतात.",
     "bar_chart": "बार तक्ता",
     "line_chart": "रेष तक्ता",
-    "pie_chart": "पाय तक्ता"
+    "pie_chart": "पाय तक्ता",
+    "lakh": "लाख",
+    "crore": "कोटी",
+    "thousand": "हजार",
+    "localization_demo": "स्थानिकीकरण डेमो",
+    "currency_formatting": "चलन स्वरूपण",
+    "number_formatting": "संख्या स्वरूपण",
+    "date_formatting": "दिनांक स्वरूपण",
+    "percentage_formatting": "टक्केवारी स्वरूपण",
+    "large_number_formatting": "मोठ्या संख्या स्वरूपण",
+    "current_locale": "वर्तमान स्थान",
+    "formatting": {
+      "date_format": "dd/MM/yyyy",
+      "currency_symbol": "₹",
+      "decimal_separator": ".",
+      "thousands_separator": ","
+    }
   },
   "navigation": {
     "menu": "मेनू",
