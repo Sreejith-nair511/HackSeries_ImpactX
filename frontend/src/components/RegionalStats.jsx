@@ -94,4 +94,5 @@ const RegionalStats = () => {
   );
 };
 
+// Export the component
 export default RegionalStats;
