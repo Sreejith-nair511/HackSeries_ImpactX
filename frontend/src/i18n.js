@@ -18,6 +18,7 @@ const resources = {
   }
 };
 
+// Initialize i18n with the configured resources
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
@@ -33,4 +34,5 @@ i18n
     }
   });
 
+// Export the configured i18n instance
 export default i18n;
