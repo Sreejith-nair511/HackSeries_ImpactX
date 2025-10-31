@@ -726,7 +726,7 @@
     "feature4": "Open-source smart contracts"
   },
   "ivrSimulator": {
-    "title": "IVR Simulator",
+    "title": "IVR Emergency Response System",
     "inProgress": "Call in Progress",
     "ready": "Ready to Call",
     "noActiveCall": "No active call. Start a call to begin.",
