@@ -1,634 +1,441 @@
 # API Documentation
 
-This document provides comprehensive documentation for the ImpactX disaster response platform APIs, including endpoints, request/response formats, authentication, and error handling.
-
 ## Overview
 
-The ImpactX API provides programmatic access to disaster response data and functionality, enabling integration with external systems and custom applications.
-
-## Base URL
-
-```
-https://api.impactx.example.com/v1
-```
-
-For local development:
-```
-http://localhost:3001/api/v1
-```
+The ImpactX API provides programmatic access to platform functionality, enabling developers to integrate humanitarian aid data, verification services, and impact metrics into their own applications. This documentation covers all available endpoints, authentication methods, and usage guidelines.
 
 ## Authentication
 
 ### API Keys
 
-Most API endpoints require authentication via API keys. API keys can be obtained through the admin dashboard.
+1. **Obtaining Keys**
+   - Available through developer portal
+   - Tiered access based on verification level
+   - Rate limits vary by key tier
 
-```bash
-curl -H "Authorization: Bearer YOUR_API_KEY" \
-  https://api.impactx.example.com/v1/reports
-```
+2. **Key Management**
+   - Secure storage requirements
+   - Rotation best practices
+   - Revocation procedures
 
-### OAuth 2.0
+3. **Rate Limiting**
+   - Anonymous: 100 requests/hour
+   - Authenticated: 10,000 requests/hour
+   - Premium: 100,000 requests/hour
 
-For user-specific operations, OAuth 2.0 authentication is required:
+### OAuth 2.0 Integration
 
-```bash
-curl -H "Authorization: Bearer USER_ACCESS_TOKEN" \
-  https://api.impactx.example.com/v1/user/profile
-```
+1. **Authorization Flow**
+   - Authorization code grant type
+   - PKCE support for mobile applications
+   - Refresh token mechanisms
 
-## Rate Limiting
+2. **Scopes and Permissions**
+   - Granular access control
+   - User consent requirements
+   - Scope modification procedures
 
-API requests are rate-limited to prevent abuse:
+3. **Token Management**
+   - JWT format for access tokens
+   - Standard expiration times
+   - Token introspection endpoints
 
-- **Anonymous requests**: 100 requests per hour
-- **Authenticated requests**: 1000 requests per hour
-- **Admin requests**: 5000 requests per hour
+## Core Endpoints
 
-Exceeding rate limits will result in a 429 Too Many Requests response.
+### Disaster Data API
 
-## Response Format
+#### GET /api/v1/disasters
 
-All API responses are returned in JSON format with the following structure:
+Retrieve information about ongoing and past disasters.
 
+**Parameters:**
+- `type` (optional): Filter by disaster type (flood, earthquake, etc.)
+- `country` (optional): Filter by country code
+- `start_date` (optional): Filter by start date (ISO 8601)
+- `end_date` (optional): Filter by end date (ISO 8601)
+- `limit` (optional): Number of results (default: 50, max: 1000)
+- `offset` (optional): Pagination offset
+
+**Response:**
 ```json
 {
-  "success": true,
-  "data": {},
-  "meta": {},
-  "errors": []
+  "disasters": [
+    {
+      "id": "disaster_12345",
+      "type": "flood",
+      "name": "Kerala Floods 2023",
+      "country": "IN",
+      "start_date": "2023-08-01T00:00:00Z",
+      "end_date": "2023-09-15T00:00:00Z",
+      "affected_population": 1250000,
+      "verified_funds": 50000000,
+      "status": "active"
+    }
+  ],
+  "total": 1,
+  "limit": 50,
+  "offset": 0
 }
 ```
 
-### Success Responses
+#### GET /api/v1/disasters/{id}
 
+Retrieve detailed information about a specific disaster.
+
+**Response:**
 ```json
 {
-  "success": true,
-  "data": {
-    "id": 123,
-    "name": "Sample Report"
+  "id": "disaster_12345",
+  "type": "flood",
+  "name": "Kerala Floods 2023",
+  "country": "IN",
+  "start_date": "2023-08-01T00:00:00Z",
+  "end_date": "2023-09-15T00:00:00Z",
+  "coordinates": {
+    "lat": 10.8505,
+    "lng": 76.2711
   },
-  "meta": {
-    "timestamp": "2023-01-01T12:00:00Z"
+  "affected_population": 1250000,
+  "verified_funds": 50000000,
+  "funds_disbursed": 42000000,
+  "status": "active",
+  "verification_score": 92.5,
+  "impact_metrics": {
+    "houses_restored": 45000,
+    "people_relocated": 18000,
+    "infrastructure_repaired": 120
   }
 }
 ```
 
-### Error Responses
+### Funding Transparency API
 
+#### GET /api/v1/funding
+
+Retrieve funding information for humanitarian projects.
+
+**Parameters:**
+- `disaster_id` (optional): Filter by disaster
+- `ngo_id` (optional): Filter by NGO
+- `status` (optional): Filter by funding status (pending, verified, released)
+- `limit` (optional): Number of results (default: 50, max: 1000)
+- `offset` (optional): Pagination offset
+
+**Response:**
 ```json
 {
-  "success": false,
-  "errors": [
+  "funding": [
     {
-      "code": "VALIDATION_ERROR",
-      "message": "Invalid input data",
-      "details": {
-        "field": "email",
-        "reason": "Invalid email format"
-      }
+      "id": "fund_67890",
+      "disaster_id": "disaster_12345",
+      "ngo_id": "ngo_54321",
+      "amount_usd": 250000,
+      "status": "verified",
+      "verification_score": 95.2,
+      "release_date": "2023-08-15T10:30:00Z",
+      "blockchain_tx": "0x7f8a9b2c4d6e8f1a0b2c4d6e8f1a0b2c4d6e8f1a0b2c4d6e8f1a0b2c4d6e8f1a"
+    }
+  ],
+  "total": 1,
+  "limit": 50,
+  "offset": 0
+}
+```
+
+#### GET /api/v1/funding/{id}
+
+Retrieve detailed funding information.
+
+**Response:**
+```json
+{
+  "id": "fund_67890",
+  "disaster_id": "disaster_12345",
+  "ngo_id": "ngo_54321",
+  "amount_usd": 250000,
+  "status": "verified",
+  "verification_score": 95.2,
+  "release_date": "2023-08-15T10:30:00Z",
+  "blockchain_tx": "0x7f8a9b2c4d6e8f1a0b2c4d6e8f1a0b2c4d6e8f1a0b2c4d6e8f1a0b2c4d6e8f1a",
+  "verification_evidence": {
+    "satellite_images": ["ipfs://QmHash1", "ipfs://QmHash2"],
+    "ngo_reports": ["ipfs://QmHash3"],
+    "iot_data": ["sensor_123", "sensor_456"],
+    "community_feedback": 87.5
+  },
+  "disbursement_schedule": [
+    {
+      "milestone": "Initial setup",
+      "percentage": 20,
+      "amount_usd": 50000,
+      "completed_date": "2023-08-20T09:15:00Z"
+    },
+    {
+      "milestone": "Infrastructure repair",
+      "percentage": 50,
+      "amount_usd": 125000,
+      "completed_date": "2023-09-05T14:22:00Z"
+    },
+    {
+      "milestone": "Community restoration",
+      "percentage": 30,
+      "amount_usd": 75000,
+      "status": "pending"
     }
   ]
 }
 ```
 
-## HTTP Status Codes
+### Impact Metrics API
 
-| Status Code | Description |
-|-------------|-------------|
-| 200 | Success |
-| 201 | Created |
-| 204 | No Content |
-| 400 | Bad Request |
-| 401 | Unauthorized |
-| 403 | Forbidden |
-| 404 | Not Found |
-| 422 | Unprocessable Entity |
-| 429 | Too Many Requests |
-| 500 | Internal Server Error |
-| 503 | Service Unavailable |
+#### GET /api/v1/impact
 
-## Endpoints
+Retrieve aggregated impact metrics across all projects.
 
-### Reports
+**Parameters:**
+- `start_date` (optional): Filter by start date (ISO 8601)
+- `end_date` (optional): Filter by end date (ISO 8601)
+- `region` (optional): Filter by geographic region
+- `sdg` (optional): Filter by Sustainable Development Goal
+- `limit` (optional): Number of results (default: 50, max: 1000)
+- `offset` (optional): Pagination offset
 
-#### Get Reports
-
-Retrieve a list of disaster reports with optional filtering.
-
-```
-GET /reports
-```
-
-**Query Parameters:**
-
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| type | string | Filter by report type (fire, flood, earthquake, etc.) |
-| status | string | Filter by report status (active, resolved, pending) |
-| region | string | Filter by region code |
-| limit | integer | Number of results to return (default: 20, max: 100) |
-| offset | integer | Offset for pagination |
-| sort | string | Sort field (created_at, updated_at, severity) |
-| order | string | Sort order (asc, desc) |
-
-**Example Request:**
-
-```bash
-curl -H "Authorization: Bearer YOUR_API_KEY" \
-  "https://api.impactx.example.com/v1/reports?type=fire&status=active&limit=10"
-```
-
-**Example Response:**
-
+**Response:**
 ```json
 {
-  "success": true,
-  "data": [
+  "metrics": [
     {
-      "id": "12345",
-      "type": "fire",
-      "severity": "high",
-      "status": "active",
-      "location": {
-        "latitude": 40.7128,
-        "longitude": -74.0060,
-        "address": "123 Main St, New York, NY"
-      },
-      "description": "Building fire reported",
-      "reported_at": "2023-01-01T12:00:00Z",
-      "updated_at": "2023-01-01T12:05:00Z",
-      "reporter": {
-        "id": "user789",
-        "name": "John Doe"
-      }
+      "id": "metric_11111",
+      "disaster_id": "disaster_12345",
+      "indicator": "people_housed",
+      "value": 125000,
+      "unit": "people",
+      "confidence": 94.2,
+      "verification_sources": ["satellite", "ngo", "iot"],
+      "sdg_alignment": ["SDG_11", "SDG_1"]
     }
   ],
-  "meta": {
-    "total": 1,
-    "limit": 10,
-    "offset": 0
-  }
+  "total": 1,
+  "limit": 50,
+  "offset": 0
 }
 ```
 
-#### Get Report by ID
+#### GET /api/v1/impact/{id}
 
-Retrieve a specific report by its ID.
+Retrieve detailed impact metric information.
 
-```
-GET /reports/{id}
-```
-
-**Example Request:**
-
-```bash
-curl -H "Authorization: Bearer YOUR_API_KEY" \
-  "https://api.impactx.example.com/v1/reports/12345"
-```
-
-#### Create Report
-
-Create a new disaster report.
-
-```
-POST /reports
-```
-
-**Request Body:**
-
+**Response:**
 ```json
 {
-  "type": "fire",
-  "severity": "high",
-  "location": {
-    "latitude": 40.7128,
-    "longitude": -74.0060,
-    "address": "123 Main St, New York, NY"
+  "id": "metric_11111",
+  "disaster_id": "disaster_12345",
+  "indicator": "people_housed",
+  "value": 125000,
+  "unit": "people",
+  "confidence": 94.2,
+  "verification_sources": ["satellite", "ngo", "iot"],
+  "sdg_alignment": ["SDG_11", "SDG_1"],
+  "methodology": {
+    "data_collection": "Combination of satellite imagery analysis and ground surveys",
+    "validation_process": "Triangulation with NGO reports and IoT sensor data",
+    "margin_of_error": "±2.1%"
   },
-  "description": "Building fire reported",
-  "contact": {
-    "name": "John Doe",
-    "phone": "+1234567890",
-    "email": "john@example.com"
-  }
+  "historical_trend": [
+    {
+      "date": "2023-08-15T00:00:00Z",
+      "value": 45000
+    },
+    {
+      "date": "2023-08-30T00:00:00Z",
+      "value": 87000
+    },
+    {
+      "date": "2023-09-15T00:00:00Z",
+      "value": 125000
+    }
+  ]
 }
 ```
 
-**Example Request:**
+## Webhook Integration
 
-```bash
-curl -X POST \
-  -H "Authorization: Bearer YOUR_API_KEY" \
-  -H "Content-Type: application/json" \
-  -d '{"type":"fire","severity":"high","location":{"latitude":40.7128,"longitude":-74.0060,"address":"123 Main St, New York, NY"},"description":"Building fire reported","contact":{"name":"John Doe","phone":"+1234567890","email":"john@example.com"}}' \
-  "https://api.impactx.example.com/v1/reports"
-```
+### Event Notifications
 
-#### Update Report
+1. **Disaster Updates**
+   - New disaster creation
+   - Status changes
+   - Funding updates
 
-Update an existing report.
+2. **Verification Events**
+   - New verification completion
+   - Verification score updates
+   - Evidence submission
 
-```
-PUT /reports/{id}
-```
-
-#### Delete Report
-
-Delete a report.
-
-```
-DELETE /reports/{id}
-```
-
-### Resources
-
-#### Get Resources
-
-Retrieve available emergency resources.
-
-```
-GET /resources
-```
-
-**Query Parameters:**
-
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| type | string | Filter by resource type (shelter, food, medical) |
-| region | string | Filter by region code |
-| status | string | Filter by availability status (available, limited, unavailable) |
-
-#### Get Resource by ID
-
-```
-GET /resources/{id}
-```
-
-#### Create Resource
-
-```
-POST /resources
-```
-
-#### Update Resource
-
-```
-PUT /resources/{id}
-```
-
-#### Delete Resource
-
-```
-DELETE /resources/{id}
-```
-
-### Alerts
-
-#### Get Alerts
-
-Retrieve current emergency alerts.
-
-```
-GET /alerts
-```
-
-#### Create Alert
-
-```
-POST /alerts
-```
-
-#### Update Alert
-
-```
-PUT /alerts/{id}
-```
-
-#### Delete Alert
-
-```
-DELETE /alerts/{id}
-```
-
-### Users
-
-#### Get User Profile
-
-```
-GET /user/profile
-```
-
-#### Update User Profile
-
-```
-PUT /user/profile
-```
-
-#### Get User Preferences
-
-```
-GET /user/preferences
-```
-
-#### Update User Preferences
-
-```
-PUT /user/preferences
-```
-
-### Regions
-
-#### Get Regions
-
-```
-GET /regions
-```
-
-#### Get Region by ID
-
-```
-GET /regions/{id}
-```
-
-### Statistics
-
-#### Get Dashboard Statistics
-
-```
-GET /statistics/dashboard
-```
-
-#### Get Report Statistics
-
-```
-GET /statistics/reports
-```
-
-#### Get Resource Statistics
-
-```
-GET /statistics/resources
-```
-
-## Webhooks
-
-The ImpactX platform supports webhooks for real-time notifications.
-
-### Event Types
-
-| Event | Description |
-|-------|-------------|
-| report.created | A new report has been created |
-| report.updated | A report has been updated |
-| report.resolved | A report has been resolved |
-| alert.issued | A new alert has been issued |
-| resource.updated | A resource status has changed |
+3. **Funding Events**
+   - Fund release notifications
+   - Disbursement updates
+   - Blockchain transaction confirmations
 
 ### Webhook Configuration
 
-Webhooks can be configured in the admin dashboard with the following settings:
+#### POST /api/v1/webhooks
 
-- **URL**: The endpoint that will receive webhook events
-- **Events**: Select which events to receive
-- **Secret**: Optional secret for verifying webhook authenticity
+Register a new webhook endpoint.
 
-### Webhook Payload
-
-Webhook payloads follow this structure:
-
+**Request Body:**
 ```json
 {
-  "event": "report.created",
-  "timestamp": "2023-01-01T12:00:00Z",
-  "data": {
-    // Event-specific data
-  },
-  "signature": "sha256-hex-signature"
+  "url": "https://your-service.com/webhook",
+  "events": ["disaster.updated", "funding.released"],
+  "secret": "your-webhook-secret"
 }
 ```
 
-### Webhook Verification
+#### DELETE /api/v1/webhooks/{id}
 
-To verify webhook authenticity, compute the HMAC signature using your webhook secret:
+Remove a webhook endpoint.
 
-```javascript
-const crypto = require('crypto');
+### Payload Format
 
-function verifyWebhook(payload, signature, secret) {
-  const expectedSignature = 'sha256=' + crypto
-    .createHmac('sha256', secret)
-    .update(payload)
-    .digest('hex');
-    
-  return crypto.timingSafeEqual(
-    Buffer.from(signature),
-    Buffer.from(expectedSignature)
-  );
+All webhook payloads follow this structure:
+
+```json
+{
+  "id": "wh_12345",
+  "timestamp": "2023-09-20T14:30:00Z",
+  "event": "disaster.updated",
+  "data": {
+    // Event-specific data
+  },
+  "signature": "hmac-sha256-signature"
 }
 ```
 
 ## Error Handling
 
-### Common Error Responses
+### HTTP Status Codes
 
-#### Validation Errors
+- `200`: Success
+- `400`: Bad Request
+- `401`: Unauthorized
+- `403`: Forbidden
+- `404`: Not Found
+- `429`: Too Many Requests
+- `500`: Internal Server Error
+- `503`: Service Unavailable
 
-```json
-{
-  "success": false,
-  "errors": [
-    {
-      "code": "VALIDATION_ERROR",
-      "message": "Validation failed",
-      "details": [
-        {
-          "field": "email",
-          "message": "Email is required"
-        },
-        {
-          "field": "location.latitude",
-          "message": "Latitude must be between -90 and 90"
-        }
-      ]
-    }
-  ]
-}
-```
-
-#### Authentication Errors
+### Error Response Format
 
 ```json
 {
-  "success": false,
-  "errors": [
-    {
-      "code": "UNAUTHORIZED",
-      "message": "Invalid API key"
+  "error": {
+    "code": "invalid_parameter",
+    "message": "The 'limit' parameter must be between 1 and 1000",
+    "details": {
+      "parameter": "limit",
+      "value": "1500"
     }
-  ]
+  }
 }
 ```
 
-#### Rate Limiting Errors
+## Rate Limiting
 
-```json
-{
-  "success": false,
-  "errors": [
-    {
-      "code": "RATE_LIMIT_EXCEEDED",
-      "message": "Rate limit exceeded. Try again in 60 seconds."
-    }
-  ]
-}
-```
+### Limits by Tier
+
+1. **Anonymous Access**
+   - 100 requests per hour
+   - IP-based limiting
+   - Basic disaster and funding data only
+
+2. **Authenticated Access**
+   - 10,000 requests per hour
+   - Full API access
+   - Higher data resolution
+
+3. **Premium Access**
+   - 100,000 requests per hour
+   - Priority processing
+   - Enhanced data access
+
+### Response Headers
+
+All API responses include rate limiting headers:
+
+- `X-RateLimit-Limit`: Request limit for the current period
+- `X-RateLimit-Remaining`: Requests remaining in the current period
+- `X-RateLimit-Reset`: Unix timestamp when the limit resets
 
 ## SDKs and Libraries
 
-### JavaScript/Node.js
+### Official SDKs
 
-```javascript
-const ImpactX = require('impactx-sdk');
+1. **JavaScript/Node.js**
+   ```javascript
+   const impactx = require('impactx-sdk');
+   const client = new impactx.Client('your-api-key');
+   
+   const disasters = await client.disasters.list();
+   ```
 
-const client = new ImpactX({
-  apiKey: 'YOUR_API_KEY',
-  baseUrl: 'https://api.impactx.example.com/v1'
-});
+2. **Python**
+   ```python
+   from impactx import Client
+   
+   client = Client(api_key='your-api-key')
+   disasters = client.disasters.list()
+   ```
 
-// Get reports
-const reports = await client.reports.list({
-  type: 'fire',
-  status: 'active'
-});
-```
+3. **Java**
+   ```java
+   import org.impactx.sdk.Client;
+   
+   Client client = new Client("your-api-key");
+   DisasterList disasters = client.disasters().list();
+   ```
 
-### Python
+### Community Libraries
 
-```python
-from impactx import ImpactXClient
-
-client = ImpactXClient(
-    api_key='YOUR_API_KEY',
-    base_url='https://api.impactx.example.com/v1'
-)
-
-# Get reports
-reports = client.reports.list(
-    type='fire',
-    status='active'
-)
-```
-
-### Java
-
-```java
-import com.impactx.client.ImpactXClient;
-
-ImpactXClient client = new ImpactXClient.Builder()
-    .apiKey("YOUR_API_KEY")
-    .baseUrl("https://api.impactx.example.com/v1")
-    .build();
-
-// Get reports
-List<Report> reports = client.reports().list(
-    new ReportsListRequest()
-        .type("fire")
-        .status("active")
-);
-```
+- Ruby gem
+- Go package
+- PHP library
+- .NET assembly
 
 ## Best Practices
 
-### Pagination
+### Efficient Data Retrieval
 
-When retrieving large datasets, always use pagination:
+1. **Pagination**
+   - Use limit and offset parameters
+   - Implement cursor-based pagination for large datasets
+   - Cache results when appropriate
 
-```bash
-# Good - Using pagination
-GET /reports?limit=20&offset=0
-GET /reports?limit=20&offset=20
+2. **Filtering**
+   - Apply filters to reduce data transfer
+   - Use date ranges for time-series data
+   - Combine multiple filters for precise results
 
-# Bad - Retrieving all data at once
-GET /reports
-```
+3. **Caching**
+   - Implement client-side caching
+   - Respect cache headers in responses
+   - Use ETags for conditional requests
 
-### Filtering
+### Security Considerations
 
-Use filtering to reduce data transfer:
+1. **API Key Protection**
+   - Never expose keys in client-side code
+   - Use environment variables for storage
+   - Rotate keys regularly
 
-```bash
-# Good - Filtering at the API level
-GET /reports?type=fire&status=active
+2. **Data Validation**
+   - Validate all API responses
+   - Handle errors gracefully
+   - Implement retry logic with exponential backoff
 
-# Bad - Retrieving all data and filtering client-side
-GET /reports
-```
+3. **Compliance**
+   - Follow data protection regulations
+   - Implement proper user consent mechanisms
+   - Maintain audit logs of API usage
 
-### Caching
-
-Implement appropriate caching strategies:
-
-- Cache static data (regions, resource types) for longer periods
-- Cache frequently accessed dynamic data for shorter periods
-- Respect cache headers in API responses
-
-### Error Handling
-
-Always handle API errors gracefully:
-
-```javascript
-try {
-  const reports = await client.reports.list();
-  // Process reports
-} catch (error) {
-  if (error.code === 'RATE_LIMIT_EXCEEDED') {
-    // Wait and retry
-    await new Promise(resolve => setTimeout(resolve, 60000));
-    return await client.reports.list();
-  }
-  throw error;
-}
-```
-
-## Versioning
-
-The ImpactX API uses semantic versioning. Breaking changes will result in a new major version number.
-
-Current version: v1
-
-## Changelog
-
-### v1.2.0 (2023-06-01)
-
-- Added resource management endpoints
-- Improved filtering capabilities
-- Added webhook support
-
-### v1.1.0 (2023-03-15)
-
-- Added user preference endpoints
-- Enhanced error response format
-- Improved rate limiting
-
-### v1.0.0 (2023-01-01)
-
-- Initial API release
-- Report management endpoints
-- Alert system endpoints
-- Basic user management
-
-## Support
-
-For API support, contact:
-- Email: api-support@impactx.example.com
-- Phone: +1 (555) 123-4567
-
-## Terms of Use
-
-Use of the ImpactX API is subject to the Terms of Service available at https://impactx.example.com/terms
-
-## Privacy
-
-API usage is governed by our Privacy Policy available at https://impactx.example.com/privacy
+This API documentation provides developers with the information needed to integrate ImpactX data and services into their applications, enabling greater transparency and effectiveness in humanitarian aid efforts.
