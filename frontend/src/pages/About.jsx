@@ -139,6 +139,11 @@ const About = () => {
               </div>
             ))}
           </div>
+          <div className="mt-8 p-4 bg-indigo-50 rounded-lg border border-indigo-100 text-center">
+            <p className="text-indigo-800 font-medium">
+              {t('about.teamAttribution')} Goodwell Sreejith S, Vasudha, and Nikhil
+            </p>
+          </div>
         </div>
 
         <div className="bg-white rounded-2xl shadow-xl p-6 mb-12">
@@ -205,6 +210,10 @@ const About = () => {
         </div>
       </div>
     </div>
+  );
+};
+
+export default About;    </div>
   );
 };
 
