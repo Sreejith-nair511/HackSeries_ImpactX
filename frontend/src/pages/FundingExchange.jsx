@@ -11,6 +11,7 @@ const FundingExchange = () => {
     activeProjects: 142,
     chains: [
       { name: "Algorand", funds: "$78.2M", percentage: 62.8 },
+      { name: "Ethereum", funds: "$25.4M", percentage: 20.4 },
       { name: "Polygon", funds: "$32.1M", percentage: 25.7 },
       { name: "Stellar", funds: "$14.5M", percentage: 11.5 }
     ]
@@ -122,13 +123,17 @@ const FundingExchange = () => {
                           <div 
                             className={`h-3 rounded-full ${
                               index === 0 ? 'bg-indigo-600' : 
-                              index === 1 ? 'bg-blue-500' : 'bg-green-500'
+                              index === 1 ? 'bg-blue-500' : 
+                              index === 2 ? 'bg-purple-500' : 'bg-green-500'
                             }`} 
                             style={{ width: `${chain.percentage}%` }}
                           ></div>
                         </div>
                       </div>
                     ))}
+                  </div>
+                  <div className="mt-4 text-sm text-gray-600">
+                    {t('fundingExchange.algorandSdkPowered')}
                   </div>
                 </div>
               </div>
@@ -365,6 +370,10 @@ const FundingExchange = () => {
         </div>
       </div>
     </div>
+  );
+};
+
+export default FundingExchange;    </div>
   );
 };
 
