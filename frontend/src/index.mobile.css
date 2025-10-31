@@ -1,0 +1,262 @@
+/* Mobile-First Responsive Design Enhancements */
+
+/* Base mobile styles */
+@media (max-width: 767px) {
+  /* Typography adjustments for mobile */
+  html {
+    font-size: 14px;
+  }
+  
+  /* Container adjustments */
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  /* Navigation adjustments */
+  .mobile-nav {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .mobile-nav-item {
+    padding: 0.75rem 1rem;
+    width: 100%;
+    text-align: left;
+  }
+  
+  /* Card adjustments */
+  .card {
+    margin-bottom: 1rem;
+  }
+  
+  .card-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  /* Form adjustments */
+  .form-group {
+    margin-bottom: 1rem;
+  }
+  
+  .form-control {
+    padding: 0.75rem;
+    font-size: 1rem;
+  }
+  
+  /* Button adjustments */
+  .btn {
+    padding: 0.75rem 1rem;
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+  
+  .btn-group {
+    flex-direction: column;
+  }
+  
+  /* Table adjustments */
+  .table-responsive {
+    overflow-x: auto;
+  }
+  
+  table {
+    min-width: 600px;
+  }
+  
+  /* Modal adjustments */
+  .modal-content {
+    margin: 1rem;
+    max-height: calc(100vh - 2rem);
+  }
+  
+  .modal-header,
+  .modal-body,
+  .modal-footer {
+    padding: 1rem;
+  }
+  
+  /* Dashboard adjustments */
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .dashboard-card {
+    padding: 1rem;
+  }
+  
+  /* Chart adjustments */
+  .chart-container {
+    height: 250px;
+  }
+  
+  /* Utility classes */
+  .text-center-mobile {
+    text-align: center;
+  }
+  
+  .flex-column-mobile {
+    flex-direction: column;
+  }
+  
+  .gap-2-mobile {
+    gap: 0.5rem;
+  }
+  
+  .p-4-mobile {
+    padding: 1rem;
+  }
+  
+  .m-4-mobile {
+    margin: 1rem;
+  }
+}
+
+/* Tablet styles */
+@media (min-width: 768px) and (max-width: 1023px) {
+  html {
+    font-size: 15px;
+  }
+  
+  .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  
+  .dashboard-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  
+  .btn {
+    width: auto;
+    margin-bottom: 0;
+  }
+  
+  .btn-group {
+    flex-direction: row;
+  }
+  
+  .chart-container {
+    height: 300px;
+  }
+}
+
+/* Desktop styles */
+@media (min-width: 1024px) {
+  html {
+    font-size: 16px;
+  }
+  
+  .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  
+  .card-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+  
+  .dashboard-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+  
+  .chart-container {
+    height: 400px;
+  }
+}
+
+/* Large screen styles */
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .card-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  .dashboard-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Touch device optimizations */
+.touch-device .btn {
+  min-height: 44px; /* Minimum touch target size */
+  min-width: 44px;
+}
+
+.touch-device .form-control {
+  min-height: 44px;
+}
+
+/* Orientation-based adjustments */
+@media (orientation: landscape) and (max-height: 500px) {
+  .modal-content {
+    max-height: 80vh;
+  }
+  
+  .chart-container {
+    height: 200px;
+  }
+}
+
+/* High contrast mode for accessibility */
+@media (prefers-contrast: high) {
+  .btn-primary {
+    border: 2px solid #000;
+  }
+  
+  .card {
+    border: 2px solid #000;
+  }
+  
+  a {
+    text-decoration: underline;
+  }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Dark mode mobile adjustments */
+@media (prefers-color-scheme: dark) {
+  .mobile-nav-item {
+    background-color: #2d3748;
+    color: #fff;
+  }
+  
+  .mobile-nav-item:hover {
+    background-color: #4a5568;
+  }
+}
+
+/* Print styles for mobile */
+@media print {
+  .no-print-mobile {
+    display: none !important;
+  }
+  
+  .card {
+    box-shadow: none;
+    border: 1px solid #000;
+  }
+}
