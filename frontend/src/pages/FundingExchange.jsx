@@ -140,7 +140,8 @@ const FundingExchange = () => {
                       <div>
                         <div className="font-medium text-blue-800">{t('fundingExchange.algorandSdkPowered')}</div>
                         <div className="text-sm text-blue-600 mt-1">
-                          {t('fundingExchange.multiChainSupport')} Ethereum, Polygon, and Stellar.
+                          {t('fundingExchange.multiChainSupport')} Ethereum, Polygon, and Stellar. 
+                          Enhanced with Algorand SDK v2.0 for secure multi-chain transactions.
                         </div>
                       </div>
                     </div>
