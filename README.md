@@ -1,5 +1,4 @@
 <img width="1860" height="427" alt="Screenshot 2025-10-23 225850" src="https://github.com/user-attachments/assets/6ca15f03-603d-4175-8783-0838bf651ff1" /># Transparent & Verifiable Disaster Relief Funding on Algorand
-<img width="818" height="349" alt="Screenshot 2025-10-24 205944" src="https://github.com/user-attachments/assets/a9fa8f5f-ee2e-4c69-bc4a-3a9fa593707f" />
 <img width="1209" height="839" alt="Screenshot 2025-10-23 232303" src="https://github.com/user-attachments/assets/730cd00b-7972-4a5d-802c-b17d823c3211" />
 <img width="1720" height="847" alt="Screenshot 2025-10-23 232030" src="https://github.com/user-attachments/assets/838e5480-70bc-48ff-b0cf-ac2dfc8b8e61" />
 <img width="797" height="307" alt="Screenshot 2025-10-23 224622" src="https://github.com/user-attachments/assets/2c6a74c4-d068-4a65-85fb-50b6849f05dd" />
