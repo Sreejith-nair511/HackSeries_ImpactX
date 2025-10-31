@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import Navigation from './components/Navigation';
+import ThemeSwitcher from './components/ThemeSwitcher';
 import Home from './pages/Home';
 import Campaigns from './pages/Campaigns';
 import Donate from './pages/Donate';
@@ -9,6 +10,7 @@ import NGODashboard from './pages/NGODashboard';
 import AdminDashboard from './pages/AdminDashboard';
 import DonationDemo from './components/DonationDemo';
 import AuthTest from './pages/AuthTest';
+import IVRSystem from './pages/IVRSystem'; // Added IVR System import
 
 function App() {
   const { t, i18n } = useTranslation();
@@ -127,6 +129,7 @@ function App() {
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/demo" element={<DonationDemo />} />
             <Route path="/authtest" element={<AuthTest />} />
+            <Route path="/ivr" element={<IVRSystem />} /> {/* Added IVR System route */}
           </Routes>
         </main>
         
