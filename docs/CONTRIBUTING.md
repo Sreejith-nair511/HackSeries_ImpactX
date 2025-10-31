@@ -1,703 +1,526 @@
-# Contributing to ImpactX Disaster Response Platform
+# Contributing to ImpactX
 
-## Table of Contents
-1. [Introduction](#introduction)
-2. [Code of Conduct](#code-of-conduct)
-3. [Getting Started](#getting-started)
-4. [Development Process](#development-process)
-5. [Coding Standards](#coding-standards)
-6. [Testing Guidelines](#testing-guidelines)
-7. [Documentation Standards](#documentation-standards)
-8. [Commit Message Guidelines](#commit-message-guidelines)
-9. [Pull Request Process](#pull-request-process)
-10. [Issue Reporting](#issue-reporting)
-11. [Security Vulnerabilities](#security-vulnerabilities)
-12. [Community Engagement](#community-engagement)
-13. [Recognition and Credits](#recognition-and-credits)
+## Welcome!
 
-## Introduction
-
-Thank you for your interest in contributing to the ImpactX disaster response platform! ImpactX is an open-source project designed to coordinate disaster response efforts among NGOs, volunteers, developers, and government agencies. Our mission is to save lives and reduce suffering during natural and man-made disasters through technology.
-
-This document provides guidelines for contributing to the ImpactX platform. By participating in this project, you agree to abide by our [Code of Conduct](#code-of-conduct) and follow these contribution guidelines.
-
-Contributions can take many forms:
-- Code improvements and new features
-- Bug fixes
-- Documentation enhancements
-- Translation and localization
-- User experience improvements
-- Security enhancements
-- Performance optimizations
-- Testing and quality assurance
-- Community support and engagement
-
-We welcome contributions from everyone, regardless of their experience level. Whether you're a seasoned developer, a designer, a technical writer, or someone passionate about disaster response, there's a way for you to contribute.
+Thank you for your interest in contributing to ImpactX, a revolutionary platform for transparent and verifiable humanitarian aid distribution. This document provides guidelines and procedures for contributing to the project in various ways.
 
 ## Code of Conduct
 
-All contributors are expected to follow our Code of Conduct, which promotes a harassment-free experience for everyone, regardless of age, body size, disability, ethnicity, gender identity and expression, level of experience, nationality, personal appearance, race, religion, or sexual identity and orientation.
+All contributors are expected to adhere to our Code of Conduct, which promotes a respectful, inclusive, and harassment-free environment for everyone involved in the project.
 
-Key principles include:
+### Our Pledge
+
+We pledge to make participation in our project a harassment-free experience for everyone, regardless of age, body size, disability, ethnicity, gender identity and expression, level of experience, nationality, personal appearance, race, religion, or sexual identity and orientation.
+
+### Our Standards
+
+Examples of behavior that contributes to creating a positive environment include:
+
 - Using welcoming and inclusive language
 - Being respectful of differing viewpoints and experiences
 - Gracefully accepting constructive criticism
 - Focusing on what is best for the community
 - Showing empathy towards other community members
 
-Unacceptable behavior includes:
-- The use of sexualized language or imagery
-- Personal attacks
-- Trolling or insulting/derogatory comments
+Examples of unacceptable behavior include:
+
+- The use of sexualized language or imagery and unwelcome sexual attention or advances
+- Trolling, insulting/derogatory comments, and personal or political attacks
 - Public or private harassment
 - Publishing others' private information without explicit permission
 - Other conduct which could reasonably be considered inappropriate in a professional setting
 
-Violations of the Code of Conduct may result in temporary or permanent expulsion from the project. If you witness or experience unacceptable behavior, please report it to the project maintainers at conduct@impactx.org.
+## How to Contribute
 
-## Getting Started
+### Reporting Bugs
 
-### Prerequisites
-Before you begin contributing, ensure you have the following tools installed:
-- Git (version 2.30 or higher)
-- Node.js (version 16.x or higher)
-- npm (version 8.x or higher)
-- Docker (for containerized development)
-- MongoDB (version 5.x or higher)
-- Redis (version 6.x or higher)
-- Python (version 3.8 or higher, for certain scripts)
+1. **Check Existing Issues**
+   - Search the issue tracker to see if the bug has already been reported
+   - If it has, add any additional information to the existing issue
 
-### Development Environment Setup
-1. Fork the repository on GitHub
-2. Clone your fork:
-   ```bash
-   git clone https://github.com/your-username/ImpactX.git
-   cd ImpactX
-   ```
+2. **Create a New Issue**
+   - Use a clear and descriptive title
+   - Describe the exact steps to reproduce the problem
+   - Provide specific examples and expected vs. actual behavior
+   - Include details about your environment (OS, browser, etc.)
 
-3. Install dependencies:
-   ```bash
-   # Backend services
-   cd backend/services/user-service
-   npm install
+3. **Issue Template**
+   ```markdown
+   ## Description
+   [Brief description of the bug]
    
-   # Frontend
-   cd ../../frontend
+   ## Steps to Reproduce
+   1. [First step]
+   2. [Second step]
+   3. [And so on...]
+   
+   ## Expected Behavior
+   [What you expected to happen]
+   
+   ## Actual Behavior
+   [What actually happened]
+   
+   ## Environment
+   - OS: [e.g., Windows 10, macOS 12.0]
+   - Browser: [e.g., Chrome 98, Firefox 97]
+   - ImpactX Version: [e.g., 1.2.3]
+   
+   ## Additional Context
+   [Any other relevant information]
+   ```
+
+### Suggesting Enhancements
+
+1. **Check Existing Suggestions**
+   - Review the issue tracker for similar enhancement requests
+   - Add your support or additional ideas to existing requests
+
+2. **Create Enhancement Request**
+   - Use a clear and descriptive title
+   - Provide a detailed explanation of the proposed enhancement
+   - Explain why this enhancement would be useful
+   - Include examples or mockups if applicable
+
+3. **Enhancement Template**
+   ```markdown
+   ## Problem Statement
+   [Description of the problem or limitation you're experiencing]
+   
+   ## Proposed Solution
+   [Detailed description of your proposed solution]
+   
+   ## Benefits
+   [Explanation of how this enhancement would benefit users]
+   
+   ## Alternatives Considered
+   [Description of any alternative solutions or features you've considered]
+   
+   ## Additional Context
+   [Any other relevant information, screenshots, or examples]
+   ```
+
+### Code Contributions
+
+#### Getting Started
+
+1. **Fork the Repository**
+   - Click the "Fork" button at the top of the repository page
+   - Clone your fork to your local development environment
+
+2. **Set Up Development Environment**
+   ```bash
+   git clone https://github.com/your-username/impactx.git
+   cd impactx
    npm install
    ```
 
-4. Set up environment variables:
-   ```bash
-   cp .env.example .env
-   # Edit .env with your configuration
-   ```
-
-5. Start development environment:
-   ```bash
-   docker-compose -f docker-compose.dev.yml up -d
-   ```
-
-### Project Structure
-```
-ImpactX/
-├── backend/
-│   ├── services/
-│   │   ├── user-service/
-│   │   ├── resource-service/
-│   │   ├── communication-service/
-│   │   ├── analytics-service/
-│   │   ├── governance-service/
-│   │   ├── document-service/
-│   │   ├── notification-service/
-│   │   ├── iot-service/
-│   │   └── blockchain-service/
-│   ├── shared/
-│   └── utils/
-├── frontend/
-│   ├── public/
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── services/
-│   │   ├── utils/
-│   │   └── assets/
-│   └── package.json
-├── docs/
-├── scripts/
-├── docker/
-├── kubernetes/
-└── README.md
-```
-
-## Development Process
-
-### Branching Strategy
-We follow a GitFlow-like branching model:
-- `main` - Production-ready code
-- `develop` - Integration branch for features
-- `feature/*` - Feature development branches
-- `bugfix/*` - Bug fix branches
-- `release/*` - Release preparation branches
-- `hotfix/*` - Emergency production fixes
-
-### Creating a Feature Branch
-1. Ensure your `develop` branch is up to date:
-   ```bash
-   git checkout develop
-   git pull origin develop
-   ```
-
-2. Create a feature branch:
+3. **Create a Branch**
    ```bash
    git checkout -b feature/your-feature-name
    ```
 
-3. Make your changes and commit them following our [commit message guidelines](#commit-message-guidelines)
+#### Development Guidelines
 
-### Development Workflow
-1. Write code following our [coding standards](#coding-standards)
-2. Add or update tests as needed
-3. Ensure all tests pass:
+1. **Code Style**
+   - Follow the existing code style in the project
+   - Use ESLint and Prettier for JavaScript/TypeScript files
+   - Use appropriate linters for other languages
+   - Write clear, self-documenting code
+
+2. **Testing**
+   - Write unit tests for new functionality
+   - Ensure all existing tests pass
+   - Test your changes in multiple browsers/environments
+
+3. **Documentation**
+   - Update relevant documentation when making changes
+   - Add comments to complex code sections
+   - Write clear commit messages
+
+#### Submitting Changes
+
+1. **Commit Your Changes**
    ```bash
-   npm test
+   git add .
+   git commit -m "Brief description of changes"
    ```
-4. Update documentation if necessary
-5. Commit your changes
-6. Push to your fork:
+
+2. **Push to Your Fork**
    ```bash
    git push origin feature/your-feature-name
    ```
-7. Create a pull request
 
-## Coding Standards
+3. **Create Pull Request**
+   - Navigate to the original repository
+   - Click "New Pull Request"
+   - Select your branch and provide a detailed description
 
-### JavaScript/Node.js Standards
-We follow the Airbnb JavaScript Style Guide with some modifications:
+### Pull Request Process
 
-1. **Code Formatting**
-   - Use 2 spaces for indentation
-   - Use single quotes for strings
-   - No trailing whitespace
-   - Line length should not exceed 100 characters
-   - Use semicolons
+1. **PR Requirements**
+   - PR must target the `develop` branch
+   - Include a clear description of changes
+   - Reference any related issues
+   - Pass all automated checks
 
-2. **Naming Conventions**
-   - Use camelCase for variables and functions
-   - Use PascalCase for constructors and classes
-   - Use UPPER_CASE for constants
-   - Use descriptive names
+2. **Code Review**
+   - At least one maintainer must approve the PR
+   - Address all review comments
+   - Make requested changes or provide justification
 
-3. **Function Design**
-   - Keep functions small and focused
-   - Use pure functions when possible
-   - Avoid global variables
-   - Handle errors appropriately
+3. **Merge Process**
+   - PR will be merged by a maintainer after approval
+   - Squash and merge for small changes
+   - Rebase and merge for larger features
 
-4. **Error Handling**
-   - Always handle asynchronous errors
-   - Use try/catch for synchronous operations
-   - Provide meaningful error messages
-   - Log errors appropriately
+## Development Workflow
 
-Example:
-```javascript
-// Good
-class UserService {
-  async createUser(userData) {
-    try {
-      // Validate input
-      if (!userData.email || !userData.password) {
-        throw new Error('Email and password are required');
-      }
-      
-      // Hash password
-      const hashedPassword = await bcrypt.hash(userData.password, 12);
-      
-      // Create user
-      const user = new User({
-        ...userData,
-        password: hashedPassword
-      });
-      
-      return await user.save();
-    } catch (error) {
-      logger.error('Error creating user:', error);
-      throw new Error(`Failed to create user: ${error.message}`);
-    }
-  }
-}
+### Branching Strategy
 
-// Avoid
-function create_user(email,pass){
-  var user=new User({email:email,password:pass});
-  return user.save();
-}
-```
+1. **Main Branches**
+   - `main`: Production-ready code
+   - `develop`: Integration branch for features
 
-### React/Frontend Standards
-1. **Component Structure**
-   - Use functional components with hooks
-   - Keep components small and focused
-   - Use prop-types for type checking
-   - Follow the container/presentational pattern when appropriate
+2. **Supporting Branches**
+   - `feature/*`: New features
+   - `bugfix/*`: Bug fixes
+   - `hotfix/*`: Critical production fixes
+   - `release/*`: Release preparation
 
-2. **State Management**
-   - Use useState and useEffect hooks
-   - Consider Redux for complex state
-   - Keep state as local as possible
-   - Use context for global state when Redux is overkill
+### Commit Message Guidelines
 
-3. **Styling**
-   - Use Tailwind CSS for styling
-   - Follow responsive design principles
-   - Ensure accessibility compliance
-   - Use CSS modules for component-specific styles
+1. **Format**
+   ```
+   type(scope): Brief description
+   
+   Detailed explanation if necessary
+   ```
 
-Example:
-```jsx
-// Good
-import React, { useState, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
+2. **Types**
+   - `feat`: New feature
+   - `fix`: Bug fix
+   - `docs`: Documentation changes
+   - `style`: Code style changes
+   - `refactor`: Code refactoring
+   - `test`: Test-related changes
+   - `chore`: Maintenance tasks
 
-const UserRegistrationForm = ({ onSubmit }) => {
-  const { t } = useTranslation();
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    firstName: '',
-    lastName: ''
-  });
-  const [errors, setErrors] = useState({});
+3. **Examples**
+   ```
+   feat(auth): Add multi-factor authentication
+   fix(api): Resolve pagination issue in disaster endpoint
+   docs(readme): Update installation instructions
+   ```
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-    
-    // Clear error when user types
-    if (errors[name]) {
-      setErrors(prev => ({
-        ...prev,
-        [name]: ''
-      }));
-    }
-  };
+### Testing Standards
 
-  const validate = () => {
-    const newErrors = {};
-    
-    if (!formData.email) {
-      newErrors.email = t('emailRequired');
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = t('emailInvalid');
-    }
-    
-    if (!formData.password) {
-      newErrors.password = t('passwordRequired');
-    } else if (formData.password.length < 8) {
-      newErrors.password = t('passwordTooShort');
-    }
-    
-    return newErrors;
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const newErrors = validate();
-    
-    if (Object.keys(newErrors).length === 0) {
-      onSubmit(formData);
-    } else {
-      setErrors(newErrors);
-    }
-  };
-
-  return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <div>
-        <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-          {t('email')}
-        </label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 ${
-            errors.email ? 'border-red-300' : ''
-          }`}
-        />
-        {errors.email && (
-          <p className="mt-1 text-sm text-red-600">{errors.email}</p>
-        )}
-      </div>
-      
-      {/* Other form fields */}
-      
-      <button
-        type="submit"
-        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-      >
-        {t('register')}
-      </button>
-    </form>
-  );
-};
-
-export default UserRegistrationForm;
-```
-
-### Database Design Standards
-1. **Schema Design**
-   - Use meaningful collection and field names
-   - Normalize data appropriately
-   - Add indexes for frequently queried fields
-   - Use proper data types
-
-2. **Query Optimization**
-   - Use projections to limit returned fields
-   - Implement proper indexing
-   - Avoid N+1 query problems
-   - Use aggregation pipelines for complex queries
-
-3. **Security**
-   - Never store passwords in plain text
-   - Use field-level validation
-   - Implement proper access controls
-   - Sanitize user input
-
-## Testing Guidelines
-
-### Test Types
 1. **Unit Tests**
-   - Test individual functions and components
-   - Aim for high code coverage (>80%)
+   - Write tests for all new functions and components
+   - Maintain test coverage above 80%
    - Use Jest for JavaScript testing
-   - Mock external dependencies
 
 2. **Integration Tests**
-   - Test service interactions
-   - Validate API endpoints
-   - Test database operations
-   - Use Supertest for API testing
+   - Test API endpoints and database interactions
+   - Verify cross-component functionality
+   - Use Cypress for end-to-end testing
 
-3. **End-to-End Tests**
-   - Test complete user workflows
-   - Use Cypress for browser testing
-   - Test across different browsers
-   - Simulate real user scenarios
-
-4. **Performance Tests**
-   - Load testing with Artillery
-   - Stress testing under high load
+3. **Performance Tests**
+   - Benchmark critical operations
    - Monitor resource usage
-   - Identify bottlenecks
+   - Test under various load conditions
 
-### Test Structure
-```javascript
-// Good test structure
-describe('UserService', () => {
-  describe('createUser', () => {
-    beforeEach(() => {
-      // Setup test data
-    });
-    
-    afterEach(() => {
-      // Clean up test data
-    });
-    
-    test('should create a new user with valid data', async () => {
-      // Arrange
-      const userData = {
-        email: 'test@example.com',
-        password: 'securePassword123',
-        firstName: 'Test',
-        lastName: 'User'
-      };
-      
-      // Act
-      const result = await userService.createUser(userData);
-      
-      // Assert
-      expect(result).toHaveProperty('id');
-      expect(result.email).toBe(userData.email);
-      expect(result.firstName).toBe(userData.firstName);
-    });
-    
-    test('should throw error for invalid email', async () => {
-      // Arrange
-      const invalidData = {
-        email: 'invalid-email',
-        password: 'securePassword123',
-        firstName: 'Test',
-        lastName: 'User'
-      };
-      
-      // Act & Assert
-      await expect(userService.createUser(invalidData))
-        .rejects
-        .toThrow('Invalid email format');
-    });
-  });
-});
-```
-
-### Test Data Management
-- Use factories for generating test data
-- Clean up test data after each test
-- Use separate test databases
-- Avoid hardcoded test data
-
-## Documentation Standards
-
-### Code Documentation
-1. **JSDoc Comments**
-   - Document all public functions and classes
-   - Include parameter and return types
-   - Provide usage examples
-   - Keep documentation up to date
-
-```javascript
-/**
- * Creates a new user account
- * @param {Object} userData - User information
- * @param {string} userData.email - User's email address
- * @param {string} userData.password - User's password
- * @param {string} userData.firstName - User's first name
- * @param {string} userData.lastName - User's last name
- * @returns {Promise<Object>} Created user object
- * @throws {Error} If user creation fails
- * @example
- * const user = await createUser({
- *   email: 'test@example.com',
- *   password: 'securePassword123',
- *   firstName: 'Test',
- *   lastName: 'User'
- * });
- */
-async function createUser(userData) {
-  // Implementation
-}
-```
-
-2. **Inline Comments**
-   - Explain complex logic
-   - Clarify non-obvious code
-   - Use sparingly
-   - Keep comments up to date
-
-### User Documentation
-1. **README Updates**
-   - Update installation instructions
-   - Document new features
-   - Include configuration changes
-   - Provide usage examples
-
-2. **API Documentation**
-   - Document all endpoints
-   - Include request/response examples
-   - Specify error codes
-   - Keep in sync with code
-
-3. **User Guides**
-   - Write for different user roles
-   - Include screenshots where helpful
-   - Provide step-by-step instructions
-   - Update for feature changes
-
-## Commit Message Guidelines
-
-We follow the Conventional Commits specification to ensure consistent and informative commit messages.
-
-### Commit Message Format
-```
-<type>(<scope>): <subject>
-
-<body>
-
-<footer>
-```
-
-### Commit Types
-- **feat**: A new feature
-- **fix**: A bug fix
-- **docs**: Documentation only changes
-- **style**: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
-- **refactor**: A code change that neither fixes a bug nor adds a feature
-- **perf**: A code change that improves performance
-- **test**: Adding missing tests or correcting existing tests
-- **build**: Changes that affect the build system or external dependencies
-- **ci**: Changes to our CI configuration files and scripts
-- **chore**: Other changes that don't modify src or test files
-- **revert**: Reverts a previous commit
-
-### Examples
-```
-feat(user-service): add user registration endpoint
-
-Implement user registration with email validation and password hashing.
-Include input validation and error handling.
-
-Closes #123
-```
-
-```
-fix(auth): resolve JWT expiration issue
-
-Fix bug where JWT tokens were expiring immediately after creation.
-Update expiration time calculation to use correct time units.
-
-Fixes #456
-```
-
-```
-docs(readme): update installation instructions
-
-Add Docker Compose setup instructions
-Include environment variable configuration
-Update troubleshooting section
-```
-
-## Pull Request Process
-
-### Before Submitting
-1. Ensure your code follows our [coding standards](#coding-standards)
-2. All tests pass locally
-3. Documentation is updated
-4. Commit messages follow our guidelines
-5. Branch is up to date with `develop`
-
-### Pull Request Template
-When creating a pull request, include:
-1. **Description**: Clear explanation of changes
-2. **Related Issues**: Link to any related GitHub issues
-3. **Testing**: Description of how changes were tested
-4. **Screenshots**: If UI changes are included
-5. **Checklist**: 
-   - [ ] Code follows style guidelines
-   - [ ] Tests have been added/updated
-   - [ ] Documentation has been updated
-   - [ ] Commit messages follow guidelines
-
-### Review Process
-1. Automated checks run on all PRs
-2. Code review by at least one maintainer
-3. Security review for sensitive changes
-4. Performance review for critical paths
-5. Merge after approval and passing checks
-
-### Merging
-- Use squash and merge for most PRs
-- Maintain clean commit history
-- Ensure PR title follows commit message guidelines
-- Delete branch after merging
-
-## Issue Reporting
-
-### Before Creating an Issue
-1. Check existing issues to avoid duplicates
-2. Ensure you're using the latest version
-3. Try to reproduce on a clean installation
-4. Gather relevant information (logs, screenshots, etc.)
-
-### Issue Template
-When creating an issue, include:
-1. **Summary**: Brief description of the problem
-2. **Steps to Reproduce**: Clear steps to reproduce the issue
-3. **Expected Behavior**: What you expected to happen
-4. **Actual Behavior**: What actually happened
-5. **Environment**: 
-   - OS version
-   - Browser version (for frontend issues)
-   - ImpactX version
-   - Node.js version
-6. **Additional Context**: Any other relevant information
-
-### Issue Labels
-We use labels to categorize and prioritize issues:
-- **bug**: Confirmed bugs
-- **feature**: Feature requests
-- **enhancement**: Improvements to existing features
-- **documentation**: Documentation issues
-- **security**: Security-related issues
-- **performance**: Performance issues
-- **help wanted**: Good issues for new contributors
-- **good first issue**: Issues suitable for beginners
-
-## Security Vulnerabilities
-
-### Reporting Security Issues
-If you discover a security vulnerability, please report it responsibly:
-1. Do NOT create a public GitHub issue
-2. Email security@impactx.org with details
-3. Include steps to reproduce the vulnerability
-4. Provide potential impact assessment
-5. Give us reasonable time to address before public disclosure
-
-### Security Best Practices
-When contributing code, follow these security practices:
-1. **Input Validation**: Always validate and sanitize user input
-2. **Authentication**: Implement proper authentication and authorization
-3. **Data Protection**: Encrypt sensitive data at rest and in transit
-4. **Error Handling**: Avoid exposing sensitive information in error messages
-5. **Dependencies**: Keep dependencies up to date and audit for vulnerabilities
-
-### Security Review Process
-Security-sensitive changes undergo additional review:
-1. Code review by security team members
-2. Static analysis scanning
-3. Dynamic analysis testing
-4. Penetration testing for critical features
-5. Third-party security audit for major releases
-
-## Community Engagement
+## Community Participation
 
 ### Communication Channels
-- **GitHub**: Primary development platform
-- **Slack**: Real-time chat for contributors
-- **Mailing List**: Announcements and discussions
-- **Twitter**: Project updates and news
-- **Community Forum**: User discussions and support
 
-### Community Events
-- **Monthly Contributors Meeting**: Virtual meeting for contributors
-- **Hackathons**: Periodic hackathons focused on new features
-- **Workshops**: Training sessions on specific topics
-- **Conference Presentations**: Speaking at relevant conferences
+1. **GitHub Discussions**
+   - General project discussions
+   - Q&A and support requests
+   - Feature proposals and feedback
+
+2. **Slack Community**
+   - Real-time chat with other contributors
+   - Dedicated channels for different topics
+   - Office hours with maintainers
+
+3. **Community Meetings**
+   - Monthly contributor meetings
+   - Bi-weekly sprint planning
+   - Quarterly roadmap reviews
+
+### Recognition and Rewards
+
+1. **Contributor Levels**
+   - **First-time Contributor**: Anyone who submits their first PR
+   - **Regular Contributor**: 5+ merged PRs
+   - **Core Contributor**: 20+ merged PRs and active participation
+   - **Maintainer**: Project maintainers with merge rights
+
+2. **Recognition Programs**
+   - Monthly contributor spotlight
+   - Annual ImpactX Awards
+   - Digital badges and certificates
+
+3. **Token Rewards**
+   - IMPX tokens for significant contributions
+   - Governance participation rights
+   - Early access to new features
 
 ### Mentorship Program
-We offer a mentorship program to help new contributors:
-- Pair new contributors with experienced mentors
-- Provide guidance on project architecture
-- Help with code reviews and feedback
-- Support career development in open source
 
-## Recognition and Credits
+1. **Getting a Mentor**
+   - Request mentorship through GitHub Discussions
+   - Match with experienced contributors
+   - Regular check-ins and guidance
 
-### Contributor Recognition
-We value and recognize all contributions:
-- **GitHub Contributors Page**: Lists all code contributors
-- **Release Notes**: Credit contributors in each release
-- **Annual Report**: Highlight significant contributions
-- **Social Media**: Feature contributor spotlights
+2. **Becoming a Mentor**
+   - Apply through the mentorship program
+   - Guide new contributors
+   - Share knowledge and experience
 
-### Contribution Tiers
-We recognize different levels of contribution:
-1. **Code Contributors**: Those who submit code changes
-2. **Documentation Contributors**: Those who improve documentation
-3. **Community Contributors**: Those who help the community
-4. **Translation Contributors**: Those who provide translations
-5. **Financial Contributors**: Those who support the project financially
+## Special Interest Groups
 
-### Awards and Recognition
-- **Monthly Contributor Award**: Recognize outstanding monthly contributions
-- **Impact Award**: Recognize contributions that significantly impact users
-- **Community Builder Award**: Recognize community engagement efforts
-- **Innovation Award**: Recognize creative solutions and new features
+### Areas of Focus
 
-This contributing guide is a living document that evolves with our community. We encourage all contributors to help improve it by submitting suggestions and updates.
+1. **Frontend Development**
+   - React.js and UI/UX improvements
+   - Accessibility enhancements
+   - Mobile optimization
 
-Thank you for being part of the ImpactX community and helping us build technology that saves lives during disasters!
+2. **Backend Development**
+   - API development and optimization
+   - Database performance
+   - Security enhancements
+
+3. **Blockchain Integration**
+   - Smart contract development
+   - Cross-chain interoperability
+   - Oracle integration
+
+4. **Data Science and AI**
+   - Machine learning models
+   - Data visualization
+   - Predictive analytics
+
+5. **DevOps and Infrastructure**
+   - CI/CD pipeline improvements
+   - Kubernetes deployments
+   - Monitoring and logging
+
+### Joining a SIG
+
+1. **Browse Active SIGs**
+   - View current special interest groups
+   - Review meeting schedules
+   - Join relevant communication channels
+
+2. **Participate**
+   - Attend regular meetings
+   - Contribute to SIG projects
+   - Take on leadership roles
+
+## Documentation Contributions
+
+### Types of Documentation
+
+1. **User Guides**
+   - Platform usage instructions
+   - Feature explanations
+   - Troubleshooting guides
+
+2. **Technical Documentation**
+   - API references
+   - Architecture diagrams
+   - Deployment guides
+
+3. **Community Resources**
+   - Blog posts
+   - Tutorial videos
+   - Case studies
+
+### Documentation Standards
+
+1. **Writing Style**
+   - Use clear, concise language
+   - Follow accessibility guidelines
+   - Include examples and screenshots
+
+2. **Structure**
+   - Logical organization
+   - Table of contents for long documents
+   - Cross-references to related content
+
+3. **Review Process**
+   - Technical accuracy review
+   - Grammar and style check
+   - User testing feedback
+
+## Translation and Localization
+
+### Getting Started
+
+1. **Join Translation Team**
+   - Express interest through GitHub Discussions
+   - Get access to translation tools
+   - Receive style guides and glossaries
+
+2. **Translation Process**
+   - Translate interface strings
+   - Review existing translations
+   - Test localized versions
+
+### Language Support
+
+1. **Currently Supported**
+   - English (primary)
+   - Hindi
+   - Tamil
+   - Spanish
+   - French
+
+2. **Adding New Languages**
+   - Community request process
+   - Resource availability assessment
+   - Native speaker review
+
+## Financial Contributions
+
+### Donation Matching
+
+1. **Corporate Matching**
+   - Many employers match charitable donations
+   - ImpactX is registered with most matching programs
+   - Request matching through your HR department
+
+2. **Cryptocurrency Donations**
+   - ETH, ALGO, MATIC, and other supported tokens
+   - Direct blockchain donations with transparent tracking
+   - Tax-deductible receipts available
+
+### Grant Writing
+
+1. **Research Opportunities**
+   - Government grants for humanitarian technology
+   - Foundation funding for open-source projects
+   - Corporate social responsibility programs
+
+2. **Application Support**
+   - ImpactX team assistance with applications
+   - Technical documentation for proposals
+   - Impact measurement data
+
+## Event Participation
+
+### Hackathons and Competitions
+
+1. **Organizing Events**
+   - Host local ImpactX hackathons
+   - Partner with universities and tech communities
+   - Provide prizes and mentorship
+
+2. **Participating**
+   - Join global hackathons
+   - Form teams with other contributors
+   - Submit innovative solutions
+
+### Conferences and Meetups
+
+1. **Speaking Opportunities**
+   - Submit talks to relevant conferences
+   - Present ImpactX at humanitarian tech events
+   - Share project updates and learnings
+
+2. **Community Events**
+   - Organize local meetups
+   - Participate in virtual events
+   - Network with other contributors
+
+## Governance Participation
+
+### Token-Based Governance
+
+1. **Earning Tokens**
+   - Contribute code, documentation, or translations
+   - Participate in community activities
+   - Verify humanitarian projects
+
+2. **Voting Rights**
+   - Vote on platform upgrades
+   - Approve new project proposals
+   - Influence strategic direction
+
+### Committee Participation
+
+1. **Technical Committee**
+   - Architecture decisions
+   - Security reviews
+   - Performance optimization
+
+2. **Ethics Committee**
+   - Policy development
+   - Conflict resolution
+   - Community standards
+
+3. **Community Advisory Board**
+   - User experience improvements
+   - Feature prioritization
+   - Feedback integration
+
+## Recognition and Attribution
+
+### Contributor Listing
+
+1. **GitHub Contributors Page**
+   - Automatic recognition for code contributions
+   - Statistics and activity metrics
+   - Badges for different contribution types
+
+2. **Project Documentation**
+   - Acknowledgment in release notes
+   - Featured contributor spotlights
+   - Team member profiles
+
+### Academic and Professional Recognition
+
+1. **Research Citations**
+   - Proper attribution for academic use
+   - Collaboration on publications
+   - Conference presentations
+
+2. **Professional Development**
+   - Portfolio building
+   - Skill development opportunities
+   - Networking with industry professionals
+
+## Support and Resources
+
+### Getting Help
+
+1. **Documentation**
+   - Comprehensive project documentation
+   - API references and guides
+   - FAQ and troubleshooting
+
+2. **Community Support**
+   - GitHub Discussions for questions
+   - Slack community for real-time help
+   - Regular office hours with maintainers
+
+3. **Professional Support**
+   - Enterprise support options
+   - Consulting services
+   - Custom development assistance
+
+### Learning Resources
+
+1. **Educational Materials**
+   - Online courses and tutorials
+   - Video walkthroughs
+   - Interactive coding exercises
+
+2. **Mentorship Programs**
+   - One-on-one guidance
+   - Code review sessions
+   - Career development advice
+
+By contributing to ImpactX, you're not just helping to improve software—you're directly contributing to more transparent, efficient, and effective humanitarian aid distribution worldwide. Thank you for being part of our mission to make a positive impact through technology.
