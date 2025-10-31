@@ -354,6 +354,23 @@ Real-time weather information and disaster risk assessment for Indian regions wi
 ### Emergency Resource Tracker
 Comprehensive system for tracking and managing emergency resources during disaster response with request management and real-time status updates.
 
+
+ImpactX 2.0
+<img width="1637" height="934" alt="Screenshot 2025-10-31 232746" src="https://github.com/user-attachments/assets/efd8cdaf-320e-45b5-9aa9-7895c9c0e4e4" />
+<img width="1816" height="936" alt="Screenshot 2025-10-31 232727" src="https://github.com/user-attachments/assets/8c52b2a4-4e46-4bc9-9d8a-b4121c0dd514" />
+<img width="1418" height="638" alt="Screenshot 2025-10-31 232827" src="https://github.com/user-attachments/assets/d9609239-4d55-4e9c-9c18-c0da74334711" />
+<img width="1517" height="573" alt="Screenshot 2025-10-31 232817" src="https://github.com/user-attachments/assets/45a1d400-fb07-4f31-b742-f035add0cec1" />
+<img width="1660" height="905" alt="Screenshot 2025-10-31 232758" src="https://github.com/user-attachments/assets/b7d6fd55-a04a-4f5c-89e0-a7159e9886c0" />
+
+<img width="553" height="452" alt="Screenshot 2025-10-31 232921" src="https://github.com/user-attachments/assets/667fa6fc-2e04-4f4b-8e07-b31b0488692c" />
+<img width="745" height="361" alt="Screenshot 2025-10-31 232905" src="https://github.com/user-attachments/assets/2fef2399-10d5-4a72-a721-42f9003c0832" />
+<img width="1700" height="918" alt="Screenshot 2025-10-31 232850" src="https://github.com/user-attachments/assets/7e240e67-c637-4528-a59f-c4a666377133" />
+<img width="1738" height="932" alt="Screenshot 2025-10-31 233108" src="https://github.com/user-attachments/assets/922271a7-e6ec-471e-ba71-6f7e7497b541" />
+<img width="1795" height="933" alt="Screenshot 2025-10-31 233039" src="https://github.com/user-attachments/assets/41b01d8e-c802-4a61-8efc-be181e994ea6" />
+<img width="1216" height="640" alt="Screenshot 2025-10-31 233024" src="https://github.com/user-attachments/assets/df3aebfe-0850-43cc-96ab-096f342d1a14" />
+<img width="1780" height="935" alt="Screenshot 2025-10-31 232953" src="https://github.com/user-attachments/assets/576ef54c-9bb3-4faa-b4a3-dbc40de74eef" />
+<img width="1713" height="934" alt="Screenshot 2025-10-31 232938" src="https://github.com/user-attachments/assets/8cf23ce4-b011-4f36-ba68-f1281a32e510" />
+
 ## License
 
 This project is licensed under the MIT License.
