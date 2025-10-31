@@ -8,12 +8,14 @@ const IVRSimulator = () => {
   const [callHistory, setCallHistory] = useState([]);
   const [isCalling, setIsCalling] = useState(false);
   const [timer, setTimer] = useState(0);
+  const [callerId, setCallerId] = useState('');
+  const [location, setLocation] = useState({ latitude: null, longitude: null });
 
   // Mock IVR menu options
   const menuOptions = {
     welcome: {
-      message: "Welcome to ImpactX Emergency Response System. Press 1 for disaster reporting, Press 2 for emergency contacts, Press 3 for weather alerts, Press 4 for volunteer coordination, Press 0 for operator.",
-      options: ['1', '2', '3', '4', '0']
+      message: "Welcome to ImpactX Emergency Response System. Press 1 for disaster reporting, Press 2 for emergency contacts, Press 3 for weather alerts, Press 4 for volunteer coordination, Press 5 for fund tracking, Press 0 for operator.",
+      options: ['1', '2', '3', '4', '5', '0']
     },
     disasterReporting: {
       message: "Press 1 to report a flood, Press 2 for earthquake, Press 3 for cyclone, Press 4 for drought, Press 5 for landslide, Press 6 for fire, Press 7 for epidemic, Press 8 for chemical hazard, Press 9 for other, Press 0 to go back.",
@@ -29,6 +31,10 @@ const IVRSimulator = () => {
     },
     volunteerCoordination: {
       message: "Press 1 to register as volunteer, Press 2 to find volunteer opportunities, Press 0 to go back.",
+      options: ['1', '2', '0']
+    },
+    fundTracking: {
+      message: "Press 1 to track your donation, Press 2 for project status, Press 0 to go back.",
       options: ['1', '2', '0']
     },
     operator: {
@@ -48,6 +54,20 @@ const IVRSimulator = () => {
       setTimer(0);
     }
     return () => clearInterval(interval);
+  }, [isCalling]);
+
+  // Simulate getting caller location
+  useEffect(() => {
+    if (isCalling) {
+      // Mock location data
+      setLocation({
+        latitude: (Math.random() * 180 - 90).toFixed(6),
+        longitude: (Math.random() * 360 - 180).toFixed(6)
+      });
+      
+      // Mock caller ID
+      setCallerId(`+91${Math.floor(Math.random() * 9000000000) + 1000000000}`);
+    }
   }, [isCalling]);
 
   const formatTime = (seconds) => {
@@ -99,6 +119,10 @@ const IVRSimulator = () => {
             nextStep = 'volunteerCoordination';
             responseMessage = menuOptions.volunteerCoordination.message;
             break;
+          case '5':
+            nextStep = 'fundTracking';
+            responseMessage = menuOptions.fundTracking.message;
+            break;
           case '0':
             nextStep = 'operator';
             responseMessage = menuOptions.operator.message;
@@ -113,7 +137,18 @@ const IVRSimulator = () => {
           nextStep = 'welcome';
           responseMessage = menuOptions.welcome.message;
         } else if (['1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(input)) {
-          responseMessage = "Thank you for your report. Our team will respond shortly. Press 0 to return to main menu.";
+          const disasters = {
+            '1': 'flood',
+            '2': 'earthquake',
+            '3': 'cyclone',
+            '4': 'drought',
+            '5': 'landslide',
+            '6': 'fire',
+            '7': 'epidemic',
+            '8': 'chemical hazard',
+            '9': 'other'
+          };
+          responseMessage = `Thank you for reporting a ${disasters[input]}. Our team will respond shortly. Reference ID: ${Math.floor(Math.random() * 100000)}. Press 0 to return to main menu.`;
           nextStep = 'reportConfirmation';
         } else {
           responseMessage = "Invalid input. " + menuOptions.disasterReporting.message;
@@ -162,7 +197,7 @@ const IVRSimulator = () => {
           responseMessage = menuOptions.welcome.message;
         } else if (['1', '2'].includes(input)) {
           responseMessage = input === '1' 
-            ? "Current weather: Clear skies, 28°C. Press 0 to return to main menu." 
+            ? `Current weather: Clear skies, 28°C. Location: ${location.latitude}, ${location.longitude}. Press 0 to return to main menu.` 
             : "No active weather alerts. Press 0 to return to main menu.";
           nextStep = 'weatherConfirmation';
         } else {
@@ -202,8 +237,31 @@ const IVRSimulator = () => {
         }
         break;
         
+      case 'fundTracking':
+        if (input === '0') {
+          nextStep = 'welcome';
+          responseMessage = menuOptions.welcome.message;
+        } else if (['1', '2'].includes(input)) {
+          responseMessage = input === '1' 
+            ? "Your donation of ₹500 to Kerala Flood Relief is confirmed. Transaction ID: TXN${Math.floor(Math.random() * 1000000)}. Status: Verified. Press 0 to return to main menu." 
+            : "Project Status: 75% complete. Funds distributed: ₹2,50,000. Beneficiaries reached: 1,200 families. Press 0 to return to main menu.";
+          nextStep = 'fundConfirmation';
+        } else {
+          responseMessage = "Invalid input. " + menuOptions.fundTracking.message;
+        }
+        break;
+        
+      case 'fundConfirmation':
+        if (input === '0') {
+          nextStep = 'welcome';
+          responseMessage = menuOptions.welcome.message;
+        } else {
+          responseMessage = "Press 0 to return to main menu.";
+        }
+        break;
+        
       case 'operator':
-        responseMessage = "Thank you for calling ImpactX. An operator will assist you shortly.";
+        responseMessage = "Thank you for calling ImpactX. An operator will assist you shortly. Your call ID is ${Math.floor(Math.random() * 100000)}.";
         break;
         
       default:
@@ -239,6 +297,15 @@ const IVRSimulator = () => {
             </div>
           )}
         </div>
+        
+        {isCalling && (
+          <div className="bg-blue-50 rounded-lg p-3 mb-4 text-sm">
+            <div className="flex justify-between">
+              <span>Caller ID: {callerId}</span>
+              <span>Location: {location.latitude ? `${location.latitude}, ${location.longitude}` : 'Detecting...'}</span>
+            </div>
+          </div>
+        )}
         
         <div className="bg-gray-50 rounded-lg p-4 h-48 overflow-y-auto mb-4">
           {callHistory.length > 0 ? (
