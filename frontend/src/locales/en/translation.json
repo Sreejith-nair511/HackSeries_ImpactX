@@ -167,5 +167,519 @@
     "how_to_use": "How to Use",
     "tts_instructions": "Select any text on the page to hear it read aloud. Adjust the speech rate to your preference.",
     "accessibility_options": "Accessibility Options"
+  },
+  "disasters": {
+    "stateInfo": {
+      "title": "State-wise Disaster Information",
+      "selectState": "Select State"
+    },
+    "floods": {
+      "title": "Floods",
+      "frequency": {
+        "high": "High",
+        "moderate": "Moderate",
+        "low": "Low"
+      }
+    },
+    "cyclones": {
+      "title": "Cyclones",
+      "frequency": {
+        "high": "High",
+        "moderate": "Moderate",
+        "low": "Low"
+      }
+    },
+    "earthquakes": {
+      "title": "Earthquakes",
+      "frequency": {
+        "high": "High",
+        "moderate": "Moderate",
+        "low": "Low"
+      }
+    },
+    "droughts": {
+      "title": "Droughts",
+      "frequency": {
+        "high": "High",
+        "moderate": "Moderate",
+        "low": "Low"
+      }
+    },
+    "landslides": {
+      "title": "Landslides",
+      "frequency": {
+        "high": "High",
+        "moderate": "Moderate",
+        "low": "Low"
+      }
+    },
+    "info": {
+      "frequency": "Frequency",
+      "affectedPopulation": "Affected Population",
+      "lastIncident": "Last Incident",
+      "preparednessLevel": "Preparedness Level"
+    },
+    "preparednessTips": {
+      "title": "Disaster Preparedness Tips",
+      "tip1": "Keep an emergency kit with essential supplies",
+      "tip1Desc": "Prepare a kit with water, non-perishable food, flashlights, batteries, first aid supplies, medications, and important documents. Store it in an easily accessible location.",
+      "tip2": "Stay informed about weather conditions and warnings",
+      "tip2Desc": "Monitor local news, weather forecasts, and emergency alerts. Sign up for emergency notification systems in your area. Download weather apps with push notifications.",
+      "tip3": "Have an evacuation plan and practice it regularly",
+      "tip3Desc": "Create a family evacuation plan that includes multiple escape routes, meeting points, and communication strategies. Practice this plan twice a year with all household members.",
+      "tip4": "Know the location of emergency shelters in your area",
+      "tip4Desc": "Identify the nearest emergency shelters, hospitals, and evacuation routes from your home and workplace. Keep a printed map in your emergency kit.",
+      "highPriority": "High Priority",
+      "mediumPriority": "Medium Priority",
+      "bookmarkedTips": "Bookmarked Tips"
+    }
+  },
+  "states": {
+    "maharashtra": "Maharashtra",
+    "odisha": "Odisha",
+    "kerala": "Kerala"
+  },
+  "emergencyContacts": {
+    "title": "Emergency Contacts",
+    "selectState": "Select State",
+    "chooseState": "Choose a state",
+    "search": "Search Contacts",
+    "searchPlaceholder": "Search by name or type...",
+    "contactsFor": "Emergency Contacts for",
+    "call": "Call",
+    "copy": "Copy",
+    "noContactsFound": "No emergency contacts found for the selected state.",
+    "selectStateMessage": "Please select a state to view emergency contacts.",
+    "quickAccess": "Quick Access Numbers",
+    "police": "Police",
+    "fire": "Fire",
+    "ambulance": "Ambulance",
+    "disaster": "Disaster Management",
+    "calling": "Calling",
+    "numberCopied": "Phone number copied to clipboard!"
+  },
+  "weatherAlerts": {
+    "title": "Weather Alerts",
+    "loading": "Loading weather alerts...",
+    "refresh": "Refresh",
+    "noAlerts": "No Active Alerts",
+    "noAlertsDesc": "There are currently no weather alerts for your region.",
+    "floodWarning": "Flood Warning",
+    "floodWarningDesc": "Heavy rainfall expected in the region. Avoid low-lying areas.",
+    "cycloneWatch": "Cyclone Watch",
+    "cycloneWatchDesc": "Cyclonic conditions developing over the Arabian Sea.",
+    "heatwaveWarning": "Heatwave Warning",
+    "heatwaveWarningDesc": "Extreme heat conditions. Stay hydrated and avoid outdoor activities.",
+    "issued": "Issued",
+    "expires": "Expires",
+    "region": "Region",
+    "safetyTip": "Weather Safety Tip",
+    "safetyTipDesc": "Stay informed about weather conditions in your area. Sign up for local weather alerts and have an emergency plan ready."
+  },
+  "disasterRisk": {
+    "title": "Disaster Risk Assessment",
+    "selectRegion": "Select Region",
+    "overallRisk": "Overall Risk Index",
+    "low": "Low",
+    "high": "High",
+    "mitigationTips": "Risk Mitigation Tips",
+    "tip1": "Develop and practice emergency evacuation plans",
+    "tip2": "Maintain emergency supply kits with essential items",
+    "tip3": "Stay informed about local disaster risks and warnings",
+    "tip4": "Invest in structural improvements to withstand disasters"
+  },
+  "resourceAllocator": {
+    "title": "Emergency Resource Allocator",
+    "disasterType": "Disaster Type",
+    "affectedPopulation": "Affected Population",
+    "severityLevel": "Severity Level",
+    "affectedArea": "Affected Area",
+    "emergencySupplies": "Emergency Supplies",
+    "personnelRequirements": "Personnel Requirements",
+    "evacuationCapacity": "Evacuation Capacity",
+    "shelterAllocation": "Shelter Allocation",
+    "water": "Water",
+    "food": "Food",
+    "medicalKits": "Medical Kits",
+    "blankets": "Blankets",
+    "hygieneKits": "Hygiene Kits",
+    "rescueTeams": "Rescue Teams",
+    "medicalTeams": "Medical Teams",
+    "logisticsTeams": "Logistics Teams",
+    "totalTeams": "Total Teams",
+    "totalCapacity": "Total Capacity",
+    "totalVehicles": "Total Vehicles",
+    "vehicleBreakdown": "Vehicle Breakdown",
+    "shelter1": "Community Center",
+    "shelter2": "School Building",
+    "shelter3": "Sports Complex",
+    "totalSheltered": "Total Sheltered",
+    "unshelteredPopulation": "Unsheltered Population",
+    "allocationDetails": "Allocation Details",
+    "remainingCapacity": "Remaining Capacity",
+    "liters": "liters",
+    "meals": "meals",
+    "note": "Note: These calculations are estimates based on standard disaster management protocols and should be adjusted based on specific local conditions.",
+    "severity": {
+      "1": "Minor",
+      "2": "Moderate",
+      "3": "Significant",
+      "4": "Severe",
+      "5": "Catastrophic"
+    }
+  },
+  "impactAssessment": {
+    "title": "Disaster Impact Assessment",
+    "disasterType": "Disaster Type",
+    "region": "Region",
+    "overallImpact": "Overall Impact",
+    "economicImpact": "Economic Impact",
+    "socialImpact": "Social Impact",
+    "environmentalImpact": "Environmental Impact",
+    "recommendations": "Recommendations",
+    "totalEconomicLoss": "Total Economic Loss",
+    "infrastructureLoss": "Infrastructure Loss",
+    "agriculturalLoss": "Agricultural Loss",
+    "recoveryEstimate": "Estimated Recovery Cost",
+    "affectedFamilies": "Affected Families",
+    "childrenAffected": "Children Affected",
+    "displacementRate": "Displacement Rate",
+    "casualtyRate": "Casualty Rate",
+    "healthcareImpact": "Healthcare Impact",
+    "educationImpact": "Education Impact",
+    "forestLoss": "Forest Loss",
+    "co2Emissions": "CO2 Emissions",
+    "biodiversityLoss": "Biodiversity Loss",
+    "species": "species",
+    "recoveryTime": "Estimated Recovery Time",
+    "months": "months",
+    "priorityLevel": "Priority Level",
+    "selectDisasterAndRegion": "Select a disaster type and region to view impact assessment",
+    "impactLevels": {
+      "catastrophic": "Catastrophic",
+      "severe": "Severe",
+      "moderate": "Moderate",
+      "minor": "Minor",
+      "low": "Low"
+    },
+    "priority": {
+      "immediate": "Immediate",
+      "high": "High",
+      "medium": "Medium",
+      "low": "Low"
+    }
+  },
+  "responsePlanner": {
+    "title": "Disaster Response Planner",
+    "disasterType": "Disaster Type",
+    "severityLevel": "Severity Level",
+    "region": "Region",
+    "disasterInfo": "{{disaster}} Response Plan for {{region}}",
+    "immediateActions": "Immediate Actions",
+    "resourceAllocation": "Resource Allocation",
+    "teams": "Teams",
+    "equipmentAndSupplies": "Equipment and Supplies",
+    "timeline": "Response Timeline",
+    "coordination": "Coordination Entities",
+    "specialConsiderations": "Special Considerations",
+    "selectDisasterAndRegion": "Select a disaster type, severity level, and region to generate a response plan",
+    "phases": {
+      "immediate": "Immediate Response (0-2 hours)",
+      "shortTerm": "Short-term Response (2-24 hours)",
+      "mediumTerm": "Medium-term Recovery (1-30 days)",
+      "longTerm": "Long-term Reconstruction (1-36 months)"
+    },
+    "severity": {
+      "minor": "Minor",
+      "moderate": "Moderate",
+      "significant": "Significant",
+      "severe": "Severe",
+      "catastrophic": "Catastrophic"
+    }
+  },
+  "recoveryPlanner": {
+    "title": "Disaster Recovery Planner",
+    "description": "Plan and track the recovery process after a disaster to ensure effective rehabilitation and reconstruction.",
+    "disasterType": "Disaster Type",
+    "selectDisaster": "Select disaster type",
+    "region": "Region",
+    "selectRegion": "Select region",
+    "affectedPopulation": "Affected Population",
+    "populationPlaceholder": "Number of people affected",
+    "severity": "Severity Level",
+    "generatePlan": "Generate Recovery Plan",
+    "progressOverview": "Recovery Progress Overview",
+    "overallProgress": "Overall Recovery Progress",
+    "status": "Status",
+    "completedTasks": "Completed",
+    "fillAllFields": "Please fill in all fields to generate a recovery plan.",
+    "tabs": {
+      "timeline": "Timeline",
+      "resources": "Resources",
+      "stakeholders": "Stakeholders",
+      "actionPlan": "Action Plan"
+    },
+    "timeline": {
+      "title": "Recovery Timeline",
+      "phases": {
+        "immediate": "Immediate Response",
+        "shortTerm": "Short-term Recovery",
+        "mediumTerm": "Medium-term Rehabilitation",
+        "longTerm": "Long-term Reconstruction"
+      }
+    },
+    "resources": {
+      "title": "Required Resources",
+      "personnel": "Personnel",
+      "supplies": "Supplies",
+      "financial": "Financial Resources",
+      "roles": {
+        "emergencyResponders": "Emergency Responders",
+        "medicalStaff": "Medical Staff",
+        "engineers": "Engineers",
+        "logistics": "Logistics Personnel"
+      },
+      "items": {
+        "water": "Water",
+        "food": "Food",
+        "medical": "Medical Kits",
+        "shelter": "Shelter Units"
+      }
+    },
+    "stakeholders": {
+      "title": "Key Stakeholders"
+    },
+    "actionPlan": {
+      "title": "Recovery Action Plan"
+    },
+    "priority": {
+      "high": "High Priority",
+      "medium": "Medium Priority",
+      "low": "Low Priority"
+    }
+  },
+  "disasterTypes": {
+    "flood": "Flood",
+    "earthquake": "Earthquake",
+    "cyclone": "Cyclone",
+    "drought": "Drought",
+    "landslide": "Landslide"
+  },
+  "communityReporting": {
+    "title": "Community Disaster Reporting",
+    "description": "Report disaster incidents in your community to help emergency responders and authorities respond quickly and effectively.",
+    "disasterType": "Disaster Type",
+    "selectDisasterType": "Select disaster type",
+    "disasterTypes": {
+      "flood": "Flood",
+      "earthquake": "Earthquake",
+      "cyclone": "Cyclone",
+      "drought": "Drought",
+      "landslide": "Landslide",
+      "fire": "Fire",
+      "epidemic": "Epidemic",
+      "chemical": "Chemical Hazard",
+      "other": "Other"
+    },
+    "location": "Location",
+    "locationPlaceholder": "Enter address or landmark",
+    "useCurrentLocation": "Use Current Location",
+    "latitude": "Latitude",
+    "longitude": "Longitude",
+    "description": "Description",
+    "descriptionPlaceholder": "Describe the incident, affected areas, and any other relevant details...",
+    "severity": "Severity Level",
+    "low": "Low",
+    "high": "High",
+    "affectedPeople": "Affected People (Estimate)",
+    "media": "Media (Photos/Videos)",
+    "uploadMedia": "Click to upload media files",
+    "mediaLimit": "Maximum 5 files. Images and videos only.",
+    "submitReport": "Submit Disaster Report",
+    "submitting": "Submitting...",
+    "successMessage": "Your disaster report has been submitted successfully! Emergency responders have been notified.",
+    "submissionError": "Failed to submit report. Please try again.",
+    "locationError": "Unable to get your current location. Please enter location manually.",
+    "locationNotSupported": "Geolocation is not supported by your browser.",
+    "maxMediaFiles": "Maximum 5 media files allowed."
+  },
+  "volunteerCoordinator": {
+    "title": "Volunteer Coordinator",
+    "description": "Coordinate volunteers for disaster response and recovery efforts",
+    "disasterType": "Disaster Type",
+    "latitude": "Latitude",
+    "longitude": "Longitude",
+    "tabs": {
+      "matching": "Volunteer Matching",
+      "assignments": "Task Assignments",
+      "communication": "Communication Plan",
+      "tracking": "Hours Tracking",
+      "scheduling": "Shift Scheduling"
+    },
+    "matching": {
+      "title": "Volunteer Matching Results"
+    },
+    "volunteer": "Volunteer",
+    "skills": "Skills",
+    "distance": "Distance",
+    "suitability": "Suitability",
+    "tasks": "Tasks",
+    "assignments": "Assignments",
+    "assignedTo": "Assigned To",
+    "assignedAt": "Assigned At",
+    "requiredSkills": "Required Skills",
+    "requiredVolunteers": "Required Volunteers",
+    "priority": "Priority",
+    "communication": {
+      "title": "Communication Plan",
+      "channels": "Communication Channels"
+    },
+    "channels": "Channels",
+    "frequency": "Frequency",
+    "contactList": "Contact List",
+    "tracking": {
+      "title": "Volunteer Hours Tracking"
+    },
+    "totalVolunteers": "Total Volunteers",
+    "totalHours": "Total Hours",
+    "topContributors": "Top Contributors",
+    "recognitionAwards": "Recognition Awards",
+    "recognitionDistribution": "Recognition Distribution",
+    "bronze": "Bronze",
+    "silver": "Silver",
+    "gold": "Gold",
+    "platinum": "Platinum",
+    "recognitionLevel": "Recognition Level",
+    "hours": "hours",
+    "scheduling": {
+      "title": "Volunteer Shift Scheduling"
+    },
+    "shift": "Shift",
+    "time": "Time",
+    "duration": "Duration",
+    "totalShifts": "Total Shifts",
+    "filledShifts": "Filled Shifts",
+    "coverage": "Coverage",
+    "volunteerUtilization": "Volunteer Utilization",
+    "utilization": "Utilization"
+  },
+  "disasterStatistics": {
+    "title": "Disaster Statistics",
+    "description": "Analyze and visualize disaster data and trends across India",
+    "tabs": {
+      "overview": "Overview",
+      "trends": "Trends",
+      "regional": "Regional Risk",
+      "comparison": "Type Comparison"
+    },
+    "overview": {
+      "title": "Disaster Statistics Overview",
+      "totalEvents": "Total Events",
+      "totalAffected": "Total Affected",
+      "totalEconomicLoss": "Total Economic Loss",
+      "averageAffected": "Average Affected per Event"
+    },
+    "byType": "By Disaster Type",
+    "byRegion": "By Region",
+    "events": "Events",
+    "affected": "Affected People",
+    "economicLoss": "Economic Loss",
+    "trends": {
+      "title": "Disaster Trends Analysis",
+      "yearsCovered": "Years Covered",
+      "annualGrowth": "Annual Growth Rate",
+      "mostIncreasing": "Most Increasing Type",
+      "yearlyBreakdown": "Yearly Breakdown",
+      "year": "Year"
+    },
+    "regional": {
+      "title": "Regional Risk Indices",
+      "region": "Region",
+      "riskIndex": "Risk Index"
+    },
+    "comparison": {
+      "title": "Disaster Type Comparison",
+      "firstType": "First Disaster Type",
+      "secondType": "Second Disaster Type",
+      "compare": "Compare",
+      "averageAffected": "Average Affected",
+      "averageEconomicLoss": "Average Economic Loss"
+    }
+  },
+  "weather": {
+    "title": "Weather Monitor",
+    "conditions": "Current Conditions",
+    "humidity": "Humidity",
+    "wind_speed": "Wind Speed",
+    "pressure": "Pressure",
+    "visibility": "Visibility",
+    "risk_assessment": "Risk Assessment",
+    "risk_level": "Risk Level",
+    "alerts": "Alerts",
+    "preparedness_recommendations": "Preparedness Recommendations",
+    "forecast": "Weather Forecast",
+    "high": "High",
+    "low": "Low",
+    "refresh": "Refresh",
+    "loading": "Loading...",
+    "data_not_available": "Weather data not available",
+    "fetch_error": "Error fetching weather data"
+  },
+  "emergencyResourceTracker": {
+    "title": "Emergency Resource Tracker",
+    "totalResources": "Total Resources",
+    "availableResources": "Available Resources",
+    "responseRate": "Response Rate",
+    "region": "Region",
+    "allRegions": "All Regions",
+    "resource": "Resource",
+    "quantity": "Quantity",
+    "location": "Location",
+    "availability": "Availability",
+    "requestResources": "Request Resources",
+    "resourceType": "Resource Type",
+    "selectType": "Select resource type",
+    "urgency": "Urgency",
+    "normal": "Normal",
+    "high": "High",
+    "critical": "Critical",
+    "enterLocation": "Enter location",
+    "contact": "Contact",
+    "enterContact": "Enter contact information",
+    "submitRequest": "Submit Request",
+    "requestStatus": "Request Status",
+    "requestId": "Request ID",
+    "status": "Status",
+    "submitted": "Submitted",
+    "estimatedDelivery": "Estimated Delivery",
+    "refreshStatus": "Refresh Status"
+  },
+  "disasterCommunicationHub": {
+    "title": "Disaster Communication Hub",
+    "selectRegion": "Select Region",
+    "allRegions": "All Regions",
+    "selectDisaster": "Select Disaster Type",
+    "communicationChannels": "Communication Channels",
+    "channelName": "Channel Name",
+    "type": "Type",
+    "frequency": "Frequency",
+    "coverage": "Coverage",
+    "status": "Status",
+    "contact": "Contact",
+    "broadcastInfo": "Emergency Broadcast Information",
+    "tvChannels": "TV Channels",
+    "radioStations": "Radio Stations",
+    "transmission": "Transmission",
+    "smsAlerts": "SMS Alerts",
+    "service": "Service",
+    "shortcode": "Shortcode",
+    "provider": "Provider",
+    "equipment": "Communication Equipment",
+    "availability": "Availability",
+    "protocols": "Communication Protocols for {{disaster}}",
+    "immediateResponse": "Immediate Response",
+    "shortTermResponse": "Short-term Response",
+    "longTermResponse": "Long-term Response",
+    "emergencyContacts": "Emergency Contacts"
   }
 }

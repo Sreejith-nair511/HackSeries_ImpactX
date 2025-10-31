@@ -167,5 +167,519 @@
     "how_to_use": "उपयोग कैसे करें",
     "tts_instructions": "इसे जोर से पढ़ने के लिए पृष्ठ पर कोई भी पाठ चुनें। अपनी पसंद के अनुसार भाषण दर को समायोजित करें।",
     "accessibility_options": "सुलभता विकल्प"
+  },
+  "disasters": {
+    "stateInfo": {
+      "title": "राज्य-वार आपदा जानकारी",
+      "selectState": "राज्य चुनें"
+    },
+    "floods": {
+      "title": "बाढ़",
+      "frequency": {
+        "high": "उच्च",
+        "moderate": "मामूली",
+        "low": "कम"
+      }
+    },
+    "cyclones": {
+      "title": "चक्रवात",
+      "frequency": {
+        "high": "उच्च",
+        "moderate": "मामूली",
+        "low": "कम"
+      }
+    },
+    "earthquakes": {
+      "title": "भूकंप",
+      "frequency": {
+        "high": "उच्च",
+        "moderate": "मामूली",
+        "low": "कम"
+      }
+    },
+    "droughts": {
+      "title": "सूखा",
+      "frequency": {
+        "high": "उच्च",
+        "moderate": "मामूली",
+        "low": "कम"
+      }
+    },
+    "landslides": {
+      "title": "भूस्खलन",
+      "frequency": {
+        "high": "उच्च",
+        "moderate": "मामूली",
+        "low": "कम"
+      }
+    },
+    "info": {
+      "frequency": "आवृत्ति",
+      "affectedPopulation": "प्रभावित जनसंख्या",
+      "lastIncident": "अंतिम घटना",
+      "preparednessLevel": "तैयारी स्तर"
+    },
+    "preparednessTips": {
+      "title": "आपदा तैयारी युक्तियाँ",
+      "tip1": "आवश्यक आपूर्ति के साथ एक आपातकालीन किट रखें",
+      "tip1Desc": "पानी, गैर-खराब होने वाले भोजन, टॉर्च, बैटरी, प्रथम सहायता आपूर्ति, दवाएं और महत्वपूर्ण दस्तावेजों के साथ एक किट तैयार करें। इसे एक आसानी से सुलभ स्थान पर संग्रहीत करें।",
+      "tip2": "मौसम की स्थिति और चेतावनियों के बारे में सूचित रहें",
+      "tip2Desc": "स्थानीय समाचार, मौसम पूर्वानुमान और आपातकालीन चेतावनियों की निगरानी करें। अपने क्षेत्र में आपातकालीन अधिसूचना प्रणालियों के लिए साइन अप करें। पुश अधिसूचनाओं के साथ मौसम ऐप्स डाउनलोड करें।",
+      "tip3": "एक खाली करने की योजना होनी चाहिए और इसे नियमित रूप से अभ्यास करें",
+      "tip3Desc": "एक परिवार खाली करने की योजना बनाएं जिसमें कई निकास मार्ग, मीटिंग बिंदु और संचार रणनीतियां शामिल हों। इस योजना का अभ्यास सभी घरेलू सदस्यों के साथ साल में दो बार करें।",
+      "tip4": "अपने क्षेत्र में आपातकालीन शरण स्थलों के स्थान को जानें",
+      "tip4Desc": "अपने घर और कार्यस्थल से निकटतम आपातकालीन शरण स्थलों, अस्पतालों और खाली करने के मार्गों की पहचान करें। अपने आपातकालीन किट में एक मुद्रित नक्शा रखें।",
+      "highPriority": "उच्च प्राथमिकता",
+      "mediumPriority": "मध्यम प्राथमिकता",
+      "bookmarkedTips": "बुकमार्क किए गए युक्तियाँ"
+    }
+  },
+  "states": {
+    "maharashtra": "महाराष्ट्र",
+    "odisha": "ओडिशा",
+    "kerala": "केरल"
+  },
+  "emergencyContacts": {
+    "title": "आपातकालीन संपर्क",
+    "selectState": "राज्य चुनें",
+    "chooseState": "एक राज्य चुनें",
+    "search": "संपर्क खोजें",
+    "searchPlaceholder": "नाम या प्रकार से खोजें...",
+    "contactsFor": "के लिए आपातकालीन संपर्क",
+    "call": "कॉल करें",
+    "copy": "कॉपी करें",
+    "noContactsFound": "चयनित राज्य के लिए कोई आपातकालीन संपर्क नहीं मिला।",
+    "selectStateMessage": "आपातकालीन संपर्क देखने के लिए कृपया एक राज्य चुनें।",
+    "quickAccess": "त्वरित पहुंच नंबर",
+    "police": "पुलिस",
+    "fire": "अग्निशमन",
+    "ambulance": "रोगीवाहन",
+    "disaster": "आपदा प्रबंधन",
+    "calling": "कॉल कर रहे हैं",
+    "numberCopied": "फोन नंबर क्लिपबोर्ड पर कॉपी किया गया!"
+  },
+  "weatherAlerts": {
+    "title": "मौसम चेतावनियाँ",
+    "loading": "मौसम चेतावनियाँ लोड हो रही हैं...",
+    "refresh": "रीफ्रेश करें",
+    "noAlerts": "कोई सक्रिय चेतावनी नहीं",
+    "noAlertsDesc": "आपके क्षेत्र के लिए वर्तमान में कोई मौसम चेतावनी नहीं है।",
+    "floodWarning": "बाढ़ चेतावनी",
+    "floodWarningDesc": "क्षेत्र में भारी वर्षा की उम्मीद है। निम्न क्षेत्रों से दूर रहें।",
+    "cycloneWatch": "चक्रवात चेतावनी",
+    "cycloneWatchDesc": "अरब सागर पर चक्रवाती परिस्थितियाँ विकसित हो रही हैं।",
+    "heatwaveWarning": "गर्मी की लहर चेतावनी",
+    "heatwaveWarningDesc": "चरम गर्मी की स्थितियाँ। पर्याप्त पानी पिएं और बाहरी गतिविधियों से बचें।",
+    "issued": "जारी किया गया",
+    "expires": "समाप्त होता है",
+    "region": "क्षेत्र",
+    "safetyTip": "मौसम सुरक्षा युक्ति",
+    "safetyTipDesc": "अपने क्षेत्र की मौसम स्थितियों के बारे में सूचित रहें। स्थानीय मौसम चेतावनियों के लिए साइन अप करें और एक आपातकालीन योजना तैयार रखें।"
+  },
+  "disasterRisk": {
+    "title": "आपदा जोखिम मूल्यांकन",
+    "selectRegion": "क्षेत्र चुनें",
+    "overallRisk": "समग्र जोखिम सूचकांक",
+    "low": "कम",
+    "high": "अधिक",
+    "mitigationTips": "जोखिम कम करने के युक्तियाँ",
+    "tip1": "आपातकालीन खाली करने की योजना विकसित और अभ्यास करें",
+    "tip2": "आवश्यक वस्तुओं के साथ आपातकालीन आपूर्ति किट बनाए रखें",
+    "tip3": "स्थानीय आपदा जोखिमों और चेतावनियों के बारे में सूचित रहें",
+    "tip4": "आपदाओं को सहन करने के लिए संरचनात्मक सुधारों में निवेश करें"
+  },
+  "resourceAllocator": {
+    "title": "आपातकालीन संसाधन आवंटक",
+    "disasterType": "आपदा प्रकार",
+    "affectedPopulation": "प्रभावित जनसंख्या",
+    "severityLevel": "गंभीरता स्तर",
+    "affectedArea": "प्रभावित क्षेत्र",
+    "emergencySupplies": "आपातकालीन आपूर्ति",
+    "personnelRequirements": "कर्मचारी आवश्यकताएं",
+    "evacuationCapacity": "खाली करने की क्षमता",
+    "shelterAllocation": "आश्रय आवंटन",
+    "water": "पानी",
+    "food": "भोजन",
+    "medicalKits": "चिकित्सा किट",
+    "blankets": "कंबल",
+    "hygieneKits": "स्वच्छता किट",
+    "rescueTeams": "बचाव टीमें",
+    "medicalTeams": "चिकित्सा टीमें",
+    "logisticsTeams": "लॉजिस्टिक्स टीमें",
+    "totalTeams": "कुल टीमें",
+    "totalCapacity": "कुल क्षमता",
+    "totalVehicles": "कुल वाहन",
+    "vehicleBreakdown": "वाहन विवरण",
+    "shelter1": "सामुदायिक केंद्र",
+    "shelter2": "स्कूल भवन",
+    "shelter3": "खेल परिसर",
+    "totalSheltered": "कुल आश्रित",
+    "unshelteredPopulation": "अनाश्रित जनसंख्या",
+    "allocationDetails": "आवंटन विवरण",
+    "remainingCapacity": "शेष क्षमता",
+    "liters": "लीटर",
+    "meals": "भोजन",
+    "note": "नोट: ये गणनाएं मानक आपदा प्रबंधन प्रोटोकॉल पर आधारित अनुमान हैं और विशिष्ट स्थानीय परिस्थितियों के आधार पर समायोजित की जानी चाहिए।",
+    "severity": {
+      "1": "कम",
+      "2": "मामूली",
+      "3": "महत्वपूर्ण",
+      "4": "गंभीर",
+      "5": "विनाशकारी"
+    }
+  },
+  "impactAssessment": {
+    "title": "आपदा प्रभाव मूल्यांकन",
+    "disasterType": "आपदा प्रकार",
+    "region": "क्षेत्र",
+    "overallImpact": "समग्र प्रभाव",
+    "economicImpact": "आर्थिक प्रभाव",
+    "socialImpact": "सामाजिक प्रभाव",
+    "environmentalImpact": "पर्यावरणीय प्रभाव",
+    "recommendations": "अनुशंसाएँ",
+    "totalEconomicLoss": "कुल आर्थिक हानि",
+    "infrastructureLoss": "बुनियादी ढांचा हानि",
+    "agriculturalLoss": "कृषि हानि",
+    "recoveryEstimate": "अनुमानित पुनर्प्राप्ति लागत",
+    "affectedFamilies": "प्रभावित परिवार",
+    "childrenAffected": "प्रभावित बच्चे",
+    "displacementRate": "विस्थापन दर",
+    "casualtyRate": "हताहत दर",
+    "healthcareImpact": "स्वास्थ्य देखभाल प्रभाव",
+    "educationImpact": "शिक्षा प्रभाव",
+    "forestLoss": "वन हानि",
+    "co2Emissions": "CO2 उत्सर्जन",
+    "biodiversityLoss": "जैव विविधता हानि",
+    "species": "प्रजातियाँ",
+    "recoveryTime": "अनुमानित पुनर्प्राप्ति समय",
+    "months": "महीने",
+    "priorityLevel": "प्राथमिकता स्तर",
+    "selectDisasterAndRegion": "प्रभाव मूल्यांकन देखने के लिए एक आपदा प्रकार और क्षेत्र चुनें",
+    "impactLevels": {
+      "catastrophic": "विनाशकारी",
+      "severe": "गंभीर",
+      "moderate": "मामूली",
+      "minor": "कम",
+      "low": "कम"
+    },
+    "priority": {
+      "immediate": "तत्काल",
+      "high": "उच्च",
+      "medium": "मध्यम",
+      "low": "कम"
+    }
+  },
+  "responsePlanner": {
+    "title": "आपदा प्रतिक्रिया योजनाकार",
+    "disasterType": "आपदा प्रकार",
+    "severityLevel": "गंभीरता स्तर",
+    "region": "क्षेत्र",
+    "disasterInfo": "{{region}} के लिए {{disaster}} प्रतिक्रिया योजना",
+    "immediateActions": "तत्काल कार्रवाइयाँ",
+    "resourceAllocation": "संसाधन आवंटन",
+    "teams": "टीमें",
+    "equipmentAndSupplies": "उपकरण और आपूर्ति",
+    "timeline": "प्रतिक्रिया समयरेखा",
+    "coordination": "समन्वय इकाइयाँ",
+    "specialConsiderations": "विशेष विचार",
+    "selectDisasterAndRegion": "एक प्रतिक्रिया योजना तैयार करने के लिए एक आपदा प्रकार, गंभीरता स्तर और क्षेत्र चुनें",
+    "phases": {
+      "immediate": "तत्काल प्रतिक्रिया (0-2 घंटे)",
+      "shortTerm": "अल्पकालिक प्रतिक्रिया (2-24 घंटे)",
+      "mediumTerm": "मध्यकालिक पुनर्प्राप्ति (1-30 दिन)",
+      "longTerm": "दीर्घकालिक पुनर्निर्माण (1-36 महीने)"
+    },
+    "severity": {
+      "minor": "कम",
+      "moderate": "मामूली",
+      "significant": "महत्वपूर्ण",
+      "severe": "गंभीर",
+      "catastrophic": "विनाशकारी"
+    }
+  },
+  "recoveryPlanner": {
+    "title": "आपदा पुनर्प्राप्ति योजनाकार",
+    "description": "प्रभावी पुनर्वास और पुनर्निर्माण सुनिश्चित करने के लिए आपदा के बाद पुनर्प्राप्ति प्रक्रिया की योजना बनाएं और ट्रैक करें।",
+    "disasterType": "आपदा का प्रकार",
+    "selectDisaster": "आपदा का प्रकार चुनें",
+    "region": "क्षेत्र",
+    "selectRegion": "क्षेत्र चुनें",
+    "affectedPopulation": "प्रभावित जनसंख्या",
+    "populationPlaceholder": "प्रभावित लोगों की संख्या",
+    "severity": "गंभीरता स्तर",
+    "generatePlan": "पुनर्प्राप्ति योजना तैयार करें",
+    "progressOverview": "पुनर्प्राप्ति प्रगति अवलोकन",
+    "overallProgress": "समग्र पुनर्प्राप्ति प्रगति",
+    "status": "स्थिति",
+    "completedTasks": "पूर्ण",
+    "fillAllFields": "पुनर्प्राप्ति योजना तैयार करने के लिए कृपया सभी फ़ील्ड भरें।",
+    "tabs": {
+      "timeline": "समयरेखा",
+      "resources": "संसाधन",
+      "stakeholders": "हितधारक",
+      "actionPlan": "कार्य योजना"
+    },
+    "timeline": {
+      "title": "पुनर्प्राप्ति समयरेखा",
+      "phases": {
+        "immediate": "तत्काल प्रतिक्रिया",
+        "shortTerm": "अल्पकालिक पुनर्प्राप्ति",
+        "mediumTerm": "मध्यकालिक पुनर्वास",
+        "longTerm": "दीर्घकालिक पुनर्निर्माण"
+      }
+    },
+    "resources": {
+      "title": "आवश्यक संसाधन",
+      "personnel": "कर्मचारी",
+      "supplies": "आपूर्ति",
+      "financial": "वित्तीय संसाधन",
+      "roles": {
+        "emergencyResponders": "आपातकालीन प्रतिक्रिया देने वाले",
+        "medicalStaff": "चिकित्सा कर्मचारी",
+        "engineers": "इंजीनियर",
+        "logistics": "लॉजिस्टिक्स कर्मचारी"
+      },
+      "items": {
+        "water": "पानी",
+        "food": "खाद्य",
+        "medical": "चिकित्सा किट",
+        "shelter": "आश्रय इकाइयाँ"
+      }
+    },
+    "stakeholders": {
+      "title": "प्रमुख हितधारक"
+    },
+    "actionPlan": {
+      "title": "पुनर्प्राप्ति कार्य योजना"
+    },
+    "priority": {
+      "high": "उच्च प्राथमिकता",
+      "medium": "मध्यम प्राथमिकता",
+      "low": "निम्न प्राथमिकता"
+    }
+  },
+  "disasterTypes": {
+    "flood": "बाढ़",
+    "earthquake": "भूकंप",
+    "cyclone": "चक्रवात",
+    "drought": "अकाल",
+    "landslide": "भूस्खलन"
+  },
+  "communityReporting": {
+    "title": "सामुदायिक आपदा रिपोर्टिंग",
+    "description": "आपातकालीन प्रतिक्रिया देने वालों और अधिकारियों को तुरंत और प्रभावी ढंग से प्रतिक्रिया देने में मदद के लिए अपने समुदाय में आपदा की घटनाओं की रिपोर्ट करें।",
+    "disasterType": "आपदा का प्रकार",
+    "selectDisasterType": "आपदा का प्रकार चुनें",
+    "disasterTypes": {
+      "flood": "बाढ़",
+      "earthquake": "भूकंप",
+      "cyclone": "चक्रवात",
+      "drought": "अकाल",
+      "landslide": "भूस्खलन",
+      "fire": "आग",
+      "epidemic": "महामारी",
+      "chemical": "रासायनिक खतरा",
+      "other": "अन्य"
+    },
+    "location": "स्थान",
+    "locationPlaceholder": "पता या स्थान चिह्न दर्ज करें",
+    "useCurrentLocation": "वर्तमान स्थान का उपयोग करें",
+    "latitude": "अक्षांश",
+    "longitude": "देशांतर",
+    "description": "विवरण",
+    "descriptionPlaceholder": "घटना, प्रभावित क्षेत्रों और अन्य प्रासंगिक विवरण का वर्णन करें...",
+    "severity": "गंभीरता स्तर",
+    "low": "कम",
+    "high": "उच्च",
+    "affectedPeople": "प्रभावित लोग (अनुमानित)",
+    "media": "मीडिया (तस्वीरें/वीडियो)",
+    "uploadMedia": "मीडिया फ़ाइलें अपलोड करने के लिए क्लिक करें",
+    "mediaLimit": "अधिकतम 5 फ़ाइलें। केवल चित्र और वीडियो।",
+    "submitReport": "आपदा रिपोर्ट सबमिट करें",
+    "submitting": "सबमिट किया जा रहा है...",
+    "successMessage": "आपकी आपदा रिपोर्ट सफलतापूर्वक सबमिट कर दी गई है! आपातकालीन प्रतिक्रिया देने वालों को सूचित कर दिया गया है।",
+    "submissionError": "रिपोर्ट सबमिट करने में विफल। कृपया पुन: प्रयास करें।",
+    "locationError": "आपका वर्तमान स्थान प्राप्त करने में असमर्थ। कृपया स्थान मैन्युअल रूप से दर्ज करें।",
+    "locationNotSupported": "जियोलोकेशन आपके ब्राउज़र द्वारा समर्थित नहीं है।",
+    "maxMediaFiles": "अधिकतम 5 मीडिया फ़ाइलें अनुमत हैं।"
+  },
+  "volunteerCoordinator": {
+    "title": "स्वयंसेवी समन्वयक",
+    "description": "आपदा प्रतिक्रिया और पुनर्प्राप्ति प्रयासों के लिए स्वयंसेवियों का समन्वय करें",
+    "disasterType": "आपदा प्रकार",
+    "latitude": "अक्षांश",
+    "longitude": "देशांतर",
+    "tabs": {
+      "matching": "स्वयंसेवी मिलान",
+      "assignments": "कार्य असाइनमेंट",
+      "communication": "संचार योजना",
+      "tracking": "घंटे ट्रैकिंग",
+      "scheduling": "शिफ्ट अनुसूची"
+    },
+    "matching": {
+      "title": "स्वयंसेवी मिलान परिणाम"
+    },
+    "volunteer": "स्वयंसेवी",
+    "skills": "कौशल",
+    "distance": "दूरी",
+    "suitability": "उपयुक्तता",
+    "tasks": "कार्य",
+    "assignments": "असाइनमेंट",
+    "assignedTo": "को असाइन किया गया",
+    "assignedAt": "पर असाइन किया गया",
+    "requiredSkills": "आवश्यक कौशल",
+    "requiredVolunteers": "आवश्यक स्वयंसेवी",
+    "priority": "प्राथमिकता",
+    "communication": {
+      "title": "संचार योजना",
+      "channels": "संचार चैनल"
+    },
+    "channels": "चैनल",
+    "frequency": "आवृत्ति",
+    "contactList": "संपर्क सूची",
+    "tracking": {
+      "title": "स्वयंसेवी घंटे ट्रैकिंग"
+    },
+    "totalVolunteers": "कुल स्वयंसेवी",
+    "totalHours": "कुल घंटे",
+    "topContributors": "शीर्ष योगदानकर्ता",
+    "recognitionAwards": "पहचान पुरस्कार",
+    "recognitionDistribution": "पहचान वितरण",
+    "bronze": "कांस्य",
+    "silver": "चांदी",
+    "gold": "स्वर्ण",
+    "platinum": "प्लैटिनम",
+    "recognitionLevel": "पहचान स्तर",
+    "hours": "घंटे",
+    "scheduling": {
+      "title": "स्वयंसेवी शिफ्ट अनुसूची"
+    },
+    "shift": "शिफ्ट",
+    "time": "समय",
+    "duration": "अवधि",
+    "totalShifts": "कुल शिफ्ट",
+    "filledShifts": "भरे हुए शिफ्ट",
+    "coverage": "कवरेज",
+    "volunteerUtilization": "स्वयंसेवी उपयोगिता",
+    "utilization": "उपयोगिता"
+  },
+  "disasterStatistics": {
+    "title": "आपदा आंकड़े",
+    "description": "भारत भर में आपदा डेटा और रुझानों का विश्लेषण और दृश्यकरण करें",
+    "tabs": {
+      "overview": "अवलोकन",
+      "trends": "रुझान",
+      "regional": "क्षेत्रीय जोखिम",
+      "comparison": "प्रकार तुलना"
+    },
+    "overview": {
+      "title": "आपदा आंकड़े अवलोकन",
+      "totalEvents": "कुल घटनाएं",
+      "totalAffected": "कुल प्रभावित",
+      "totalEconomicLoss": "कुल आर्थिक हानि",
+      "averageAffected": "प्रति घटना औसत प्रभावित"
+    },
+    "byType": "आपदा प्रकार द्वारा",
+    "byRegion": "क्षेत्र द्वारा",
+    "events": "घटनाएं",
+    "affected": "प्रभावित लोग",
+    "economicLoss": "आर्थिक हानि",
+    "trends": {
+      "title": "आपदा रुझान विश्लेषण",
+      "yearsCovered": "शामिल वर्ष",
+      "annualGrowth": "वार्षिक वृद्धि दर",
+      "mostIncreasing": "सबसे अधिक बढ़ता प्रकार",
+      "yearlyBreakdown": "वार्षिक विवरण",
+      "year": "वर्ष"
+    },
+    "regional": {
+      "title": "क्षेत्रीय जोखिम सूचकांक",
+      "region": "क्षेत्र",
+      "riskIndex": "जोखिम सूचकांक"
+    },
+    "comparison": {
+      "title": "आपदा प्रकार तुलना",
+      "firstType": "पहला आपदा प्रकार",
+      "secondType": "दूसरा आपदा प्रकार",
+      "compare": "तुलना करें",
+      "averageAffected": "औसत प्रभावित",
+      "averageEconomicLoss": "औसत आर्थिक हानि"
+    }
+  },
+  "weather": {
+    "title": "मौसम मॉनिटर",
+    "conditions": "वर्तमान स्थितियाँ",
+    "humidity": "आर्द्रता",
+    "wind_speed": "हवा की गति",
+    "pressure": "दबाव",
+    "visibility": "दृश्यता",
+    "risk_assessment": "जोखिम मूल्यांकन",
+    "risk_level": "जोखिम स्तर",
+    "alerts": "चेतावनियाँ",
+    "preparedness_recommendations": "तैयारी की अनुशंसाएँ",
+    "forecast": "मौसम पूर्वानुमान",
+    "high": "अधिकतम",
+    "low": "न्यूनतम",
+    "refresh": "रीफ्रेश करें",
+    "loading": "लोड हो रहा है...",
+    "data_not_available": "मौसम डेटा उपलब्ध नहीं है",
+    "fetch_error": "मौसम डेटा प्राप्त करने में त्रुटि"
+  },
+  "emergencyResourceTracker": {
+    "title": "आपातकालीन संसाधन ट्रैकर",
+    "totalResources": "कुल संसाधन",
+    "availableResources": "उपलब्ध संसाधन",
+    "responseRate": "प्रतिक्रिया दर",
+    "region": "क्षेत्र",
+    "allRegions": "सभी क्षेत्र",
+    "resource": "संसाधन",
+    "quantity": "मात्रा",
+    "location": "स्थान",
+    "availability": "उपलब्धता",
+    "requestResources": "संसाधन का अनुरोध करें",
+    "resourceType": "संसाधन प्रकार",
+    "selectType": "संसाधन प्रकार चुनें",
+    "urgency": "तत्परता",
+    "normal": "सामान्य",
+    "high": "उच्च",
+    "critical": "गंभीर",
+    "enterLocation": "स्थान दर्ज करें",
+    "contact": "संपर्क",
+    "enterContact": "संपर्क जानकारी दर्ज करें",
+    "submitRequest": "अनुरोध सबमिट करें",
+    "requestStatus": "अनुरोध स्थिति",
+    "requestId": "अनुरोध आईडी",
+    "status": "स्थिति",
+    "submitted": "सबमिट किया गया",
+    "estimatedDelivery": "अनुमानित वितरण",
+    "refreshStatus": "स्थिति रीफ्रेश करें"
+  },
+  "disasterCommunicationHub": {
+    "title": "आपदा संचार केंद्र",
+    "selectRegion": "क्षेत्र चुनें",
+    "allRegions": "सभी क्षेत्र",
+    "selectDisaster": "आपदा प्रकार चुनें",
+    "communicationChannels": "संचार चैनल",
+    "channelName": "चैनल का नाम",
+    "type": "प्रकार",
+    "frequency": "आवृत्ति",
+    "coverage": "कवरेज",
+    "status": "स्थिति",
+    "contact": "संपर्क",
+    "broadcastInfo": "आपातकालीन प्रसारण जानकारी",
+    "tvChannels": "टीवी चैनल",
+    "radioStations": "रेडियो स्टेशन",
+    "transmission": "प्रसारण",
+    "smsAlerts": "एसएमएस चेतावनियाँ",
+    "service": "सेवा",
+    "shortcode": "शॉर्टकोड",
+    "provider": "प्रदाता",
+    "equipment": "संचार उपकरण",
+    "availability": "उपलब्धता",
+    "protocols": "{{disaster}} के लिए संचार प्रोटोकॉल",
+    "immediateResponse": "तत्काल प्रतिक्रिया",
+    "shortTermResponse": "अल्पकालिक प्रतिक्रिया",
+    "longTermResponse": "दीर्घकालिक प्रतिक्रिया",
+    "emergencyContacts": "आपातकालीन संपर्क"
   }
 }

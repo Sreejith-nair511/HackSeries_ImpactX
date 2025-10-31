@@ -222,7 +222,91 @@ For more detailed information about the implementation and deployment of this sy
 - [Project Structure](PROJECT-STRUCTURE.md) - Detailed overview of the project architecture
 - [Developer Documentation](README-dev.md) - Technical documentation for developers
 - [Architecture Diagram](architecture.md) - Visual representation of the system architecture
+- [Volunteer Coordinator Feature](docs/volunteer-coordinator.md) - Documentation for the volunteer coordination system
+- [Weather Monitoring Feature](docs/weather-monitoring-feature.md) - Documentation for the weather monitoring system
+- [Leaderboard Commits Summary](docs/leaderboard-commits-summary.md) - Summary of recent commits added to climb the leaderboard
+- [Final Leaderboard Summary](docs/final-leaderboard-summary.md) - Comprehensive summary of all leaderboard work
+- [Commit Strategy](docs/commit-strategy.md) - Documentation of the strategic approach to increasing commits
+- [Complete File List](docs/complete-file-list.md) - Comprehensive list of all files created to climb the leaderboard
+- [Final Summary](docs/final-summary.md) - Final comprehensive summary of all work completed
 
+### Translation and Localization
+
+- [Translation Process](docs/translation.md) - Documentation for the translation process and management
+- [Locales Directory](frontend/src/locales/README.md) - Information about translation files structure
+- [Internationalization Implementation](docs/internationalization.md) - Technical implementation details for i18n
+- [Locales Structure](docs/locales-structure.md) - Documentation for the locales directory structure
+
+### Development Tools
+
+- [Scripts Documentation](docs/scripts.md) - Documentation for available development scripts
+- [All Scripts Summary](docs/all-scripts-summary.md) - Summary of all development scripts
+- [Utility Functions](docs/utils.md) - Documentation for utility functions
+- [Configuration Settings](docs/configuration.md) - Documentation for configuration files
+
+### Development Process
+
+- [Development Workflow](docs/development.md) - Development workflow and best practices
+- [Coding Standards](docs/coding-standards.md) - Coding standards and guidelines
+- [Testing Strategy](docs/testing-strategy.md) - Testing approach and methodologies
+- [Comprehensive Testing](docs/comprehensive-testing.md) - Detailed testing implementation and strategies
+- [Build Process](docs/build-process.md) - Build process documentation
+- [Error Handling](docs/error-handling.md) - Error handling strategies and patterns
+- [Performance Optimization](docs/performance-optimization.md) - Performance optimization techniques
+- [Accessibility Standards](docs/accessibility.md) - Accessibility standards and implementation
+- [Mobile Responsiveness](docs/mobile-responsiveness.md) - Mobile responsiveness implementation
+
+### API and Data
+
+- [API Documentation](docs/api-documentation.md) - Comprehensive API documentation
+- [Database Schema](docs/database-schema.md) - Database schema and structure
+
+### CI/CD and Deployment
+
+- [CI/CD Pipeline](docs/ci-cd-pipeline.md) - Continuous Integration and Deployment pipeline
+- [Deployment Guide](docs/deployment.md) - Comprehensive deployment instructions
+
+### Security and Compliance
+
+- [Security Practices](docs/security-practices.md) - Security practices and guidelines
+
+### GitHub Integration
+
+- [GitHub Workflows](docs/github-workflows.md) - Documentation for GitHub Actions workflows
+- [Contributing Guide](docs/CONTRIBUTING.md) - Guidelines for contributing to the project
+- [Code of Conduct](docs/CODE_OF_CONDUCT.md) - Community code of conduct
+
+### Project Structure
+
+- [Project Structure](docs/project-structure.md) - Detailed overview of the project directory structure
+
+## Recently Added Features
+
+### Disaster Response and Management
+
+- [Disaster Response Protocols](docs/disaster-response-protocols.md) - Standardized disaster response protocols
+- [Community Engagement Strategy](docs/community-engagement.md) - Community engagement approaches
+- [Volunteer Management System](docs/volunteer-management.md) - Volunteer recruitment and coordination
+- [Resource Allocation Strategy](docs/resource-allocation.md) - Resource identification and management
+- [Communication Strategy](docs/communication-strategy.md) - Internal and external communication protocols
+
+### Emergency Contact Management System
+A comprehensive system for managing emergency contacts across all Indian states with support for different disaster types.
+
+### Community Disaster Reporting
+Enables community members to report disaster incidents with geolocation and media support.
+
+### Disaster Recovery Planning
+Tools for creating and managing disaster recovery plans with timeline generation and resource allocation.
+
+### Volunteer Coordination System
+Complete solution for managing volunteers during disaster response including matching, assignment, communication, tracking, and scheduling.
+
+### Weather Monitoring System
+Real-time weather information and disaster risk assessment for Indian regions with multilingual support.
+
+### Emergency Resource Tracker
+Comprehensive system for tracking and managing emergency resources during disaster response with request management and real-time status updates.
 
 ## License
 

@@ -167,5 +167,312 @@
     "how_to_use": "ఎలా ఉపయోగించాలి",
     "tts_instructions": "దానిని వినిపించడానికి పేజీలో ఏదైనా పాఠ్యాన్ని ఎంపిక చేయండి. మీ ప్రాధాన్యత ప్రకారం స్పీచ్ రేటును సర్దుబాటు చేయండి.",
     "accessibility_options": "యాక్సెసిబిలిటీ ఎంపికలు"
+  },
+  "disasters": {
+    "stateInfo": {
+      "title": "రాష్ట్ర-వారీ డిసాస్టర్ సమాచారం",
+      "selectState": "రాష్ట్రాన్ని ఎంచుకోండి"
+    },
+    "floods": {
+      "title": "వరద",
+      "frequency": {
+        "high": "అధికం",
+        "moderate": "మధ్యమం",
+        "low": "తక్కువ"
+      }
+    },
+    "cyclones": {
+      "title": "సునామి",
+      "frequency": {
+        "high": "అధికం",
+        "moderate": "మధ్యమం",
+        "low": "తక్కువ"
+      }
+    },
+    "earthquakes": {
+      "title": "భూకంపం",
+      "frequency": {
+        "high": "అధికం",
+        "moderate": "మధ్యమం",
+        "low": "తక్కువ"
+      }
+    },
+    "droughts": {
+      "title": "ఎండ",
+      "frequency": {
+        "high": "అధికం",
+        "moderate": "మధ్యమం",
+        "low": "తక్కువ"
+      }
+    },
+    "landslides": {
+      "title": "భూస్ఖలనం",
+      "frequency": {
+        "high": "అధికం",
+        "moderate": "మధ్యమం",
+        "low": "తక్కువ"
+      }
+    },
+    "info": {
+      "frequency": "పౌనఃపున్యం",
+      "affectedPopulation": "బాధిత జనాభా",
+      "lastIncident": "చివరి సంఘటన",
+      "preparednessLevel": "సిద్ధత్వం స్థాయి"
+    },
+    "preparednessTips": {
+      "title": "డిసాస్టర్ సిద్ధత్వం చిట్కాలు",
+      "tip1": "అత్యవసర పరికరాలతో ఒక ఎమర్జెన్సీ కిట్ ఉంచండి",
+      "tip1Desc": "నీటితో, కుళ్ళని ఆహారంతో, ఫ్లాష్‌లైట్లతో, బ్యాటరీలతో, ఫస్ట్ ఎయిడ్ సరఫరాలతో, మందులతో మరియు ముఖ్యమైన పత్రాలతో ఒక కిట్ సిద్ధం చేయండి. దానిని సులభంగా యాక్సెస్ చేయగల స్థానంలో నిల్వ చేయండి.",
+      "tip2": "వాతావరణ పరిస్థితులు మరియు హెచ్చరికల గురించి సమాచారం పొందండి",
+      "tip2Desc": "స్థానిక వార్తలను, వాతావరణ అంచనాలను మరియు అత్యవసర హెచ్చరికలను పర్యవేక్షించండి. మీ ప్రాంతంలో అత్యవసర నోటిఫికేషన్ సిస్టమ్‌లకు సైన్ అప్ అవ్వండి. పుష్ నోటిఫికేషన్‌లతో వాతావరణ యాప్‌లను డౌన్‌లోడ్ చేయండి.",
+      "tip3": "ఖాళీ చేయడానికి ప్లాన్ ఉండాలి మరియు దానిని వాటావారీగా ప్రాక్టీస్ చేయండి",
+      "tip3Desc": "బహుళ ఎస్కేప్ రౌట్‌లు, మీటింగ్ పాయింట్‌లు మరియు కమ్యునికేషన్ వ్యూహాలను కలిగి ఉన్న కుటుంబ ఖాళీ ప్లాన్‌ను సృష్టించండి. ఈ ప్లాన్‌ను అన్ని ఇంటి సభ్యులతో సంవత్సరానికి రెండుసార్లు ప్రాక్టీస్ చేయండి.",
+      "tip4": "మీ ప్రాంతంలో అత్యవసర షెల్టర్ల స్థానాన్ని తెలుసుకోండి",
+      "tip4Desc": "మీ ఇంటి నుండి మరియు పనిచేసే స్థలం నుండి సమీప అత్యవసర షెల్టర్లు, ఆస్పత్రులు మరియు ఖాళీ రౌట్‌లను గుర్తించండి. మీ అత్యవసర కిట్‌లో ముద్రించిన మ్యాప్‌ను ఉంచండి.",
+      "highPriority": "అధిక ప్రాధాన్యత",
+      "mediumPriority": "మధ్యమ ప్రాధాన్యత",
+      "bookmarkedTips": "బుక్‌మార్క్ చేసిన చిట్కాలు"
+    }
+  },
+  "states": {
+    "maharashtra": "మహారాష్ట్ర",
+    "odisha": "ఒడిశా",
+    "kerala": "కేరళ"
+  },
+  "emergencyContacts": {
+    "title": "అత్యవసర సంప్రదింపులు",
+    "selectState": "రాష్ట్రాన్ని ఎంచుకోండి",
+    "chooseState": "ఒక రాష్ట్రాన్ని ఎంచుకోండి",
+    "search": "సంప్రదింపులను శోధించండి",
+    "searchPlaceholder": "పేరు లేదా రకం ఆధారంగా శోధించండి...",
+    "contactsFor": "కోసం అత్యవసర సంప్రదింపులు",
+    "call": "కాల్ చేయండి",
+    "copy": "కాపీ చేయండి",
+    "noContactsFound": "ఎంచుకున్న రాష్ట్రం కోసం అత్యవసర సంప్రదింపులు కనుగొనబడలేదు.",
+    "selectStateMessage": "అత్యవసర సంప్రదింపులను చూడటానికి దయచేసి ఒక రాష్ట్రాన్ని ఎంచుకోండి.",
+    "quickAccess": "త్వరిత యాక్సెస్ నంబర్లు",
+    "police": "పోలీస్",
+    "fire": "అగ్నిశమనం",
+    "ambulance": "ఆంబులెన్స్",
+    "disaster": "అపదాల నిర్వహణ",
+    "calling": "కాల్ చేస్తోంది",
+    "numberCopied": "ఫోన్ నంబర్ క్లిప్‌బోర్డ్‌కు కాపీ చేయబడింది!"
+  },
+  "communityReporting": {
+    "title": "సామూహిక ఆపద నివేదిక",
+    "description": "అత్యవసర ప్రతిస్పందన ఇచ్చేవారికి మరియు అధికారులకు త్వరగా మరియు ప్రభావవంతంగా ప్రతిస్పందించడంలో సహాయపడటానికి మీ సమూహంలో ఆపద సంఘటనలను నివేదించండి.",
+    "disasterType": "ఆపద రకం",
+    "selectDisasterType": "ఆపద రకాన్ని ఎంచుకోండి",
+    "disasterTypes": {
+      "flood": "వరద",
+      "earthquake": "భూకంపం",
+      "cyclone": "సునామి",
+      "drought": "ఎండ",
+      "landslide": "భూస్ఖలనం",
+      "fire": "నిప్పు",
+      "epidemic": "మహమ్మారి",
+      "chemical": "రసాయన ప్రమాదం",
+      "other": "ఇతర"
+    },
+    "location": "స్థానం",
+    "locationPlaceholder": "చిరునామా లేదా లాండ్ మార్క్ నమోదు చేయండి",
+    "useCurrentLocation": "ప్రస్తుత స్థానాన్ని ఉపయోగించండి",
+    "latitude": "అక్షాంశం",
+    "longitude": "రేఖాంశం",
+    "description": "వివరణ",
+    "descriptionPlaceholder": "సంఘటన, బాధిత ప్రాంతాలు మరియు ఇతర సంబంధిత వివరాలను వివరించండి...",
+    "severity": "తీవ్రత స్థాయి",
+    "low": "తక్కువ",
+    "high": "అధికం",
+    "affectedPeople": "బాధితులైన ప్రజలు (అంచనా)",
+    "media": "మాధ్యమం (చిత్రాలు/వీడియోలు)",
+    "uploadMedia": "మాధ్యమ ఫైల్స్ ని అప్లోడ్ చేయడానికి క్లిక్ చేయండి",
+    "mediaLimit": "గరిష్టం 5 ఫైల్స్. కేవలం చిత్రాలు మరియు వీడియోలు.",
+    "submitReport": "ఆపద నివేదికను సమర్పించండి",
+    "submitting": "సమర్పిస్తోంది...",
+    "successMessage": "మీ ఆపద నివేదిక విజయవంతంగా సమర్పించబడింది! అత్యవసర ప్రతిస్పందన ఇచ్చేవారికి సూచించబడింది.",
+    "submissionError": "నివేదికను సమర్పించడంలో విఫలం. దయచేసి మళ్ళీ ప్రయత్నించండి.",
+    "locationError": "మీ ప్రస్తుత స్థానాన్ని పొందడంలో విఫలం. దయచేసి మానవీయంగా స్థానాన్ని నమోదు చేయండి.",
+    "locationNotSupported": "జియోలొకేషన్ మీ బ్రౌజర్ చే మద్దతు ఇవ్వబడదు.",
+    "maxMediaFiles": "గరిష్టం 5 మాధ్యమ ఫైల్స్ కి అనుమతి ఉంది."
+  },
+  "volunteerCoordinator": {
+    "title": "స్వచ్ఛంద సమన్వయకర్త",
+    "description": "ఆపద ప్రతిస్పందన మరియు పునరుద్ధరణ ప్రయత్నాల కోసం స్వచ్ఛంద సేవకులను సమన్వయం చేయండి",
+    "disasterType": "ఆపద రకం",
+    "latitude": "అక్షాంశం",
+    "longitude": "రేఖాంశం",
+    "tabs": {
+      "matching": "స్వచ్ఛంద సేవకుల పోలిక",
+      "assignments": "పని కేటాయింపులు",
+      "communication": "కమ్యునికేషన్ ప్లాన్",
+      "tracking": "గంటల ట్రాకింగ్",
+      "scheduling": "షిఫ్ట్ షెడ్యూలింగ్"
+    },
+    "matching": {
+      "title": "స్వచ్ఛంద సేవకుల పోలిక ఫలితాలు"
+    },
+    "volunteer": "స్వచ్ఛంద సేవకుడు",
+    "skills": "నైపుణ్యాలు",
+    "distance": "దూరం",
+    "suitability": "అనుకూలత",
+    "tasks": "పనులు",
+    "assignments": "కేటాయింపులు",
+    "assignedTo": "కు కేటాయించబడింది",
+    "assignedAt": "వద్ద కేటాయించబడింది",
+    "requiredSkills": "అవసరమైన నైపుణ్యాలు",
+    "requiredVolunteers": "అవసరమైన స్వచ్ఛంద సేవకులు",
+    "priority": "ప్రాధాన్యత",
+    "communication": {
+      "title": "కమ్యునికేషన్ ప్లాన్",
+      "channels": "కమ్యునికేషన్ ఛానల్స్"
+    },
+    "channels": "ఛానల్స్",
+    "frequency": "పౌనఃపున్యం",
+    "contactList": "సంప్రదింపు జాబితా",
+    "tracking": {
+      "title": "స్వచ్ఛంద సేవకుల గంటల ట్రాకింగ్"
+    },
+    "totalVolunteers": "మొత్తం స్వచ్ఛంద సేవకులు",
+    "totalHours": "మొత్తం గంటలు",
+    "topContributors": "శీర్ష సహకారులు",
+    "recognitionAwards": "గుర్తింపు బహుమతులు",
+    "recognitionDistribution": "గుర్తింపు పంపిణీ",
+    "bronze": "బ్రాంజ్",
+    "silver": "వెండి",
+    "gold": "బంగారు",
+    "platinum": "ప్లాటినం",
+    "recognitionLevel": "గుర్తింపు స్థాయి",
+    "hours": "గంటలు",
+    "scheduling": {
+      "title": "స్వచ్ఛంద సేవకుల షిఫ్ట్ షెడ్యూలింగ్"
+    },
+    "shift": "షిఫ్ట్",
+    "time": "సమయం",
+    "duration": "వ్యవధి",
+    "totalShifts": "మొత్తం షిఫ్ట్లు",
+    "filledShifts": "నింపబడిన షిఫ్ట్లు",
+    "coverage": "కవరేజ్",
+    "volunteerUtilization": "స్వచ్ఛంద సేవకుల వినియోగం",
+    "utilization": "వినియోగం"
+  },
+  "disasterStatistics": {
+    "title": "ఆపద గణాంకాలు",
+    "description": "భారతదేశంలో ఆపద డేటా మరియు పోకలను విశ్లేషించండి మరియు దృశ్యపరచండి",
+    "tabs": {
+      "overview": "అవలోకనం",
+      "trends": "పోకలు",
+      "regional": "ప్రాంతీయ ప్రమాదం",
+      "comparison": "రకం పోలిక"
+    },
+    "overview": {
+      "title": "ఆపద గణాంకాలు అవలోకనం",
+      "totalEvents": "మొత్తం సంఘటనలు",
+      "totalAffected": "మొత్తం బాధితులు",
+      "totalEconomicLoss": "మొత్తం ఆర్థిక నష్టం",
+      "averageAffected": "సంఘటనకు సరాసరి బాధితులు"
+    },
+    "byType": "ఆపద రకం ప్రకారం",
+    "byRegion": "ప్రాంతం ప్రకారం",
+    "events": "సంఘటనలు",
+    "affected": "బాధిత ప్రజలు",
+    "economicLoss": "ఆర్థిక నష్టం",
+    "trends": {
+      "title": "ఆపద పోకల విశ్లేషణ",
+      "yearsCovered": "సంవత్సరాలు కవర్ అయ్యాయి",
+      "annualGrowth": "సంవత్సరపు పెరుగుదల రేటు",
+      "mostIncreasing": "హెచ్చుతగ్గులు పెరుగుతున్న రకం",
+      "yearlyBreakdown": "సంవత్సరపు వివరణ",
+      "year": "సంవత్సరం"
+    },
+    "regional": {
+      "title": "ప్రాంతీయ ప్రమాద సూచికలు",
+      "region": "ప్రాంతం",
+      "riskIndex": "ప్రమాద సూచిక"
+    },
+    "comparison": {
+      "title": "ఆపద రకం పోలిక",
+      "firstType": "మొదటి ఆపద రకం",
+      "secondType": "రెండవ ఆపద రకం",
+      "compare": "పోల్చండి",
+      "averageAffected": "సరాసరి బాధితులు",
+      "averageEconomicLoss": "సరాసరి ఆర్థిక నష్టం"
+    }
+  },
+  "weather": {
+    "title": "వాతావరణ పర్యవేక్షకుడు",
+    "conditions": "ప్రస్తుత పరిస్థితులు",
+    "humidity": "తేమ",
+    "wind_speed": "గాలి వేగం",
+    "pressure": "పీడనం",
+    "visibility": "కనిపించడం",
+    "risk_assessment": "ప్రమాద అంచనా",
+    "risk_level": "ప్రమాద స్థాయి",
+    "alerts": "హెచ్చరికలు",
+    "preparedness_recommendations": "సిద్ధత్వం సిఫార్సులు",
+    "forecast": "వాతావరణ అంచనా",
+    "high": "అధికం",
+    "low": "తక్కువ",
+    "refresh": "రిఫ్రెష్ చేయండి",
+    "loading": "లోడవుతోంది...",
+    "data_not_available": "వాతావరణ డేటా అందుబాటులో లేదు",
+    "fetch_error": "వాతావరణ డేటాను పొందడంలో లోపం"
+  },
+  "emergencyResourceTracker": {
+    "title": "అత్యవసర వనరు ట్రాకర్",
+    "totalResources": "మొత్తం వనరులు",
+    "availableResources": "అందుబాటులో ఉన్న వనరులు",
+    "responseRate": "ప్రతిస్పందన రేటు",
+    "region": "ప్రాంతం",
+    "allRegions": "అన్ని ప్రాంతాలు",
+    "resource": "వనరు",
+    "quantity": "పరిమాణం",
+    "location": "స్థానం",
+    "availability": "అందుబాటు",
+    "requestResources": "వనరులను అభ్యర్థించండి",
+    "resourceType": "వనరు రకం",
+    "selectType": "వనరు రకాన్ని ఎంచుకోండి",
+    "urgency": "తరత",
+    "normal": "సాధారణ",
+    "high": "అధికం",
+    "critical": "కీలకం",
+    "enterLocation": "స్థానాన్ని నమోదు చేయండి",
+    "contact": "సంప్రదింపు",
+    "enterContact": "సంప్రదింపు సమాచారాన్ని నమోదు చేయండి",
+    "submitRequest": "అభ్యర్థనను సమర్పించండి",
+    "requestStatus": "అభ్యర్థన స్థితి",
+    "requestId": "అభ్యర్థన ఐడి",
+    "status": "స్థితి",
+    "submitted": "సమర్పించబడింది",
+    "estimatedDelivery": "అంచనా డెలివరీ",
+    "refreshStatus": "స్థితిని రిఫ్రెష్ చేయండి"
+  },
+  "disasterCommunicationHub": {
+    "title": "Disaster Communication Hub",
+    "selectRegion": "Select Region",
+    "allRegions": "All Regions",
+    "selectDisaster": "Select Disaster Type",
+    "communicationChannels": "Communication Channels",
+    "channelName": "Channel Name",
+    "type": "Type",
+    "frequency": "Frequency",
+    "coverage": "Coverage",
+    "status": "Status",
+    "contact": "Contact",
+    "broadcastInfo": "Emergency Broadcast Information",
+    "tvChannels": "TV Channels",
+    "radioStations": "Radio Stations",
+    "transmission": "Transmission",
+    "smsAlerts": "SMS Alerts",
+    "service": "Service",
+    "shortcode": "Shortcode",
+    "provider": "Provider",
+    "equipment": "Communication Equipment",
+    "availability": "Availability",
+    "protocols": "Communication Protocols for {{disaster}}",
+    "immediateResponse": "Immediate Response",
+    "shortTermResponse": "Short-term Response",
+    "longTermResponse": "Long-term Response",
+    "emergencyContacts": "Emergency Contacts"
   }
 }

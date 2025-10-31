@@ -14,7 +14,7 @@
     "english": "English",
     "hindi": "हिंदी",
     "tamil": "தமிழ்",
-    "telugu": "తెలుগు",
+    "telugu": "తెలుగు",
     "marathi": "मराठी",
     "bengali": "বাংলা",
     "gujarati": "ગુજરાતી"
@@ -103,7 +103,7 @@
     "disaster_flood_prep3": "বন্যা জলের মধ্য দিয়ে হেঁটে যাওয়া বা গাড়ি চালানো এড়িয়ে চলুন",
     "disaster_earthquake_prep1": "ঝাঁকুনির সময় ড্রপ, কভার এবং হোল্ড অন করুন",
     "disaster_earthquake_prep2": "ভারী আসবাব এবং যন্ত্রপাতি দেয়ালের সাথে সুরক্ষিত করুন",
-    "disaster_earthquake_prep3": "আপনার বাড়ির প্রতিটি রুমে নিরাপদ স্থান চিহ্নিত করুন",
+    "disaster_9uake_prep3": "আপনার বাড়ির প্রতিটি রুমে নিরাপদ স্থান চিহ্নিত করুন",
     "disaster_cyclone_prep1": "ঝড়ের শাটার বা প্লাইউড দিয়ে দরজা এবং জানালা শক্তিশালী করুন",
     "disaster_cyclone_prep2": "আপনার বাড়ির কাছাকাছি গাছগুলি ছাঁটুন এবং শুকনো শাখা সরিয়ে ফেলুন",
     "disaster_cyclone_prep3": "জরুরি প্রচারের জন্য ব্যাটারি চালিত রেডিও রাখুন",
@@ -167,5 +167,519 @@
     "how_to_use": "কীভাবে ব্যবহার করবেন",
     "tts_instructions": "এটি উচ্চারণ করতে পৃষ্ঠায় যেকোনো পাঠ্য নির্বাচন করুন। আপনার পছন্দ অনুযায়ী স্পিচ হার সামঞ্জস্য করুন।",
     "accessibility_options": "অ্যাক্সেসযোগ্যতা বিকল্প"
+  },
+  "disasters": {
+    "stateInfo": {
+      "title": "রাজ্য-ভিত্তিক দুর্যোগ তথ্য",
+      "selectState": "রাজ্য নির্বাচন করুন"
+    },
+    "floods": {
+      "title": "বন্যা",
+      "frequency": {
+        "high": "উচ্চ",
+        "moderate": "মাঝারি",
+        "low": "কম"
+      }
+    },
+    "cyclones": {
+      "title": "ঘূর্ণিঝড়",
+      "frequency": {
+        "high": "উচ্চ",
+        "moderate": "মাঝারি",
+        "low": "কম"
+      }
+    },
+    "earthquakes": {
+      "title": "ভূমিকম্প",
+      "frequency": {
+        "high": "উচ্চ",
+        "moderate": "মাঝারি",
+        "low": "কম"
+      }
+    },
+    "droughts": {
+      "title": "খরা",
+      "frequency": {
+        "high": "উচ্চ",
+        "moderate": "মাঝারি",
+        "low": "কম"
+      }
+    },
+    "landslides": {
+      "title": "ভূস্খলন",
+      "frequency": {
+        "high": "উচ্চ",
+        "moderate": "মাঝারি",
+        "low": "কম"
+      }
+    },
+    "info": {
+      "frequency": "ঘটনার পরিমাণ",
+      "affectedPopulation": "প্রভাবিত জনসংখ্যা",
+      "lastIncident": "শেষ ঘটনা",
+      "preparednessLevel": "প্রস্তুতির স্তর"
+    },
+    "preparednessTips": {
+      "title": "দুর্যোগ প্রস্তুতি টিপস",
+      "tip1": "প্রয়োজনীয় সরবরাহের সাথে একটি জরুরি কিট রাখুন",
+      "tip1Desc": "জল, ক্ষয়কালে নষ্ট না হওয়া খাবার, ফ্ল্যাশলাইট, ব্যাটারি, প্রথম সাহায্য সরবরাহ, ওষুধ এবং গুরুত্বপূর্ণ নথি সহ একটি কিট প্রস্তুত করুন। এটি সহজে অ্যাক্সেসযোগ্য স্থানে সংরক্ষণ করুন।",
+      "tip2": "আবহাওয়ার অবস্থা এবং সতর্কবার্তা সম্পর্কে অবগত থাকুন",
+      "tip2Desc": "স্থানীয় সংবাদ, আবহাওয়া পূর্বাভাস এবং জরুরি সতর্কতা পর্যবেক্ষণ করুন। আপনার এলাকার জরুরি বিজ্ঞপ্তি সিস্টেমের জন্য সাইন আপ করুন। পুশ বিজ্ঞপ্তি সহ আবহাওয়া অ্যাপ ডাউনলোড করুন।",
+      "tip3": "একটি পরিত্যাগ পরিকল্পনা থাকা উচিত এবং এটি নিয়মিত অনুশীলন করুন",
+      "tip3Desc": "একাধিক পালানোর রুট, সভার স্থান এবং যোগাযোগ কৌশল সহ একটি পরিবার পরিত্যাগ পরিকল্পনা তৈরি করুন। এই পরিকল্পনাটি সমস্ত গৃহস্থ সদস্যদের সাথে বছরে দুইবার অনুশীলন করুন।",
+      "tip4": "আপনার এলাকায় জরুরি আশ্রয়স্থলগুলির অবস্থান জানুন",
+      "tip4Desc": "আপনার বাড়ি এবং কর্মস্থল থেকে নিকটতম জরুরি আশ্রয়স্থল, হাসপাতাল এবং পরিত্যাগের রুটগুলি চিহ্নিত করুন। আপনার জরুরি কিটে একটি মুদ্রিত মানচিত্র রাখুন।",
+      "highPriority": "উচ্চ অগ্রাধিকার",
+      "mediumPriority": "মাঝারি অগ্রাধিকার",
+      "bookmarkedTips": "বুকমার্ক করা টিপস"
+    }
+  },
+  "states": {
+    "maharashtra": "মহারাষ্ট্র",
+    "odisha": "ওড়িশা",
+    "kerala": "কেরালা"
+  },
+  "emergencyContacts": {
+    "title": "জরুরি যোগাযোগ",
+    "selectState": "রাজ্য নির্বাচন করুন",
+    "chooseState": "একটি রাজ্য চয়ন করুন",
+    "search": "যোগাযোগ অনুসন্ধান করুন",
+    "searchPlaceholder": "নাম বা ধরন অনুসারে অনুসন্ধান করুন...",
+    "contactsFor": "জন্য জরুরি যোগাযোগ",
+    "call": "কল করুন",
+    "copy": "অনুলিপি করুন",
+    "noContactsFound": "নির্বাচিত রাজ্যের জন্য কোনও জরুরি যোগাযোগ পাওয়া যায়নি।",
+    "selectStateMessage": "জরুরি যোগাযোগ দেখতে একটি রাজ্য নির্বাচন করুন।",
+    "quickAccess": "দ্রুত অ্যাক্সেস নম্বর",
+    "police": "পুলিশ",
+    "fire": "আগুন",
+    "ambulance": "অ্যাম্বুলেন্স",
+    "disaster": "দুর্যোগ ব্যবস্থাপনা",
+    "calling": "কল করা হচ্ছে",
+    "numberCopied": "ফোন নম্বর ক্লিপবোর্ডে অনুলিপি করা হয়েছে!"
+  },
+  "weatherAlerts": {
+    "title": "আবহাওয়া সতর্কতা",
+    "loading": "আবহাওয়া সতর্কতা লোড হচ্ছে...",
+    "refresh": "রিফ্রেশ করুন",
+    "noAlerts": "কোনও সক্রিয় সতর্কতা নেই",
+    "noAlertsDesc": "আপনার অঞ্চলের জন্য বর্তমানে কোনও আবহাওয়া সতর্কতা নেই।",
+    "floodWarning": "বন্যা সতর্কতা",
+    "floodWarningDesc": "অঞ্চলে ভারী বৃষ্টিপাতের সম্ভাবনা। নিম্ন অঞ্চলগুলি এড়িয়ে চলুন।",
+    "cycloneWatch": "ঘূর্ণিঝড় পর্যবেক্ষণ",
+    "cycloneWatchDesc": "আরব সাগরের উপরে ঘূর্ণিঝড়ের অবস্থা উন্নয়ন হচ্ছে।",
+    "heatwaveWarning": "উত্তাপ তরঙ্গ সতর্কতা",
+    "heatwaveWarningDesc": "চরম উত্তাপের অবস্থা। জল খান এবং বাইরের কাজ এড়িয়ে চলুন।",
+    "issued": "জারি করা হয়েছে",
+    "expires": "মেয়াদ শেষ হয়",
+    "region": "অঞ্চল",
+    "safetyTip": "আবহাওয়া নিরাপত্তা টিপ",
+    "safetyTipDesc": "আপনার অঞ্চলের আবহাওয়া অবস্থার বিষয়ে অবগত থাকুন। স্থানীয় আবহাওয়া সতর্কতার জন্য সাইন আপ করুন এবং একটি জরুরি পরিকল্পনা প্রস্তুত রাখুন।"
+  },
+  "disasterRisk": {
+    "title": "দুর্যোগ ঝুঁকি মূল্যায়ন",
+    "selectRegion": "অঞ্চল নির্বাচন করুন",
+    "overallRisk": "সামগ্রিক ঝুঁকি সূচক",
+    "low": "কম",
+    "high": "বেশি",
+    "mitigationTips": "ঝুঁকি হ্রাসকরণ টিপস",
+    "tip1": "জরুরি পরিত্যাগ পরিকল্পনা তৈরি এবং অনুশীলন করুন",
+    "tip2": "প্রয়োজনীয় আইটেম সহ জরুরি সরবরাহ কিট রক্ষণাবেক্ষণ করুন",
+    "tip3": "স্থানীয় দুর্যোগ ঝুঁকি এবং সতর্কবার্তা সম্পর্কে অবগত থাকুন",
+    "tip4": "দুর্যোগ প্রতিরোধ করতে গঠনমূলক উন্নয়নে বিনিয়োগ করুন"
+  },
+  "resourceAllocator": {
+    "title": "জরুরি সম্পদ বরাদ্দকারী",
+    "disasterType": "দুর্যোগের ধরন",
+    "affectedPopulation": "প্রভাবিত জনসংখ্যা",
+    "severityLevel": "তীব্রতা স্তর",
+    "affectedArea": "প্রভাবিত এলাকা",
+    "emergencySupplies": "জরুরি সরবরাহ",
+    "personnelRequirements": "কর্মীদের প্রয়োজনীয়তা",
+    "evacuationCapacity": "পরিত্যাগ ক্ষমতা",
+    "shelterAllocation": "আশ্রয়স্থল বরাদ্দকরণ",
+    "water": "জল",
+    "food": "খাবার",
+    "medicalKits": "চিকিৎসা কিট",
+    "blankets": "কম্বল",
+    "hygieneKits": "স্বাচ্ছন্দ্য কিট",
+    "rescueTeams": "উদ্ধার দল",
+    "medicalTeams": "চিকিৎসা দল",
+    "logisticsTeams": "লজিস্টিক্স দল",
+    "totalTeams": "মোট দল",
+    "totalCapacity": "মোট ক্ষমতা",
+    "totalVehicles": "মোট গাড়ি",
+    "vehicleBreakdown": "গাড়ির বিবরণ",
+    "shelter1": "সম্প্রদায় কেন্দ্র",
+    "shelter2": "স্কুল ভবন",
+    "shelter3": "খেলার জটিল",
+    "totalSheltered": "মোট আশ্রিত",
+    "unshelteredPopulation": "অনাশ্রিত জনসংখ্যা",
+    "allocationDetails": "বরাদ্দকরণ বিবরণ",
+    "remainingCapacity": "অবশিষ্ট ক্ষমতা",
+    "liters": "লিটার",
+    "meals": "খাবার",
+    "note": "নোট: এই গণনাগুলি প্রমিত দুর্যোগ ব্যবস্থাপনা প্রোটোকলের উপর ভিত্তি করে আনুমানিক এবং নির্দিষ্ট স্থানীয় শর্তাবলীর উপর ভিত্তি করে সামঞ্জস্য করা উচিত।",
+    "severity": {
+      "1": "ক্ষুদ্র",
+      "2": "মাঝারি",
+      "3": "গুরুত্বপূর্ণ",
+      "4": "তীব্র",
+      "5": "বিপজ্জনক"
+    }
+  },
+  "impactAssessment": {
+    "title": "দুর্যোগ প্রভাব মূল্যায়ন",
+    "disasterType": "দুর্যোগের ধরন",
+    "region": "অঞ্চল",
+    "overallImpact": "সামগ্রিক প্রভাব",
+    "economicImpact": "অর্থনৈতিক প্রভাব",
+    "socialImpact": "সামাজিক প্রভাব",
+    "environmentalImpact": "পরিবেশগত প্রভাব",
+    "recommendations": "প্রস্তাবনা",
+    "totalEconomicLoss": "মোট অর্থনৈতিক ক্ষতি",
+    "infrastructureLoss": "পরিকাঠামো ক্ষতি",
+    "agriculturalLoss": "কৃষি ক্ষতি",
+    "recoveryEstimate": "আনুমানিক পুনরুদ্ধার খরচ",
+    "affectedFamilies": "প্রভাবিত পরিবার",
+    "childrenAffected": "প্রভাবিত শিশু",
+    "displacementRate": "বিস্থাপন হার",
+    "casualtyRate": "হতাহতির হার",
+    "healthcareImpact": "স্বাস্থ্যসেবা প্রভাব",
+    "educationImpact": "শিক্ষা প্রভাব",
+    "forestLoss": "বন ক্ষতি",
+    "co2Emissions": "CO2 নির্গমন",
+    "biodiversityLoss": "জৈব বৈচিত্র্য ক্ষতি",
+    "species": "প্রজাতি",
+    "recoveryTime": "আনুমানিক পুনরুদ্ধার সময়",
+    "months": "মাস",
+    "priorityLevel": "অগ্রাধিকার স্তর",
+    "selectDisasterAndRegion": "প্রভাব মূল্যায়ন দেখতে একটি দুর্যোগ ধরন এবং অঞ্চল নির্বাচন করুন",
+    "impactLevels": {
+      "catastrophic": "বিপজ্জনক",
+      "severe": "তীব্র",
+      "moderate": "মাঝারি",
+      "minor": "ক্ষুদ্র",
+      "low": "কম"
+    },
+    "priority": {
+      "immediate": "অবিলম্বে",
+      "high": "উচ্চ",
+      "medium": "মাঝারি",
+      "low": "কম"
+    }
+  },
+  "responsePlanner": {
+    "title": "দুর্যোগ প্রতিক্রিয়া পরিকল্পনাকারী",
+    "disasterType": "দুর্যোগের ধরন",
+    "severityLevel": "তীব্রতা স্তর",
+    "region": "অঞ্চল",
+    "disasterInfo": "{{region}}-এর জন্য {{disaster}} প্রতিক্রিয়া পরিকল্পনা",
+    "immediateActions": "তাৎক্ষণিক কাজ",
+    "resourceAllocation": "সম্পদ বরাদ্দকরণ",
+    "teams": "দল",
+    "equipmentAndSupplies": "সরঞ্জাম এবং সরবরাহ",
+    "timeline": "প্রতিক্রিয়া সময়সূচি",
+    "coordination": "সমন্বয় সংস্থা",
+    "specialConsiderations": "বিশেষ বিবেচনা",
+    "selectDisasterAndRegion": "একটি প্রতিক্রিয়া পরিকল্পনা তৈরি করতে দুর্যোগের ধরন, তীব্রতা স্তর এবং অঞ্চল নির্বাচন করুন",
+    "phases": {
+      "immediate": "তাৎক্ষণিক প্রতিক্রিয়া (0-2 ঘন্টা)",
+      "shortTerm": "স্বল্পমেয়াদী প্রতিক্রিয়া (2-24 ঘন্টা)",
+      "mediumTerm": "মাধ্যমিক পুনরুদ্ধার (1-30 দিন)",
+      "longTerm": "দীর্ঘমেয়াদী পুনর্গঠন (1-36 মাস)"
+    },
+    "severity": {
+      "minor": "ক্ষুদ্র",
+      "moderate": "মাঝারি",
+      "significant": "গুরুত্বপূর্ণ",
+      "severe": "তীব্র",
+      "catastrophic": "বিপজ্জনক"
+    }
+  },
+  "recoveryPlanner": {
+    "title": "দুর্যোগ পুনরুদ্ধার পরিকল্পনাকারী",
+    "description": "কার্যকর পুনর্বাসন এবং পুনর্গঠন নিশ্চিত করতে দুর্যোগের পর পুনরুদ্ধার প্রক্রিয়ার পরিকল্পনা করুন এবং ট্র্যাক করুন।",
+    "disasterType": "দুর্যোগের ধরন",
+    "selectDisaster": "দুর্যোগের ধরন নির্বাচন করুন",
+    "region": "অঞ্চল",
+    "selectRegion": "অঞ্চল নির্বাচন করুন",
+    "affectedPopulation": "প্রভাবিত জনসংখ্যা",
+    "populationPlaceholder": "প্রভাবিত মানুষের সংখ্যা",
+    "severity": "তীব্রতা স্তর",
+    "generatePlan": "পুনরুদ্ধার পরিকল্পনা তৈরি করুন",
+    "progressOverview": "পুনরুদ্ধার অগ্রগতির সংক্ষিপ্ত বিবরণ",
+    "overallProgress": "সামগ্রিক পুনরুদ্ধার অগ্রগতি",
+    "status": "অবস্থা",
+    "completedTasks": "সম্পন্ন",
+    "fillAllFields": "একটি পুনরুদ্ধার পরিকল্পনা তৈরি করতে অনুগ্রহ করে সমস্ত ক্ষেত্র পূরণ করুন।",
+    "tabs": {
+      "timeline": "সময়সূচি",
+      "resources": "সম্পদ",
+      "stakeholders": "স্টেকহোল্ডারদের",
+      "actionPlan": "অ্যাকশন প্ল্যান"
+    },
+    "timeline": {
+      "title": "পুনরুদ্ধার সময়সূচি",
+      "phases": {
+        "immediate": "তাৎক্ষণিক প্রতিক্রিয়া",
+        "shortTerm": "স্বল্পমেয়াদী পুনরুদ্ধার",
+        "mediumTerm": "মাধ্যম মেয়াদী পুনর্বাসন",
+        "longTerm": "দীর্ঘমেয়াদী পুনর্গঠন"
+      }
+    },
+    "resources": {
+      "title": "প্রয়োজনীয় সম্পদ",
+      "personnel": "কর্মী",
+      "supplies": "সরবরাহ",
+      "financial": "আর্থিক সম্পদ",
+      "roles": {
+        "emergencyResponders": "জরুরি প্রতিক্রিয়া জানানোকারী",
+        "medicalStaff": "চিকিৎসা কর্মী",
+        "engineers": "প্রকৌশলী",
+        "logistics": "লজিস্টিক্স কর্মী"
+      },
+      "items": {
+        "water": "জল",
+        "food": "খাবার",
+        "medical": "চিকিৎসা কিট",
+        "shelter": "আশ্রয় ইউনিট"
+      }
+    },
+    "stakeholders": {
+      "title": "প্রধান স্টেকহোল্ডাররা"
+    },
+    "actionPlan": {
+      "title": "পুনরুদ্ধার অ্যাকশন প্ল্যান"
+    },
+    "priority": {
+      "high": "উচ্চ অগ্রাধিকার",
+      "medium": "মাধ্যম অগ্রাধিকার",
+      "low": "কম অগ্রাধিকার"
+    }
+  },
+  "disasterTypes": {
+    "flood": "বন্যা",
+    "earthquake": "ভূমিকম্প",
+    "cyclone": "ঘূর্ণিঝড়",
+    "drought": "খরা",
+    "landslide": "ভূস্খলন"
+  },
+  "communityReporting": {
+    "title": "সম্প্রদায়ের দুর্যোগ প্রতিবেদন",
+    "description": "জরুরি প্রতিক্রিয়া জানানোকারী এবং কর্তৃপক্ষকে দ্রুত এবং কার্যকরভাবে প্রতিক্রিয়া জানাতে সাহায্য করতে আপনার সম্প্রদায়ে দুর্যোগের ঘটনার প্রতিবেদন করুন।",
+    "disasterType": "দুর্যোগের ধরন",
+    "selectDisasterType": "দুর্যোগের ধরন নির্বাচন করুন",
+    "disasterTypes": {
+      "flood": "বন্যা",
+      "earthquake": "ভূমিকম্প",
+      "cyclone": "ঘূর্ণিঝড়",
+      "drought": "খরা",
+      "landslide": "ভূস্খলন",
+      "fire": "আগুন",
+      "epidemic": "মহামারী",
+      "chemical": "রাসায়নিক বিপদ",
+      "other": "অন্যান্য"
+    },
+    "location": "অবস্থান",
+    "locationPlaceholder": "ঠিকানা বা ল্যান্ডমার্ক লিখুন",
+    "useCurrentLocation": "বর্তমান অবস্থান ব্যবহার করুন",
+    "latitude": "অক্ষাংশ",
+    "longitude": "দ্রাঘিমাংশ",
+    "description": "বর্ণনা",
+    "descriptionPlaceholder": "ঘটনা, প্রভাবিত এলাকা এবং অন্যান্য প্রাসঙ্গিক বিবরণ বর্ণনা করুন...",
+    "severity": "তীব্রতা স্তর",
+    "low": "কম",
+    "high": "উচ্চ",
+    "affectedPeople": "প্রভাবিত মানুষ (আনুমানিক)",
+    "media": "মিডিয়া (ছবি/ভিডিও)",
+    "uploadMedia": "মিডিয়া ফাইল আপলোড করতে ক্লিক করুন",
+    "mediaLimit": "সর্বাধিক 5 টি ফাইল। শুধুমাত্র ছবি এবং ভিডিও।",
+    "submitReport": "দুর্যোগ প্রতিবেদন জমা দিন",
+    "submitting": "জমা দেওয়া হচ্ছে...",
+    "successMessage": "আপনার দুর্যোগ প্রতিবেদন সফলভাবে জমা দেওয়া হয়েছে! জরুরি প্রতিক্রিয়া জানানোকারীদের অবহিত করা হয়েছে।",
+    "submissionError": "প্রতিবেদন জমা দিতে ব্যর্থ হয়েছে। অনুগ্রহ করে আবার চেষ্টা করুন।",
+    "locationError": "আপনার বর্তমান অবস্থান পাওয়া যাচ্ছে না। অনুগ্রহ করে ম্যানুয়ালি অবস্থান লিখুন।",
+    "locationNotSupported": "জিওলোকেশন আপনার ব্রাউজার দ্বারা সমর্থিত নয়।",
+    "maxMediaFiles": "সর্বাধিক 5 টি মিডিয়া ফাইল অনুমোদিত।"
+  },
+  "volunteerCoordinator": {
+    "title": "স্বেচ্ছাসেবক সমন্বয়ক",
+    "description": "দুর্যোগ প্রতিক্রিয়া এবং পুনরুদ্ধার প্রচেষ্টার জন্য স্বেচ্ছাসেবকদের সমন্বয় করুন",
+    "disasterType": "দুর্যোগের ধরন",
+    "latitude": "অক্ষাংশ",
+    "longitude": "দ্রাঘিমাংশ",
+    "tabs": {
+      "matching": "স্বেচ্ছাসেবক ম্যাচিং",
+      "assignments": "কাজের নিয়োগ",
+      "communication": "যোগাযোগ পরিকল্পনা",
+      "tracking": "ঘন্টা ট্র্যাকিং",
+      "scheduling": "শিফট সময়সূচী"
+    },
+    "matching": {
+      "title": "স্বেচ্ছাসেবক ম্যাচিং ফলাফল"
+    },
+    "volunteer": "স্বেচ্ছাসেবক",
+    "skills": "দক্ষতা",
+    "distance": "দূরত্ব",
+    "suitability": "উপযুক্ততা",
+    "tasks": "কাজ",
+    "assignments": "নিয়োগ",
+    "assignedTo": "কে নিয়োগ করা হয়েছে",
+    "assignedAt": "এ নিয়োগ করা হয়েছে",
+    "requiredSkills": "প্রয়োজনীয় দক্ষতা",
+    "requiredVolunteers": "প্রয়োজনীয় স্বেচ্ছাসেবক",
+    "priority": "অগ্রাধিকার",
+    "communication": {
+      "title": "যোগাযোগ পরিকল্পনা",
+      "channels": "যোগাযোগ চ্যানেল"
+    },
+    "channels": "চ্যানেল",
+    "frequency": "ফ্রিকোয়েন্সি",
+    "contactList": "যোগাযোগ তালিকা",
+    "tracking": {
+      "title": "স্বেচ্ছাসেবক ঘন্টা ট্র্যাকিং"
+    },
+    "totalVolunteers": "মোট স্বেচ্ছাসেবক",
+    "totalHours": "মোট ঘন্টা",
+    "topContributors": "শীর্ষ অবদানকারী",
+    "recognitionAwards": "স্বীকৃতি পুরস্কার",
+    "recognitionDistribution": "স্বীকৃতি বিতরণ",
+    "bronze": "ব্রোঞ্জ",
+    "silver": "রৌপ্য",
+    "gold": "স্বর্ণ",
+    "platinum": "প্লাটিনাম",
+    "recognitionLevel": "স্বীকৃতি স্তর",
+    "hours": "ঘন্টা",
+    "scheduling": {
+      "title": "স্বেচ্ছাসেবক শিফট সময়সূচী"
+    },
+    "shift": "শিফট",
+    "time": "সময়",
+    "duration": "সময়কাল",
+    "totalShifts": "মোট শিফট",
+    "filledShifts": "পূরণ করা শিফট",
+    "coverage": "কভারেজ",
+    "volunteerUtilization": "স্বেচ্ছাসেবক ব্যবহার",
+    "utilization": "ব্যবহার"
+  },
+  "disasterStatistics": {
+    "title": "দুর্যোগ পরিসংখ্যান",
+    "description": "ভারতজুড়ে দুর্যোগ ডেটা এবং প্রবণতাগুলি বিশ্লেষণ এবং দৃশ্যমান করুন",
+    "tabs": {
+      "overview": "সংক্ষিপ্ত বিবরণ",
+      "trends": "প্রবণতা",
+      "regional": "আঞ্চলিক ঝুঁকি",
+      "comparison": "ধরন তুলনা"
+    },
+    "overview": {
+      "title": "দুর্যোগ পরিসংখ্যান সংক্ষিপ্ত বিবরণ",
+      "totalEvents": "মোট ঘটনা",
+      "totalAffected": "মোট প্রভাবিত",
+      "totalEconomicLoss": "মোট অর্থনৈতিক ক্ষতি",
+      "averageAffected": "প্রতি ঘটনা গড় প্রভাবিত"
+    },
+    "byType": "দুর্যোগের ধরন অনুযায়ী",
+    "byRegion": "অঞ্চল অনুযায়ী",
+    "events": "ঘটনা",
+    "affected": "প্রভাবিত মানুষ",
+    "economicLoss": "অর্থনৈতিক ক্ষতি",
+    "trends": {
+      "title": "দুর্যোগ প্রবণতা বিশ্লেষণ",
+      "yearsCovered": "বছরগুলি অন্তর্ভুক্ত",
+      "annualGrowth": "বার্ষিক প্রবৃদ্ধির হার",
+      "mostIncreasing": "সবচেয়ে বেশি বৃদ্ধি পাওয়া ধরন",
+      "yearlyBreakdown": "বার্ষিক বিভাজন",
+      "year": "বছর"
+    },
+    "regional": {
+      "title": "আঞ্চলিক ঝুঁকি সূচক",
+      "region": "অঞ্চল",
+      "riskIndex": "ঝুঁকি সূচক"
+    },
+    "comparison": {
+      "title": "দুর্যোগের ধরন তুলনা",
+      "firstType": "প্রথম দুর্যোগের ধরন",
+      "secondType": "দ্বিতীয় দুর্যোগের ধরন",
+      "compare": "তুলনা করুন",
+      "averageAffected": "গড় প্রভাবিত",
+      "averageEconomicLoss": "গড় অর্থনৈতিক ক্ষতি"
+    }
+  },
+  "weather": {
+    "title": "আবহাওয়া নিরীক্ষক",
+    "conditions": "বর্তমান অবস্থা",
+    "humidity": "আর্দ্রতা",
+    "wind_speed": "বাতাসের গতি",
+    "pressure": "চাপ",
+    "visibility": "দৃশ্যমানতা",
+    "risk_assessment": "ঝুঁকি মূল্যায়ন",
+    "risk_level": "ঝুঁকি স্তর",
+    "alerts": "সতর্কতা",
+    "preparedness_recommendations": "প্রস্তুতি প্রস্তাবনা",
+    "forecast": "আবহাওয়া পূর্বাভাস",
+    "high": "উচ্চ",
+    "low": "কম",
+    "refresh": "রিফ্রেশ করুন",
+    "loading": "লোড হচ্ছে...",
+    "data_not_available": "আবহাওয়া ডেটা উপলব্ধ নয়",
+    "fetch_error": "আবহাওয়া ডেটা আনতে ত্রুটি"
+  },
+  "emergencyResourceTracker": {
+    "title": "জরুরি সম্পদ ট্র্যাকার",
+    "totalResources": "মোট সম্পদ",
+    "availableResources": "উপলব্ধ সম্পদ",
+    "responseRate": "প্রতিক্রিয়া হার",
+    "region": "অঞ্চল",
+    "allRegions": "সমস্ত অঞ্চল",
+    "resource": "সম্পদ",
+    "quantity": "পরিমাণ",
+    "location": "অবস্থান",
+    "availability": "উপলব্ধতা",
+    "requestResources": "সম্পদের অনুরোধ করুন",
+    "resourceType": "সম্পদের ধরন",
+    "selectType": "সম্পদের ধরন নির্বাচন করুন",
+    "urgency": "জরুরি অবস্থা",
+    "normal": "সাধারণ",
+    "high": "উচ্চ",
+    "critical": "গুরুতর",
+    "enterLocation": "অবস্থান লিখুন",
+    "contact": "যোগাযোগ",
+    "enterContact": "যোগাযোগের তথ্য লিখুন",
+    "submitRequest": "অনুরোধ জমা দিন",
+    "requestStatus": "অনুরোধের অবস্থা",
+    "requestId": "অনুরোধ আইডি",
+    "status": "অবস্থা",
+    "submitted": "জমা দেওয়া হয়েছে",
+    "estimatedDelivery": "আনুমানিক ডেলিভারি",
+    "refreshStatus": "অবস্থা রিফ্রেশ করুন"
+  },
+  "disasterCommunicationHub": {
+    "title": "দুর্যোগ যোগাযোগ হাব",
+    "selectRegion": "অঞ্চল নির্বাচন করুন",
+    "allRegions": "সমস্ত অঞ্চল",
+    "selectDisaster": "দুর্যোগের ধরন নির্বাচন করুন",
+    "communicationChannels": "যোগাযোগ চ্যানেল",
+    "channelName": "চ্যানেলের নাম",
+    "type": "ধরন",
+    "frequency": "ফ্রিকোয়েন্সি",
+    "coverage": "কভারেজ",
+    "status": "অবস্থা",
+    "contact": "যোগাযোগ",
+    "broadcastInfo": "জরুরি প্রচার তথ্য",
+    "tvChannels": "টিভি চ্যানেল",
+    "radioStations": "রেডিও স্টেশন",
+    "transmission": "প্রচার",
+    "smsAlerts": "এসএমএস সতর্কবার্তা",
+    "service": "সেবা",
+    "shortcode": "শর্টকোড",
+    "provider": "প্রদানকারী",
+    "equipment": "যোগাযোগ সরঞ্জাম",
+    "availability": "উপলব্ধতা",
+    "protocols": "{{disaster}}-এর জন্য যোগাযোগ প্রোটোকল",
+    "immediateResponse": "অবিলম্বে প্রতিক্রিয়া",
+    "shortTermResponse": "স্বল্পমেয়াদী প্রতিক্রিয়া",
+    "longTermResponse": "দীর্ঘমেয়াদী প্রতিক্রিয়া",
+    "emergencyContacts": "জরুরি যোগাযোগ"
   }
 }

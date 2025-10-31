@@ -167,5 +167,451 @@
     "how_to_use": "कसे वापरायचे",
     "tts_instructions": "ते जोरात ऐकण्यासाठी पृष्ठावरील कोणताही मजकूर निवडा. तुमच्या पसंतीनुसार भाषण दर समायोजित करा.",
     "accessibility_options": "ॲक्सेसिबिलिटी पर्याय"
+  },
+  "disasters": {
+    "stateInfo": {
+      "title": "राज्य-नुसार आपत्ती माहिती",
+      "selectState": "राज्य निवडा"
+    },
+    "floods": {
+      "title": "पूर",
+      "frequency": {
+        "high": "उच्च",
+        "moderate": "मध्यम",
+        "low": "कमी"
+      }
+    },
+    "cyclones": {
+      "title": "चक्रीवादळ",
+      "frequency": {
+        "high": "उच्च",
+        "moderate": "मध्यम",
+        "low": "कमी"
+      }
+    },
+    "earthquakes": {
+      "title": "भूकंप",
+      "frequency": {
+        "high": "उच्च",
+        "moderate": "मध्यम",
+        "low": "कमी"
+      }
+    },
+    "droughts": {
+      "title": "ड्राऊट",
+      "frequency": {
+        "high": "उच्च",
+        "moderate": "मध्यम",
+        "low": "कमी"
+      }
+    },
+    "landslides": {
+      "title": "भूस्खलन",
+      "frequency": {
+        "high": "उच्च",
+        "moderate": "मध्यम",
+        "low": "कमी"
+      }
+    },
+    "info": {
+      "frequency": "वारंवारता",
+      "affectedPopulation": "प्रभावित लोकसंख्या",
+      "lastIncident": "शेवटची घटना",
+      "preparednessLevel": "तयारी स्तर"
+    },
+    "preparednessTips": {
+      "title": "आपत्ती तयारी टिपा",
+      "tip1": "आवश्यक पुरवठा असलेल्या एका आणीबाणीच्या किट ठेवा",
+      "tip1Desc": "पाणी, क्षय होऊ नये अशा अन्न, फ्लॅशलाइट्स, बॅटरी, प्रथम सहाय्य पुरवठा, औषधे आणि महत्त्वाचे कागदपत्रे असलेली किट तयार करा. ती सहजपणे प्रवेश करता येणार्‍या ठिकाणी साठवा.",
+      "tip2": "हवामान परिस्थिती आणि चेतावण्यांबद्दल माहिती घ्या",
+      "tip2Desc": "स्थानिक बातम्या, हवामान अंदाज आणि आणीबाणीच्या चेतावण्या निरीक्षण करा. तुमच्या क्षेत्रातील आणीबाणी सूचना प्रणालींसाठी साइन अप करा. पुश सूचनांसह हवामान अ‍ॅप्स डाउनलोड करा.",
+      "tip3": "एव्हॅक्युएशन योजना असावी आणि ती नेहमीच सराव करा",
+      "tip3Desc": "एकाधिक बाहेर पडण्याच्या मार्ग, भेटीच्या ठिकाणी आणि संप्रेषण व्यूहरचना यांचा समावेश असलेली कुटुंब एव्हॅक्युएशन योजना तयार करा. या योजनेचा सराव सर्व घरातील सदस्यांसह वर्षातून दोनदा करा.",
+      "tip4": "तुमच्या क्षेत्रातील आणीबाणी शेल्टरचे स्थान जाणून घ्या",
+      "tip4Desc": "तुमच्या घरापासून आणि कामाच्या ठिकाणीपासून सर्वात जवळच्या आणीबाणी शेल्टर, रुग्णालय आणि एव्हॅक्युएशन मार्ग ओळखा. तुमच्या आणीबाणी किटमध्ये मुद्रित नकाशा ठेवा.",
+      "highPriority": "उच्च प्राधान्यता",
+      "mediumPriority": "मध्यम प्राधान्यता",
+      "bookmarkedTips": "बुकमार्क केलेल्या टिपा"
+    }
+  },
+  "states": {
+    "maharashtra": "महाराष्ट्र",
+    "odisha": "ओडिशा",
+    "kerala": "केरळ"
+  },
+  "emergencyContacts": {
+    "title": "आणीबाणीचे संपर्क",
+    "selectState": "राज्य निवडा",
+    "chooseState": "एक राज्य निवडा",
+    "search": "संपर्क शोधा",
+    "searchPlaceholder": "नाव किंवा प्रकारानुसार शोधा...",
+    "contactsFor": "साठी आणीबाणीचे संपर्क",
+    "call": "कॉल करा",
+    "copy": "कॉपी करा",
+    "noContactsFound": "निवडलेल्या राज्यासाठी कोणतेही आणीबाणीचे संपर्क सापडले नाहीत.",
+    "selectStateMessage": "आणीबाणीचे संपर्क पाहण्यासाठी कृपया एक राज्य निवडा.",
+    "quickAccess": "जलद प्रवेश क्रमांक",
+    "police": "पोलीस",
+    "fire": "अग्निशमन",
+    "ambulance": "रुग्णवाहिका",
+    "disaster": "आपत्ती व्यवस्थापन",
+    "calling": "कॉल करत आहे",
+    "numberCopied": "फोन क्रमांक क्लिपबोर्डवर कॉपी केला!"
+  },
+  "weatherAlerts": {
+    "title": "हवामान चेतावण्या",
+    "loading": "हवामान चेतावण्या लोड होत आहेत...",
+    "refresh": "रीफ्रेश करा",
+    "noAlerts": "कोणत्याही सक्रिय चेतावण्या नाहीत",
+    "noAlertsDesc": "तुमच्या प्रदेशासाठी सध्या कोणत्याही हवामान चेतावण्या नाहीत.",
+    "floodWarning": "पूर चेतावणी",
+    "floodWarningDesc": "प्रदेशात जोरदार पाऊस अपेक्षित आहे. कमी उंचीचे क्षेत्र टाळा.",
+    "cycloneWatch": "चक्रीवादळ निरीक्षण",
+    "cycloneWatchDesc": "अरबी समुद्रावर चक्रीवादळी परिस्थिती विकसित होत आहेत.",
+    "heatwaveWarning": "उष्णतरंग चेतावणी",
+    "heatwaveWarningDesc": "अत्यंत उष्ण परिस्थिती. पुरेशी पाणी प्या आणि बाहेरील गतीविधी टाळा.",
+    "issued": "जारी केलेले",
+    "expires": "कालबाह्य होते",
+    "region": "प्रदेश",
+    "safetyTip": "हवामान सुरक्षा टिप",
+    "safetyTipDesc": "तुमच्या क्षेत्रातील हवामान परिस्थिती बद्दल माहिती घ्या. स्थानिक हवामान चेतावण्यांसाठी साइन अप करा आणि आणीबाणी योजना तयार ठेवा."
+  },
+  "disasterRisk": {
+    "title": "आपत्ती जोखीम मूल्यांकन",
+    "selectRegion": "प्रदेश निवडा",
+    "overallRisk": "एकूण जोखीम निर्देशांक",
+    "low": "कमी",
+    "high": "जास्त",
+    "mitigationTips": "जोखीम निवारण टिपा",
+    "tip1": "आणीबाणी खाली करण्याची योजना विकसित करा आणि ती सराव करा",
+    "tip2": "आवश्यक वस्तूंसह आणीबाणी पुरवठा किट निर्वहित करा",
+    "tip3": "स्थानिक आपत्ती जोखमी आणि चेतावण्यांबद्दल माहिती घ्या",
+    "tip4": "आपत्तींचा प्रतिकार करण्यासाठी संरचनात्मक सुधारणांमध्ये गुंतवणूक करा"
+  },
+  "resourceAllocator": {
+    "title": "आणीबाणी संसाधन वाटपकर्ता",
+    "disasterType": "आपत्ती प्रकार",
+    "affectedPopulation": "प्रभावित लोकसंख्या",
+    "severityLevel": "तीव्रता स्तर",
+    "affectedArea": "प्रभावित क्षेत्र",
+    "emergencySupplies": "आणीबाणी पुरवठा",
+    "personnelRequirements": "कर्मचारी आवश्यकता",
+    "evacuationCapacity": "एव्हॅक्युएशन क्षमता",
+    "shelterAllocation": "शेल्टर वाटप",
+    "water": "पाणी",
+    "food": "अन्न",
+    "medicalKits": "वैद्यकीय किट",
+    "blankets": "कंबळे",
+    "hygieneKits": "स्वच्छता किट",
+    "rescueTeams": "वाचवण्याच्या टीम",
+    "medicalTeams": "वैद्यकीय टीम",
+    "logisticsTeams": "लॉजिस्टिक्स टीम",
+    "totalTeams": "एकूण टीम",
+    "totalCapacity": "एकूण क्षमता",
+    "totalVehicles": "एकूण वाहने",
+    "vehicleBreakdown": "वाहन तपशील",
+    "shelter1": "समुदाय केंद्र",
+    "shelter2": "शाळा इमारत",
+    "shelter3": "क्रीडा संकुल",
+    "totalSheltered": "एकूण शेल्टर केलेले",
+    "unshelteredPopulation": "अशेल्टर्ड लोकसंख्या",
+    "allocationDetails": "वाटप तपशील",
+    "remainingCapacity": "उर्वरित क्षमता",
+    "liters": "लिटर",
+    "meals": "भोजन",
+    "note": "टीप: ही गणना प्रमाणिक आपत्ती व्यवस्थापन प्रोटोकॉलवर आधारित अंदाज आहेत आणि निर्दिष्ट स्थानिक परिस्थितींनुसार समायोजित केल्या पाहिजेत.",
+    "severity": {
+      "1": "किरकोळ",
+      "2": "मध्यम",
+      "3": "महत्त्वाचे",
+      "4": "तीव्र",
+      "5": "विनाशकारक"
+    }
+  },
+  "impactAssessment": {
+    "title": "आपत्ती प्रभाव मूल्यांकन",
+    "disasterType": "आपत्ती प्रकार",
+    "region": "प्रदेश",
+    "overallImpact": "एकूण प्रभाव",
+    "economicImpact": "आर्थिक प्रभाव",
+    "socialImpact": "सामाजिक प्रभाव",
+    "environmentalImpact": "पर्यावरण प्रभाव",
+    "recommendations": "शिफारसी",
+    "totalEconomicLoss": "एकूण आर्थिक तोटा",
+    "infrastructureLoss": "मूळ सुविधा तोटा",
+    "agriculturalLoss": "शेती तोटा",
+    "recoveryEstimate": "अंदाजे पुनर्प्राप्ती खर्च",
+    "affectedFamilies": "प्रभावित कुटुंबे",
+    "childrenAffected": "प्रभावित मुले",
+    "displacementRate": "स्थानांतरण दर",
+    "casualtyRate": "हताहत दर",
+    "healthcareImpact": "आरोग्य सेवा प्रभाव",
+    "educationImpact": "शिक्षण प्रभाव",
+    "forestLoss": "वन तोटा",
+    "co2Emissions": "CO2 उत्सर्जन",
+    "biodiversityLoss": "जैव विविधता तोटा",
+    "species": "प्रजाती",
+    "recoveryTime": "अंदाजे पुनर्प्राप्ती वेळ",
+    "months": "महिने",
+    "priorityLevel": "प्राधान्यता स्तर",
+    "selectDisasterAndRegion": "प्रभाव मूल्यांकन पाहण्यासाठी आपत्ती प्रकार आणि प्रदेश निवडा",
+    "impactLevels": {
+      "catastrophic": "विनाशकारक",
+      "severe": "तीव्र",
+      "moderate": "मध्यम",
+      "minor": "किरकोळ",
+      "low": "कमी"
+    },
+    "priority": {
+      "immediate": "तातडीचे",
+      "high": "जास्त",
+      "medium": "मध्यम",
+      "low": "कमी"
+    }
+  },
+  "responsePlanner": {
+    "title": "आपत्ती प्रतिसाद योजनाकार",
+    "disasterType": "आपत्ती प्रकार",
+    "severityLevel": "तीव्रता स्तर",
+    "region": "प्रदेश",
+    "disasterInfo": "{{region}} साठी {{disaster}} प्रतिसाद योजना",
+    "immediateActions": "तातडीच्या कारवाई",
+    "resourceAllocation": "संसाधन वाटप",
+    "teams": "टीम",
+    "equipmentAndSupplies": "उपकरणे आणि पुरवठा",
+    "timeline": "प्रतिसाद काळ",
+    "coordination": "समन्वय घटक",
+    "specialConsiderations": "विशेष विचार",
+    "selectDisasterAndRegion": "प्रतिसाद योजना तयार करण्यासाठी आपत्ती प्रकार, तीव्रता स्तर आणि प्रदेश निवडा",
+    "phases": {
+      "immediate": "तातडीचे प्रतिसाद (0-2 तास)",
+      "shortTerm": "अल्पकालीन प्रतिसाद (2-24 तास)",
+      "mediumTerm": "मध्यकालीन पुनर्प्राप्ती (1-30 दिवस)",
+      "longTerm": "दीर्घकालीन पुनर्बांधणी (1-36 महिने)"
+    },
+    "severity": {
+      "minor": "किरकोळ",
+      "moderate": "मध्यम",
+      "significant": "महत्त्वाचे",
+      "severe": "तीव्र",
+      "catastrophic": "विनाशकारक"
+    }
+  },
+  "communityReporting": {
+    "title": "सामुदायिक आपत्ती अहवाल",
+    "description": "तात्काळ प्रतिसाद देणाऱ्यांना आणि अधिकार्यांना त्वरित आणि प्रभावीरित्या प्रतिसाद देण्यास मदत करण्यासाठी तुमच्या समुदायातील आपत्ती घटनांचा अहवाल द्या.",
+    "disasterType": "आपत्ती प्रकार",
+    "selectDisasterType": "आपत्ती प्रकार निवडा",
+    "disasterTypes": {
+      "flood": "पूर",
+      "earthquake": "भूकंप",
+      "cyclone": "चक्रीवादळ",
+      "drought": "धुरांधर",
+      "landslide": "भूस्खलन",
+      "fire": "आग",
+      "epidemic": "साथ",
+      "chemical": "रासायनिक धोका",
+      "other": "इतर"
+    },
+    "location": "स्थान",
+    "locationPlaceholder": "पत्ता किंवा लँडमार्क प्रविष्ट करा",
+    "useCurrentLocation": "वर्तमान स्थान वापरा",
+    "latitude": "अक्षांश",
+    "longitude": "रेखांश",
+    "description": "वर्णन",
+    "descriptionPlaceholder": "घटना, प्रभावित क्षेत्रे आणि इतर संबंधित तपशील वर्णन करा...",
+    "severity": "तीव्रता स्तर",
+    "low": "कमी",
+    "high": "जास्त",
+    "affectedPeople": "प्रभावित लोक (अंदाजे)",
+    "media": "मीडिया (छायाचित्रे/व्हिडिओ)",
+    "uploadMedia": "मीडिया फाइल्स अपलोड करण्यासाठी क्लिक करा",
+    "mediaLimit": "कमाल 5 फाइल्स. फक्त चित्रे आणि व्हिडिओ.",
+    "submitReport": "आपत्ती अहवाल सबमिट करा",
+    "submitting": "सबमिट करत आहे...",
+    "successMessage": "तुमचा आपत्ती अहवाल यशस्वीरित्या सबमिट केला गेला आहे! तात्काळ प्रतिसाद देणाऱ्यांना सूचित केले गेले आहे.",
+    "submissionError": "अहवाल सबमिट करण्यात अयशस्वी. कृपया पुन्हा प्रयत्न करा.",
+    "locationError": "तुमचे वर्तमान स्थान मिळवण्यात अक्षम. कृपया मॅन्युअली स्थान प्रविष्ट करा.",
+    "locationNotSupported": "जिओलोकेशन तुमच्या ब्राउझरद्वारे समर्थित नाही.",
+    "maxMediaFiles": "कमाल 5 मीडिया फाइल्सना परवानगी आहे."
+  },
+  "volunteerCoordinator": {
+    "title": "स्वयंसेवक समन्वयक",
+    "description": "आपत्ती प्रतिसाद आणि पुनर्प्राप्ती प्रयत्नांसाठी स्वयंसेवकांचे समन्वय करा",
+    "disasterType": "आपत्ती प्रकार",
+    "latitude": "अक्षांश",
+    "longitude": "रेखांश",
+    "tabs": {
+      "matching": "स्वयंसेवक जुळवणी",
+      "assignments": "काम नेमणूक",
+      "communication": "संप्रेषण योजना",
+      "tracking": "तास ट्रॅकिंग",
+      "scheduling": "शिफ्ट नियोजन"
+    },
+    "matching": {
+      "title": "स्वयंसेवक जुळवणी परिणाम"
+    },
+    "volunteer": "स्वयंसेवक",
+    "skills": "कौशल्ये",
+    "distance": "अंतर",
+    "suitability": "योग्यता",
+    "tasks": "कामे",
+    "assignments": "नेमणूक",
+    "assignedTo": "ला नेमणूक",
+    "assignedAt": "येथे नेमणूक",
+    "requiredSkills": "आवश्यक कौशल्ये",
+    "requiredVolunteers": "आवश्यक स्वयंसेवक",
+    "priority": "प्राधान्यता",
+    "communication": {
+      "title": "संप्रेषण योजना",
+      "channels": "संप्रेषण माध्यमे"
+    },
+    "channels": "माध्यमे",
+    "frequency": "वारंवारता",
+    "contactList": "संपर्क यादी",
+    "tracking": {
+      "title": "स्वयंसेवक तास ट्रॅकिंग"
+    },
+    "totalVolunteers": "एकूण स्वयंसेवक",
+    "totalHours": "एकूण तास",
+    "topContributors": "शीर्ष योगदानकर्ते",
+    "recognitionAwards": "मान्यता पुरस्कार",
+    "recognitionDistribution": "मान्यता वितरण",
+    "bronze": "कांस्य",
+    "silver": "चांदी",
+    "gold": "सोने",
+    "platinum": "प्लॅटिनम",
+    "recognitionLevel": "मान्यता स्तर",
+    "hours": "तास",
+    "scheduling": {
+      "title": "स्वयंसेवक शिफ्ट नियोजन"
+    },
+    "shift": "शिफ्ट",
+    "time": "वेळ",
+    "duration": "कालावधी",
+    "totalShifts": "एकूण शिफ्ट्स",
+    "filledShifts": "भरलेले शिफ्ट्स",
+    "coverage": "कव्हरेज",
+    "volunteerUtilization": "स्वयंसेवक वापर",
+    "utilization": "वापर"
+  },
+  "disasterStatistics": {
+    "title": "आपत्ती आकडेवारी",
+    "description": "भारतभरात आपत्ती डेटा आणि ट्रेंड्सचे विश्लेषण आणि दृश्यीकरण करा",
+    "tabs": {
+      "overview": "अवलोकन",
+      "trends": "ट्रेंड्स",
+      "regional": "क्षेत्रीय जोखीम",
+      "comparison": "प्रकार तुलना"
+    },
+    "overview": {
+      "title": "आपत्ती आकडेवारी अवलोकन",
+      "totalEvents": "एकूण घटना",
+      "totalAffected": "एकूण प्रभावित",
+      "totalEconomicLoss": "एकूण आर्थिक तोटा",
+      "averageAffected": "प्रति घटना सरासरी प्रभावित"
+    },
+    "byType": "आपत्ती प्रकारानुसार",
+    "byRegion": "प्रदेशानुसार",
+    "events": "घटना",
+    "affected": "प्रभावित लोक",
+    "economicLoss": "आर्थिक तोटा",
+    "trends": {
+      "title": "आपत्ती ट्रेंड्स विश्लेषण",
+      "yearsCovered": "समाविष्ट वर्षे",
+      "annualGrowth": "वार्षिक वाढ दर",
+      "mostIncreasing": "सर्वाधिक वाढता प्रकार",
+      "yearlyBreakdown": "वार्षिक तपशील",
+      "year": "वर्ष"
+    },
+    "regional": {
+      "title": "क्षेत्रीय जोखीम निर्देशांक",
+      "region": "प्रदेश",
+      "riskIndex": "जोखीम निर्देशांक"
+    },
+    "comparison": {
+      "title": "आपत्ती प्रकार तुलना",
+      "firstType": "पहिला आपत्ती प्रकार",
+      "secondType": "दुसरा आपत्ती प्रकार",
+      "compare": "तुलना करा",
+      "averageAffected": "सरासरी प्रभावित",
+      "averageEconomicLoss": "सरासरी आर्थिक तोटा"
+    }
+  },
+  "weather": {
+    "title": "हवामान निरीक्षक",
+    "conditions": "वर्तमान परिस्थिती",
+    "humidity": "आर्द्रता",
+    "wind_speed": "वारेचा वेग",
+    "pressure": "दबाव",
+    "visibility": "दृश्यता",
+    "risk_assessment": "जोखीम मूल्यांकन",
+    "risk_level": "जोखीम स्तर",
+    "alerts": "चेतावण्या",
+    "preparedness_recommendations": "तयारी शिफारसी",
+    "forecast": "हवामान अंदाज",
+    "high": "उच्च",
+    "low": "कमी",
+    "refresh": "रीफ्रेश करा",
+    "loading": "लोड होत आहे...",
+    "data_not_available": "हवामान डेटा उपलब्ध नाही",
+    "fetch_error": "हवामान डेटा मिळवण्यात त्रुटी"
+  },
+  "emergencyResourceTracker": {
+    "title": "आणीबाणी संसाधन ट्रॅकर",
+    "totalResources": "एकूण संसाधने",
+    "availableResources": "उपलब्ध संसाधने",
+    "responseRate": "प्रतिसाद दर",
+    "region": "प्रदेश",
+    "allRegions": "सर्व प्रदेश",
+    "resource": "संसाधन",
+    "quantity": "प्रमाण",
+    "location": "स्थान",
+    "availability": "उपलब्धता",
+    "requestResources": "संसाधने विनंती करा",
+    "resourceType": "संसाधन प्रकार",
+    "selectType": "संसाधन प्रकार निवडा",
+    "urgency": "तातडी",
+    "normal": "सामान्य",
+    "high": "जास्त",
+    "critical": "गंभीर",
+    "enterLocation": "स्थान प्रविष्ट करा",
+    "contact": "संपर्क",
+    "enterContact": "संपर्क माहिती प्रविष्ट करा",
+    "submitRequest": "विनंती सबमिट करा",
+    "requestStatus": "विनंती स्थिती",
+    "requestId": "विनंती आयडी",
+    "status": "स्थिती",
+    "submitted": "सबमिट केलेले",
+    "estimatedDelivery": "अंदाजे वितरण",
+    "refreshStatus": "स्थिती रीफ्रेश करा"
+  },
+  "disasterCommunicationHub": {
+    "title": "आपत्ती संप्रेषण केंद्र",
+    "selectRegion": "प्रदेश निवडा",
+    "allRegions": "सर्व प्रदेश",
+    "selectDisaster": "आपत्ती प्रकार निवडा",
+    "communicationChannels": "संप्रेषण माध्यमे",
+    "channelName": "माध्यम नाव",
+    "type": "प्रकार",
+    "frequency": "वारंवारता",
+    "coverage": "कव्हरेज",
+    "status": "स्थिती",
+    "contact": "संपर्क",
+    "broadcastInfo": "आणीबाणी प्रसारण माहिती",
+    "tvChannels": "टीव्ही माध्यमे",
+    "radioStations": "रेडिओ स्टेशन",
+    "transmission": "प्रसारण",
+    "smsAlerts": "एसएमएस सतर्कता",
+    "service": "सेवा",
+    "shortcode": "शॉर्टकोड",
+    "provider": "प्रदाता",
+    "equipment": "संप्रेषण उपकरणे",
+    "availability": "उपलब्धता",
+    "protocols": "{{disaster}} साठी संप्रेषण प्रोटोकॉल",
+    "immediateResponse": "तात्काळ प्रतिसाद",
+    "shortTermResponse": "अल्पकालीन प्रतिसाद",
+    "longTermResponse": "दीर्घकालीन प्रतिसाद",
+    "emergencyContacts": "आणीबाणीचे संपर्क"
   }
 }

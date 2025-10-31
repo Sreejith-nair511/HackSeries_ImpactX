@@ -1,4 +1,12 @@
 {
+  "scripts": {
+    "validate-translations": "node scripts/validate-translations.js",
+    "test-translations": "node scripts/test-translations.js",
+    "translation-status": "node scripts/translation-status.js",
+    "count-commits": "node scripts/count-commits.js",
+    "file-report": "node scripts/file-report.js",
+    "find-todos": "node scripts/find-todos.js"
+  },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.4",
     "axios": "^1.12.2",
