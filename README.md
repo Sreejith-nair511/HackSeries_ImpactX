@@ -382,6 +382,28 @@ backend
 <img width="913" height="320" alt="Screenshot 2025-10-31 233706" src="https://github.com/user-attachments/assets/98bad588-46c5-4e7b-95f3-7225ff1cf731" />
 
 
+<h1>UPDATE 3.0</h1>
+<img width="1601" height="646" alt="Screenshot 2025-11-01 104417" src="https://github.com/user-attachments/assets/ee466d14-fe77-4e68-9e69-53a54ae6a8c1" />
+<img width="1654" height="840" alt="Screenshot 2025-11-01 104410" src="https://github.com/user-attachments/assets/45e5d649-88ae-41dd-a54f-21f3839103e2" />
+<img width="1764" height="853" alt="Screenshot 2025-11-01 104357" src="https://github.com/user-attachments/assets/13633676-0fe5-4400-878a-97e4d068b9a8" />
+<img width="1594" height="474" alt="Screenshot 2025-11-01 104342" src="https://github.com/user-attachments/assets/33457d8b-00b4-487d-b3b6-1c471229bc76" />
+<img width="1624" height="664" alt="Screenshot 2025-11-01 104331" src="https://github.com/user-attachments/assets/0ff2db70-d9c5-4434-9f07-ba9d534889f4" />
+<img width="1638" height="861" alt="Screenshot 2025-11-01 104825" src="https://github.com/user-attachments/assets/0ba63c1a-8dc0-4848-9560-a94c86de655e" />
+<img width="1745" height="855" alt="Screenshot 2025-11-01 104813" src="https://github.com/user-attachments/assets/6e920ae7-fb6a-4e81-ade5-632e9a85ee84" />
+<img width="1629" height="872" alt="Screenshot 2025-11-01 104746" src="https://github.com/user-attachments/assets/39ef437a-62e3-4fdd-b2a6-2910ffc9d5d8" />
+<img width="1614" height="658" alt="Screenshot 2025-11-01 104729" src="https://github.com/user-attachments/assets/3d3405d7-eb35-419b-97b0-0f16737843d0" />
+<img width="1663" height="770" alt="Screenshot 2025-11-01 104716" src="https://github.com/user-attachments/assets/c74cc45b-9128-478f-b543-be5eb4cb3795" />
+<img width="1708" height="930" alt="Screenshot 2025-11-01 104701" src="https://github.com/user-attachments/assets/37b8305b-5581-4cd4-89ae-3dcfa27a78d7" />
+<img width="1722" height="941" alt="Screenshot 2025-11-01 104633" src="https://github.com/user-attachments/assets/17643a94-0e03-4efc-b37b-dffbd00c6030" />
+<img width="1677" height="790" alt="Screenshot 2025-11-01 104621" src="https://github.com/user-attachments/assets/016ac267-05fa-43c8-a29e-08bca4d2b62c" />
+<img width="1717" height="941" alt="Screenshot 2025-11-01 104607" src="https://github.com/user-attachments/assets/a4f1e2e0-7070-4494-bb77-1c72dbec828b" />
+<img width="1582" height="508" alt="Screenshot 2025-11-01 104513" src="https://github.com/user-attachments/assets/2a12ee44-da68-4569-8511-96f086dd71d5" />
+<img width="1676" height="882" alt="Screenshot 2025-11-01 104501" src="https://github.com/user-attachments/assets/e7577ea9-d8d6-44e0-ac1e-5d36fd6b6211" />
+<img width="1651" height="585" alt="Screenshot 2025-11-01 104445" src="https://github.com/user-attachments/assets/d54a4637-6a21-4082-aec5-e25d70c0f190" />
+<img width="1682" height="566" alt="Screenshot 2025-11-01 104429" src="https://github.com/user-attachments/assets/f236001a-4eb8-4c5d-bfb1-07595eab2c15" />
+
+
+
 ## License
 
 This project is licensed under the MIT License.
