@@ -20,7 +20,8 @@
     "gujarati": "ગુજરાતી",
     "search": "Search",
     "all_states": "All States",
-    "statistics": "Statistics"
+    "statistics": "Statistics",
+    "prediction": "Prediction"
   },
   "home": {
     "title": "Transparent & Verifiable Disaster Relief Funding on Algorand",
@@ -848,6 +849,20 @@
       "forestCover": "Forest Cover",
       "riverProximity": "River Proximity",
       "seismicActivity": "Seismic Activity"
+    },
+    "about": {
+      "title": "About Disaster Prediction",
+      "description": "Our disaster prediction system uses advanced algorithms and real-time data to forecast potential disasters and provide early warnings to communities at risk.",
+      "howItWorks": "How It Works",
+      "step1": "Collects real-time weather and environmental data",
+      "step2": "Analyzes historical disaster patterns",
+      "step3": "Applies machine learning models to predict risks",
+      "step4": "Generates actionable alerts and recommendations",
+      "benefits": "Key Benefits",
+      "benefit1": "Early warning systems save lives",
+      "benefit2": "Communities can prepare in advance",
+      "benefit3": "Resources can be pre-positioned",
+      "benefit4": "Economic losses can be minimized"
     }
   }
 }
