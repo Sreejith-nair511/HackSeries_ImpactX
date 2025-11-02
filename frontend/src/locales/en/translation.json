@@ -17,7 +17,10 @@
     "telugu": "తెలుగు",
     "marathi": "मराठी",
     "bengali": "বাংলা",
-    "gujarati": "ગુજરાતી"
+    "gujarati": "ગુજરાતી",
+    "search": "Search",
+    "all_states": "All States",
+    "statistics": "Statistics"
   },
   "home": {
     "title": "Transparent & Verifiable Disaster Relief Funding on Algorand",
@@ -562,6 +565,18 @@
     "coverage": "Coverage",
     "volunteerUtilization": "Volunteer Utilization",
     "utilization": "Utilization"
+  },
+  "disaster_stats": {
+    "title": "State-wise Disaster Statistics",
+    "select_state": "Select State",
+    "state": "State",
+    "floods": "Floods",
+    "cyclones": "Cyclones",
+    "earthquakes": "Earthquakes",
+    "droughts": "Droughts",
+    "total": "Total",
+    "disclaimer": "Data Disclaimer",
+    "disclaimer_text": "The disaster statistics presented here are for demonstration purposes only. In a production environment, this data would be sourced from official government databases and updated in real-time."
   },
   "disasterStatistics": {
     "title": "Disaster Statistics",
