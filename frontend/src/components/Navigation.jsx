@@ -20,6 +20,8 @@ const Navigation = ({
   const [isAccessibilityOpen, setIsAccessibilityOpen] = useState(false);
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
   const [isReadingAssistanceOpen, setIsReadingAssistanceOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false); // New state for search
+  const [searchQuery, setSearchQuery] = useState(''); // New state for search query
   
   // Handle keyboard navigation
   useEffect(() => {
@@ -29,6 +31,7 @@ const Navigation = ({
         setIsAccessibilityOpen(false);
         setIsLanguageOpen(false);
         setIsReadingAssistanceOpen(false);
+        setIsSearchOpen(false); // Close search on Escape
       }
     };
     
@@ -36,6 +39,17 @@ const Navigation = ({
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, []);
   
+  // New function to handle search
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      // In a real app, this would navigate to search results
+      console.log('Searching for:', searchQuery);
+      setIsSearchOpen(false);
+      setSearchQuery('');
+    }
+  };
+
   const navItems = [
     { path: '/', label: t('common.home') },
     { path: '/campaigns', label: t('common.campaigns') },
@@ -44,7 +58,8 @@ const Navigation = ({
     { path: '/admin', label: t('common.admin') },
     { path: '/demo', label: t('common.demo') },
     { path: '/authtest', label: t('common.auth_test') },
-    { path: '/ivr', label: 'IVR System' }, // Added IVR System to navigation
+    { path: '/ivr', label: 'IVR System' },
+    { path: '/stats', label: t('common.statistics') }, // New stats page
   ];
 
   const languages = [
@@ -87,6 +102,27 @@ const Navigation = ({
                 {item.label}
               </Link>
             ))}
+            
+            {/* Search Bar for Desktop */}
+            <div className="relative mx-2">
+              <form onSubmit={handleSearch} className="flex items-center">
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder={t('common.search')}
+                  className="px-3 py-1 rounded-l-lg text-gray-700 text-sm focus:outline-none w-32 focus:w-48 transition-all duration-300"
+                />
+                <button
+                  type="submit"
+                  className="bg-blue-500 hover:bg-blue-600 px-3 py-1 rounded-r-lg text-white"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                  </svg>
+                </button>
+              </form>
+            </div>
             
             {/* Language Selector */}
             <div className="relative">
@@ -192,6 +228,23 @@ const Navigation = ({
           
           {/* Mobile Navigation */}
           <div className="md:hidden flex items-center">
+            {/* Search Icon for Mobile */}
+            <button
+              onClick={() => {
+                setIsSearchOpen(!isSearchOpen);
+                setIsMenuOpen(false);
+                setIsLanguageOpen(false);
+                setIsAccessibilityOpen(false);
+              }}
+              className="p-2 rounded-full mr-2"
+              aria-label={t('common.search')}
+              aria-expanded={isSearchOpen}
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+              </svg>
+            </button>
+            
             {/* Language Selector for mobile */}
             <div className="relative">
               <button
@@ -274,6 +327,28 @@ const Navigation = ({
             </button>
           </div>
         </div>
+        
+        {/* Search Bar for Mobile */}
+        {isSearchOpen && (
+          <div className="md:hidden mt-2 pb-2">
+            <form onSubmit={handleSearch} className="flex">
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder={t('common.search')}
+                className="flex-grow px-3 py-2 rounded-l-lg text-gray-700 text-sm focus:outline-none"
+                autoFocus
+              />
+              <button
+                type="submit"
+                className="bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-r-lg text-white"
+              >
+                {t('common.search')}
+              </button>
+            </form>
+          </div>
+        )}
         
         {/* Mobile Menu */}
         {isMenuOpen && (
