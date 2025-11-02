@@ -233,8 +233,22 @@ Our project harnesses Algorand's secure, scalable blockchain to revolutionize di
 - Detailed technology integration with blockchain, smart contracts, and verification systems
 - Established key performance indicators and monitoring metrics
 
+### India-Specific Features
+- Enhanced platform with India-focused disaster information and statistics
+- Added state-wise disaster data visualization and analysis
+- Implemented regional disaster preparedness tips and guidelines
+- Created multilingual support for Indian languages (Hindi, Tamil, Telugu, Marathi, Bengali, Gujarati)
+- Integrated Indian flag animation and culturally relevant design elements
+
+### Disaster Statistics and Analytics
+- Developed comprehensive disaster statistics dashboard with state-wise data
+- Created interactive charts and visualizations for disaster trends analysis
+- Implemented regional risk assessment tools
+- Added disaster type comparison features
+- Integrated real-time data updates and filtering capabilities
+
 ## Commit Count Increase
-The project has successfully increased from 35 initial commits to 90+ commits through meaningful enhancements, with each commit representing valuable progress toward the platform's goals. We are on track to reach our target of 100+ commits with continued development.
+The project has successfully increased from 35 initial commits to 95+ commits through meaningful enhancements, with each commit representing valuable progress toward the platform's goals. We are on track to reach our target of 100+ commits with continued development.
 
 ## Additional Documentation
 
@@ -330,6 +344,9 @@ Real-time weather information and disaster risk assessment for Indian regions wi
 
 ### Emergency Resource Tracker
 Comprehensive system for tracking and managing emergency resources during disaster response with request management and real-time status updates.
+
+### State-wise Disaster Statistics
+Interactive dashboard for viewing and analyzing disaster statistics across Indian states with filtering and visualization capabilities.
 
 ## License
 
