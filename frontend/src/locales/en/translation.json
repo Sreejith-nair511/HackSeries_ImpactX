@@ -686,7 +686,14 @@
     "status": "Status",
     "submitted": "Submitted",
     "estimatedDelivery": "Estimated Delivery",
-    "refreshStatus": "Refresh Status"
+    "refreshStatus": "Refresh Status",
+    "allTypes": "All Types",
+    "refresh": "Refresh",
+    "sort": {
+      "name": "Sort by Name",
+      "quantity": "Sort by Quantity",
+      "availability": "Sort by Availability"
+    }
   },
   "disasterCommunicationHub": {
     "title": "Disaster Communication Hub",
