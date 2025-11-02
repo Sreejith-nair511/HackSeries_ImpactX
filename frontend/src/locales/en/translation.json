@@ -631,7 +631,14 @@
       "compare": "Compare",
       "averageAffected": "Average Affected",
       "averageEconomicLoss": "Average Economic Loss"
-    }
+    },
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "region": "Region",
+    "allRegions": "All Regions",
+    "resetFilters": "Reset Filters",
+    "export": "Export Data",
+    "exportData": "Export data functionality would be implemented here"
   },
   "weather": {
     "title": "Weather Monitor",
