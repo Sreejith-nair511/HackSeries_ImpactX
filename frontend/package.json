@@ -8,6 +8,9 @@
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint .",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
     "postinstall": "npm rebuild"
   },
   "dependencies": {
@@ -40,6 +43,10 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
     "globals": "^16.4.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "@testing-library/react": "^16.2.0",
+    "@testing-library/jest-dom": "^6.6.3",
     "postcss": "^8.5.6",
     "rollup-plugin-node-polyfills": "^0.2.1"
   }
