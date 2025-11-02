@@ -16,6 +16,8 @@ const EmergencyResourceTracker = () => {
   const [requestStatus, setRequestStatus] = useState(null);
   const [statistics, setStatistics] = useState({});
   const [resourceTypes, setResourceTypes] = useState([]);
+  const [sortBy, setSortBy] = useState('name'); // New state for sorting
+  const [filterByType, setFilterByType] = useState(''); // New state for filtering by type
 
   useEffect(() => {
     // Load resource types
@@ -77,6 +79,25 @@ const EmergencyResourceTracker = () => {
     }
   };
 
+  // Filter and sort resources
+  const filteredAndSortedResources = resources
+    .filter(resource => {
+      if (filterByType && resource.type !== filterByType) {
+        return false;
+      }
+      return true;
+    })
+    .sort((a, b) => {
+      if (sortBy === 'name') {
+        return a.name.localeCompare(b.name);
+      } else if (sortBy === 'quantity') {
+        return b.quantity - a.quantity;
+      } else if (sortBy === 'availability') {
+        return a.availability.localeCompare(b.availability);
+      }
+      return 0;
+    });
+
   return (
     <div className="max-w-6xl mx-auto p-4">
       <h1 className="text-3xl font-bold mb-6 text-gray-800">{t('emergencyResourceTracker.title')}</h1>
@@ -100,8 +121,34 @@ const EmergencyResourceTracker = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Resource List */}
         <div className="bg-white rounded-lg shadow p-6">
+          <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
+            <h2 className="text-xl font-semibold text-gray-800 mb-2 md:mb-0">{t('emergencyResourceTracker.availableResources')}</h2>
+            <div className="flex flex-col sm:flex-row gap-2">
+              <select
+                value={filterByType}
+                onChange={(e) => setFilterByType(e.target.value)}
+                className="border rounded px-2 py-1"
+              >
+                <option value="">{t('emergencyResourceTracker.allTypes')}</option>
+                {resourceTypes.map((type) => (
+                  <option key={type.id} value={type.id}>
+                    {type.icon} {type.name}
+                  </option>
+                ))}
+              </select>
+              <select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+                className="border rounded px-2 py-1"
+              >
+                <option value="name">{t('emergencyResourceTracker.sort.name')}</option>
+                <option value="quantity">{t('emergencyResourceTracker.sort.quantity')}</option>
+                <option value="availability">{t('emergencyResourceTracker.sort.availability')}</option>
+              </select>
+            </div>
+          </div>
+          
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-semibold text-gray-800">{t('emergencyResourceTracker.availableResources')}</h2>
             <div>
               <label htmlFor="region" className="mr-2 text-gray-700">{t('emergencyResourceTracker.region')}</label>
               <select
@@ -118,6 +165,12 @@ const EmergencyResourceTracker = () => {
                 <option value="Telangana">Telangana</option>
               </select>
             </div>
+            <button
+              onClick={loadResources}
+              className="inline-flex items-center px-3 py-1 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              {t('emergencyResourceTracker.refresh')}
+            </button>
           </div>
           
           <div className="overflow-x-auto">
@@ -139,7 +192,7 @@ const EmergencyResourceTracker = () => {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {resources.map((resource) => (
+                {filteredAndSortedResources.map((resource) => (
                   <tr key={resource.id}>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
@@ -272,7 +325,15 @@ const EmergencyResourceTracker = () => {
           {/* Request Status */}
           {requestStatus && (
             <div className="bg-white rounded-lg shadow p-6">
-              <h2 className="text-xl font-semibold text-gray-800 mb-4">{t('emergencyResourceTracker.requestStatus')}</h2>
+              <div className="flex justify-between items-center mb-4">
+                <h2 className="text-xl font-semibold text-gray-800">{t('emergencyResourceTracker.requestStatus')}</h2>
+                <button
+                  onClick={handleTrackRequest}
+                  className="inline-flex items-center px-3 py-1 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                  {t('emergencyResourceTracker.refreshStatus')}
+                </button>
+              </div>
               <div className="border rounded p-4">
                 <div className="flex justify-between items-center mb-2">
                   <span className="font-medium">{t('emergencyResourceTracker.requestId')}:</span>
@@ -294,12 +355,6 @@ const EmergencyResourceTracker = () => {
                     <span>{new Date(requestStatus.estimatedDelivery).toLocaleString()}</span>
                   </div>
                 )}
-                <button
-                  onClick={handleTrackRequest}
-                  className="mt-4 w-full bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-4 rounded"
-                >
-                  {t('emergencyResourceTracker.refreshStatus')}
-                </button>
               </div>
             </div>
           )}
