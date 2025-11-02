@@ -54,12 +54,11 @@ const Navigation = ({
     { path: '/', label: t('common.home') },
     { path: '/campaigns', label: t('common.campaigns') },
     { path: '/donate', label: t('common.donate') },
-    { path: '/ngo', label: t('common.ngo_dashboard') },
-    { path: '/admin', label: t('common.admin') },
-    { path: '/demo', label: t('common.demo') },
-    { path: '/authtest', label: t('common.auth_test') },
-    { path: '/ivr', label: 'IVR System' },
-    { path: '/stats', label: t('common.statistics') }, // New stats page
+    { path: '/ngo', label: t('common.ngoDashboard') },
+    { path: '/admin', label: t('common.adminDashboard') },
+    { path: '/ivr', label: t('common.ivrSystem') },
+    { path: '/stats', label: t('common.statistics') },
+    { path: '/prediction', label: t('common.prediction') }, // Added Prediction link
   ];
 
   const languages = [
