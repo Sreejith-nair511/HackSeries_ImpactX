@@ -12,6 +12,8 @@ const DisasterStatistics = () => {
   const [riskIndices, setRiskIndices] = useState([]);
   const [comparison, setComparison] = useState(null);
   const [comparisonTypes, setComparisonTypes] = useState({ type1: 'flood', type2: 'earthquake' });
+  const [dateRange, setDateRange] = useState({ start: '', end: '' }); // New state for date filtering
+  const [selectedRegion, setSelectedRegion] = useState(''); // New state for region filtering
 
   // Sample data for demonstration
   useEffect(() => {
@@ -112,21 +114,45 @@ const DisasterStatistics = () => {
     setRegionData(sampleRegionData);
   }, []);
 
-  // Calculate statistics when data changes
+  // Filter disaster data based on date range and selected region
+  const filterDisasterData = () => {
+    let filteredData = [...disasterData];
+    
+    // Apply date range filter
+    if (dateRange.start && dateRange.end) {
+      const startDate = new Date(dateRange.start);
+      const endDate = new Date(dateRange.end);
+      filteredData = filteredData.filter(event => {
+        const eventDate = new Date(event.date);
+        return eventDate >= startDate && eventDate <= endDate;
+      });
+    }
+    
+    // Apply region filter
+    if (selectedRegion) {
+      filteredData = filteredData.filter(event => event.region === selectedRegion);
+    }
+    
+    return filteredData;
+  };
+
+  // Calculate statistics when data or filters change
   useEffect(() => {
-    if (disasterData.length > 0) {
-      const stats = calculateDisasterStatistics(disasterData);
+    const filteredData = filterDisasterData();
+    
+    if (filteredData.length > 0) {
+      const stats = calculateDisasterStatistics(filteredData);
       setStatistics(stats);
       
-      const trendData = analyzeDisasterTrends(disasterData);
+      const trendData = analyzeDisasterTrends(filteredData);
       setTrends(trendData);
       
       if (regionData.length > 0) {
-        const riskData = calculateRegionalRiskIndices(disasterData, regionData);
+        const riskData = calculateRegionalRiskIndices(filteredData, regionData);
         setRiskIndices(riskData);
       }
     }
-  }, [disasterData, regionData]);
+  }, [disasterData, regionData, dateRange, selectedRegion]);
 
   // Handle comparison
   const handleCompare = () => {
@@ -153,11 +179,56 @@ const DisasterStatistics = () => {
     { value: 'landslide', label: t('disasterTypes.landslide') }
   ];
 
+  const regions = [...new Set(disasterData.map(event => event.region))];
+
   return (
     <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
       <h2 className="text-2xl font-bold text-gray-800 mb-4">{t('disasterStatistics.title')}</h2>
       <p className="text-gray-600 mb-6">{t('disasterStatistics.description')}</p>
       
+      {/* Filters */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            {t('disasterStatistics.startDate')}
+          </label>
+          <input
+            type="date"
+            value={dateRange.start}
+            onChange={(e) => setDateRange({...dateRange, start: e.target.value})}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+          />
+        </div>
+        
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            {t('disasterStatistics.endDate')}
+          </label>
+          <input
+            type="date"
+            value={dateRange.end}
+            onChange={(e) => setDateRange({...dateRange, end: e.target.value})}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+          />
+        </div>
+        
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            {t('disasterStatistics.region')}
+          </label>
+          <select
+            value={selectedRegion}
+            onChange={(e) => setSelectedRegion(e.target.value)}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+          >
+            <option value="">{t('disasterStatistics.allRegions')}</option>
+            {regions.map(region => (
+              <option key={region} value={region}>{region}</option>
+            ))}
+          </select>
+        </div>
+      </div>
+
       {/* Tab Navigation */}
       <div className="border-b border-gray-200 mb-6">
         <nav className="flex space-x-8">
@@ -209,7 +280,18 @@ const DisasterStatistics = () => {
         {/* Overview Tab */}
         {activeTab === 'overview' && statistics && (
           <div>
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">{t('disasterStatistics.overview.title')}</h3>
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-lg font-semibold text-gray-800">{t('disasterStatistics.overview.title')}</h3>
+              <button
+                onClick={() => {
+                  setDateRange({ start: '', end: '' });
+                  setSelectedRegion('');
+                }}
+                className="inline-flex items-center px-3 py-1 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                {t('disasterStatistics.resetFilters')}
+              </button>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
               <div className="bg-blue-50 p-4 rounded-lg">
                 <div className="text-2xl font-bold text-blue-700">{statistics.totalEvents}</div>
@@ -286,7 +368,18 @@ const DisasterStatistics = () => {
         {/* Trends Tab */}
         {activeTab === 'trends' && trends && (
           <div>
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">{t('disasterStatistics.trends.title')}</h3>
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-lg font-semibold text-gray-800">{t('disasterStatistics.trends.title')}</h3>
+              <button
+                onClick={() => {
+                  // In a real implementation, this would export the data
+                  alert(t('disasterStatistics.exportData'));
+                }}
+                className="inline-flex items-center px-3 py-1 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                {t('disasterStatistics.export')}
+              </button>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
               <div className="bg-blue-50 p-4 rounded-lg">
                 <div className="text-2xl font-bold text-blue-700">{trends.yearlyTrends.length}</div>
@@ -357,7 +450,18 @@ const DisasterStatistics = () => {
         {/* Regional Tab */}
         {activeTab === 'regional' && riskIndices.length > 0 && (
           <div>
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">{t('disasterStatistics.regional.title')}</h3>
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-lg font-semibold text-gray-800">{t('disasterStatistics.regional.title')}</h3>
+              <button
+                onClick={() => {
+                  // In a real implementation, this would export the data
+                  alert(t('disasterStatistics.exportData'));
+                }}
+                className="inline-flex items-center px-3 py-1 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                {t('disasterStatistics.export')}
+              </button>
+            </div>
             <div className="overflow-x-auto">
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
@@ -418,7 +522,18 @@ const DisasterStatistics = () => {
         {/* Comparison Tab */}
         {activeTab === 'comparison' && (
           <div>
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">{t('disasterStatistics.comparison.title')}</h3>
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-lg font-semibold text-gray-800">{t('disasterStatistics.comparison.title')}</h3>
+              <button
+                onClick={() => {
+                  // In a real implementation, this would export the data
+                  alert(t('disasterStatistics.exportData'));
+                }}
+                className="inline-flex items-center px-3 py-1 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                {t('disasterStatistics.export')}
+              </button>
+            </div>
             
             {/* Comparison Controls */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
