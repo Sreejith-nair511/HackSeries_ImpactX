@@ -804,5 +804,50 @@
     "scalability1": "Auto-scaling infrastructure",
     "scalability2": "Load balancing across multiple servers",
     "scalability3": "Geographic redundancy for high availability"
+  },
+  "disasterPrediction": {
+    "title": "Disaster Prediction & Early Warning",
+    "description": "Predict potential disasters and receive early warnings to prepare communities",
+    "selectRegion": "Select Region",
+    "currentRiskLevel": "Current Risk Level",
+    "currentWeather": "Current Weather",
+    "tabs": {
+      "predictions": "Risk Predictions",
+      "historical": "Historical Data",
+      "factors": "Risk Factors"
+    },
+    "risk": {
+      "critical": "Critical",
+      "high": "High",
+      "moderate": "Moderate",
+      "low": "Low"
+    },
+    "predictions": {
+      "title": "Disaster Risk Predictions"
+    },
+    "probability": "Probability",
+    "expectedImpact": "Expected Impact",
+    "timeline": "Expected Timeline",
+    "recommendations": "Recommendations",
+    "historical": {
+      "title": "Historical Disaster Data",
+      "year": "Year",
+      "disasterType": "Disaster Type",
+      "affected": "People Affected",
+      "economicLoss": "Economic Loss"
+    },
+    "factors": {
+      "title": "Risk Factors Analysis",
+      "weather": "Weather Conditions",
+      "geographical": "Geographical Factors",
+      "temperature": "Temperature",
+      "humidity": "Humidity",
+      "precipitation": "Precipitation",
+      "windSpeed": "Wind Speed",
+      "elevation": "Elevation",
+      "forestCover": "Forest Cover",
+      "riverProximity": "River Proximity",
+      "seismicActivity": "Seismic Activity"
+    }
   }
 }
