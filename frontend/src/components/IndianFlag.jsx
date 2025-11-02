@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 
-const IndianFlag = () => {
+const IndianFlag = ({ size = 'medium', interactive = false }) => {
   const [isWaving, setIsWaving] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   
   useEffect(() => {
     // Start waving animation after component mounts
@@ -12,9 +13,28 @@ const IndianFlag = () => {
     return () => clearTimeout(timer);
   }, []);
   
+  const getSizeClasses = () => {
+    switch (size) {
+      case 'small': return 'w-12 h-8';
+      case 'large': return 'w-20 h-12';
+      default: return 'w-16 h-10';
+    }
+  };
+  
+  const handleFlagClick = () => {
+    if (interactive) {
+      setIsWaving(!isWaving);
+    }
+  };
+  
   return (
     <div className="flex flex-col items-center">
-      <div className={`relative w-16 h-10 overflow-hidden rounded ${isWaving ? 'animate-flag-wave' : ''}`}>
+      <div 
+        className={`relative overflow-hidden rounded ${getSizeClasses()} ${isWaving ? 'animate-flag-wave' : ''} ${isHovered ? 'scale-110' : ''} transition-transform duration-300 cursor-pointer`}
+        onClick={handleFlagClick}
+        onMouseEnter={() => interactive && setIsHovered(true)}
+        onMouseLeave={() => interactive && setIsHovered(false)}
+      >
         {/* Saffron stripe */}
         <div className="absolute top-0 left-0 w-full h-1/3 bg-[#FF9933]"></div>
         
