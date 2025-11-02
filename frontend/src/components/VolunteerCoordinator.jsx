@@ -24,6 +24,8 @@ const VolunteerCoordinator = () => {
   const [communicationPlan, setCommunicationPlan] = useState(null);
   const [volunteerStats, setVolunteerStats] = useState(null);
   const [scheduledShifts, setScheduledShifts] = useState(null);
+  const [searchTerm, setSearchTerm] = useState(''); // New state for search
+  const [sortBy, setSortBy] = useState('suitability'); // New state for sorting
 
   // Initialize sample data for demonstration purposes
   // This would typically come from an API in a real application
@@ -191,6 +193,24 @@ const VolunteerCoordinator = () => {
     { value: 'landslide', label: t('disasterTypes.landslide') }
   ];
 
+  // Filter and sort volunteers based on search and sort criteria
+  const filteredAndSortedVolunteers = matchedVolunteers
+    .filter(volunteer => 
+      volunteer.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      volunteer.role.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      volunteer.matchedSkills.some(skill => skill.toLowerCase().includes(searchTerm.toLowerCase()))
+    )
+    .sort((a, b) => {
+      if (sortBy === 'suitability') {
+        return b.suitabilityScore - a.suitabilityScore;
+      } else if (sortBy === 'distance') {
+        return a.distanceFromDisaster - b.distanceFromDisaster;
+      } else if (sortBy === 'experience') {
+        return (b.experience?.disasterResponse || 0) - (a.experience?.disasterResponse || 0);
+      }
+      return 0;
+    });
+
   return (
     <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
       <h2 className="text-2xl font-bold text-gray-800 mb-4">{t('volunteerCoordinator.title')}</h2>
@@ -307,7 +327,34 @@ const VolunteerCoordinator = () => {
         {/* Matching Tab */}
         {activeTab === 'matching' && (
           <div>
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">{t('volunteerCoordinator.matching.title')}</h3>
+            <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
+              <h3 className="text-lg font-semibold text-gray-800 mb-2 md:mb-0">{t('volunteerCoordinator.matching.title')}</h3>
+              <div className="flex flex-col sm:flex-row gap-2">
+                <div className="relative">
+                  <input
+                    type="text"
+                    placeholder={t('volunteerCoordinator.search')}
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  />
+                  <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                    <svg className="h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                </div>
+                <select
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value)}
+                  className="px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                >
+                  <option value="suitability">{t('volunteerCoordinator.sort.suitability')}</option>
+                  <option value="distance">{t('volunteerCoordinator.sort.distance')}</option>
+                  <option value="experience">{t('volunteerCoordinator.sort.experience')}</option>
+                </select>
+              </div>
+            </div>
             <div className="overflow-x-auto">
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
@@ -324,10 +371,13 @@ const VolunteerCoordinator = () => {
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       {t('volunteerCoordinator.suitability')}
                     </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      {t('volunteerCoordinator.experience')}
+                    </th>
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                  {matchedVolunteers.map((volunteer) => (
+                  {filteredAndSortedVolunteers.map((volunteer) => (
                     <tr key={volunteer.id}>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm font-medium text-gray-900">{volunteer.name}</div>
@@ -354,6 +404,9 @@ const VolunteerCoordinator = () => {
                           </span>
                         </div>
                       </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        {volunteer.experience?.disasterResponse || 0} {t('volunteerCoordinator.years')}
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -365,7 +418,15 @@ const VolunteerCoordinator = () => {
         {/* Assignments Tab */}
         {activeTab === 'assignments' && (
           <div>
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">{t('volunteerCoordinator.assignments.title')}</h3>
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-lg font-semibold text-gray-800">{t('volunteerCoordinator.assignments.title')}</h3>
+              <button
+                onClick={handleAssignVolunteers}
+                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                {t('volunteerCoordinator.reassign')}
+              </button>
+            </div>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div>
                 <h4 className="font-medium text-gray-700 mb-3">{t('volunteerCoordinator.tasks')}</h4>
@@ -414,7 +475,15 @@ const VolunteerCoordinator = () => {
         {/* Communication Tab */}
         {activeTab === 'communication' && communicationPlan && (
           <div>
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">{t('volunteerCoordinator.communication.title')}</h3>
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-lg font-semibold text-gray-800">{t('volunteerCoordinator.communication.title')}</h3>
+              <button
+                onClick={() => generateCommunicationPlan(matchedVolunteers, disasterInfo)}
+                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                {t('volunteerCoordinator.regenerate')}
+              </button>
+            </div>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div>
                 <h4 className="font-medium text-gray-700 mb-3">{t('volunteerCoordinator.communication.channels')}</h4>
@@ -461,7 +530,15 @@ const VolunteerCoordinator = () => {
         {/* Tracking Tab */}
         {activeTab === 'tracking' && volunteerStats && (
           <div>
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">{t('volunteerCoordinator.tracking.title')}</h3>
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-lg font-semibold text-gray-800">{t('volunteerCoordinator.tracking.title')}</h3>
+              <button
+                onClick={handleTrackHours}
+                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                {t('volunteerCoordinator.refresh')}
+              </button>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
               <div className="bg-blue-50 p-4 rounded-lg">
                 <div className="text-2xl font-bold text-blue-700">{volunteerStats.totalVolunteers}</div>
@@ -556,7 +633,15 @@ const VolunteerCoordinator = () => {
         {/* Scheduling Tab */}
         {activeTab === 'scheduling' && scheduledShifts && (
           <div>
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">{t('volunteerCoordinator.scheduling.title')}</h3>
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-lg font-semibold text-gray-800">{t('volunteerCoordinator.scheduling.title')}</h3>
+              <button
+                onClick={handleScheduleShifts}
+                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                {t('volunteerCoordinator.reschedule')}
+              </button>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
               <div className="bg-blue-50 p-4 rounded-lg">
                 <div className="text-2xl font-bold text-blue-700">{scheduledShifts.totalShifts}</div>
