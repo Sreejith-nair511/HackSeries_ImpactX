@@ -11,6 +11,7 @@ import AdminDashboard from './pages/AdminDashboard';
 import DonationDemo from './components/DonationDemo';
 import AuthTest from './pages/AuthTest';
 import IVRSystem from './pages/IVRSystem'; // Added IVR System import
+import DisasterStatisticsPage from './pages/DisasterStatisticsPage'; // Added Disaster Statistics Page import
 
 function App() {
   const { t, i18n } = useTranslation();
@@ -130,6 +131,7 @@ function App() {
             <Route path="/demo" element={<DonationDemo />} />
             <Route path="/authtest" element={<AuthTest />} />
             <Route path="/ivr" element={<IVRSystem />} /> {/* Added IVR System route */}
+            <Route path="/stats" element={<DisasterStatisticsPage />} /> {/* Added Disaster Statistics route */}
           </Routes>
         </main>
         
