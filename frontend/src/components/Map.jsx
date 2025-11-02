@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { useState, useEffect, useRef } from 'react';
+import { MapContainer, TileLayer, Marker, Popup, Circle } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
@@ -13,7 +13,9 @@ L.Icon.Default.mergeOptions({
 
 const Map = ({ darkMode }) => {
   const [campaigns, setCampaigns] = useState([]);
+  const [disasterZones, setDisasterZones] = useState([]);
   const [mapKey, setMapKey] = useState(0); // Used to force re-render when dark mode changes
+  const mapRef = useRef();
 
   // Sample campaign data for India with realistic sources
   const sampleCampaigns = [
@@ -79,9 +81,38 @@ const Map = ({ darkMode }) => {
     }
   ];
 
+  // Sample disaster risk zones
+  const sampleDisasterZones = [
+    {
+      id: 1,
+      name: "Kerala Flood Zone",
+      center: [10.8505, 76.2711],
+      radius: 50000, // 50km in meters
+      riskLevel: "high",
+      disasterType: "flood"
+    },
+    {
+      id: 2,
+      name: "Gujarat Earthquake Zone",
+      center: [22.2587, 71.1924],
+      radius: 100000, // 100km in meters
+      riskLevel: "moderate",
+      disasterType: "earthquake"
+    },
+    {
+      id: 3,
+      name: "Odisha Cyclone Zone",
+      center: [20.9517, 85.0985],
+      radius: 75000, // 75km in meters
+      riskLevel: "high",
+      disasterType: "cyclone"
+    }
+  ];
+
   useEffect(() => {
     // Simulate fetching campaign data
     setCampaigns(sampleCampaigns);
+    setDisasterZones(sampleDisasterZones);
     // Force re-render when dark mode changes
     setMapKey(prev => prev + 1);
   }, [darkMode]);
@@ -102,14 +133,35 @@ const Map = ({ darkMode }) => {
     });
   };
 
+  // Get color based on risk level
+  const getRiskColor = (riskLevel) => {
+    switch (riskLevel) {
+      case 'high': return '#ef4444';
+      case 'moderate': return '#f59e0b';
+      case 'low': return '#10b981';
+      default: return '#6b7280';
+    }
+  };
+
+  // Get fill opacity based on risk level
+  const getFillOpacity = (riskLevel) => {
+    switch (riskLevel) {
+      case 'high': return 0.3;
+      case 'moderate': return 0.2;
+      case 'low': return 0.1;
+      default: return 0.1;
+    }
+  };
+
   return (
     <div className={`rounded-2xl overflow-hidden ${darkMode ? 'bg-gray-800' : 'bg-white'} shadow-lg`}>
       <MapContainer 
         key={mapKey} // Force re-render when dark mode changes
         center={center} 
         zoom={5} 
-        style={{ height: '300px', width: '100%' }}
+        style={{ height: '400px', width: '100%' }}
         className={`${darkMode ? 'dark-map' : ''} rounded-2xl`}
+        ref={mapRef}
       >
         <TileLayer
           url={darkMode 
@@ -162,6 +214,31 @@ const Map = ({ darkMode }) => {
               </div>
             </Popup>
           </Marker>
+        ))}
+        {disasterZones.map(zone => (
+          <Circle
+            key={zone.id}
+            center={zone.center}
+            radius={zone.radius}
+            color={getRiskColor(zone.riskLevel)}
+            fillColor={getRiskColor(zone.riskLevel)}
+            fillOpacity={getFillOpacity(zone.riskLevel)}
+            weight={2}
+          >
+            <Popup>
+              <div className={`max-w-xs ${darkMode ? 'dark-popup' : ''}`}>
+                <h3 className={`font-bold text-lg ${darkMode ? 'text-white' : 'text-gray-800'}`}>
+                  {zone.name}
+                </h3>
+                <p className={`text-sm mt-1 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                  Risk Level: <span className="font-semibold capitalize">{zone.riskLevel}</span>
+                </p>
+                <p className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                  Disaster Type: <span className="font-semibold capitalize">{zone.disasterType}</span>
+                </p>
+              </div>
+            </Popup>
+          </Circle>
         ))}
       </MapContainer>
     </div>
