@@ -533,6 +533,18 @@
     "requiredSkills": "Required Skills",
     "requiredVolunteers": "Required Volunteers",
     "priority": "Priority",
+    "search": "Search volunteers...",
+    "sort": {
+      "suitability": "Sort by Suitability",
+      "distance": "Sort by Distance",
+      "experience": "Sort by Experience"
+    },
+    "experience": "Experience",
+    "years": "years",
+    "reassign": "Reassign Volunteers",
+    "regenerate": "Regenerate Plan",
+    "refresh": "Refresh Data",
+    "reschedule": "Reschedule Shifts",
     "communication": {
       "title": "Communication Plan",
       "channels": "Communication Channels"
