@@ -26,6 +26,7 @@ const VolunteerCoordinator = () => {
   const [scheduledShifts, setScheduledShifts] = useState(null);
   const [searchTerm, setSearchTerm] = useState(''); // New state for search
   const [sortBy, setSortBy] = useState('suitability'); // New state for sorting
+  const [performanceMetrics, setPerformanceMetrics] = useState(null); // New state for performance metrics
 
   // Initialize sample data for demonstration purposes
   // This would typically come from an API in a real application
@@ -211,10 +212,68 @@ const VolunteerCoordinator = () => {
       return 0;
     });
 
+  // Calculate performance metrics
+  useEffect(() => {
+    if (volunteers.length > 0 && taskAssignments.length > 0) {
+      // Calculate volunteer utilization rate
+      const assignedVolunteers = new Set(taskAssignments.map(a => a.volunteerId));
+      const utilizationRate = (assignedVolunteers.size / volunteers.length) * 100;
+      
+      // Calculate average suitability score of assigned volunteers
+      const assignedVolunteerScores = taskAssignments.map(assignment => {
+        const volunteer = matchedVolunteers.find(v => v.id === assignment.volunteerId);
+        return volunteer ? volunteer.suitabilityScore : 0;
+      });
+      const avgSuitabilityScore = assignedVolunteerScores.length > 0 
+        ? assignedVolunteerScores.reduce((sum, score) => sum + score, 0) / assignedVolunteerScores.length 
+        : 0;
+      
+      // Calculate shift coverage
+      const shiftCoverage = scheduledShifts 
+        ? (scheduledShifts.filledShifts / scheduledShifts.totalShifts) * 100 
+        : 0;
+      
+      setPerformanceMetrics({
+        utilizationRate: Math.round(utilizationRate),
+        avgSuitabilityScore: Math.round(avgSuitabilityScore),
+        shiftCoverage: Math.round(shiftCoverage),
+        totalVolunteers: volunteers.length,
+        assignedVolunteers: assignedVolunteers.size
+      });
+    }
+  }, [volunteers, taskAssignments, matchedVolunteers, scheduledShifts]);
+
   return (
     <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
       <h2 className="text-2xl font-bold text-gray-800 mb-4">{t('volunteerCoordinator.title')}</h2>
       <p className="text-gray-600 mb-6">{t('volunteerCoordinator.description')}</p>
+      
+      {/* Performance Metrics Dashboard */}
+      {performanceMetrics && (
+        <div className="mb-6">
+          <h3 className="text-lg font-semibold text-gray-800 mb-4">{t('volunteerCoordinator.performance.title')}</h3>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div className="bg-blue-50 p-4 rounded-lg">
+              <div className="text-2xl font-bold text-blue-700">{performanceMetrics.utilizationRate}%</div>
+              <div className="text-sm text-blue-600">{t('volunteerCoordinator.performance.utilization')}</div>
+            </div>
+            <div className="bg-green-50 p-4 rounded-lg">
+              <div className="text-2xl font-bold text-green-700">{performanceMetrics.avgSuitabilityScore}%</div>
+              <div className="text-sm text-green-600">{t('volunteerCoordinator.performance.avgSuitability')}</div>
+            </div>
+            <div className="bg-yellow-50 p-4 rounded-lg">
+              <div className="text-2xl font-bold text-yellow-700">{performanceMetrics.shiftCoverage}%</div>
+              <div className="text-sm text-yellow-600">{t('volunteerCoordinator.performance.shiftCoverage')}</div>
+            </div>
+            <div className="bg-purple-50 p-4 rounded-lg">
+              <div className="text-2xl font-bold text-purple-700">
+                {performanceMetrics.assignedVolunteers}/{performanceMetrics.totalVolunteers}
+              </div>
+              <div className="text-sm text-purple-600">{t('volunteerCoordinator.performance.assigned')}</div>
+            </div>
+          </div>
+        </div>
+      )}
       
       {/* Tab Navigation */}
       <div className="border-b border-gray-200 mb-6">

@@ -10,6 +10,7 @@ const DisasterPrediction = () => {
   const [weatherData, setWeatherData] = useState(null);
   const [riskLevel, setRiskLevel] = useState('low');
   const [activeTab, setActiveTab] = useState('predictions');
+  const [alerts, setAlerts] = useState([]); // New state for alerts
 
   // Sample regions for India
   const regions = [
@@ -36,6 +37,63 @@ const DisasterPrediction = () => {
     setWeatherData(data);
   };
 
+  // Generate alerts based on predictions and weather data
+  const generateAlerts = (predictions, weatherData) => {
+    const newAlerts = [];
+    
+    // Check for high risk predictions
+    predictions.forEach(prediction => {
+      if (prediction.riskScore >= 80) {
+        newAlerts.push({
+          id: `risk-${Date.now()}-${prediction.type}`,
+          type: 'danger',
+          message: t('disasterPrediction.alerts.highRisk', { 
+            disaster: t(`disasterTypes.${prediction.type}`),
+            score: prediction.riskScore 
+          }),
+          timestamp: new Date().toISOString()
+        });
+      } else if (prediction.riskScore >= 60) {
+        newAlerts.push({
+          id: `risk-${Date.now()}-${prediction.type}`,
+          type: 'warning',
+          message: t('disasterPrediction.alerts.moderateRisk', { 
+            disaster: t(`disasterTypes.${prediction.type}`),
+            score: prediction.riskScore 
+          }),
+          timestamp: new Date().toISOString()
+        });
+      }
+    });
+    
+    // Check for extreme weather conditions
+    if (weatherData) {
+      if (weatherData.precipitation > 150) {
+        newAlerts.push({
+          id: `weather-${Date.now()}-precipitation`,
+          type: 'warning',
+          message: t('disasterPrediction.alerts.heavyRain', { 
+            amount: weatherData.precipitation 
+          }),
+          timestamp: new Date().toISOString()
+        });
+      }
+      
+      if (weatherData.windSpeed > 100) {
+        newAlerts.push({
+          id: `weather-${Date.now()}-wind`,
+          type: 'danger',
+          message: t('disasterPrediction.alerts.highWinds', { 
+            speed: weatherData.windSpeed 
+          }),
+          timestamp: new Date().toISOString()
+        });
+      }
+    }
+    
+    return newAlerts;
+  };
+
   const handleRegionChange = (e) => {
     const regionId = e.target.value;
     setSelectedRegion(regionId);
@@ -48,6 +106,10 @@ const DisasterPrediction = () => {
       
       // Load weather data
       loadWeatherData(region);
+      
+      // Generate alerts
+      const alerts = generateAlerts(pred, getWeatherData(region));
+      setAlerts(alerts);
       
       // Determine risk level based on predictions
       const maxRisk = Math.max(...pred.map(p => p.riskScore));
@@ -81,10 +143,38 @@ const DisasterPrediction = () => {
     }
   };
 
+  // Get alert color based on type
+  const getAlertColor = (type) => {
+    switch (type) {
+      case 'danger': return 'bg-red-100 text-red-800 border-red-200';
+      case 'warning': return 'bg-yellow-100 text-yellow-800 border-yellow-200';
+      default: return 'bg-blue-100 text-blue-800 border-blue-200';
+    }
+  };
+
   return (
     <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
       <h2 className="text-2xl font-bold text-gray-800 mb-4">{t('disasterPrediction.title')}</h2>
       <p className="text-gray-600 mb-6">{t('disasterPrediction.description')}</p>
+      
+      {/* Alerts Section */}
+      {alerts.length > 0 && (
+        <div className="mb-6">
+          <h3 className="text-lg font-semibold text-gray-800 mb-2">{t('disasterPrediction.alerts.title')}</h3>
+          <div className="space-y-2">
+            {alerts.map(alert => (
+              <div key={alert.id} className={`p-3 rounded-lg border ${getAlertColor(alert.type)}`}>
+                <div className="flex justify-between items-start">
+                  <span>{alert.message}</span>
+                  <span className="text-xs opacity-75">
+                    {new Date(alert.timestamp).toLocaleTimeString()}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
       
       {/* Region Selector */}
       <div className="mb-6">
