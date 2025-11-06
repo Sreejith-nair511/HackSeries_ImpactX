@@ -18,6 +18,7 @@ const EmergencyResourceTracker = () => {
   const [resourceTypes, setResourceTypes] = useState([]);
   const [sortBy, setSortBy] = useState('name'); // New state for sorting
   const [filterByType, setFilterByType] = useState(''); // New state for filtering by type
+  const [allocationData, setAllocationData] = useState([]); // New state for resource allocation visualization
 
   useEffect(() => {
     // Load resource types
@@ -70,6 +71,28 @@ const EmergencyResourceTracker = () => {
     }
   };
 
+  // Initialize allocation data for visualization
+  useEffect(() => {
+    // Sample allocation data - in a real app this would come from the backend
+    const sampleAllocationData = [
+      { type: 'medical', allocated: 45, available: 55, total: 100 },
+      { type: 'food', allocated: 70, available: 30, total: 100 },
+      { type: 'rescue', allocated: 30, available: 70, total: 100 },
+      { type: 'shelter', allocated: 60, available: 40, total: 100 },
+      { type: 'communication', allocated: 20, available: 80, total: 100 },
+      { type: 'transport', allocated: 40, available: 60, total: 100 }
+    ];
+    setAllocationData(sampleAllocationData);
+  }, []);
+
+  // Get color based on allocation percentage
+  const getAllocationColor = (percentage) => {
+    if (percentage >= 80) return 'bg-red-500';
+    if (percentage >= 60) return 'bg-orange-500';
+    if (percentage >= 40) return 'bg-yellow-500';
+    return 'bg-green-500';
+  };
+
   const getUrgencyColor = (urgency) => {
     switch (urgency) {
       case 'critical': return 'bg-red-100 text-red-800';
@@ -101,6 +124,41 @@ const EmergencyResourceTracker = () => {
   return (
     <div className="max-w-6xl mx-auto p-4">
       <h1 className="text-3xl font-bold mb-6 text-gray-800">{t('emergencyResourceTracker.title')}</h1>
+      
+      {/* Resource Allocation Visualization */}
+      <div className="mb-8">
+        <h2 className="text-xl font-semibold text-gray-800 mb-4">{t('emergencyResourceTracker.allocation.title')}</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {allocationData.map((item, index) => {
+            const allocatedPercentage = (item.allocated / item.total) * 100;
+            const availablePercentage = (item.available / item.total) * 100;
+            const resourceType = resourceTypes.find(type => type.id === item.type);
+            
+            return (
+              <div key={index} className="bg-white rounded-lg shadow p-4">
+                <div className="flex justify-between items-center mb-2">
+                  <h3 className="font-medium text-gray-700">
+                    {resourceType ? `${resourceType.icon} ${resourceType.name}` : item.type}
+                  </h3>
+                  <span className="text-sm font-medium text-gray-500">
+                    {item.allocated}/{item.total}
+                  </span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-2 mb-2">
+                  <div 
+                    className={`h-2 rounded-full ${getAllocationColor(allocatedPercentage)}`}
+                    style={{ width: `${allocatedPercentage}%` }}
+                  ></div>
+                </div>
+                <div className="flex justify-between text-xs text-gray-500">
+                  <span>{t('emergencyResourceTracker.allocation.allocated')}: {allocatedPercentage.toFixed(0)}%</span>
+                  <span>{t('emergencyResourceTracker.allocation.available')}: {availablePercentage.toFixed(0)}%</span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
       
       {/* Statistics Overview */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
