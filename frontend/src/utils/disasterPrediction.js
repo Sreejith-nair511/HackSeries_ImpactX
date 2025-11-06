@@ -275,3 +275,67 @@ export const getWeatherData = (region) => {
   
   return weatherData[region.id] || weatherData.kerala;
 };
+
+/**
+ * Generate disaster alerts based on predictions and weather data
+ * @param {Array} predictions - Disaster predictions
+ * @param {Object} weatherData - Current weather data
+ * @returns {Array} Array of alert objects
+ */
+export const generateDisasterAlerts = (predictions, weatherData) => {
+  const alerts = [];
+  
+  // Check for high risk predictions
+  predictions.forEach(prediction => {
+    if (prediction.riskScore >= 80) {
+      alerts.push({
+        id: `risk-${Date.now()}-${prediction.type}`,
+        type: 'danger',
+        message: `High risk of ${prediction.type} detected (${prediction.riskScore}% probability)`,
+        timestamp: new Date().toISOString()
+      });
+    } else if (prediction.riskScore >= 60) {
+      alerts.push({
+        id: `risk-${Date.now()}-${prediction.type}`,
+        type: 'warning',
+        message: `Moderate risk of ${prediction.type} detected (${prediction.riskScore}% probability)`,
+        timestamp: new Date().toISOString()
+      });
+    }
+  });
+  
+  // Check for extreme weather conditions
+  if (weatherData) {
+    if (weatherData.precipitation > 150) {
+      alerts.push({
+        id: `weather-${Date.now()}-precipitation`,
+        type: 'warning',
+        message: `Heavy rainfall expected (${weatherData.precipitation}mm)`,
+        timestamp: new Date().toISOString()
+      });
+    }
+    
+    if (weatherData.windSpeed > 100) {
+      alerts.push({
+        id: `weather-${Date.now()}-wind`,
+        type: 'danger',
+        message: `High wind speeds detected (${weatherData.windSpeed} km/h)`,
+        timestamp: new Date().toISOString()
+      });
+    }
+  }
+  
+  return alerts;
+};
+
+/**
+ * Get risk level based on risk score
+ * @param {number} riskScore - The risk score (0-100)
+ * @returns {string} Risk level (low, moderate, high, critical)
+ */
+export const getRiskLevel = (riskScore) => {
+  if (riskScore >= 80) return 'critical';
+  if (riskScore >= 60) return 'high';
+  if (riskScore >= 40) return 'moderate';
+  return 'low';
+};
