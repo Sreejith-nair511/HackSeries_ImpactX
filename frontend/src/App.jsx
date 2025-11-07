@@ -13,6 +13,7 @@ import AuthTest from './pages/AuthTest';
 import IVRSystem from './pages/IVRSystem'; // Added IVR System import
 import DisasterStatisticsPage from './pages/DisasterStatisticsPage'; // Added Disaster Statistics Page import
 import DisasterPredictionPage from './pages/DisasterPredictionPage'; // Added Disaster Prediction Page import
+import DisasterRecoveryTrackerPage from './pages/DisasterRecoveryTrackerPage'; // Added Disaster Recovery Tracker Page import
 
 function App() {
   const { t, i18n } = useTranslation();
@@ -134,6 +135,7 @@ function App() {
             <Route path="/ivr" element={<IVRSystem />} /> {/* Added IVR System route */}
             <Route path="/stats" element={<DisasterStatisticsPage />} /> {/* Added Disaster Statistics route */}
             <Route path="/prediction" element={<DisasterPredictionPage />} /> {/* Added Disaster Prediction route */}
+            <Route path="/recovery" element={<DisasterRecoveryTrackerPage />} /> {/* Added Disaster Recovery Tracker route */}
           </Routes>
         </main>
         

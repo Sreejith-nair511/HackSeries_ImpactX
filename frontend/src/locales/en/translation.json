@@ -466,5 +466,66 @@
     },
     "safetyTip": "Safety Tip",
     "safetyTipDesc": "Save these numbers in your phone and keep this information easily accessible. In an emergency, every second counts."
+  },
+  "recoveryTracker": {
+    "pageTitle": "Disaster Recovery Tracker",
+    "pageDescription": "Monitor and track the progress of disaster recovery efforts across different regions",
+    "aboutTitle": "About Disaster Recovery Tracking",
+    "aboutDescription": "The Disaster Recovery Tracker provides comprehensive monitoring of post-disaster recovery efforts, helping stakeholders understand progress and identify areas needing attention.",
+    "benefit1": "Real-time visibility into recovery progress",
+    "benefit2": "Identification of potential bottlenecks and challenges",
+    "benefit3": "Resource allocation optimization",
+    "benefit4": "Stakeholder communication and transparency",
+    "title": "Disaster Recovery Tracker",
+    "selectRegion": "Select Region",
+    "disasterType": "Disaster Type",
+    "startDate": "Start Date",
+    "endDate": "Target End Date",
+    "overallProgress": "Overall Progress",
+    "progressTrend": "Recovery Progress Trend",
+    "progress": "Progress",
+    "milestones": {
+      "title": "Recovery Milestones",
+      "housing": "Housing Reconstruction",
+      "infrastructure": "Infrastructure Restoration",
+      "healthcare": "Healthcare Facilities",
+      "education": "Educational Institutions",
+      "livelihood": "Livelihood Restoration",
+      "environment": "Environmental Rehabilitation"
+    },
+    "targetDate": "Target Date",
+    "actualDate": "Actual Completion Date",
+    "status": {
+      "completed": "Completed",
+      "in-progress": "In Progress",
+      "not-started": "Not Started"
+    },
+    "resourceAllocation": "Resource Allocation",
+    "resourceBreakdown": "Resource Breakdown",
+    "resources": {
+      "housing": "Housing",
+      "infrastructure": "Infrastructure",
+      "healthcare": "Healthcare",
+      "education": "Education",
+      "livelihood": "Livelihood",
+      "admin": "Administration"
+    },
+    "allocated": "Allocated",
+    "spent": "Spent",
+    "percentage": "Percentage",
+    "challenges": {
+      "title": "Recovery Challenges",
+      "resolved": "Resolved",
+      "funding": "Funding Shortage",
+      "logistics": "Logistics Challenges",
+      "coordination": "Coordination Issues",
+      "community": "Community Resistance"
+    },
+    "severity": {
+      "high": "High",
+      "medium": "Medium",
+      "low": "Low"
+    },
+    "noData": "No recovery data available for the selected region."
   }
 }
