@@ -376,20 +376,22 @@
     "disasterType": "आपदा प्रकार",
     "severityLevel": "गंभीरता स्तर",
     "region": "क्षेत्र",
+    "selectDisasterAndRegion": "प्रतिक्रिया योजना उत्पन्न करने के लिए एक आपदा प्रकार और क्षेत्र चुनें",
     "disasterInfo": "{{region}} के लिए {{disaster}} प्रतिक्रिया योजना",
-    "immediateActions": "तत्काल कार्रवाइयाँ",
+    "affectedArea": "प्रभावित क्षेत्र",
+    "affectedPopulation": "प्रभावित जनसंख्या",
+    "immediateActions": "तत्काल कार्रवाई",
     "resourceAllocation": "संसाधन आवंटन",
     "teams": "टीमें",
     "equipmentAndSupplies": "उपकरण और आपूर्ति",
     "timeline": "प्रतिक्रिया समयरेखा",
     "coordination": "समन्वय इकाइयाँ",
     "specialConsiderations": "विशेष विचार",
-    "selectDisasterAndRegion": "एक प्रतिक्रिया योजना तैयार करने के लिए एक आपदा प्रकार, गंभीरता स्तर और क्षेत्र चुनें",
     "phases": {
-      "immediate": "तत्काल प्रतिक्रिया (0-2 घंटे)",
-      "shortTerm": "अल्पकालिक प्रतिक्रिया (2-24 घंटे)",
-      "mediumTerm": "मध्यकालिक पुनर्प्राप्ति (1-30 दिन)",
-      "longTerm": "दीर्घकालिक पुनर्निर्माण (1-36 महीने)"
+      "immediate": "तत्काल प्रतिक्रिया",
+      "shortTerm": "अल्पकालिक प्रतिक्रिया",
+      "mediumTerm": "मध्यकालिक पुनर्वास",
+      "longTerm": "दीर्घकालिक पुनर्निर्माण"
     },
     "severity": {
       "minor": "कम",
@@ -397,7 +399,23 @@
       "significant": "महत्वपूर्ण",
       "severe": "गंभीर",
       "catastrophic": "विनाशकारी"
-    }
+    },
+    "export": "निर्यात करें",
+    "exportJSON": "JSON के रूप में निर्यात करें",
+    "exportCSV": "CSV के रूप में निर्यात करें",
+    "savePlan": "योजना सहेजें",
+    "comparePlans": "योजनाओं की तुलना करें",
+    "customScenario": "कस्टम परिदृश्य",
+    "useStandard": "मानक का उपयोग करें",
+    "resourceDistribution": "संसाधन वितरण",
+    "teamAllocation": "टीम आवंटन",
+    "quantity": "मात्रा",
+    "numberOfTeams": "टीमों की संख्या",
+    "planComparison": "योजना तुलना",
+    "currentPlan": "वर्तमान योजना",
+    "savedPlan": "सहेजी गई योजना",
+    "totalResources": "कुल संसाधन",
+    "noSavedPlans": "तुलना के लिए कोई सहेजी गई योजना उपलब्ध नहीं है"
   },
   "recoveryPlanner": {
     "title": "आपदा पुनर्प्राप्ति योजनाकार",

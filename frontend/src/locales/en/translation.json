@@ -369,5 +369,51 @@
       "invalidLongitude": "Invalid longitude value (must be between -180 and 180)",
       "invalidAffectedPeople": "Affected people count cannot be negative"
     }
+  },
+  "responsePlanner": {
+    "title": "Disaster Response Planner",
+    "disasterType": "Disaster Type",
+    "severityLevel": "Severity Level",
+    "region": "Region",
+    "selectDisasterAndRegion": "Select a disaster type and region to generate a response plan",
+    "disasterInfo": "{{disaster}} Response Plan for {{region}}",
+    "affectedArea": "Affected Area",
+    "affectedPopulation": "Affected Population",
+    "immediateActions": "Immediate Actions",
+    "resourceAllocation": "Resource Allocation",
+    "teams": "Teams",
+    "equipmentAndSupplies": "Equipment & Supplies",
+    "timeline": "Response Timeline",
+    "coordination": "Coordination Entities",
+    "specialConsiderations": "Special Considerations",
+    "phases": {
+      "immediate": "Immediate Response",
+      "shortTerm": "Short-term Response",
+      "mediumTerm": "Medium-term Recovery",
+      "longTerm": "Long-term Reconstruction"
+    },
+    "severity": {
+      "minor": "Minor",
+      "moderate": "Moderate",
+      "significant": "Significant",
+      "severe": "Severe",
+      "catastrophic": "Catastrophic"
+    },
+    "export": "Export",
+    "exportJSON": "Export as JSON",
+    "exportCSV": "Export as CSV",
+    "savePlan": "Save Plan",
+    "comparePlans": "Compare Plans",
+    "customScenario": "Custom Scenario",
+    "useStandard": "Use Standard",
+    "resourceDistribution": "Resource Distribution",
+    "teamAllocation": "Team Allocation",
+    "quantity": "Quantity",
+    "numberOfTeams": "Number of Teams",
+    "planComparison": "Plan Comparison",
+    "currentPlan": "Current Plan",
+    "savedPlan": "Saved Plan",
+    "totalResources": "Total Resources",
+    "noSavedPlans": "No saved plans available for comparison"
   }
 }
