@@ -527,5 +527,47 @@
       "low": "Low"
     },
     "noData": "No recovery data available for the selected region."
+  },
+  "weather": {
+    "title": "Weather Monitor",
+    "loading": "Loading...",
+    "refresh": "Refresh",
+    "data_not_available": "Weather data not available",
+    "fetch_error": "Error fetching weather data",
+    "conditions": "Current Conditions",
+    "temperature": "Temperature",
+    "humidity": "Humidity",
+    "wind_speed": "Wind Speed",
+    "pressure": "Pressure",
+    "visibility": "Visibility",
+    "risk_assessment": "Risk Assessment",
+    "risk_level": "Risk Level",
+    "alerts": "Alerts",
+    "preparedness_recommendations": "Preparedness Recommendations",
+    "forecast": "Weather Forecast",
+    "high": "High",
+    "low": "Low",
+    "show_trends": "Show Trends",
+    "hide_trends": "Hide Trends",
+    "trend_analysis": "Trend Analysis",
+    "temperature_trend": "Temperature Trend",
+    "condition_distribution": "Weather Condition Distribution",
+    "conditions": {
+      "sunny": "Sunny",
+      "cloudy": "Cloudy",
+      "rainy": "Rainy",
+      "stormy": "Stormy"
+    },
+    "days": "Days",
+    "trend": {
+      "increasing": "Increasing by {{value}}",
+      "decreasing": "Decreasing by {{value}}",
+      "stable": "Stable"
+    },
+    "time_range": {
+      "week": "Last Week",
+      "month": "Last Month",
+      "year": "Last Year"
+    }
   }
 }
