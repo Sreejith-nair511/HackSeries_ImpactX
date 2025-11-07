@@ -6,8 +6,11 @@ const DisasterImpactAssessment = () => {
   const { t } = useTranslation();
   const [disasterType, setDisasterType] = useState('flood');
   const [region, setRegion] = useState('kerala');
+  const [severity, setSeverity] = useState(3); // New severity level (1-5)
+  const [populationDensity, setPopulationDensity] = useState(500); // New population density factor
   const [impactReport, setImpactReport] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [showPredictiveModel, setShowPredictiveModel] = useState(false); // New state for predictive model
 
   // Sample disaster data for different regions and disaster types
   const disasterData = {
@@ -82,19 +85,54 @@ const DisasterImpactAssessment = () => {
     }
   };
 
+  // Predictive modeling function
+  const predictImpact = (baseData, severity, populationDensity) => {
+    // Adjust factors based on severity and population density
+    const adjustedData = {
+      economicFactors: {
+        ...baseData.economicFactors,
+        affectedPopulation: Math.round(baseData.economicFactors.affectedPopulation * (severity / 3) * (populationDensity / 500)),
+        infrastructureDamage: Math.min(1, baseData.economicFactors.infrastructureDamage * (severity / 3)),
+        businessDisruption: Math.round(baseData.economicFactors.businessDisruption * (severity / 3)),
+        agriculturalLoss: Math.min(100, baseData.economicFactors.agriculturalLoss * (severity / 3))
+      },
+      socialFactors: {
+        ...baseData.socialFactors,
+        affectedPopulation: Math.round(baseData.socialFactors.affectedPopulation * (severity / 3) * (populationDensity / 500)),
+        displacedPopulation: Math.round(baseData.socialFactors.displacedPopulation * (severity / 3) * (populationDensity / 500)),
+        casualties: Math.round(baseData.socialFactors.casualties * (severity / 3) * (populationDensity / 500)),
+        healthcareCapacity: Math.min(1, baseData.socialFactors.healthcareCapacity * (severity / 3)),
+        educationDisruption: Math.round(baseData.socialFactors.educationDisruption * (severity / 3))
+      },
+      environmentalFactors: {
+        ...baseData.environmentalFactors,
+        areaAffected: Math.round(baseData.environmentalFactors.areaAffected * (severity / 3)),
+        forestDamage: Math.min(100, baseData.environmentalFactors.forestDamage * (severity / 3)),
+        waterContamination: Math.min(10, baseData.environmentalFactors.waterContamination * (severity / 3)),
+        airQualityDegradation: Math.min(10, baseData.environmentalFactors.airQualityDegradation * (severity / 3)),
+        wildlifeImpact: Math.min(10, baseData.environmentalFactors.wildlifeImpact * (severity / 3))
+      }
+    };
+    
+    return adjustedData;
+  };
+
   useEffect(() => {
     if (disasterType && region) {
       setIsLoading(true);
       
       // Simulate API call delay
       setTimeout(() => {
-        const data = disasterData[disasterType];
+        const baseData = disasterData[disasterType];
+        const data = showPredictiveModel 
+          ? predictImpact(baseData, severity, populationDensity)
+          : baseData;
         const report = generateImpactReport(data);
         setImpactReport(report);
         setIsLoading(false);
       }, 800);
     }
-  }, [disasterType, region]);
+  }, [disasterType, region, severity, populationDensity, showPredictiveModel]);
 
   const disasterTypes = [
     { value: 'flood', label: t('common.disasterTypes.flood') },
@@ -163,6 +201,61 @@ const DisasterImpactAssessment = () => {
             ))}
           </select>
         </div>
+        
+        {/* New controls for predictive modeling */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            {t('impactAssessment.severityLevel')}
+          </label>
+          <div className="flex items-center space-x-2">
+            <input
+              type="range"
+              min="1"
+              max="5"
+              value={severity}
+              onChange={(e) => setSeverity(parseInt(e.target.value))}
+              className="w-full"
+            />
+            <span className="text-sm font-medium w-8">{severity}</span>
+          </div>
+          <div className="flex justify-between text-xs text-gray-500 mt-1">
+            <span>{t('impactAssessment.severity.low')}</span>
+            <span>{t('impactAssessment.severity.high')}</span>
+          </div>
+        </div>
+        
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            {t('impactAssessment.populationDensity')} (people/km²)
+          </label>
+          <input
+            type="number"
+            value={populationDensity}
+            onChange={(e) => setPopulationDensity(parseInt(e.target.value) || 0)}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            min="1"
+            max="2000"
+          />
+        </div>
+      </div>
+      
+      {/* Toggle for predictive model */}
+      <div className="mb-6">
+        <button
+          onClick={() => setShowPredictiveModel(!showPredictiveModel)}
+          className={`px-4 py-2 rounded-md text-sm font-medium ${
+            showPredictiveModel 
+              ? 'bg-indigo-600 text-white' 
+              : 'bg-gray-200 text-gray-800 hover:bg-gray-300'
+          }`}
+        >
+          {showPredictiveModel 
+            ? t('impactAssessment.predictiveModelOn') 
+            : t('impactAssessment.predictiveModelOff')}
+        </button>
+        <p className="text-sm text-gray-600 mt-2">
+          {t('impactAssessment.predictiveModelDescription')}
+        </p>
       </div>
 
       {isLoading ? (

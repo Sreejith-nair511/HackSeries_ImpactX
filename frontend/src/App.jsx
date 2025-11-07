@@ -15,6 +15,8 @@ import DisasterStatisticsPage from './pages/DisasterStatisticsPage'; // Added Di
 import DisasterPredictionPage from './pages/DisasterPredictionPage'; // Added Disaster Prediction Page import
 import DisasterRecoveryTrackerPage from './pages/DisasterRecoveryTrackerPage'; // Added Disaster Recovery Tracker Page import
 import CommunityFeedbackPage from './pages/CommunityFeedbackPage'; // Added Community Feedback Page import
+import ResourceDeploymentTrackerPage from './pages/ResourceDeploymentTrackerPage'; // Added Resource Deployment Tracker Page import
+import VolunteerRecognitionPage from './pages/VolunteerRecognitionPage'; // Added Volunteer Recognition Page import
 
 function App() {
   const { t, i18n } = useTranslation();
@@ -138,6 +140,8 @@ function App() {
             <Route path="/prediction" element={<DisasterPredictionPage />} /> {/* Added Disaster Prediction route */}
             <Route path="/recovery" element={<DisasterRecoveryTrackerPage />} /> {/* Added Disaster Recovery Tracker route */}
             <Route path="/feedback" element={<CommunityFeedbackPage />} /> {/* Added Community Feedback route */}
+            <Route path="/resources" element={<ResourceDeploymentTrackerPage />} /> {/* Added Resource Deployment Tracker route */}
+            <Route path="/volunteer-recognition" element={<VolunteerRecognitionPage />} /> {/* Added Volunteer Recognition route */}
           </Routes>
         </main>
         
