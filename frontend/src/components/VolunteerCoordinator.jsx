@@ -27,6 +27,7 @@ const VolunteerCoordinator = () => {
   const [searchTerm, setSearchTerm] = useState(''); // New state for search
   const [sortBy, setSortBy] = useState('suitability'); // New state for sorting
   const [performanceMetrics, setPerformanceMetrics] = useState(null); // New state for performance metrics
+  const [volunteerEngagement, setVolunteerEngagement] = useState(null); // New state for engagement metrics
 
   // Initialize sample data for demonstration purposes
   // This would typically come from an API in a real application
@@ -233,15 +234,43 @@ const VolunteerCoordinator = () => {
         ? (scheduledShifts.filledShifts / scheduledShifts.totalShifts) * 100 
         : 0;
       
+      // Calculate volunteer engagement metrics
+      const totalVolunteerHours = volunteerHours.reduce((sum, record) => sum + record.hours, 0);
+      const avgHoursPerVolunteer = totalVolunteerHours / volunteers.length;
+      
+      // Calculate skill utilization
+      const allRequiredSkills = tasks.flatMap(task => task.requiredSkills);
+      const allVolunteerSkills = volunteers.flatMap(volunteer => volunteer.skills);
+      const skillMatchCount = allVolunteerSkills.filter(skill => allRequiredSkills.includes(skill)).length;
+      const skillUtilizationRate = allRequiredSkills.length > 0 
+        ? (skillMatchCount / allRequiredSkills.length) * 100 
+        : 0;
+      
       setPerformanceMetrics({
         utilizationRate: Math.round(utilizationRate),
         avgSuitabilityScore: Math.round(avgSuitabilityScore),
         shiftCoverage: Math.round(shiftCoverage),
         totalVolunteers: volunteers.length,
-        assignedVolunteers: assignedVolunteers.size
+        assignedVolunteers: assignedVolunteers.size,
+        totalVolunteerHours,
+        avgHoursPerVolunteer: Math.round(avgHoursPerVolunteer * 10) / 10,
+        skillUtilizationRate: Math.round(skillUtilizationRate)
       });
+      
+      // Calculate volunteer engagement metrics
+      const engagementMetrics = {
+        totalVolunteers: volunteers.length,
+        activeVolunteers: assignedVolunteers.size,
+        inactiveVolunteers: volunteers.length - assignedVolunteers.size,
+        avgEngagementScore: Math.round(avgSuitabilityScore),
+        highEngagementVolunteers: matchedVolunteers.filter(v => v.suitabilityScore >= 80).length,
+        mediumEngagementVolunteers: matchedVolunteers.filter(v => v.suitabilityScore >= 50 && v.suitabilityScore < 80).length,
+        lowEngagementVolunteers: matchedVolunteers.filter(v => v.suitabilityScore < 50).length
+      };
+      
+      setVolunteerEngagement(engagementMetrics);
     }
-  }, [volunteers, taskAssignments, matchedVolunteers, scheduledShifts]);
+  }, [volunteers, taskAssignments, matchedVolunteers, scheduledShifts, volunteerHours]);
 
   return (
     <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
@@ -252,7 +281,7 @@ const VolunteerCoordinator = () => {
       {performanceMetrics && (
         <div className="mb-6">
           <h3 className="text-lg font-semibold text-gray-800 mb-4">{t('volunteerCoordinator.performance.title')}</h3>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
             <div className="bg-blue-50 p-4 rounded-lg">
               <div className="text-2xl font-bold text-blue-700">{performanceMetrics.utilizationRate}%</div>
               <div className="text-sm text-blue-600">{t('volunteerCoordinator.performance.utilization')}</div>
@@ -270,6 +299,81 @@ const VolunteerCoordinator = () => {
                 {performanceMetrics.assignedVolunteers}/{performanceMetrics.totalVolunteers}
               </div>
               <div className="text-sm text-purple-600">{t('volunteerCoordinator.performance.assigned')}</div>
+            </div>
+            <div className="bg-indigo-50 p-4 rounded-lg">
+              <div className="text-2xl font-bold text-indigo-700">{performanceMetrics.totalVolunteerHours}h</div>
+              <div className="text-sm text-indigo-600">{t('volunteerCoordinator.totalHours')}</div>
+            </div>
+            <div className="bg-pink-50 p-4 rounded-lg">
+              <div className="text-2xl font-bold text-pink-700">{performanceMetrics.skillUtilizationRate}%</div>
+              <div className="text-sm text-pink-600">{t('volunteerCoordinator.skillUtilization')}</div>
+            </div>
+          </div>
+        </div>
+      )}
+      
+      {/* Volunteer Engagement Dashboard */}
+      {volunteerEngagement && (
+        <div className="mb-6">
+          <h3 className="text-lg font-semibold text-gray-800 mb-4">{t('volunteerCoordinator.engagement.title')}</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+            <div className="bg-blue-50 p-4 rounded-lg">
+              <div className="text-2xl font-bold text-blue-700">{volunteerEngagement.totalVolunteers}</div>
+              <div className="text-sm text-blue-600">{t('volunteerCoordinator.totalVolunteers')}</div>
+            </div>
+            <div className="bg-green-50 p-4 rounded-lg">
+              <div className="text-2xl font-bold text-green-700">{volunteerEngagement.activeVolunteers}</div>
+              <div className="text-sm text-green-600">{t('volunteerCoordinator.engagement.active')}</div>
+            </div>
+            <div className="bg-yellow-50 p-4 rounded-lg">
+              <div className="text-2xl font-bold text-yellow-700">{volunteerEngagement.inactiveVolunteers}</div>
+              <div className="text-sm text-yellow-600">{t('volunteerCoordinator.engagement.inactive')}</div>
+            </div>
+            <div className="bg-purple-50 p-4 rounded-lg">
+              <div className="text-2xl font-bold text-purple-700">{volunteerEngagement.avgEngagementScore}%</div>
+              <div className="text-sm text-purple-600">{t('volunteerCoordinator.engagement.averageScore')}</div>
+            </div>
+            <div className="bg-pink-50 p-4 rounded-lg">
+              <div className="text-2xl font-bold text-pink-700">{volunteerEngagement.highEngagementVolunteers}</div>
+              <div className="text-sm text-pink-600">{t('volunteerCoordinator.engagement.high')}</div>
+            </div>
+          </div>
+          
+          {/* Engagement Distribution Chart */}
+          <div className="mt-4 bg-gray-50 p-4 rounded-lg">
+            <h4 className="font-medium text-gray-700 mb-3">{t('volunteerCoordinator.engagement.distribution')}</h4>
+            <div className="flex items-center">
+              <div className="w-full bg-gray-200 rounded-full h-4">
+                <div 
+                  className="bg-green-500 h-4 rounded-full" 
+                  style={{ width: `${(volunteerEngagement.highEngagementVolunteers / volunteerEngagement.totalVolunteers) * 100}%` }}
+                  title={`${volunteerEngagement.highEngagementVolunteers} High Engagement`}
+                ></div>
+                <div 
+                  className="bg-yellow-500 h-4 rounded-full" 
+                  style={{ width: `${(volunteerEngagement.mediumEngagementVolunteers / volunteerEngagement.totalVolunteers) * 100}%` }}
+                  title={`${volunteerEngagement.mediumEngagementVolunteers} Medium Engagement`}
+                ></div>
+                <div 
+                  className="bg-red-500 h-4 rounded-full" 
+                  style={{ width: `${(volunteerEngagement.lowEngagementVolunteers / volunteerEngagement.totalVolunteers) * 100}%` }}
+                  title={`${volunteerEngagement.lowEngagementVolunteers} Low Engagement`}
+                ></div>
+              </div>
+              <div className="ml-4 flex space-x-4 text-sm">
+                <span className="flex items-center">
+                  <span className="w-3 h-3 bg-green-500 rounded-full mr-1"></span>
+                  {t('volunteerCoordinator.engagement.high')}
+                </span>
+                <span className="flex items-center">
+                  <span className="w-3 h-3 bg-yellow-500 rounded-full mr-1"></span>
+                  {t('volunteerCoordinator.engagement.medium')}
+                </span>
+                <span className="flex items-center">
+                  <span className="w-3 h-3 bg-red-500 rounded-full mr-1"></span>
+                  {t('volunteerCoordinator.engagement.low')}
+                </span>
+              </div>
             </div>
           </div>
         </div>

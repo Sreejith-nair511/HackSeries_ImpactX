@@ -205,7 +205,18 @@
       "avgSuitability": "Avg. Suitability Score",
       "shiftCoverage": "Shift Coverage",
       "assigned": "Volunteers Assigned"
-    }
+    },
+    "engagement": {
+      "title": "Volunteer Engagement",
+      "active": "Active Volunteers",
+      "inactive": "Inactive Volunteers",
+      "averageScore": "Avg. Engagement Score",
+      "high": "High Engagement",
+      "medium": "Medium Engagement",
+      "low": "Low Engagement",
+      "distribution": "Engagement Distribution"
+    },
+    "skillUtilization": "Skill Utilization Rate"
   },
   "map": {
     "title": "Disaster Response Map",
