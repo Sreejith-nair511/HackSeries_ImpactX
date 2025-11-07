@@ -22,6 +22,7 @@ const Navigation = ({
   const [isReadingAssistanceOpen, setIsReadingAssistanceOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false); // New state for search
   const [searchQuery, setSearchQuery] = useState(''); // New state for search query
+  const [skipLinkFocused, setSkipLinkFocused] = useState(false); // New state for skip link focus
   
   // Handle keyboard navigation
   useEffect(() => {
@@ -32,6 +33,11 @@ const Navigation = ({
         setIsLanguageOpen(false);
         setIsReadingAssistanceOpen(false);
         setIsSearchOpen(false); // Close search on Escape
+      }
+      
+      // Handle skip link (Tab key from beginning of page)
+      if (e.key === 'Tab' && e.target === document.body) {
+        setSkipLinkFocused(true);
       }
     };
     
@@ -47,6 +53,28 @@ const Navigation = ({
       console.log('Searching for:', searchQuery);
       setIsSearchOpen(false);
       setSearchQuery('');
+    }
+  };
+  
+  // Skip to main content function with enhanced focus management
+  const skipToMainContent = () => {
+    const mainContent = document.querySelector('main') || document.getElementById('main-content');
+    if (mainContent) {
+      // Ensure the element is focusable
+      const originalTabindex = mainContent.getAttribute('tabindex');
+      mainContent.setAttribute('tabindex', '-1');
+      mainContent.focus();
+      mainContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      
+      // Restore original tabindex after focus
+      setTimeout(() => {
+        if (originalTabindex !== null) {
+          mainContent.setAttribute('tabindex', originalTabindex);
+        } else {
+          mainContent.removeAttribute('tabindex');
+        }
+        setSkipLinkFocused(false);
+      }, 100);
     }
   };
 
@@ -75,6 +103,18 @@ const Navigation = ({
 
   return (
     <nav className="bg-gradient-to-r from-blue-700 to-indigo-800 text-white shadow-lg sticky top-0 z-50" role="navigation" aria-label="Main navigation">
+      {/* Skip to main content link */}
+      <a 
+        href="#main-content" 
+        className={`sr-only focus:not-sr-only focus:absolute focus:p-4 focus:bg-white focus:text-blue-700 focus:z-50 focus:rounded-lg focus:shadow-lg ${skipLinkFocused ? 'block' : ''}`}
+        onClick={(e) => {
+          e.preventDefault();
+          skipToMainContent();
+        }}
+      >
+        {t('accessibility.skip_to_main_content')}
+      </a>
+      
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           <Link to="/" className="text-2xl font-bold flex items-center" aria-label="ImpactX Home">
@@ -111,10 +151,12 @@ const Navigation = ({
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder={t('common.search')}
                   className="px-3 py-1 rounded-l-lg text-gray-700 text-sm focus:outline-none w-32 focus:w-48 transition-all duration-300"
+                  aria-label={t('common.search')}
                 />
                 <button
                   type="submit"
                   className="bg-blue-500 hover:bg-blue-600 px-3 py-1 rounded-r-lg text-white"
+                  aria-label={t('common.search')}
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
@@ -338,10 +380,12 @@ const Navigation = ({
                 placeholder={t('common.search')}
                 className="flex-grow px-3 py-2 rounded-l-lg text-gray-700 text-sm focus:outline-none"
                 autoFocus
+                aria-label={t('common.search')}
               />
               <button
                 type="submit"
                 className="bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-r-lg text-white"
+                aria-label={t('common.search')}
               >
                 {t('common.search')}
               </button>
