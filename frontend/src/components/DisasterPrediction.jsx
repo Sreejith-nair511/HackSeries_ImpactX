@@ -12,6 +12,7 @@ const DisasterPrediction = () => {
   const [activeTab, setActiveTab] = useState('predictions');
   const [alerts, setAlerts] = useState([]); // New state for alerts
   const [dismissedAlerts, setDismissedAlerts] = useState([]); // State for dismissed alerts
+  const [autoRefreshEnabled, setAutoRefreshEnabled] = useState(true); // State for auto-refresh toggle
 
   // Sample regions for India
   const regions = [
@@ -117,6 +118,32 @@ const DisasterPrediction = () => {
           priority: 'medium'
         });
       }
+      
+      // Check for extreme humidity
+      if (weatherData.humidity > 90) {
+        newAlerts.push({
+          id: `weather-${Date.now()}-humidity`,
+          type: 'warning',
+          message: t('disasterPrediction.alerts.highHumidity', { 
+            humidity: weatherData.humidity 
+          }),
+          timestamp: new Date().toISOString(),
+          priority: 'medium'
+        });
+      }
+      
+      // Check for extreme pressure changes
+      if (weatherData.pressure && weatherData.pressure < 980) {
+        newAlerts.push({
+          id: `weather-${Date.now()}-pressure`,
+          type: 'warning',
+          message: t('disasterPrediction.alerts.lowPressure', { 
+            pressure: weatherData.pressure 
+          }),
+          timestamp: new Date().toISOString(),
+          priority: 'medium'
+        });
+      }
     }
     
     return newAlerts;
@@ -182,6 +209,16 @@ const DisasterPrediction = () => {
     }
   };
   
+  // Get priority badge color
+  const getPriorityColor = (priority) => {
+    switch (priority) {
+      case 'high': return 'bg-red-500';
+      case 'medium': return 'bg-yellow-500';
+      case 'low': return 'bg-green-500';
+      default: return 'bg-gray-500';
+    }
+  };
+  
   // Dismiss an alert
   const dismissAlert = (alertId) => {
     setDismissedAlerts(prev => [...prev, alertId]);
@@ -200,16 +237,29 @@ const DisasterPrediction = () => {
     }
   };
   
+  // Clear all dismissed alerts
+  const clearDismissedAlerts = () => {
+    setDismissedAlerts([]);
+  };
+  
+  // Toggle auto-refresh
+  const toggleAutoRefresh = () => {
+    setAutoRefreshEnabled(!autoRefreshEnabled);
+  };
+  
   // Auto-refresh alerts every 5 minutes
   useEffect(() => {
-    if (selectedRegion) {
-      const interval = setInterval(() => {
+    let interval;
+    if (selectedRegion && autoRefreshEnabled) {
+      interval = setInterval(() => {
         refreshAlerts();
       }, 300000); // 5 minutes
-      
-      return () => clearInterval(interval);
     }
-  }, [selectedRegion, dismissedAlerts]);
+    
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [selectedRegion, dismissedAlerts, autoRefreshEnabled]);
 
   return (
     <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
@@ -221,16 +271,24 @@ const DisasterPrediction = () => {
         <div className="mb-6">
           <div className="flex justify-between items-center mb-2">
             <h3 className="text-lg font-semibold text-gray-800">{t('disasterPrediction.alerts.title')}</h3>
-            <button 
-              onClick={refreshAlerts}
-              className="text-sm text-blue-600 hover:text-blue-800 flex items-center"
-              aria-label={t('common.refresh')}
-            >
-              <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
-              </svg>
-              {t('common.refresh')}
-            </button>
+            <div className="flex items-center space-x-2">
+              <button 
+                onClick={toggleAutoRefresh}
+                className={`text-xs px-2 py-1 rounded ${autoRefreshEnabled ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'}`}
+              >
+                {autoRefreshEnabled ? t('disasterPrediction.autoRefreshOn') : t('disasterPrediction.autoRefreshOff')}
+              </button>
+              <button 
+                onClick={refreshAlerts}
+                className="text-sm text-blue-600 hover:text-blue-800 flex items-center"
+                aria-label={t('common.refresh')}
+              >
+                <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                </svg>
+                {t('common.refresh')}
+              </button>
+            </div>
           </div>
           <div className="space-y-2">
             {alerts.map(alert => (
@@ -252,8 +310,13 @@ const DisasterPrediction = () => {
                     </svg>
                   </button>
                 </div>
+                <div className="absolute top-0 right-0 -mt-1 -mr-1 flex">
+                  <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${getPriorityColor(alert.priority)} text-white`}>
+                    {t(`disasterPrediction.priority.${alert.priority}`)}
+                  </span>
+                </div>
                 {alert.priority === 'high' && (
-                  <div className="absolute top-0 right-0 -mt-1 -mr-1 flex h-3 w-3">
+                  <div className="absolute top-0 left-0 -mt-1 -ml-1 flex h-3 w-3">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
                   </div>
@@ -261,6 +324,16 @@ const DisasterPrediction = () => {
               </div>
             ))}
           </div>
+          {dismissedAlerts.length > 0 && (
+            <div className="mt-2 text-right">
+              <button 
+                onClick={clearDismissedAlerts}
+                className="text-xs text-gray-500 hover:text-gray-700"
+              >
+                {t('disasterPrediction.clearDismissed')}
+              </button>
+            </div>
+          )}
         </div>
       )}
       
@@ -449,6 +522,12 @@ const DisasterPrediction = () => {
                     <span className="text-gray-600">{t('disasterPrediction.factors.windSpeed')}:</span>
                     <span className="font-medium">{weatherData.windSpeed} km/h</span>
                   </div>
+                  {weatherData.pressure && (
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">{t('disasterPrediction.factors.pressure')}:</span>
+                      <span className="font-medium">{weatherData.pressure} hPa</span>
+                    </div>
+                  )}
                 </div>
               </div>
               

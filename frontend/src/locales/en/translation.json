@@ -99,8 +99,18 @@
       "heavyRain": "Heavy rainfall expected ({{amount}}mm)",
       "highWinds": "High wind speeds detected ({{speed}} km/h)",
       "extremeHeat": "Extreme heat conditions ({{temperature}}°C)",
-      "extremeCold": "Extreme cold conditions ({{temperature}}°C)"
-    }
+      "extremeCold": "Extreme cold conditions ({{temperature}}°C)",
+      "highHumidity": "High humidity levels ({{humidity}}%)",
+      "lowPressure": "Low atmospheric pressure ({{pressure}} hPa)"
+    },
+    "priority": {
+      "high": "High",
+      "medium": "Medium",
+      "low": "Low"
+    },
+    "autoRefreshOn": "Auto-refresh: ON",
+    "autoRefreshOff": "Auto-refresh: OFF",
+    "clearDismissed": "Clear dismissed alerts"
   },
   "emergencyResourceTracker": {
     "title": "Emergency Resource Tracker",

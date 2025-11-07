@@ -756,8 +756,18 @@
       "heavyRain": "भारी वर्षा की अपेक्षा ({{amount}}mm)",
       "highWinds": "उच्च हवा की गति का पता चला ({{speed}} किमी/घंटा)",
       "extremeHeat": "चरम गर्मी की स्थिति ({{temperature}}°C)",
-      "extremeCold": "चरम ठंड की स्थिति ({{temperature}}°C)"
-    }
+      "extremeCold": "चरम ठंड की स्थिति ({{temperature}}°C)",
+      "highHumidity": "उच्च आर्द्रता स्तर ({{humidity}}%)",
+      "lowPressure": "कम वायुमंडलीय दबाव ({{pressure}} हेक्टोपास्कल)"
+    },
+    "priority": {
+      "high": "उच्च",
+      "medium": "मध्यम",
+      "low": "कम"
+    },
+    "autoRefreshOn": "स्वतः रीफ्रेश: चालू",
+    "autoRefreshOff": "स्वतः रीफ्रेश: बंद",
+    "clearDismissed": "खारिज किए गए चेतावनियाँ साफ़ करें"
   },
   "map": {
     "title": "आपदा प्रतिक्रिया मानचित्र",
