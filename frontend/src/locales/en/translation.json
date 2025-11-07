@@ -317,5 +317,57 @@
       "averageAffected": "Average Affected",
       "averageEconomicLoss": "Average Economic Loss"
     }
+  },
+  "communityReporting": {
+    "title": "Community Disaster Reporter",
+    "description": "Report disaster incidents in your community to help emergency responders and relief organizations",
+    "disasterType": "Disaster Type",
+    "selectDisasterType": "Select disaster type",
+    "location": "Location",
+    "locationPlaceholder": "Enter location (city, district, or landmark)",
+    "useCurrentLocation": "Use Current Location",
+    "detecting": "Detecting...",
+    "detectingLocation": "Detecting your location...",
+    "locationError": "Unable to retrieve your location. Please try again.",
+    "locationPermissionDenied": "Location access denied. Please enable location permissions in your browser settings.",
+    "locationUnavailable": "Location information is unavailable. Please check your device settings.",
+    "locationTimeout": "Location request timed out. Please try again.",
+    "locationNotSupported": "Geolocation is not supported by your browser.",
+    "descriptionPlaceholder": "Describe the disaster incident, including what happened, when, and any visible damage...",
+    "descriptionHelp": "Please provide as much detail as possible about the incident",
+    "severity": "Severity Level",
+    "severityHelp": "Rate the severity of the incident (1 = Low, 5 = Critical)",
+    "low": "Low",
+    "high": "High",
+    "affectedPeople": "Affected People",
+    "affectedPeopleHelp": "Estimated number of people affected (optional)",
+    "media": "Photos/Videos",
+    "uploadMedia": "Click to upload photos or videos",
+    "mediaLimit": "Upload up to 5 images or videos (max 10MB each)",
+    "maxMediaFiles": "You can only upload a maximum of 5 files.",
+    "submitReport": "Submit Disaster Report",
+    "submitting": "Submitting...",
+    "successMessage": "Your disaster report has been submitted successfully! Emergency responders have been notified.",
+    "submissionError": "There was an error submitting your report. Please try again.",
+    "disasterTypes": {
+      "flood": "Flood",
+      "earthquake": "Earthquake",
+      "cyclone": "Cyclone",
+      "drought": "Drought",
+      "landslide": "Landslide",
+      "fire": "Fire",
+      "epidemic": "Epidemic",
+      "chemical": "Chemical Spill",
+      "other": "Other"
+    },
+    "validation": {
+      "disasterTypeRequired": "Disaster type is required",
+      "locationRequired": "Location is required",
+      "descriptionRequired": "Description is required",
+      "descriptionTooShort": "Description must be at least 10 characters long",
+      "invalidLatitude": "Invalid latitude value (must be between -90 and 90)",
+      "invalidLongitude": "Invalid longitude value (must be between -180 and 180)",
+      "invalidAffectedPeople": "Affected people count cannot be negative"
+    }
   }
 }
