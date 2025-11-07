@@ -904,6 +904,9 @@
       "low": "कम भागीदारी",
       "distribution": "भागीदारी वितरण"
     },
-    "skillUtilization": "कौशल उपयोग दर"
+    "skillUtilization": "कौशल उपयोग दर",
+    "skillUtilizationTitle": "कौशल उपयोग डैशबोर्ड",
+    "skillAvailability": "उपलब्ध",
+    "avgHoursPerVolunteer": "प्रति स्वयंसेवी औसत घंटे"
   }
 }

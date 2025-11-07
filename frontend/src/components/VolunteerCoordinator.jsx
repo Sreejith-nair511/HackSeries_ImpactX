@@ -1,8 +1,3 @@
-/**
- * Volunteer Coordinator Component
- * Provides a comprehensive interface for managing volunteers during disaster response and recovery
- * Includes volunteer matching, task assignment, communication planning, hour tracking, and shift scheduling
- */
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { matchVolunteersToNeeds, assignVolunteersToTasks, generateCommunicationPlan, trackVolunteerHours, scheduleVolunteerShifts } from '../utils/volunteerCoordinator';
@@ -28,6 +23,7 @@ const VolunteerCoordinator = () => {
   const [sortBy, setSortBy] = useState('suitability'); // New state for sorting
   const [performanceMetrics, setPerformanceMetrics] = useState(null); // New state for performance metrics
   const [volunteerEngagement, setVolunteerEngagement] = useState(null); // New state for engagement metrics
+  const [skillUtilization, setSkillUtilization] = useState(null); // New state for skill utilization metrics
 
   // Initialize sample data for demonstration purposes
   // This would typically come from an API in a real application
@@ -269,6 +265,28 @@ const VolunteerCoordinator = () => {
       };
       
       setVolunteerEngagement(engagementMetrics);
+      
+      // Calculate skill utilization metrics
+      const skillCounts = {};
+      allVolunteerSkills.forEach(skill => {
+        skillCounts[skill] = (skillCounts[skill] || 0) + 1;
+      });
+      
+      const requiredSkillCounts = {};
+      allRequiredSkills.forEach(skill => {
+        requiredSkillCounts[skill] = (requiredSkillCounts[skill] || 0) + 1;
+      });
+      
+      const skillUtilizationData = Object.keys(requiredSkillCounts).map(skill => ({
+        skill,
+        required: requiredSkillCounts[skill],
+        available: skillCounts[skill] || 0,
+        utilization: requiredSkillCounts[skill] > 0 
+          ? Math.round(((skillCounts[skill] || 0) / requiredSkillCounts[skill]) * 100)
+          : 0
+      }));
+      
+      setSkillUtilization(skillUtilizationData);
     }
   }, [volunteers, taskAssignments, matchedVolunteers, scheduledShifts, volunteerHours]);
 
@@ -281,7 +299,7 @@ const VolunteerCoordinator = () => {
       {performanceMetrics && (
         <div className="mb-6">
           <h3 className="text-lg font-semibold text-gray-800 mb-4">{t('volunteerCoordinator.performance.title')}</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <div className="bg-blue-50 p-4 rounded-lg">
               <div className="text-2xl font-bold text-blue-700">{performanceMetrics.utilizationRate}%</div>
               <div className="text-sm text-blue-600">{t('volunteerCoordinator.performance.utilization')}</div>
@@ -300,6 +318,10 @@ const VolunteerCoordinator = () => {
               </div>
               <div className="text-sm text-purple-600">{t('volunteerCoordinator.performance.assigned')}</div>
             </div>
+          </div>
+          
+          {/* Additional Metrics */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
             <div className="bg-indigo-50 p-4 rounded-lg">
               <div className="text-2xl font-bold text-indigo-700">{performanceMetrics.totalVolunteerHours}h</div>
               <div className="text-sm text-indigo-600">{t('volunteerCoordinator.totalHours')}</div>
@@ -307,6 +329,10 @@ const VolunteerCoordinator = () => {
             <div className="bg-pink-50 p-4 rounded-lg">
               <div className="text-2xl font-bold text-pink-700">{performanceMetrics.skillUtilizationRate}%</div>
               <div className="text-sm text-pink-600">{t('volunteerCoordinator.skillUtilization')}</div>
+            </div>
+            <div className="bg-teal-50 p-4 rounded-lg">
+              <div className="text-2xl font-bold text-teal-700">{performanceMetrics.avgHoursPerVolunteer}h</div>
+              <div className="text-sm text-teal-600">{t('volunteerCoordinator.avgHoursPerVolunteer')}</div>
             </div>
           </div>
         </div>
@@ -375,6 +401,32 @@ const VolunteerCoordinator = () => {
                 </span>
               </div>
             </div>
+          </div>
+        </div>
+      )}
+      
+      {/* Skill Utilization Dashboard */}
+      {skillUtilization && (
+        <div className="mb-6">
+          <h3 className="text-lg font-semibold text-gray-800 mb-4">{t('volunteerCoordinator.skillUtilizationTitle')}</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {skillUtilization.map((skillData, index) => (
+              <div key={index} className="border border-gray-200 rounded-lg p-4">
+                <div className="flex justify-between items-center mb-2">
+                  <h4 className="font-medium text-gray-900">{skillData.skill}</h4>
+                  <span className="text-sm font-medium text-gray-700">{skillData.utilization}%</span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-2 mb-2">
+                  <div 
+                    className="bg-indigo-600 h-2 rounded-full" 
+                    style={{ width: `${Math.min(skillData.utilization, 100)}%` }}
+                  ></div>
+                </div>
+                <div className="text-xs text-gray-500">
+                  {skillData.available}/{skillData.required} {t('volunteerCoordinator.skillAvailability')}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       )}

@@ -235,7 +235,10 @@
       "low": "Low Engagement",
       "distribution": "Engagement Distribution"
     },
-    "skillUtilization": "Skill Utilization Rate"
+    "skillUtilization": "Skill Utilization Rate",
+    "skillUtilizationTitle": "Skill Utilization Dashboard",
+    "skillAvailability": "available",
+    "avgHoursPerVolunteer": "Avg. Hours per Volunteer"
   },
   "map": {
     "title": "Disaster Response Map",
