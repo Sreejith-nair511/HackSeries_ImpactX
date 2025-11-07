@@ -269,7 +269,7 @@
   "disasterStatistics": {
     "title": "Disaster Statistics",
     "description": "Comprehensive analysis of disaster events, impacts, and trends across India",
-    "export": "Export Data",
+    "export": "Export",
     "exportData": "Export disaster statistics data",
     "resetFilters": "Reset Filters",
     "startDate": "Start Date",

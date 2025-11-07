@@ -14,6 +14,7 @@ const DisasterStatistics = () => {
   const [comparisonTypes, setComparisonTypes] = useState({ type1: 'flood', type2: 'earthquake' });
   const [dateRange, setDateRange] = useState({ start: '', end: '' }); // New state for date filtering
   const [selectedRegion, setSelectedRegion] = useState(''); // New state for region filtering
+  const [exportFormat, setExportFormat] = useState('csv'); // New state for export format
 
   // Sample data for demonstration
   useEffect(() => {
@@ -177,6 +178,49 @@ const DisasterStatistics = () => {
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
   };
+  
+  // Export data as Excel (simplified version)
+  const exportToExcel = (data, filename) => {
+    if (!data || data.length === 0) return;
+    
+    // Create a simple Excel-like format
+    const headers = Object.keys(data[0]).join('\t');
+    const rows = data.map(obj => 
+      Object.values(obj).map(value => 
+        typeof value === 'string' ? `"${value}"` : value
+      ).join('\t')
+    ).join('\n');
+    
+    const excelContent = `${headers}\n${rows}`;
+    const blob = new Blob([excelContent], { type: 'application/vnd.ms-excel' });
+    const url = URL.createObjectURL(blob);
+    
+    // Create download link
+    const link = document.createElement('a');
+    link.setAttribute('href', url);
+    link.setAttribute('download', `${filename}.xls`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+  
+  // Handle export based on selected format
+  const handleExport = (data, filename) => {
+    switch (exportFormat) {
+      case 'csv':
+        exportToCSV(data, filename);
+        break;
+      case 'json':
+        exportToJSON(data, filename);
+        break;
+      case 'excel':
+        exportToExcel(data, filename);
+        break;
+      default:
+        exportToCSV(data, filename);
+    }
+  };
 
   // Calculate statistics when data or filters change
   useEffect(() => {
@@ -229,7 +273,7 @@ const DisasterStatistics = () => {
       <p className="text-gray-600 mb-6">{t('disasterStatistics.description')}</p>
       
       {/* Filters */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             {t('disasterStatistics.startDate')}
@@ -268,6 +312,18 @@ const DisasterStatistics = () => {
               <option key={region} value={region}>{region}</option>
             ))}
           </select>
+        </div>
+        
+        <div className="flex items-end">
+          <button
+            onClick={() => {
+              setDateRange({ start: '', end: '' });
+              setSelectedRegion('');
+            }}
+            className="w-full inline-flex items-center justify-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md shadow-sm text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >
+            {t('disasterStatistics.resetFilters')}
+          </button>
         </div>
       </div>
 
@@ -322,26 +378,26 @@ const DisasterStatistics = () => {
         {/* Overview Tab */}
         {activeTab === 'overview' && statistics && (
           <div>
-            <div className="flex justify-between items-center mb-4">
+            <div className="flex flex-wrap justify-between items-center mb-4 gap-2">
               <h3 className="text-lg font-semibold text-gray-800">{t('disasterStatistics.overview.title')}</h3>
-              <div className="flex space-x-2">
+              <div className="flex flex-wrap gap-2">
+                <select
+                  value={exportFormat}
+                  onChange={(e) => setExportFormat(e.target.value)}
+                  className="px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                >
+                  <option value="csv">CSV</option>
+                  <option value="json">JSON</option>
+                  <option value="excel">Excel</option>
+                </select>
                 <button
                   onClick={() => {
                     const filteredData = filterDisasterData();
-                    exportToCSV(filteredData, 'disaster_statistics_overview');
+                    handleExport(filteredData, 'disaster_statistics_overview');
                   }}
                   className="inline-flex items-center px-3 py-1 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
-                  {t('disasterStatistics.export')}
-                </button>
-                <button
-                  onClick={() => {
-                    setDateRange({ start: '', end: '' });
-                    setSelectedRegion('');
-                  }}
-                  className="inline-flex items-center px-3 py-1 border border-gray-300 text-sm font-medium rounded-md shadow-sm text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                >
-                  {t('disasterStatistics.resetFilters')}
+                  {t('disasterStatistics.exportData')}
                 </button>
               </div>
             </div>
@@ -372,7 +428,7 @@ const DisasterStatistics = () => {
             
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div>
-                <h4 className="font-medium text-gray-700 mb-3">{t('disasterStatistics.byType')}</h4>
+                <h4 className="font-medium text-gray-700 mb-3">{t('disasterStatistics.overview.byType')}</h4>
                 <div className="space-y-3">
                   {Object.entries(statistics.byType).map(([type, data]) => (
                     <div key={type} className="border border-gray-200 rounded-lg p-4">
@@ -394,7 +450,7 @@ const DisasterStatistics = () => {
               </div>
               
               <div>
-                <h4 className="font-medium text-gray-700 mb-3">{t('disasterStatistics.byRegion')}</h4>
+                <h4 className="font-medium text-gray-700 mb-3">{t('disasterStatistics.overview.byRegion')}</h4>
                 <div className="space-y-3">
                   {Object.entries(statistics.byRegion).map(([region, data]) => (
                     <div key={region} className="border border-gray-200 rounded-lg p-4">
@@ -421,16 +477,27 @@ const DisasterStatistics = () => {
         {/* Trends Tab */}
         {activeTab === 'trends' && trends && (
           <div>
-            <div className="flex justify-between items-center mb-4">
+            <div className="flex flex-wrap justify-between items-center mb-4 gap-2">
               <h3 className="text-lg font-semibold text-gray-800">{t('disasterStatistics.trends.title')}</h3>
-              <button
-                onClick={() => {
-                  exportToCSV(trends.yearlyTrends, 'disaster_statistics_trends');
-                }}
-                className="inline-flex items-center px-3 py-1 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              >
-                {t('disasterStatistics.export')}
-              </button>
+              <div className="flex flex-wrap gap-2">
+                <select
+                  value={exportFormat}
+                  onChange={(e) => setExportFormat(e.target.value)}
+                  className="px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                >
+                  <option value="csv">CSV</option>
+                  <option value="json">JSON</option>
+                  <option value="excel">Excel</option>
+                </select>
+                <button
+                  onClick={() => {
+                    handleExport(trends.yearlyTrends, 'disaster_statistics_trends');
+                  }}
+                  className="inline-flex items-center px-3 py-1 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                  {t('disasterStatistics.exportData')}
+                </button>
+              </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
               <div className="bg-blue-50 p-4 rounded-lg">
@@ -502,16 +569,27 @@ const DisasterStatistics = () => {
         {/* Regional Tab */}
         {activeTab === 'regional' && riskIndices.length > 0 && (
           <div>
-            <div className="flex justify-between items-center mb-4">
+            <div className="flex flex-wrap justify-between items-center mb-4 gap-2">
               <h3 className="text-lg font-semibold text-gray-800">{t('disasterStatistics.regional.title')}</h3>
-              <button
-                onClick={() => {
-                  exportToCSV(riskIndices, 'disaster_statistics_regional');
-                }}
-                className="inline-flex items-center px-3 py-1 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              >
-                {t('disasterStatistics.export')}
-              </button>
+              <div className="flex flex-wrap gap-2">
+                <select
+                  value={exportFormat}
+                  onChange={(e) => setExportFormat(e.target.value)}
+                  className="px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                >
+                  <option value="csv">CSV</option>
+                  <option value="json">JSON</option>
+                  <option value="excel">Excel</option>
+                </select>
+                <button
+                  onClick={() => {
+                    handleExport(riskIndices, 'disaster_statistics_regional');
+                  }}
+                  className="inline-flex items-center px-3 py-1 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                  {t('disasterStatistics.exportData')}
+                </button>
+              </div>
             </div>
             <div className="overflow-x-auto">
               <table className="min-w-full divide-y divide-gray-200">
@@ -573,16 +651,27 @@ const DisasterStatistics = () => {
         {/* Comparison Tab */}
         {activeTab === 'comparison' && (
           <div>
-            <div className="flex justify-between items-center mb-4">
+            <div className="flex flex-wrap justify-between items-center mb-4 gap-2">
               <h3 className="text-lg font-semibold text-gray-800">{t('disasterStatistics.comparison.title')}</h3>
-              <button
-                onClick={() => {
-                  exportToJSON(comparison, 'disaster_statistics_comparison');
-                }}
-                className="inline-flex items-center px-3 py-1 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              >
-                {t('disasterStatistics.export')}
-              </button>
+              <div className="flex flex-wrap gap-2">
+                <select
+                  value={exportFormat}
+                  onChange={(e) => setExportFormat(e.target.value)}
+                  className="px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                >
+                  <option value="csv">CSV</option>
+                  <option value="json">JSON</option>
+                  <option value="excel">Excel</option>
+                </select>
+                <button
+                  onClick={() => {
+                    handleExport(comparison, 'disaster_statistics_comparison');
+                  }}
+                  className="inline-flex items-center px-3 py-1 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                  {t('disasterStatistics.exportData')}
+                </button>
+              </div>
             </div>
             
             {/* Comparison Controls */}
