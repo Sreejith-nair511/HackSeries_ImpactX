@@ -10,6 +10,11 @@ const IVRSimulator = () => {
   const [timer, setTimer] = useState(0);
   const [callerId, setCallerId] = useState('');
   const [location, setLocation] = useState({ latitude: null, longitude: null });
+  // Add new state for call flow visualization
+  const [callFlow, setCallFlow] = useState([]);
+  const [showCallFlow, setShowCallFlow] = useState(false);
+  const [testMode, setTestMode] = useState(false);
+  const [testScenarios, setTestScenarios] = useState([]);
 
   // Mock IVR menu options
   const menuOptions = {
@@ -76,10 +81,38 @@ const IVRSimulator = () => {
     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
 
+  // Add function to update call flow
+  const updateCallFlow = (step, input = null) => {
+    const newFlow = [...callFlow, {
+      id: callFlow.length + 1,
+      step,
+      input,
+      timestamp: new Date()
+    }];
+    setCallFlow(newFlow);
+  };
+
+  // Add function to run test scenarios
+  const runTestScenario = (scenario) => {
+    setTestMode(true);
+    handleStartCall();
+    
+    // Simulate user inputs for the scenario
+    setTimeout(() => {
+      scenario.inputs.forEach((input, index) => {
+        setTimeout(() => {
+          handleKeyPress(input);
+        }, (index + 1) * 1000);
+      });
+    }, 1000);
+  };
+
   const handleStartCall = () => {
     setIsCalling(true);
     setCurrentStep('welcome');
     setUserInput('');
+    setCallFlow([]);
+    updateCallFlow('welcome');
     setCallHistory([{ step: 'welcome', message: menuOptions.welcome.message, time: new Date() }]);
   };
 
@@ -95,6 +128,9 @@ const IVRSimulator = () => {
 
     // Add user input to history
     const newHistory = [...callHistory, { step: 'user', message: `Pressed: ${input}`, time: new Date() }];
+    
+    // Update call flow
+    updateCallFlow(currentStep, input);
     
     // Process the input based on current step
     let nextStep = currentStep;
@@ -243,7 +279,7 @@ const IVRSimulator = () => {
           responseMessage = menuOptions.welcome.message;
         } else if (['1', '2'].includes(input)) {
           responseMessage = input === '1' 
-            ? "Your donation of ₹500 to Kerala Flood Relief is confirmed. Transaction ID: TXN${Math.floor(Math.random() * 1000000)}. Status: Verified. Press 0 to return to main menu." 
+            ? `Thank you for your donation. Transaction ID: TXN${Math.floor(Math.random() * 1000000)}. Status: Verified. Press 0 to return to main menu.` 
             : "Project Status: 75% complete. Funds distributed: ₹2,50,000. Beneficiaries reached: 1,200 families. Press 0 to return to main menu.";
           nextStep = 'fundConfirmation';
         } else {
@@ -271,6 +307,7 @@ const IVRSimulator = () => {
 
     setCurrentStep(nextStep);
     setUserInput('');
+    updateCallFlow(nextStep);
     setCallHistory([...newHistory, { step: nextStep, message: responseMessage, time: new Date() }]);
   };
 
@@ -279,6 +316,30 @@ const IVRSimulator = () => {
     setUserInput(key);
     handleInput(key);
   };
+
+  // Initialize test scenarios
+  useEffect(() => {
+    setTestScenarios([
+      {
+        id: 1,
+        name: "Disaster Reporting Flow",
+        description: "Test the disaster reporting functionality",
+        inputs: ['1', '2', '0', '0']
+      },
+      {
+        id: 2,
+        name: "Emergency Contacts Flow",
+        description: "Test the emergency contacts functionality",
+        inputs: ['2', '1', '0', '0']
+      },
+      {
+        id: 3,
+        name: "Weather Alerts Flow",
+        description: "Test the weather alerts functionality",
+        inputs: ['3', '2', '0', '0']
+      }
+    ]);
+  }, []);
 
   return (
     <div className="bg-white rounded-xl shadow-lg p-6 max-w-2xl mx-auto">
@@ -342,8 +403,75 @@ const IVRSimulator = () => {
               {t('ivrSimulator.endCall')}
             </button>
           )}
+          
+          {/* Add buttons for visualization and testing */}
+          {isCalling && (
+            <button
+              onClick={() => setShowCallFlow(!showCallFlow)}
+              className="px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors font-medium"
+            >
+              {showCallFlow ? t('ivrSimulator.hideFlow') : t('ivrSimulator.showFlow')}
+            </button>
+          )}
+          
+          {!isCalling && (
+            <button
+              onClick={() => setTestMode(!testMode)}
+              className="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors font-medium"
+            >
+              {testMode ? t('ivrSimulator.exitTestMode') : t('ivrSimulator.testMode')}
+            </button>
+          )}
         </div>
       </div>
+      
+      {/* Call Flow Visualization */}
+      {showCallFlow && isCalling && (
+        <div className="mb-6 bg-yellow-50 rounded-lg p-4">
+          <h3 className="text-lg font-semibold text-gray-800 mb-3">
+            {t('ivrSimulator.callFlow')}
+          </h3>
+          <div className="flex flex-wrap gap-2">
+            {callFlow.map((flow, index) => (
+              <div key={flow.id} className="flex items-center">
+                <div className="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm">
+                  {index + 1}
+                </div>
+                <div className="ml-2 bg-white border border-gray-300 rounded px-2 py-1 text-sm">
+                  <div className="font-medium">{flow.step}</div>
+                  {flow.input && <div className="text-gray-600">Input: {flow.input}</div>}
+                </div>
+                {index < callFlow.length - 1 && (
+                  <div className="ml-2 text-gray-400">→</div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      
+      {/* Test Mode Panel */}
+      {testMode && !isCalling && (
+        <div className="mb-6 bg-indigo-50 rounded-lg p-4">
+          <h3 className="text-lg font-semibold text-gray-800 mb-3">
+            {t('ivrSimulator.testScenarios')}
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {testScenarios.map(scenario => (
+              <div key={scenario.id} className="bg-white rounded-lg p-4 border border-indigo-200">
+                <h4 className="font-semibold text-indigo-800">{scenario.name}</h4>
+                <p className="text-sm text-gray-600 mt-1">{scenario.description}</p>
+                <button
+                  onClick={() => runTestScenario(scenario)}
+                  className="mt-3 px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 text-sm transition-colors"
+                >
+                  {t('ivrSimulator.runTest')}
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
       
       {isCalling && (
         <div className="bg-gray-100 rounded-lg p-6">

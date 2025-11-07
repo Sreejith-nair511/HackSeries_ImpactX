@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { validateCommunityReport, formatCommunityReport, calculateReportPriority } from '../utils/communityReportingUtils';
 
@@ -17,9 +17,12 @@ const CommunityDisasterReporter = () => {
   });
   
   const [errors, setErrors] = useState([]);
+  const [fieldErrors, setFieldErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [currentLocation, setCurrentLocation] = useState(null);
+  const [locationError, setLocationError] = useState('');
+  const [mediaPreviews, setMediaPreviews] = useState([]);
 
   // Disaster types for the dropdown
   const disasterTypes = [
@@ -34,13 +37,72 @@ const CommunityDisasterReporter = () => {
     { value: 'other', label: t('communityReporting.disasterTypes.other') }
   ];
 
-  // Handle input changes
+  // Real-time validation
+  const validateField = (name, value) => {
+    const newFieldErrors = { ...fieldErrors };
+    
+    switch (name) {
+      case 'disasterType':
+        if (!value || value.trim() === '') {
+          newFieldErrors.disasterType = t('communityReporting.validation.disasterTypeRequired');
+        } else {
+          delete newFieldErrors.disasterType;
+        }
+        break;
+      case 'location':
+        if (!value || value.trim() === '') {
+          newFieldErrors.location = t('communityReporting.validation.locationRequired');
+        } else {
+          delete newFieldErrors.location;
+        }
+        break;
+      case 'description':
+        if (!value || value.trim() === '') {
+          newFieldErrors.description = t('communityReporting.validation.descriptionRequired');
+        } else if (value.length < 10) {
+          newFieldErrors.description = t('communityReporting.validation.descriptionTooShort');
+        } else {
+          delete newFieldErrors.description;
+        }
+        break;
+      case 'latitude':
+        if (value && (isNaN(value) || parseFloat(value) < -90 || parseFloat(value) > 90)) {
+          newFieldErrors.latitude = t('communityReporting.validation.invalidLatitude');
+        } else {
+          delete newFieldErrors.latitude;
+        }
+        break;
+      case 'longitude':
+        if (value && (isNaN(value) || parseFloat(value) < -180 || parseFloat(value) > 180)) {
+          newFieldErrors.longitude = t('communityReporting.validation.invalidLongitude');
+        } else {
+          delete newFieldErrors.longitude;
+        }
+        break;
+      case 'affectedPeople':
+        if (value && (isNaN(value) || parseInt(value) < 0)) {
+          newFieldErrors.affectedPeople = t('communityReporting.validation.invalidAffectedPeople');
+        } else {
+          delete newFieldErrors.affectedPeople;
+        }
+        break;
+      default:
+        break;
+    }
+    
+    setFieldErrors(newFieldErrors);
+  };
+
+  // Handle input changes with real-time validation
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setReportData(prev => ({
       ...prev,
       [name]: value
     }));
+    
+    // Validate the field in real-time
+    validateField(name, value);
   };
 
   // Handle severity change
@@ -51,29 +113,56 @@ const CommunityDisasterReporter = () => {
     }));
   };
 
-  // Get current location
+  // Get current location with enhanced error handling
   const getCurrentLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          setReportData(prev => ({
-            ...prev,
-            latitude: latitude.toFixed(6),
-            longitude: longitude.toFixed(6)
-          }));
-          setCurrentLocation({ latitude, longitude });
-        },
-        (error) => {
-          alert(t('communityReporting.locationError'));
-        }
-      );
-    } else {
-      alert(t('communityReporting.locationNotSupported'));
+    setLocationError('');
+    
+    if (!navigator.geolocation) {
+      setLocationError(t('communityReporting.locationNotSupported'));
+      return;
     }
+    
+    // Show loading state
+    setLocationError(t('communityReporting.detectingLocation'));
+    
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        setReportData(prev => ({
+          ...prev,
+          latitude: latitude.toFixed(6),
+          longitude: longitude.toFixed(6)
+        }));
+        setCurrentLocation({ latitude, longitude });
+        setLocationError('');
+      },
+      (error) => {
+        let errorMessage = '';
+        switch (error.code) {
+          case error.PERMISSION_DENIED:
+            errorMessage = t('communityReporting.locationPermissionDenied');
+            break;
+          case error.POSITION_UNAVAILABLE:
+            errorMessage = t('communityReporting.locationUnavailable');
+            break;
+          case error.TIMEOUT:
+            errorMessage = t('communityReporting.locationTimeout');
+            break;
+          default:
+            errorMessage = t('communityReporting.locationError');
+            break;
+        }
+        setLocationError(errorMessage);
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 300000
+      }
+    );
   };
 
-  // Handle media file selection
+  // Handle media file selection with preview
   const handleMediaChange = (e) => {
     const files = Array.from(e.target.files);
     if (files.length + reportData.media.length > 5) {
@@ -81,11 +170,37 @@ const CommunityDisasterReporter = () => {
       return;
     }
     
-    const newMedia = files.map(file => ({
-      name: file.name,
-      size: file.size,
-      type: file.type
-    }));
+    const newMedia = [];
+    const newPreviews = [...mediaPreviews];
+    
+    files.forEach((file, index) => {
+      newMedia.push({
+        name: file.name,
+        size: file.size,
+        type: file.type,
+        fileObject: file
+      });
+      
+      // Create preview for images
+      if (file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          newPreviews.push({
+            name: file.name,
+            url: e.target.result,
+            type: 'image'
+          });
+          setMediaPreviews([...newPreviews]);
+        };
+        reader.readAsDataURL(file);
+      } else {
+        newPreviews.push({
+          name: file.name,
+          type: 'file'
+        });
+        setMediaPreviews([...newPreviews]);
+      }
+    });
     
     setReportData(prev => ({
       ...prev,
@@ -99,6 +214,8 @@ const CommunityDisasterReporter = () => {
       ...prev,
       media: prev.media.filter((_, i) => i !== index)
     }));
+    
+    setMediaPreviews(prev => prev.filter((_, i) => i !== index));
   };
 
   // Validate and submit report
@@ -142,6 +259,8 @@ const CommunityDisasterReporter = () => {
         affectedPeople: '',
         media: []
       });
+      setMediaPreviews([]);
+      setFieldErrors({});
       
       // Reset success message after 5 seconds
       setTimeout(() => {
@@ -180,13 +299,16 @@ const CommunityDisasterReporter = () => {
         <div>
           <label htmlFor="disasterType" className="block text-sm font-medium text-gray-700 mb-2">
             {t('communityReporting.disasterType')}
+            <span className="text-red-500 ml-1">*</span>
           </label>
           <select
             id="disasterType"
             name="disasterType"
             value={reportData.disasterType}
             onChange={handleInputChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
+              fieldErrors.disasterType ? 'border-red-500' : 'border-gray-300'
+            }`}
             required
           >
             <option value="">{t('communityReporting.selectDisasterType')}</option>
@@ -196,12 +318,16 @@ const CommunityDisasterReporter = () => {
               </option>
             ))}
           </select>
+          {fieldErrors.disasterType && (
+            <p className="mt-1 text-sm text-red-600">{fieldErrors.disasterType}</p>
+          )}
         </div>
         
         {/* Location */}
         <div>
           <label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-2">
             {t('communityReporting.location')}
+            <span className="text-red-500 ml-1">*</span>
           </label>
           <div className="flex space-x-2">
             <input
@@ -211,17 +337,33 @@ const CommunityDisasterReporter = () => {
               value={reportData.location}
               onChange={handleInputChange}
               placeholder={t('communityReporting.locationPlaceholder')}
-              className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className={`flex-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
+                fieldErrors.location ? 'border-red-500' : 'border-gray-300'
+              }`}
               required
             />
             <button
               type="button"
               onClick={getCurrentLocation}
               className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500"
+              disabled={locationError === t('communityReporting.detectingLocation')}
             >
-              {t('communityReporting.useCurrentLocation')}
+              {locationError === t('communityReporting.detectingLocation') ? (
+                <span className="flex items-center">
+                  <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-gray-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  {t('communityReporting.detecting')}
+                </span>
+              ) : (
+                t('communityReporting.useCurrentLocation')
+              )}
             </button>
           </div>
+          {locationError && (
+            <p className="mt-1 text-sm text-red-600">{locationError}</p>
+          )}
           
           {/* Coordinates (optional) */}
           <div className="grid grid-cols-2 gap-4 mt-2">
@@ -236,8 +378,13 @@ const CommunityDisasterReporter = () => {
                 value={reportData.latitude}
                 onChange={handleInputChange}
                 placeholder="28.6139"
-                className="w-full px-3 py-1 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className={`w-full px-3 py-1 text-sm border rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
+                  fieldErrors.latitude ? 'border-red-500' : 'border-gray-300'
+                }`}
               />
+              {fieldErrors.latitude && (
+                <p className="mt-1 text-xs text-red-600">{fieldErrors.latitude}</p>
+              )}
             </div>
             <div>
               <label htmlFor="longitude" className="block text-xs text-gray-500 mb-1">
@@ -250,8 +397,13 @@ const CommunityDisasterReporter = () => {
                 value={reportData.longitude}
                 onChange={handleInputChange}
                 placeholder="77.2090"
-                className="w-full px-3 py-1 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className={`w-full px-3 py-1 text-sm border rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
+                  fieldErrors.longitude ? 'border-red-500' : 'border-gray-300'
+                }`}
               />
+              {fieldErrors.longitude && (
+                <p className="mt-1 text-xs text-red-600">{fieldErrors.longitude}</p>
+              )}
             </div>
           </div>
         </div>
@@ -260,6 +412,7 @@ const CommunityDisasterReporter = () => {
         <div>
           <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-2">
             {t('communityReporting.description')}
+            <span className="text-red-500 ml-1">*</span>
           </label>
           <textarea
             id="description"
@@ -268,9 +421,17 @@ const CommunityDisasterReporter = () => {
             onChange={handleInputChange}
             rows={4}
             placeholder={t('communityReporting.descriptionPlaceholder')}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
+              fieldErrors.description ? 'border-red-500' : 'border-gray-300'
+            }`}
             required
           />
+          {fieldErrors.description && (
+            <p className="mt-1 text-sm text-red-600">{fieldErrors.description}</p>
+          )}
+          <p className="mt-1 text-xs text-gray-500">
+            {t('communityReporting.descriptionHelp')}
+          </p>
         </div>
         
         {/* Severity */}
@@ -304,6 +465,9 @@ const CommunityDisasterReporter = () => {
             <span>{t('communityReporting.low')}</span>
             <span>{t('communityReporting.high')}</span>
           </div>
+          <p className="mt-1 text-xs text-gray-500">
+            {t('communityReporting.severityHelp')}
+          </p>
         </div>
         
         {/* Affected People */}
@@ -319,8 +483,16 @@ const CommunityDisasterReporter = () => {
             onChange={handleInputChange}
             min="0"
             placeholder="0"
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
+              fieldErrors.affectedPeople ? 'border-red-500' : 'border-gray-300'
+            }`}
           />
+          {fieldErrors.affectedPeople && (
+            <p className="mt-1 text-sm text-red-600">{fieldErrors.affectedPeople}</p>
+          )}
+          <p className="mt-1 text-xs text-gray-500">
+            {t('communityReporting.affectedPeopleHelp')}
+          </p>
         </div>
         
         {/* Media Upload */}
@@ -351,16 +523,29 @@ const CommunityDisasterReporter = () => {
           </div>
           
           {/* Preview selected media */}
-          {reportData.media.length > 0 && (
+          {mediaPreviews.length > 0 && (
             <div className="mt-3 grid grid-cols-3 gap-2">
-              {reportData.media.map((file, index) => (
+              {mediaPreviews.map((preview, index) => (
                 <div key={index} className="relative">
-                  <div className="bg-gray-100 border border-gray-300 rounded-lg p-2 text-center">
-                    <div className="text-xs truncate">{file.name}</div>
-                    <div className="text-xs text-gray-500">
-                      {Math.round(file.size / 1024)} KB
+                  {preview.type === 'image' ? (
+                    <div className="bg-gray-100 border border-gray-300 rounded-lg overflow-hidden">
+                      <img 
+                        src={preview.url} 
+                        alt={preview.name} 
+                        className="w-full h-24 object-cover"
+                      />
+                      <div className="p-1 text-xs truncate bg-white">
+                        {preview.name}
+                      </div>
                     </div>
-                  </div>
+                  ) : (
+                    <div className="bg-gray-100 border border-gray-300 rounded-lg p-2 text-center">
+                      <div className="text-xs truncate">{preview.name}</div>
+                      <div className="text-xs text-gray-500">
+                        {Math.round(reportData.media[index]?.size / 1024)} KB
+                      </div>
+                    </div>
+                  )}
                   <button
                     type="button"
                     onClick={() => removeMediaFile(index)}
