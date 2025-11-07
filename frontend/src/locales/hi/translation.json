@@ -774,10 +774,26 @@
     "allTime": "सभी समय",
     "lastMonth": "पिछला महीना",
     "lastQuarter": "पिछली तिमाही",
+    "lastYear": "पिछला वर्ष",
     "riskZones": "जोखिम क्षेत्र",
     "campaigns": "अभियान",
     "active": "सक्रिय",
-    "completed": "पूर्ण"
+    "completed": "पूर्ण",
+    "campaign": "अभियान",
+    "fundsRaised": "एकत्रित निधि",
+    "goal": "लक्ष्य",
+    "source": "स्रोत",
+    "createdAt": "निर्माण तिथि",
+    "endDate": "अंतिम तिथि",
+    "disasterZone": "आपदा क्षेत्र",
+    "riskLevel": "जोखिम स्तर",
+    "disasterType": "आपदा प्रकार",
+    "lastUpdated": "अंतिम अद्यतन",
+    "riskLevels": {
+      "high": "उच्च",
+      "moderate": "मामूली",
+      "low": "कम"
+    }
   },
   "disasterStatistics": {
     "title": "आपदा आंकड़े",

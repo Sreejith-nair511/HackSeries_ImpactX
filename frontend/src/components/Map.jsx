@@ -20,9 +20,11 @@ const Map = ({ darkMode }) => {
   const [filteredDisasterZones, setFilteredDisasterZones] = useState([]);
   const [mapKey, setMapKey] = useState(0); // Used to force re-render when dark mode changes
   const [timeRange, setTimeRange] = useState('all'); // Time range filter
+  const [showCampaigns, setShowCampaigns] = useState(true); // Toggle for campaigns visibility
+  const [showDisasterZones, setShowDisasterZones] = useState(true); // Toggle for disaster zones visibility
   const mapRef = useRef();
 
-  // Sample campaign data for India with realistic sources
+  // Sample campaign data for India with realistic sources and timestamps
   const sampleCampaigns = [
     {
       id: 1,
@@ -32,7 +34,9 @@ const Map = ({ darkMode }) => {
       fundsRaised: "₹25,00,000",
       goal: "₹50,00,000",
       status: "active",
-      source: "NDRF Kerala Unit"
+      source: "NDRF Kerala Unit",
+      createdAt: new Date('2023-07-15'),
+      endDate: null
     },
     {
       id: 2,
@@ -42,7 +46,9 @@ const Map = ({ darkMode }) => {
       fundsRaised: "₹18,50,000",
       goal: "₹30,00,000",
       status: "active",
-      source: "Government of Rajasthan"
+      source: "Government of Rajasthan",
+      createdAt: new Date('2023-05-20'),
+      endDate: null
     },
     {
       id: 3,
@@ -52,7 +58,9 @@ const Map = ({ darkMode }) => {
       fundsRaised: "₹42,00,000",
       goal: "₹42,00,000",
       status: "completed",
-      source: "Ministry of Home Affairs"
+      source: "Ministry of Home Affairs",
+      createdAt: new Date('2022-03-10'),
+      endDate: new Date('2023-09-30')
     },
     {
       id: 4,
@@ -62,7 +70,9 @@ const Map = ({ darkMode }) => {
       fundsRaised: "₹15,75,000",
       goal: "₹35,00,000",
       status: "active",
-      source: "NDRF Odisha Unit"
+      source: "NDRF Odisha Unit",
+      createdAt: new Date('2023-10-05'),
+      endDate: null
     },
     {
       id: 5,
@@ -72,7 +82,9 @@ const Map = ({ darkMode }) => {
       fundsRaised: "₹8,25,000",
       goal: "₹20,00,000",
       status: "active",
-      source: "Assam State Disaster Management Authority"
+      source: "Assam State Disaster Management Authority",
+      createdAt: new Date('2023-08-12'),
+      endDate: null
     },
     {
       id: 6,
@@ -82,11 +94,13 @@ const Map = ({ darkMode }) => {
       fundsRaised: "₹32,00,000",
       goal: "₹40,00,000",
       status: "active",
-      source: "NDRF Maharashtra Unit"
+      source: "NDRF Maharashtra Unit",
+      createdAt: new Date('2023-07-25'),
+      endDate: null
     }
   ];
 
-  // Sample disaster risk zones
+  // Sample disaster risk zones with timestamps
   const sampleDisasterZones = [
     {
       id: 1,
@@ -94,7 +108,8 @@ const Map = ({ darkMode }) => {
       center: [10.8505, 76.2711],
       radius: 50000, // 50km in meters
       riskLevel: "high",
-      disasterType: "flood"
+      disasterType: "flood",
+      lastUpdated: new Date('2023-07-20')
     },
     {
       id: 2,
@@ -102,7 +117,8 @@ const Map = ({ darkMode }) => {
       center: [22.2587, 71.1924],
       radius: 100000, // 100km in meters
       riskLevel: "moderate",
-      disasterType: "earthquake"
+      disasterType: "earthquake",
+      lastUpdated: new Date('2023-06-15')
     },
     {
       id: 3,
@@ -110,7 +126,17 @@ const Map = ({ darkMode }) => {
       center: [20.9517, 85.0985],
       radius: 75000, // 75km in meters
       riskLevel: "high",
-      disasterType: "cyclone"
+      disasterType: "cyclone",
+      lastUpdated: new Date('2023-10-10')
+    },
+    {
+      id: 4,
+      name: "Uttarakhand Landslide Zone",
+      center: [30.0668, 79.0193],
+      radius: 30000, // 30km in meters
+      riskLevel: "moderate",
+      disasterType: "landslide",
+      lastUpdated: new Date('2023-08-05')
     }
   ];
 
@@ -126,33 +152,32 @@ const Map = ({ darkMode }) => {
   
   // Filter data based on time range
   useEffect(() => {
+    const now = new Date();
+    let campaignFilter, zoneFilter;
+    
     if (timeRange === 'all') {
-      setFilteredCampaigns(campaigns);
-      setFilteredDisasterZones(disasterZones);
-    } else {
-      // For demo purposes, we'll filter based on a simple time-based logic
-      // In a real app, this would be based on actual timestamps
-      const now = new Date();
-      const oneMonthAgo = new Date(now.setMonth(now.getMonth() - 1));
-      const threeMonthsAgo = new Date(now.setMonth(now.getMonth() - 2));
-      
-      if (timeRange === 'month') {
-        // Filter campaigns from the last month
-        setFilteredCampaigns(campaigns.filter(c => {
-          // For demo, we'll just return all campaigns
-          return true;
-        }));
-        setFilteredDisasterZones(disasterZones);
-      } else if (timeRange === 'quarter') {
-        // Filter campaigns from the last quarter
-        setFilteredCampaigns(campaigns.filter(c => {
-          // For demo, we'll just return all campaigns
-          return true;
-        }));
-        setFilteredDisasterZones(disasterZones);
-      }
+      campaignFilter = () => true;
+      zoneFilter = () => true;
+    } else if (timeRange === 'month') {
+      const oneMonthAgo = new Date();
+      oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
+      campaignFilter = campaign => new Date(campaign.createdAt) >= oneMonthAgo;
+      zoneFilter = zone => new Date(zone.lastUpdated) >= oneMonthAgo;
+    } else if (timeRange === 'quarter') {
+      const threeMonthsAgo = new Date();
+      threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3);
+      campaignFilter = campaign => new Date(campaign.createdAt) >= threeMonthsAgo;
+      zoneFilter = zone => new Date(zone.lastUpdated) >= threeMonthsAgo;
+    } else if (timeRange === 'year') {
+      const oneYearAgo = new Date();
+      oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
+      campaignFilter = campaign => new Date(campaign.createdAt) >= oneYearAgo;
+      zoneFilter = zone => new Date(zone.lastUpdated) >= oneYearAgo;
     }
-  }, [timeRange, campaigns, disasterZones]);
+    
+    setFilteredCampaigns(showCampaigns ? campaigns.filter(campaignFilter) : []);
+    setFilteredDisasterZones(showDisasterZones ? disasterZones.filter(zoneFilter) : []);
+  }, [timeRange, campaigns, disasterZones, showCampaigns, showDisasterZones]);
 
   // Center of India
   const center = [20.5937, 78.9629];
@@ -190,9 +215,18 @@ const Map = ({ darkMode }) => {
     }
   };
 
+  // Format date for display
+  const formatDate = (date) => {
+    return new Date(date).toLocaleDateString(undefined, {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
+    });
+  };
+
   return (
     <div className={`rounded-2xl overflow-hidden ${darkMode ? 'bg-gray-800' : 'bg-white'} shadow-lg`}>
-      {/* Time Range Filter */}
+      {/* Map Controls */}
       <div className={`p-4 ${darkMode ? 'bg-gray-700' : 'bg-gray-100'} rounded-t-2xl`}>
         <div className="flex flex-wrap items-center justify-between gap-4">
           <h3 className={`font-semibold ${darkMode ? 'text-white' : 'text-gray-800'}`}>
@@ -223,7 +257,37 @@ const Map = ({ darkMode }) => {
             >
               {t('map.lastQuarter')}
             </button>
+            <button 
+              onClick={() => setTimeRange('year')}
+              className={`px-3 py-1 text-sm rounded-full ${timeRange === 'year' 
+                ? (darkMode ? 'bg-blue-600 text-white' : 'bg-blue-500 text-white') 
+                : (darkMode ? 'bg-gray-600 text-gray-200' : 'bg-gray-200 text-gray-700')}`}
+            >
+              {t('map.lastYear')}
+            </button>
           </div>
+        </div>
+        
+        {/* Visibility Toggles */}
+        <div className="flex flex-wrap gap-4 mt-3">
+          <label className={`flex items-center ${darkMode ? 'text-gray-200' : 'text-gray-700'}`}>
+            <input
+              type="checkbox"
+              checked={showCampaigns}
+              onChange={() => setShowCampaigns(!showCampaigns)}
+              className="mr-2 rounded"
+            />
+            {t('map.campaigns')}
+          </label>
+          <label className={`flex items-center ${darkMode ? 'text-gray-200' : 'text-gray-700'}`}>
+            <input
+              type="checkbox"
+              checked={showDisasterZones}
+              onChange={() => setShowDisasterZones(!showDisasterZones)}
+              className="mr-2 rounded"
+            />
+            {t('map.riskZones')}
+          </label>
         </div>
       </div>
       
@@ -254,18 +318,18 @@ const Map = ({ darkMode }) => {
             <Popup>
               <div className={`max-w-xs ${darkMode ? 'dark-popup' : ''}`}>
                 <h3 className={`font-bold text-lg ${darkMode ? 'text-white' : 'text-gray-800'}`}>
-                  {campaign.title}
+                  {t('map.campaign')}: {campaign.title}
                 </h3>
                 <p className={`text-sm mt-1 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
                   {campaign.description}
                 </p>
                 <div className="mt-2">
                   <div className="flex justify-between text-sm">
-                    <span className={darkMode ? 'text-gray-300' : 'text-gray-600'}>Raised:</span>
+                    <span className={darkMode ? 'text-gray-300' : 'text-gray-600'}>{t('map.fundsRaised')}:</span>
                     <span className="font-semibold">{campaign.fundsRaised}</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className={darkMode ? 'text-gray-300' : 'text-gray-600'}>Goal:</span>
+                    <span className={darkMode ? 'text-gray-300' : 'text-gray-600'}>{t('map.goal')}:</span>
                     <span className="font-semibold">{campaign.goal}</span>
                   </div>
                 </div>
@@ -279,9 +343,17 @@ const Map = ({ darkMode }) => {
                   </span>
                 </div>
                 <div className="mt-2 text-xs">
-                  <span className={darkMode ? 'text-gray-400' : 'text-gray-500'}>
-                    Source: {campaign.source}
-                  </span>
+                  <div className={darkMode ? 'text-gray-400' : 'text-gray-500'}>
+                    {t('map.source')}: {campaign.source}
+                  </div>
+                  <div className={darkMode ? 'text-gray-400' : 'text-gray-500'}>
+                    {t('map.createdAt')}: {formatDate(campaign.createdAt)}
+                  </div>
+                  {campaign.endDate && (
+                    <div className={darkMode ? 'text-gray-400' : 'text-gray-500'}>
+                      {t('map.endDate')}: {formatDate(campaign.endDate)}
+                    </div>
+                  )}
                 </div>
               </div>
             </Popup>
@@ -300,14 +372,17 @@ const Map = ({ darkMode }) => {
             <Popup>
               <div className={`max-w-xs ${darkMode ? 'dark-popup' : ''}`}>
                 <h3 className={`font-bold text-lg ${darkMode ? 'text-white' : 'text-gray-800'}`}>
-                  {zone.name}
+                  {t('map.disasterZone')}: {zone.name}
                 </h3>
                 <p className={`text-sm mt-1 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-                  Risk Level: <span className="font-semibold capitalize">{zone.riskLevel}</span>
+                  {t('map.riskLevel')}: <span className="font-semibold capitalize">{t(`map.riskLevels.${zone.riskLevel}`)}</span>
                 </p>
                 <p className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-                  Disaster Type: <span className="font-semibold capitalize">{zone.disasterType}</span>
+                  {t('map.disasterType')}: <span className="font-semibold capitalize">{t(`disasterTypes.${zone.disasterType}`)}</span>
                 </p>
+                <div className={`text-xs mt-2 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                  {t('map.lastUpdated')}: {formatDate(zone.lastUpdated)}
+                </div>
               </div>
             </Popup>
           </Circle>
