@@ -569,5 +569,56 @@
       "month": "Last Month",
       "year": "Last Year"
     }
+  },
+  "feedback": {
+    "page_title": "Community Feedback System",
+    "page_description": "Share your experiences, suggestions, and concerns to help us improve disaster response efforts",
+    "importance_title": "Why Community Feedback Matters",
+    "importance_description": "Your feedback is crucial for improving our disaster response system. It helps us understand what's working well and where we need to make improvements.",
+    "benefit1": "Identify gaps in disaster response and recovery efforts",
+    "benefit2": "Improve communication and coordination between agencies",
+    "benefit3": "Enhance platform usability based on real user experiences",
+    "benefit4": "Build trust through transparency and community engagement",
+    "title": "Community Feedback",
+    "submit_feedback": "Submit Feedback",
+    "view_feedback": "View Feedback",
+    "analytics": "Analytics",
+    "name": "Full Name",
+    "email": "Email Address",
+    "category": "Feedback Category",
+    "location": "Location",
+    "rating": "Rating",
+    "comment": "Your Feedback",
+    "submit": "Submit Feedback",
+    "submitting": "Submitting...",
+    "submission_success": "Thank you for your feedback! It has been successfully submitted.",
+    "feedback_list": "Community Feedback",
+    "all_categories": "All Categories",
+    "all_ratings": "All Ratings",
+    "no_feedback_found": "No feedback found matching the selected filters.",
+    "submitted_on": "Submitted on",
+    "feedback_analytics": "Feedback Analytics",
+    "total_feedback": "Total Feedback",
+    "resolved": "Resolved",
+    "in_progress": "In Progress",
+    "average_rating": "Average Rating",
+    "category_distribution": "Feedback by Category",
+    "rating_distribution": "Feedback by Rating",
+    "status_distribution": "Feedback by Status",
+    "feedback_count": "Feedback Count",
+    "stars": "stars",
+    "categories": {
+      "general": "General Feedback",
+      "disaster_response": "Disaster Response",
+      "platform_usability": "Platform Usability",
+      "resource_allocation": "Resource Allocation",
+      "communication": "Communication",
+      "volunteer_coordination": "Volunteer Coordination"
+    },
+    "status": {
+      "resolved": "Resolved",
+      "pending": "Pending",
+      "in_progress": "In Progress"
+    }
   }
 }
