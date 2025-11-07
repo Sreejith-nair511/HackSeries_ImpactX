@@ -7,7 +7,9 @@
     "adminDashboard": "Admin Dashboard",
     "ivrSystem": "IVR System",
     "statistics": "Statistics",
-    "prediction": "Prediction"
+    "prediction": "Prediction",
+    "refresh": "Refresh",
+    "dismiss": "Dismiss"
   },
   "home": {
     "title": "Transparent & Verifiable Disaster Relief Funding on Algorand",
@@ -16,7 +18,12 @@
     "learnMore": "Learn More"
   },
   "accessibility": {
-    "skip_to_main_content": "Skip to main content"
+    "skip_to_main_content": "Skip to main content",
+    "accessibility_options": "Accessibility Options",
+    "increase_font_size": "Increase Font Size",
+    "decrease_font_size": "Decrease Font Size",
+    "high_contrast": "High Contrast Mode",
+    "reading_assistance": "Reading Assistance"
   },
   "disasterTypes": {
     "flood": "Flood",
@@ -90,7 +97,9 @@
       "highRisk": "High risk of {{disaster}} detected ({{score}}% probability)",
       "moderateRisk": "Moderate risk of {{disaster}} detected ({{score}}% probability)",
       "heavyRain": "Heavy rainfall expected ({{amount}}mm)",
-      "highWinds": "High wind speeds detected ({{speed}} km/h)"
+      "highWinds": "High wind speeds detected ({{speed}} km/h)",
+      "extremeHeat": "Extreme heat conditions ({{temperature}}°C)",
+      "extremeCold": "Extreme cold conditions ({{temperature}}°C)"
     }
   },
   "emergencyResourceTracker": {

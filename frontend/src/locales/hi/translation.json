@@ -17,7 +17,9 @@
     "telugu": "తెలుగు",
     "marathi": "मराठी",
     "bengali": "বাংলা",
-    "gujarati": "ગુજરાતી"
+    "gujarati": "ગુજરાતી",
+    "refresh": "रीफ्रेश करें",
+    "dismiss": "खारिज करें"
   },
   "home": {
     "title": "अल्गोरैंड पर पारदर्शी एवं सत्यापन योग्य आपदा राहत निधि",
@@ -693,5 +695,59 @@
     "shortTermResponse": "अल्पकालिक प्रतिक्रिया",
     "longTermResponse": "दीर्घकालिक प्रतिक्रिया",
     "emergencyContacts": "आपातकालीन संपर्क"
+  },
+  "disasterPrediction": {
+    "title": "आपदा पूर्वानुमान और शीघ्र चेतावनी",
+    "description": "समुदायों को तैयार करने के लिए संभावित आपदाओं की भविष्यवाणी करें और शीघ्र चेतावनी प्राप्त करें",
+    "selectRegion": "क्षेत्र चुनें",
+    "currentRiskLevel": "वर्तमान जोखिम स्तर",
+    "currentWeather": "वर्तमान मौसम",
+    "tabs": {
+      "predictions": "जोखिम पूर्वानुमान",
+      "historical": "ऐतिहासिक डेटा",
+      "factors": "जोखिम कारक"
+    },
+    "risk": {
+      "critical": "गंभीर",
+      "high": "उच्च",
+      "moderate": "मामूली",
+      "low": "कम"
+    },
+    "predictions": {
+      "title": "आपदा जोखिम पूर्वानुमान"
+    },
+    "probability": "संभावना",
+    "expectedImpact": "अपेक्षित प्रभाव",
+    "timeline": "अपेक्षित समयसीमा",
+    "recommendations": "अनुशंसाएं",
+    "historical": {
+      "title": "ऐतिहासिक आपदा डेटा",
+      "year": "वर्ष",
+      "disasterType": "आपदा प्रकार",
+      "affected": "प्रभावित लोग",
+      "economicLoss": "आर्थिक हानि"
+    },
+    "factors": {
+      "title": "जोखिम कारक विश्लेषण",
+      "weather": "मौसम की स्थिति",
+      "geographical": "भौगोलिक कारक",
+      "temperature": "तापमान",
+      "humidity": "आर्द्रता",
+      "precipitation": "वर्षा",
+      "windSpeed": "हवा की गति",
+      "elevation": "ऊंचाई",
+      "forestCover": "वन आच्छादन",
+      "riverProximity": "नदी की निकटता",
+      "seismicActivity": "भूकंपीय गतिविधि"
+    },
+    "alerts": {
+      "title": "चेतावनी और सूचनाएं",
+      "highRisk": "{{disaster}} का उच्च जोखिम पाया गया ({{score}}% संभावना)",
+      "moderateRisk": "{{disaster}} का मामूली जोखिम पाया गया ({{score}}% संभावना)",
+      "heavyRain": "भारी वर्षा की अपेक्षा ({{amount}}mm)",
+      "highWinds": "उच्च हवा की गति का पता चला ({{speed}} किमी/घंटा)",
+      "extremeHeat": "चरम गर्मी की स्थिति ({{temperature}}°C)",
+      "extremeCold": "चरम ठंड की स्थिति ({{temperature}}°C)"
+    }
   }
 }

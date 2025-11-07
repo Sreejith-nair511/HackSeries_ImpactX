@@ -11,6 +11,7 @@ const DisasterPrediction = () => {
   const [riskLevel, setRiskLevel] = useState('low');
   const [activeTab, setActiveTab] = useState('predictions');
   const [alerts, setAlerts] = useState([]); // New state for alerts
+  const [dismissedAlerts, setDismissedAlerts] = useState([]); // State for dismissed alerts
 
   // Sample regions for India
   const regions = [
@@ -51,7 +52,8 @@ const DisasterPrediction = () => {
             disaster: t(`disasterTypes.${prediction.type}`),
             score: prediction.riskScore 
           }),
-          timestamp: new Date().toISOString()
+          timestamp: new Date().toISOString(),
+          priority: 'high'
         });
       } else if (prediction.riskScore >= 60) {
         newAlerts.push({
@@ -61,7 +63,8 @@ const DisasterPrediction = () => {
             disaster: t(`disasterTypes.${prediction.type}`),
             score: prediction.riskScore 
           }),
-          timestamp: new Date().toISOString()
+          timestamp: new Date().toISOString(),
+          priority: 'medium'
         });
       }
     });
@@ -75,7 +78,8 @@ const DisasterPrediction = () => {
           message: t('disasterPrediction.alerts.heavyRain', { 
             amount: weatherData.precipitation 
           }),
-          timestamp: new Date().toISOString()
+          timestamp: new Date().toISOString(),
+          priority: 'medium'
         });
       }
       
@@ -86,7 +90,31 @@ const DisasterPrediction = () => {
           message: t('disasterPrediction.alerts.highWinds', { 
             speed: weatherData.windSpeed 
           }),
-          timestamp: new Date().toISOString()
+          timestamp: new Date().toISOString(),
+          priority: 'high'
+        });
+      }
+      
+      // Check for extreme temperatures
+      if (weatherData.temperature > 45) {
+        newAlerts.push({
+          id: `weather-${Date.now()}-heat`,
+          type: 'danger',
+          message: t('disasterPrediction.alerts.extremeHeat', { 
+            temperature: weatherData.temperature 
+          }),
+          timestamp: new Date().toISOString(),
+          priority: 'high'
+        });
+      } else if (weatherData.temperature < 5) {
+        newAlerts.push({
+          id: `weather-${Date.now()}-cold`,
+          type: 'warning',
+          message: t('disasterPrediction.alerts.extremeCold', { 
+            temperature: weatherData.temperature 
+          }),
+          timestamp: new Date().toISOString(),
+          priority: 'medium'
         });
       }
     }
@@ -109,7 +137,9 @@ const DisasterPrediction = () => {
       
       // Generate alerts
       const alerts = generateAlerts(pred, getWeatherData(region));
-      setAlerts(alerts);
+      // Filter out dismissed alerts
+      const activeAlerts = alerts.filter(alert => !dismissedAlerts.includes(alert.id));
+      setAlerts(activeAlerts);
       
       // Determine risk level based on predictions
       const maxRisk = Math.max(...pred.map(p => p.riskScore));
@@ -151,6 +181,35 @@ const DisasterPrediction = () => {
       default: return 'bg-blue-100 text-blue-800 border-blue-200';
     }
   };
+  
+  // Dismiss an alert
+  const dismissAlert = (alertId) => {
+    setDismissedAlerts(prev => [...prev, alertId]);
+    setAlerts(prev => prev.filter(alert => alert.id !== alertId));
+  };
+  
+  // Refresh alerts
+  const refreshAlerts = () => {
+    if (selectedRegion) {
+      const region = regions.find(r => r.id === selectedRegion);
+      const pred = predictDisasterRisk(region);
+      const alerts = generateAlerts(pred, getWeatherData(region));
+      // Filter out dismissed alerts
+      const activeAlerts = alerts.filter(alert => !dismissedAlerts.includes(alert.id));
+      setAlerts(activeAlerts);
+    }
+  };
+  
+  // Auto-refresh alerts every 5 minutes
+  useEffect(() => {
+    if (selectedRegion) {
+      const interval = setInterval(() => {
+        refreshAlerts();
+      }, 300000); // 5 minutes
+      
+      return () => clearInterval(interval);
+    }
+  }, [selectedRegion, dismissedAlerts]);
 
   return (
     <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
@@ -160,16 +219,45 @@ const DisasterPrediction = () => {
       {/* Alerts Section */}
       {alerts.length > 0 && (
         <div className="mb-6">
-          <h3 className="text-lg font-semibold text-gray-800 mb-2">{t('disasterPrediction.alerts.title')}</h3>
+          <div className="flex justify-between items-center mb-2">
+            <h3 className="text-lg font-semibold text-gray-800">{t('disasterPrediction.alerts.title')}</h3>
+            <button 
+              onClick={refreshAlerts}
+              className="text-sm text-blue-600 hover:text-blue-800 flex items-center"
+              aria-label={t('common.refresh')}
+            >
+              <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+              </svg>
+              {t('common.refresh')}
+            </button>
+          </div>
           <div className="space-y-2">
             {alerts.map(alert => (
-              <div key={alert.id} className={`p-3 rounded-lg border ${getAlertColor(alert.type)}`}>
+              <div key={alert.id} className={`p-3 rounded-lg border ${getAlertColor(alert.type)} relative`}>
                 <div className="flex justify-between items-start">
-                  <span>{alert.message}</span>
-                  <span className="text-xs opacity-75">
-                    {new Date(alert.timestamp).toLocaleTimeString()}
-                  </span>
+                  <div>
+                    <span>{alert.message}</span>
+                    <div className="text-xs opacity-75 mt-1">
+                      {new Date(alert.timestamp).toLocaleTimeString()}
+                    </div>
+                  </div>
+                  <button 
+                    onClick={() => dismissAlert(alert.id)}
+                    className="text-gray-500 hover:text-gray-700 ml-2"
+                    aria-label={t('common.dismiss')}
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                  </button>
                 </div>
+                {alert.priority === 'high' && (
+                  <div className="absolute top-0 right-0 -mt-1 -mr-1 flex h-3 w-3">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+                  </div>
+                )}
               </div>
             ))}
           </div>
