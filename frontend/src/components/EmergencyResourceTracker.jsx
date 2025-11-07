@@ -19,6 +19,18 @@ const EmergencyResourceTracker = () => {
   const [sortBy, setSortBy] = useState('name'); // New state for sorting
   const [filterByType, setFilterByType] = useState(''); // New state for filtering by type
   const [allocationData, setAllocationData] = useState([]); // New state for resource allocation visualization
+  const [historicalData, setHistoricalData] = useState([]); // New state for historical resource usage
+  const [showResourceForm, setShowResourceForm] = useState(false); // New state for showing resource addition form
+  const [newResource, setNewResource] = useState({
+    name: '',
+    type: '',
+    quantity: '',
+    unit: '',
+    location: '',
+    contact: '',
+    availability: '24/7',
+    region: ''
+  }); // New state for adding new resources
 
   useEffect(() => {
     // Load resource types
@@ -29,11 +41,26 @@ const EmergencyResourceTracker = () => {
     
     // Load initial resources
     loadResources();
+    
+    // Load historical data
+    loadHistoricalData();
   }, []);
 
   const loadResources = () => {
     const data = getAvailableResources(selectedRegion);
     setResources(data);
+  };
+
+  const loadHistoricalData = () => {
+    // Sample historical data - in a real app this would come from the backend
+    const sampleHistoricalData = [
+      { month: 'Jan', medical: 120, food: 8000, rescue: 20, shelter: 150, communication: 15, transport: 30 },
+      { month: 'Feb', medical: 90, food: 6500, rescue: 15, shelter: 120, communication: 12, transport: 25 },
+      { month: 'Mar', medical: 200, food: 12000, rescue: 35, shelter: 250, communication: 25, transport: 45 },
+      { month: 'Apr', medical: 150, food: 9000, rescue: 25, shelter: 180, communication: 20, transport: 35 },
+      { month: 'May', medical: 300, food: 15000, rescue: 50, shelter: 320, communication: 40, transport: 60 }
+    ];
+    setHistoricalData(sampleHistoricalData);
   };
 
   const handleRegionChange = (e) => {
@@ -45,6 +72,13 @@ const EmergencyResourceTracker = () => {
   const handleRequestChange = (e) => {
     setRequestForm({
       ...requestForm,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleNewResourceChange = (e) => {
+    setNewResource({
+      ...newResource,
       [e.target.name]: e.target.value
     });
   };
@@ -62,6 +96,25 @@ const EmergencyResourceTracker = () => {
       location: '',
       contact: ''
     });
+  };
+
+  const handleSubmitNewResource = (e) => {
+    e.preventDefault();
+    // In a real app, this would submit to the backend
+    console.log('New resource submitted:', newResource);
+    setShowResourceForm(false);
+    setNewResource({
+      name: '',
+      type: '',
+      quantity: '',
+      unit: '',
+      location: '',
+      contact: '',
+      availability: '24/7',
+      region: ''
+    });
+    // Refresh resources
+    loadResources();
   };
 
   const handleTrackRequest = () => {
@@ -127,8 +180,179 @@ const EmergencyResourceTracker = () => {
       
       {/* Resource Allocation Visualization */}
       <div className="mb-8">
-        <h2 className="text-xl font-semibold text-gray-800 mb-4">{t('emergencyResourceTracker.allocation.title')}</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-xl font-semibold text-gray-800">{t('emergencyResourceTracker.allocation.title')}</h2>
+          <button 
+            onClick={() => setShowResourceForm(!showResourceForm)}
+            className="inline-flex items-center px-3 py-1 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >
+            {showResourceForm ? t('emergencyResourceTracker.hideForm') : t('emergencyResourceTracker.addResource')}
+          </button>
+        </div>
+        
+        {/* Add Resource Form */}
+        {showResourceForm && (
+          <div className="bg-white rounded-lg shadow p-4 mb-6">
+            <h3 className="text-lg font-medium text-gray-800 mb-3">{t('emergencyResourceTracker.addResource')}</h3>
+            <form onSubmit={handleSubmitNewResource} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                  {t('emergencyResourceTracker.resourceName')}
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={newResource.name}
+                  onChange={handleNewResourceChange}
+                  className="w-full border rounded px-3 py-2"
+                  required
+                />
+              </div>
+              
+              <div>
+                <label htmlFor="type" className="block text-sm font-medium text-gray-700 mb-1">
+                  {t('emergencyResourceTracker.resourceType')}
+                </label>
+                <select
+                  id="type"
+                  name="type"
+                  value={newResource.type}
+                  onChange={handleNewResourceChange}
+                  className="w-full border rounded px-3 py-2"
+                  required
+                >
+                  <option value="">{t('emergencyResourceTracker.selectType')}</option>
+                  {resourceTypes.map((type) => (
+                    <option key={type.id} value={type.id}>
+                      {type.icon} {type.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              
+              <div>
+                <label htmlFor="quantity" className="block text-sm font-medium text-gray-700 mb-1">
+                  {t('emergencyResourceTracker.quantity')}
+                </label>
+                <input
+                  type="number"
+                  id="quantity"
+                  name="quantity"
+                  value={newResource.quantity}
+                  onChange={handleNewResourceChange}
+                  className="w-full border rounded px-3 py-2"
+                  required
+                />
+              </div>
+              
+              <div>
+                <label htmlFor="unit" className="block text-sm font-medium text-gray-700 mb-1">
+                  {t('emergencyResourceTracker.unit')}
+                </label>
+                <input
+                  type="text"
+                  id="unit"
+                  name="unit"
+                  value={newResource.unit}
+                  onChange={handleNewResourceChange}
+                  className="w-full border rounded px-3 py-2"
+                  placeholder={t('emergencyResourceTracker.enterUnit')}
+                  required
+                />
+              </div>
+              
+              <div>
+                <label htmlFor="region" className="block text-sm font-medium text-gray-700 mb-1">
+                  {t('emergencyResourceTracker.region')}
+                </label>
+                <select
+                  id="region"
+                  name="region"
+                  value={newResource.region}
+                  onChange={handleNewResourceChange}
+                  className="w-full border rounded px-3 py-2"
+                  required
+                >
+                  <option value="">{t('emergencyResourceTracker.selectRegion')}</option>
+                  <option value="Maharashtra">Maharashtra</option>
+                  <option value="Delhi">Delhi</option>
+                  <option value="Kerala">Kerala</option>
+                  <option value="Karnataka">Karnataka</option>
+                  <option value="Telangana">Telangana</option>
+                </select>
+              </div>
+              
+              <div>
+                <label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-1">
+                  {t('emergencyResourceTracker.location')}
+                </label>
+                <input
+                  type="text"
+                  id="location"
+                  name="location"
+                  value={newResource.location}
+                  onChange={handleNewResourceChange}
+                  className="w-full border rounded px-3 py-2"
+                  placeholder={t('emergencyResourceTracker.enterLocation')}
+                  required
+                />
+              </div>
+              
+              <div>
+                <label htmlFor="contact" className="block text-sm font-medium text-gray-700 mb-1">
+                  {t('emergencyResourceTracker.contact')}
+                </label>
+                <input
+                  type="text"
+                  id="contact"
+                  name="contact"
+                  value={newResource.contact}
+                  onChange={handleNewResourceChange}
+                  className="w-full border rounded px-3 py-2"
+                  placeholder={t('emergencyResourceTracker.enterContact')}
+                  required
+                />
+              </div>
+              
+              <div>
+                <label htmlFor="availability" className="block text-sm font-medium text-gray-700 mb-1">
+                  {t('emergencyResourceTracker.availability')}
+                </label>
+                <select
+                  id="availability"
+                  name="availability"
+                  value={newResource.availability}
+                  onChange={handleNewResourceChange}
+                  className="w-full border rounded px-3 py-2"
+                >
+                  <option value="24/7">24/7</option>
+                  <option value="8:00 AM - 8:00 PM">8:00 AM - 8:00 PM</option>
+                  <option value="On Demand">On Demand</option>
+                </select>
+              </div>
+              
+              <div className="md:col-span-2 flex justify-end space-x-2">
+                <button
+                  type="button"
+                  onClick={() => setShowResourceForm(false)}
+                  className="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md shadow-sm text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                  {t('emergencyResourceTracker.cancel')}
+                </button>
+                <button
+                  type="submit"
+                  className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                  {t('emergencyResourceTracker.addResource')}
+                </button>
+              </div>
+            </form>
+          </div>
+        )}
+        
+        {/* Allocation Overview */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
           {allocationData.map((item, index) => {
             const allocatedPercentage = (item.allocated / item.total) * 100;
             const availablePercentage = (item.available / item.total) * 100;
@@ -157,6 +381,41 @@ const EmergencyResourceTracker = () => {
               </div>
             );
           })}
+        </div>
+        
+        {/* Historical Usage Chart */}
+        <div className="bg-white rounded-lg shadow p-4">
+          <h3 className="text-lg font-semibold text-gray-800 mb-4">{t('emergencyResourceTracker.historicalUsage')}</h3>
+          <div className="overflow-x-auto">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    {t('emergencyResourceTracker.month')}
+                  </th>
+                  {resourceTypes.map((type) => (
+                    <th key={type.id} className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      {type.icon} {type.name}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                {historicalData.map((data, index) => (
+                  <tr key={index}>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      {data.month}
+                    </td>
+                    {resourceTypes.map((type) => (
+                      <td key={type.id} className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        {data[type.id] || 0}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
       

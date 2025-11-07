@@ -666,7 +666,16 @@
     "status": "स्थिति",
     "submitted": "सबमिट किया गया",
     "estimatedDelivery": "अनुमानित वितरण",
-    "refreshStatus": "स्थिति रीफ्रेश करें"
+    "refreshStatus": "स्थिति रीफ्रेश करें",
+    "historicalUsage": "ऐतिहासिक संसाधन उपयोग",
+    "month": "महीना",
+    "addResource": "नया संसाधन जोड़ें",
+    "hideForm": "फॉर्म छिपाएं",
+    "resourceName": "संसाधन का नाम",
+    "unit": "इकाई",
+    "enterUnit": "इकाई दर्ज करें (उदा., किट, पैकेट)",
+    "selectRegion": "क्षेत्र चुनें",
+    "cancel": "रद्द करें"
   },
   "disasterCommunicationHub": {
     "title": "आपदा संचार केंद्र",

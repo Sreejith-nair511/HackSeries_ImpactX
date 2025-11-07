@@ -141,7 +141,16 @@
       "title": "Resource Allocation Overview",
       "allocated": "Allocated",
       "available": "Available"
-    }
+    },
+    "historicalUsage": "Historical Resource Usage",
+    "month": "Month",
+    "addResource": "Add New Resource",
+    "hideForm": "Hide Form",
+    "resourceName": "Resource Name",
+    "unit": "Unit",
+    "enterUnit": "Enter unit (e.g., kits, packets)",
+    "selectRegion": "Select Region",
+    "cancel": "Cancel"
   },
   "volunteerCoordinator": {
     "title": "Volunteer Coordinator",
