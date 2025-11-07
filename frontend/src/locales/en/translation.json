@@ -415,5 +415,56 @@
     "savedPlan": "Saved Plan",
     "totalResources": "Total Resources",
     "noSavedPlans": "No saved plans available for comparison"
+  },
+  "emergencyContacts": {
+    "title": "Emergency Contacts",
+    "searchPlaceholder": "Search contacts...",
+    "all": "All",
+    "favorites": "Favorites",
+    "favoriteContacts": "Favorite Contacts",
+    "contactsFound": "contacts found",
+    "noContactsFound": "No contacts found matching your search criteria.",
+    "addToFavorites": "Add to favorites",
+    "removeFromFavorites": "Remove from favorites",
+    "call": "Call",
+    "copy": "Copy",
+    "national": {
+      "title": "National Emergency Numbers",
+      "police": "Police",
+      "policeDesc": "For immediate police assistance",
+      "ambulance": "Ambulance",
+      "ambulanceDesc": "For medical emergencies",
+      "fire": "Fire Department",
+      "fireDesc": "For fire and rescue services",
+      "disaster": "Disaster Management",
+      "disasterDesc": "For disaster response and management"
+    },
+    "maharashtra": {
+      "controlRoom": "State Control Room",
+      "controlRoomDesc": "Maharashtra State Disaster Management Authority",
+      "emergency": "Emergency Response",
+      "emergencyDesc": "Integrated Emergency Response System"
+    },
+    "odisha": {
+      "controlRoom": "State Control Room",
+      "controlRoomDesc": "Odisha State Disaster Management Authority",
+      "emergency": "Emergency Response",
+      "emergencyDesc": "Odisha Emergency Response System"
+    },
+    "kerala": {
+      "controlRoom": "State Control Room",
+      "controlRoomDesc": "Kerala State Disaster Management Authority",
+      "emergency": "Emergency Response",
+      "emergencyDesc": "Kerala Emergency Response System"
+    },
+    "groups": {
+      "police": "Police",
+      "medical": "Medical",
+      "fire": "Fire",
+      "disaster": "Disaster",
+      "emergency": "Emergency"
+    },
+    "safetyTip": "Safety Tip",
+    "safetyTipDesc": "Save these numbers in your phone and keep this information easily accessible. In an emergency, every second counts."
   }
 }

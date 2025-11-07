@@ -956,5 +956,56 @@
     "skillUtilizationTitle": "कौशल उपयोग डैशबोर्ड",
     "skillAvailability": "उपलब्ध",
     "avgHoursPerVolunteer": "प्रति स्वयंसेवी औसत घंटे"
+  },
+  "emergencyContacts": {
+    "title": "आपातकालीन संपर्क",
+    "searchPlaceholder": "संपर्क खोजें...",
+    "all": "सभी",
+    "favorites": "पसंदीदा",
+    "favoriteContacts": "पसंदीदा संपर्क",
+    "contactsFound": "संपर्क मिले",
+    "noContactsFound": "आपके खोज मानदंडों के अनुरूप कोई संपर्क नहीं मिला।",
+    "addToFavorites": "पसंदीदा में जोड़ें",
+    "removeFromFavorites": "पसंदीदा से हटाएं",
+    "call": "कॉल करें",
+    "copy": "कॉपी करें",
+    "national": {
+      "title": "राष्ट्रीय आपातकालीन नंबर",
+      "police": "पुलिस",
+      "policeDesc": "तत्काल पुलिस सहायता के लिए",
+      "ambulance": "एम्बुलेंस",
+      "ambulanceDesc": "चिकित्सा आपातकाल के लिए",
+      "fire": "अग्निशमन विभाग",
+      "fireDesc": "आग और बचाव सेवाओं के लिए",
+      "disaster": "आपदा प्रबंधन",
+      "disasterDesc": "आपदा प्रतिक्रिया और प्रबंधन के लिए"
+    },
+    "maharashtra": {
+      "controlRoom": "राज्य नियंत्रण कक्ष",
+      "controlRoomDesc": "महाराष्ट्र राज्य आपदा प्रबंधन प्राधिकरण",
+      "emergency": "आपातकालीन प्रतिक्रिया",
+      "emergencyDesc": "एकीकृत आपातकालीन प्रतिक्रिया प्रणाली"
+    },
+    "odisha": {
+      "controlRoom": "राज्य नियंत्रण कक्ष",
+      "controlRoomDesc": "ओडिशा राज्य आपदा प्रबंधन प्राधिकरण",
+      "emergency": "आपातकालीन प्रतिक्रिया",
+      "emergencyDesc": "ओडिशा आपातकालीन प्रतिक्रिया प्रणाली"
+    },
+    "kerala": {
+      "controlRoom": "राज्य नियंत्रण कक्ष",
+      "controlRoomDesc": "केरल राज्य आपदा प्रबंधन प्राधिकरण",
+      "emergency": "आपातकालीन प्रतिक्रिया",
+      "emergencyDesc": "केरल आपातकालीन प्रतिक्रिया प्रणाली"
+    },
+    "groups": {
+      "police": "पुलिस",
+      "medical": "चिकित्सा",
+      "fire": "आग",
+      "disaster": "आपदा",
+      "emergency": "आपातकाल"
+    },
+    "safetyTip": "सुरक्षा युक्ति",
+    "safetyTipDesc": "अपने फोन में ये नंबर सहेजें और इस जानकारी को आसानी से पहुंच योग्य रखें। आपातकाल में, हर सेकंड की गिनती होती है।"
   }
 }
