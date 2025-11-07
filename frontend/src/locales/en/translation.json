@@ -216,5 +216,57 @@
     "campaigns": "Campaigns",
     "active": "Active",
     "completed": "Completed"
+  },
+  "disasterStatistics": {
+    "title": "Disaster Statistics",
+    "description": "Comprehensive analysis of disaster events, impacts, and trends across India",
+    "export": "Export Data",
+    "exportData": "Export disaster statistics data",
+    "resetFilters": "Reset Filters",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "region": "Region",
+    "allRegions": "All Regions",
+    "events": "Events",
+    "affected": "Affected",
+    "economicLoss": "Economic Loss",
+    "tabs": {
+      "overview": "Overview",
+      "trends": "Trends",
+      "regional": "Regional Analysis",
+      "comparison": "Type Comparison"
+    },
+    "overview": {
+      "title": "Disaster Overview",
+      "totalEvents": "Total Events",
+      "totalAffected": "Total Affected",
+      "totalEconomicLoss": "Total Economic Loss",
+      "averageAffected": "Average Affected per Event",
+      "byType": "By Disaster Type",
+      "byRegion": "By Region"
+    },
+    "byType": "By Type",
+    "byRegion": "By Region",
+    "trends": {
+      "title": "Disaster Trends",
+      "yearsCovered": "Years Covered",
+      "annualGrowth": "Annual Growth",
+      "mostIncreasing": "Most Increasing Type",
+      "yearlyBreakdown": "Yearly Breakdown",
+      "year": "Year"
+    },
+    "regional": {
+      "title": "Regional Risk Analysis",
+      "region": "Region",
+      "riskIndex": "Risk Index"
+    },
+    "comparison": {
+      "title": "Disaster Type Comparison",
+      "firstType": "First Disaster Type",
+      "secondType": "Second Disaster Type",
+      "compare": "Compare",
+      "averageAffected": "Average Affected",
+      "averageEconomicLoss": "Average Economic Loss"
+    }
   }
 }

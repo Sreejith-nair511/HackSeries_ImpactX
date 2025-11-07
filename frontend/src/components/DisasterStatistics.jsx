@@ -135,6 +135,48 @@ const DisasterStatistics = () => {
     
     return filteredData;
   };
+  
+  // Export data as CSV
+  const exportToCSV = (data, filename) => {
+    if (!data || data.length === 0) return;
+    
+    // Create CSV content
+    const headers = Object.keys(data[0]).join(',');
+    const rows = data.map(obj => 
+      Object.values(obj).map(value => 
+        typeof value === 'string' ? `"${value}"` : value
+      ).join(',')
+    ).join('\n');
+    
+    const csvContent = `data:text/csv;charset=utf-8,${headers}\n${rows}`;
+    const encodedUri = encodeURI(csvContent);
+    
+    // Create download link
+    const link = document.createElement('a');
+    link.setAttribute('href', encodedUri);
+    link.setAttribute('download', `${filename}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+  
+  // Export data as JSON
+  const exportToJSON = (data, filename) => {
+    if (!data) return;
+    
+    const jsonContent = JSON.stringify(data, null, 2);
+    const blob = new Blob([jsonContent], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    
+    // Create download link
+    const link = document.createElement('a');
+    link.setAttribute('href', url);
+    link.setAttribute('download', `${filename}.json`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
 
   // Calculate statistics when data or filters change
   useEffect(() => {
@@ -282,15 +324,26 @@ const DisasterStatistics = () => {
           <div>
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-lg font-semibold text-gray-800">{t('disasterStatistics.overview.title')}</h3>
-              <button
-                onClick={() => {
-                  setDateRange({ start: '', end: '' });
-                  setSelectedRegion('');
-                }}
-                className="inline-flex items-center px-3 py-1 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              >
-                {t('disasterStatistics.resetFilters')}
-              </button>
+              <div className="flex space-x-2">
+                <button
+                  onClick={() => {
+                    const filteredData = filterDisasterData();
+                    exportToCSV(filteredData, 'disaster_statistics_overview');
+                  }}
+                  className="inline-flex items-center px-3 py-1 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                  {t('disasterStatistics.export')}
+                </button>
+                <button
+                  onClick={() => {
+                    setDateRange({ start: '', end: '' });
+                    setSelectedRegion('');
+                  }}
+                  className="inline-flex items-center px-3 py-1 border border-gray-300 text-sm font-medium rounded-md shadow-sm text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                  {t('disasterStatistics.resetFilters')}
+                </button>
+              </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
               <div className="bg-blue-50 p-4 rounded-lg">
@@ -372,8 +425,7 @@ const DisasterStatistics = () => {
               <h3 className="text-lg font-semibold text-gray-800">{t('disasterStatistics.trends.title')}</h3>
               <button
                 onClick={() => {
-                  // In a real implementation, this would export the data
-                  alert(t('disasterStatistics.exportData'));
+                  exportToCSV(trends.yearlyTrends, 'disaster_statistics_trends');
                 }}
                 className="inline-flex items-center px-3 py-1 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
@@ -454,8 +506,7 @@ const DisasterStatistics = () => {
               <h3 className="text-lg font-semibold text-gray-800">{t('disasterStatistics.regional.title')}</h3>
               <button
                 onClick={() => {
-                  // In a real implementation, this would export the data
-                  alert(t('disasterStatistics.exportData'));
+                  exportToCSV(riskIndices, 'disaster_statistics_regional');
                 }}
                 className="inline-flex items-center px-3 py-1 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
@@ -526,8 +577,7 @@ const DisasterStatistics = () => {
               <h3 className="text-lg font-semibold text-gray-800">{t('disasterStatistics.comparison.title')}</h3>
               <button
                 onClick={() => {
-                  // In a real implementation, this would export the data
-                  alert(t('disasterStatistics.exportData'));
+                  exportToJSON(comparison, 'disaster_statistics_comparison');
                 }}
                 className="inline-flex items-center px-3 py-1 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
