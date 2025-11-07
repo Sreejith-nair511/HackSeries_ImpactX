@@ -206,5 +206,15 @@
       "shiftCoverage": "Shift Coverage",
       "assigned": "Volunteers Assigned"
     }
+  },
+  "map": {
+    "title": "Disaster Response Map",
+    "allTime": "All Time",
+    "lastMonth": "Last Month",
+    "lastQuarter": "Last Quarter",
+    "riskZones": "Risk Zones",
+    "campaigns": "Campaigns",
+    "active": "Active",
+    "completed": "Completed"
   }
 }

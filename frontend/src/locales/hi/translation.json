@@ -749,5 +749,15 @@
       "extremeHeat": "चरम गर्मी की स्थिति ({{temperature}}°C)",
       "extremeCold": "चरम ठंड की स्थिति ({{temperature}}°C)"
     }
+  },
+  "map": {
+    "title": "आपदा प्रतिक्रिया मानचित्र",
+    "allTime": "सभी समय",
+    "lastMonth": "पिछला महीना",
+    "lastQuarter": "पिछली तिमाही",
+    "riskZones": "जोखिम क्षेत्र",
+    "campaigns": "अभियान",
+    "active": "सक्रिय",
+    "completed": "पूर्ण"
   }
 }

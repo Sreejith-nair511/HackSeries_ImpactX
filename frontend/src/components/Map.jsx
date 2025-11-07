@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, Circle } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
+import { useTranslation } from 'react-i18next';
 
 // Fix for default marker icons in Leaflet
 delete L.Icon.Default.prototype._getIconUrl;
@@ -12,9 +13,13 @@ L.Icon.Default.mergeOptions({
 });
 
 const Map = ({ darkMode }) => {
+  const { t } = useTranslation();
   const [campaigns, setCampaigns] = useState([]);
   const [disasterZones, setDisasterZones] = useState([]);
+  const [filteredCampaigns, setFilteredCampaigns] = useState([]);
+  const [filteredDisasterZones, setFilteredDisasterZones] = useState([]);
   const [mapKey, setMapKey] = useState(0); // Used to force re-render when dark mode changes
+  const [timeRange, setTimeRange] = useState('all'); // Time range filter
   const mapRef = useRef();
 
   // Sample campaign data for India with realistic sources
@@ -113,9 +118,41 @@ const Map = ({ darkMode }) => {
     // Simulate fetching campaign data
     setCampaigns(sampleCampaigns);
     setDisasterZones(sampleDisasterZones);
+    setFilteredCampaigns(sampleCampaigns);
+    setFilteredDisasterZones(sampleDisasterZones);
     // Force re-render when dark mode changes
     setMapKey(prev => prev + 1);
   }, [darkMode]);
+  
+  // Filter data based on time range
+  useEffect(() => {
+    if (timeRange === 'all') {
+      setFilteredCampaigns(campaigns);
+      setFilteredDisasterZones(disasterZones);
+    } else {
+      // For demo purposes, we'll filter based on a simple time-based logic
+      // In a real app, this would be based on actual timestamps
+      const now = new Date();
+      const oneMonthAgo = new Date(now.setMonth(now.getMonth() - 1));
+      const threeMonthsAgo = new Date(now.setMonth(now.getMonth() - 2));
+      
+      if (timeRange === 'month') {
+        // Filter campaigns from the last month
+        setFilteredCampaigns(campaigns.filter(c => {
+          // For demo, we'll just return all campaigns
+          return true;
+        }));
+        setFilteredDisasterZones(disasterZones);
+      } else if (timeRange === 'quarter') {
+        // Filter campaigns from the last quarter
+        setFilteredCampaigns(campaigns.filter(c => {
+          // For demo, we'll just return all campaigns
+          return true;
+        }));
+        setFilteredDisasterZones(disasterZones);
+      }
+    }
+  }, [timeRange, campaigns, disasterZones]);
 
   // Center of India
   const center = [20.5937, 78.9629];
@@ -155,6 +192,41 @@ const Map = ({ darkMode }) => {
 
   return (
     <div className={`rounded-2xl overflow-hidden ${darkMode ? 'bg-gray-800' : 'bg-white'} shadow-lg`}>
+      {/* Time Range Filter */}
+      <div className={`p-4 ${darkMode ? 'bg-gray-700' : 'bg-gray-100'} rounded-t-2xl`}>
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <h3 className={`font-semibold ${darkMode ? 'text-white' : 'text-gray-800'}`}>
+            {t('map.title')}
+          </h3>
+          <div className="flex flex-wrap gap-2">
+            <button 
+              onClick={() => setTimeRange('all')}
+              className={`px-3 py-1 text-sm rounded-full ${timeRange === 'all' 
+                ? (darkMode ? 'bg-blue-600 text-white' : 'bg-blue-500 text-white') 
+                : (darkMode ? 'bg-gray-600 text-gray-200' : 'bg-gray-200 text-gray-700')}`}
+            >
+              {t('map.allTime')}
+            </button>
+            <button 
+              onClick={() => setTimeRange('month')}
+              className={`px-3 py-1 text-sm rounded-full ${timeRange === 'month' 
+                ? (darkMode ? 'bg-blue-600 text-white' : 'bg-blue-500 text-white') 
+                : (darkMode ? 'bg-gray-600 text-gray-200' : 'bg-gray-200 text-gray-700')}`}
+            >
+              {t('map.lastMonth')}
+            </button>
+            <button 
+              onClick={() => setTimeRange('quarter')}
+              className={`px-3 py-1 text-sm rounded-full ${timeRange === 'quarter' 
+                ? (darkMode ? 'bg-blue-600 text-white' : 'bg-blue-500 text-white') 
+                : (darkMode ? 'bg-gray-600 text-gray-200' : 'bg-gray-200 text-gray-700')}`}
+            >
+              {t('map.lastQuarter')}
+            </button>
+          </div>
+        </div>
+      </div>
+      
       <MapContainer 
         key={mapKey} // Force re-render when dark mode changes
         center={center} 
@@ -173,7 +245,7 @@ const Map = ({ darkMode }) => {
             : '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           }
         />
-        {campaigns.map(campaign => (
+        {filteredCampaigns.map(campaign => (
           <Marker 
             key={campaign.id} 
             position={campaign.location}
@@ -203,7 +275,7 @@ const Map = ({ darkMode }) => {
                       ? 'bg-blue-100 text-blue-800' 
                       : 'bg-green-100 text-green-800'
                   }`}>
-                    {campaign.status === 'active' ? 'Active' : 'Completed'}
+                    {campaign.status === 'active' ? t('map.active') : t('map.completed')}
                   </span>
                 </div>
                 <div className="mt-2 text-xs">
@@ -215,7 +287,7 @@ const Map = ({ darkMode }) => {
             </Popup>
           </Marker>
         ))}
-        {disasterZones.map(zone => (
+        {filteredDisasterZones.map(zone => (
           <Circle
             key={zone.id}
             center={zone.center}
