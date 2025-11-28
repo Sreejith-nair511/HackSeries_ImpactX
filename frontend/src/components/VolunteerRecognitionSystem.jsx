@@ -150,7 +150,7 @@ const VolunteerRecognitionSystem = () => {
         
         <div className="bg-yellow-50 rounded-lg p-4">
           <div className="text-2xl font-bold text-yellow-800">
-            {Math.round(volunteers.reduce((sum, volunteer) => sum + volunteer.hours, 0) / volunteers.length)}
+            {volunteers.length > 0 ? Math.round(volunteers.reduce((sum, volunteer) => sum + volunteer.hours, 0) / volunteers.length) : 0}
           </div>
           <div className="text-sm text-yellow-600">{t('volunteerRecognition.avgHoursPerVolunteer')}</div>
         </div>

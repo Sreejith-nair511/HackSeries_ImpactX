@@ -159,7 +159,7 @@ const CommunityFeedbackSystem = () => {
     pending: submittedFeedback.filter(item => item.status === 'pending').length,
     inProgress: submittedFeedback.filter(item => item.status === 'in_progress').length,
     averageRating: submittedFeedback.length > 0 
-      ? (submittedFeedback.reduce((sum, item) => sum + item.rating, 0) / submittedFeedback.length).toFixed(1)
+      ? ((submittedFeedback.reduce((sum, item) => sum + item.rating, 0)) / submittedFeedback.length).toFixed(1)
       : 0
   };
 
