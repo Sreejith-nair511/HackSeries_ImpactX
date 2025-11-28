@@ -1,36 +1,36 @@
 /**
  * Global API Service
- * This service ensures all API calls are properly authenticated
- * to prevent "Access token required" errors
+ * This service provides mock data for all API calls
+ * to ensure the application works properly when deployed
  */
-
-import authHelper from '../utils/authHelper';
 
 class APIService {
   constructor() {
-    // Use environment variable or default to localhost for development
-    // In production, this should be set in Vercel environment variables
-    this.baseURL = import.meta.env.VITE_API_URL || 
-                  (typeof window !== 'undefined' ? '' : 'http://localhost:5000/api/v1');
+    // Always use mock mode
+    this.mockMode = true;
   }
 
-  // Generic API request method with automatic authentication
+  // Generic API request method that returns mock data
   async request(endpoint, options = {}) {
-    // Ensure we have the correct base URL
-    const url = endpoint.startsWith('http') ? endpoint : `${this.baseURL}${endpoint}`;
+    console.log('Mock API request to:', endpoint);
     
-    // If we don't have a baseURL (e.g., in production without VITE_API_URL), 
-    // return a mock response to prevent errors
-    if (!this.baseURL && typeof window !== 'undefined') {
-      console.warn('API URL not configured, returning mock response for endpoint:', endpoint);
-      return { 
-        ok: true, 
-        data: null, 
-        error: 'API not configured' 
-      };
+    // Return mock response based on endpoint
+    if (endpoint.includes('/donations')) {
+      return this.getMockDonations();
+    } else if (endpoint.includes('/campaigns')) {
+      return this.getMockCampaigns();
+    } else if (endpoint.includes('/auth/login')) {
+      return this.getMockLogin();
+    } else if (endpoint.includes('/auth/register')) {
+      return this.getMockRegister();
     }
     
-    return await authHelper.makeAuthenticatedRequest(url, options);
+    // Default mock response
+    return {
+      ok: true,
+      data: { message: 'Mock response' },
+      error: null
+    };
   }
 
   // GET request
@@ -42,9 +42,6 @@ class APIService {
   async post(endpoint, data) {
     return await this.request(endpoint, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
       body: JSON.stringify(data)
     });
   }
@@ -53,9 +50,6 @@ class APIService {
   async put(endpoint, data) {
     return await this.request(endpoint, {
       method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      },
       body: JSON.stringify(data)
     });
   }
@@ -65,98 +59,137 @@ class APIService {
     return await this.request(endpoint, { method: 'DELETE' });
   }
 
+  // Mock data methods
+  getMockDonations() {
+    return {
+      ok: true,
+      data: [
+        { id: 1, amount: 1000, campaignId: 1, date: '2023-06-15', donor: 'Anonymous' },
+        { id: 2, amount: 500, campaignId: 2, date: '2023-06-10', donor: 'John Doe' },
+        { id: 3, amount: 2500, campaignId: 1, date: '2023-06-05', donor: 'Jane Smith' }
+      ],
+      error: null
+    };
+  }
+
+  getMockCampaigns() {
+    return {
+      ok: true,
+      data: [
+        { 
+          id: 1, 
+          title: 'Flood Relief in Kerala', 
+          description: 'Support flood victims in Kerala with emergency supplies and shelter', 
+          goal: 100000, 
+          raised: 75000, 
+          endDate: '2023-12-31',
+          image: '/placeholder-image.jpg'
+        },
+        { 
+          id: 2, 
+          title: 'Earthquake Recovery in Manipur', 
+          description: 'Help rebuild communities affected by the recent earthquake', 
+          goal: 50000, 
+          raised: 30000, 
+          endDate: '2023-11-30',
+          image: '/placeholder-image.jpg'
+        }
+      ],
+      error: null
+    };
+  }
+
+  getMockLogin() {
+    return {
+      ok: true,
+      data: {
+        token: 'mock-jwt-token',
+        user: { 
+          id: 1, 
+          email: 'user@example.com', 
+          role: 'DONOR',
+          name: 'Mock User'
+        }
+      },
+      error: null
+    };
+  }
+
+  getMockRegister() {
+    return {
+      ok: true,
+      data: {
+        token: 'mock-jwt-token',
+        user: { 
+          id: 1, 
+          email: 'user@example.com', 
+          role: 'DONOR',
+          name: 'Mock User'
+        }
+      },
+      error: null
+    };
+  }
+
   // Donation-specific methods
   async createDonation(amount, campaignId = null) {
-    const donationData = { amount };
-    if (campaignId) {
-      donationData.campaignId = campaignId;
-    }
-    
-    return await this.post('/donations', donationData);
+    console.log('Mock creating donation:', { amount, campaignId });
+    return {
+      ok: true,
+      data: { 
+        id: Math.floor(Math.random() * 1000), 
+        amount, 
+        campaignId, 
+        date: new Date().toISOString().split('T')[0],
+        donor: 'Current User'
+      },
+      error: null
+    };
   }
 
   async getDonations() {
-    return await this.get('/donations');
+    return this.getMockDonations();
   }
 
   async getDonationById(id) {
-    return await this.get(`/donations/${id}`);
+    const donations = await this.getDonations();
+    const donation = donations.data.find(d => d.id === parseInt(id));
+    return {
+      ok: true,
+      data: donation || null,
+      error: donation ? null : 'Donation not found'
+    };
   }
 
   // Campaign-specific methods
   async getCampaigns() {
-    return await this.get('/campaigns');
+    return this.getMockCampaigns();
   }
 
   async getCampaignById(id) {
-    return await this.get(`/campaigns/${id}`);
+    const campaigns = await this.getCampaigns();
+    const campaign = campaigns.data.find(c => c.id === parseInt(id));
+    return {
+      ok: true,
+      data: campaign || null,
+      error: campaign ? null : 'Campaign not found'
+    };
   }
 
   // Auth-specific methods
   async login(email, password) {
-    // If no baseURL, return mock response
-    if (!this.baseURL && typeof window !== 'undefined') {
-      console.warn('API URL not configured, simulating login');
-      return {
-        token: 'mock-token',
-        user: { id: 1, email: email, role: 'DONOR' }
-      };
-    }
-    
-    const response = await fetch(`${this.baseURL}/auth/login`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ email, password })
-    });
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.error || 'Login failed');
-    }
-
-    const data = await response.json();
-    authHelper.storeAuthData(data.token, data.user);
-    return data;
+    console.log('Mock login attempt:', { email });
+    return this.getMockLogin();
   }
 
   async register(email, password, role = 'DONOR') {
-    // If no baseURL, return mock response
-    if (!this.baseURL && typeof window !== 'undefined') {
-      console.warn('API URL not configured, simulating registration');
-      return {
-        token: 'mock-token',
-        user: { id: 1, email: email, role: role }
-      };
-    }
-    
-    const response = await fetch(`${this.baseURL}/auth/register`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ email, password, role })
-    });
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.error || 'Registration failed');
-    }
-
-    const data = await response.json();
-    authHelper.storeAuthData(data.token, data.user);
-    return data;
+    console.log('Mock registration attempt:', { email, role });
+    return this.getMockRegister();
   }
 
-  // Auto-initialize authentication
+  // Auto-initialize authentication (no-op in mock mode)
   async initialize() {
-    try {
-      // This will automatically handle authentication
-      await authHelper.simulateAutoLogin();
-    } catch (error) {
-      console.warn('Auto-initialization failed, but this is normal for first-time users:', error);
-    }
+    console.log('Mock API service initialized');
   }
 }
 

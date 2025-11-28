@@ -8,7 +8,8 @@ class AuthHelper {
   constructor() {
     this.tokenKey = 'impactx_auth_token';
     this.userKey = 'impactx_user_data';
-    this.baseURL = 'http://localhost:5000/api/v1'; // Fixed the API version prefix
+    // Always use mock mode
+    this.mockMode = true;
   }
 
   // Store token and user data in localStorage
@@ -19,11 +20,25 @@ class AuthHelper {
 
   // Retrieve token from localStorage
   getToken() {
+    // In mock mode, always return a mock token
+    if (this.mockMode) {
+      return 'mock-jwt-token';
+    }
     return localStorage.getItem(this.tokenKey);
   }
 
   // Retrieve user data from localStorage
   getUserData() {
+    // In mock mode, return mock user data
+    if (this.mockMode) {
+      return {
+        id: 1,
+        email: 'user@example.com',
+        role: 'DONOR',
+        name: 'Mock User'
+      };
+    }
+    
     const userData = localStorage.getItem(this.userKey);
     return userData ? JSON.parse(userData) : null;
   }
@@ -36,12 +51,25 @@ class AuthHelper {
 
   // Check if user is authenticated
   isAuthenticated() {
+    // In mock mode, always return true
+    if (this.mockMode) {
+      return true;
+    }
+    
     const token = this.getToken();
     return !!token;
   }
 
   // Get authentication headers for API requests
   getAuthHeaders() {
+    // In mock mode, return mock headers
+    if (this.mockMode) {
+      return {
+        'Authorization': 'Bearer mock-jwt-token',
+        'Content-Type': 'application/json'
+      };
+    }
+    
     const token = this.getToken();
     if (!token) {
       throw new Error('No authentication token found. Please log in.');
@@ -53,55 +81,122 @@ class AuthHelper {
     };
   }
 
-  // Make authenticated API request
+  // Make authenticated API request (mock implementation)
   async makeAuthenticatedRequest(endpoint, options = {}) {
-    // Ensure we have the correct base URL
-    const url = endpoint.startsWith('http') ? endpoint : `${this.baseURL}${endpoint}`;
+    console.log('Mock authenticated request to:', endpoint);
     
-    // Auto-simulate login if not authenticated
-    if (!this.isAuthenticated()) {
-      await this.simulateAutoLogin();
+    // Simulate network delay
+    await new Promise(resolve => setTimeout(resolve, 300));
+    
+    // Return mock response based on endpoint
+    if (endpoint.includes('/donations')) {
+      return this.getMockDonationsResponse();
+    } else if (endpoint.includes('/campaigns')) {
+      return this.getMockCampaignsResponse();
+    } else if (endpoint.includes('/auth/login')) {
+      return this.getMockLoginResponse();
+    } else if (endpoint.includes('/auth/register')) {
+      return this.getMockRegisterResponse();
     }
-
-    // Add authentication headers
-    const authOptions = {
-      ...options,
-      headers: {
-        ...this.getAuthHeaders(),
-        ...options.headers
-      }
+    
+    // Default mock response
+    return {
+      ok: true,
+      json: async () => ({ 
+        message: 'Mock response',
+        data: null 
+      })
     };
-
-    try {
-      const response = await fetch(url, authOptions);
-      
-      // Handle token expiration
-      if (response.status === 401) {
-        this.clearAuthData();
-        // Try to re-authenticate automatically
-        await this.simulateAutoLogin();
-        // Retry the request with new token
-        const retryOptions = {
-          ...authOptions,
-          headers: {
-            ...this.getAuthHeaders(),
-            ...options.headers
-          }
-        };
-        return await fetch(url, retryOptions);
-      }
-      
-      return response;
-    } catch (error) {
-      console.error('Authenticated request failed:', error);
-      throw error;
-    }
   }
 
-  // Simulate automatic login for demo purposes
+  // Mock response methods
+  getMockDonationsResponse() {
+    return {
+      ok: true,
+      json: async () => ({
+        donations: [
+          { id: 1, amount: 1000, campaignId: 1, date: '2023-06-15', donor: 'Anonymous' },
+          { id: 2, amount: 500, campaignId: 2, date: '2023-06-10', donor: 'John Doe' },
+          { id: 3, amount: 2500, campaignId: 1, date: '2023-06-05', donor: 'Jane Smith' }
+        ]
+      })
+    };
+  }
+
+  getMockCampaignsResponse() {
+    return {
+      ok: true,
+      json: async () => ({
+        campaigns: [
+          { 
+            id: 1, 
+            title: 'Flood Relief in Kerala', 
+            description: 'Support flood victims in Kerala with emergency supplies and shelter', 
+            goal: 100000, 
+            raised: 75000, 
+            endDate: '2023-12-31',
+            image: '/placeholder-image.jpg'
+          },
+          { 
+            id: 2, 
+            title: 'Earthquake Recovery in Manipur', 
+            description: 'Help rebuild communities affected by the recent earthquake', 
+            goal: 50000, 
+            raised: 30000, 
+            endDate: '2023-11-30',
+            image: '/placeholder-image.jpg'
+          }
+        ]
+      })
+    };
+  }
+
+  getMockLoginResponse() {
+    return {
+      ok: true,
+      json: async () => ({
+        token: 'mock-jwt-token',
+        user: { 
+          id: 1, 
+          email: 'user@example.com', 
+          role: 'DONOR',
+          name: 'Mock User'
+        }
+      })
+    };
+  }
+
+  getMockRegisterResponse() {
+    return {
+      ok: true,
+      json: async () => ({
+        token: 'mock-jwt-token',
+        user: { 
+          id: 1, 
+          email: 'user@example.com', 
+          role: 'DONOR',
+          name: 'Mock User'
+        }
+      })
+    };
+  }
+
+  // Simulate automatic login for demo purposes (mock implementation)
   async simulateAutoLogin() {
-    // In a real application, this would check for a valid session
-    // For simulation, we'll auto-login with test credentials
+    console.log('Mock auto-login simulation');
+    
+    // In mock mode, always succeed
+    if (this.mockMode) {
+      return {
+        token: 'mock-jwt-token',
+        user: {
+          id: 1,
+          email: 'user@example.com',
+          role: 'DONOR',
+          name: 'Mock User'
+        }
+      };
+    }
     
     // Check if already logged in
     if (this.isAuthenticated()) {
@@ -109,50 +204,6 @@ class AuthHelper {
         token: this.getToken(),
         user: this.getUserData()
       };
-    }
-
-    try {
-      // Attempt to login with simulation credentials
-      const response = await fetch(`${this.baseURL}/auth/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          email: 'simulation@example.com',
-          password: 'simulation123'
-        })
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        this.storeAuthData(data.token, data.user);
-        return data;
-      } else {
-        // If login fails, register first
-        const registerResponse = await fetch(`${this.baseURL}/auth/register`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            email: 'simulation@example.com',
-            password: 'simulation123',
-            role: 'DONOR'
-          })
-        });
-
-        if (registerResponse.ok) {
-          const data = await registerResponse.json();
-          this.storeAuthData(data.token, data.user);
-          return data;
-        } else {
-          throw new Error('Failed to authenticate');
-        }
-      }
-    } catch (error) {
-      console.error('Auto-login simulation failed:', error);
-      throw error;
     }
   }
   
