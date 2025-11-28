@@ -1,14 +1,14 @@
-# Use Node.js 18 as the base image
-FROM node:18-alpine
+# Use a newer Node.js version that's compatible with Vite
+FROM node:20-alpine
 
-# Set the working directory
+# Set working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json
+# Copy package files
 COPY package*.json ./
 
-# Install dependencies
-RUN npm ci --only=production
+# Install dependencies including dev dependencies needed for build
+RUN npm ci
 
 # Copy the rest of the application code
 COPY . .
@@ -19,8 +19,8 @@ RUN npm run build
 # Install serve to serve the static files
 RUN npm install -g serve
 
-# Expose the port the app runs on
+# Expose port 3000
 EXPOSE 3000
 
-# Run the application
+# Serve the built app
 CMD ["serve", "-s", "dist", "-l", "3000"]
