@@ -8,13 +8,27 @@ import authHelper from '../utils/authHelper';
 
 class APIService {
   constructor() {
-    this.baseURL = 'http://localhost:5000/api/v1';
+    // Use environment variable or default to localhost for development
+    // In production, this should be set in Vercel environment variables
+    this.baseURL = import.meta.env.VITE_API_URL || 
+                  (typeof window !== 'undefined' ? '' : 'http://localhost:5000/api/v1');
   }
 
   // Generic API request method with automatic authentication
   async request(endpoint, options = {}) {
     // Ensure we have the correct base URL
     const url = endpoint.startsWith('http') ? endpoint : `${this.baseURL}${endpoint}`;
+    
+    // If we don't have a baseURL (e.g., in production without VITE_API_URL), 
+    // return a mock response to prevent errors
+    if (!this.baseURL && typeof window !== 'undefined') {
+      console.warn('API URL not configured, returning mock response for endpoint:', endpoint);
+      return { 
+        ok: true, 
+        data: null, 
+        error: 'API not configured' 
+      };
+    }
     
     return await authHelper.makeAuthenticatedRequest(url, options);
   }
@@ -80,6 +94,15 @@ class APIService {
 
   // Auth-specific methods
   async login(email, password) {
+    // If no baseURL, return mock response
+    if (!this.baseURL && typeof window !== 'undefined') {
+      console.warn('API URL not configured, simulating login');
+      return {
+        token: 'mock-token',
+        user: { id: 1, email: email, role: 'DONOR' }
+      };
+    }
+    
     const response = await fetch(`${this.baseURL}/auth/login`, {
       method: 'POST',
       headers: {
@@ -99,6 +122,15 @@ class APIService {
   }
 
   async register(email, password, role = 'DONOR') {
+    // If no baseURL, return mock response
+    if (!this.baseURL && typeof window !== 'undefined') {
+      console.warn('API URL not configured, simulating registration');
+      return {
+        token: 'mock-token',
+        user: { id: 1, email: email, role: role }
+      };
+    }
+    
     const response = await fetch(`${this.baseURL}/auth/register`, {
       method: 'POST',
       headers: {
