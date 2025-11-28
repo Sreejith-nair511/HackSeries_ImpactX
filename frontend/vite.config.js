@@ -16,9 +16,19 @@ export default defineConfig({
   resolve: {
     alias: {
       buffer: 'buffer',
+      react: 'react',
+      'react-dom': 'react-dom'
     },
   },
   optimizeDeps: {
-    include: ['buffer'],
+    include: ['buffer', 'react', 'react-dom'],
   },
+  build: {
+    rollupOptions: {
+      external: [],
+      output: {
+        manualChunks: undefined
+      }
+    }
+  }
 })
