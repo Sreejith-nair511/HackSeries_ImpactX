@@ -20,11 +20,11 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    include: ['buffer', 'react', 'react-dom'],
+    include: ['buffer', 'react', 'react-dom', 'react-is'],
   },
   build: {
     rollupOptions: {
-      external: [],
+      external: ['react-is'],
       output: {
         manualChunks: undefined
       }
